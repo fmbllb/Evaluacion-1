@@ -10,50 +10,43 @@
 
 </head>
 <body> 
-<!--Navbar 1, donde va boton de cuentas-->
-  <nav style="height: auto; max-height: 40px; margin-bottom: auto;" class="navbar navbar-expand-lg bg-black">
-    <div class="container-fluid">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false" >Usuarios</a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="/login">Iniciar sesión</a></li>
-                <li><a class="dropdown-item" href="/register">Registrate</a></li>
-            </ul>
-        </li>
+  <div class="container">
+    <div class="row">
+      <!-- Detalles de carrito -->
+      <div class="col-md-8">
+        <h2>Carrito</h2>
+        <p>No hay más artículos en su carrito</p>
+        <a href="index.html" class="btn btn-warning rounded-0">Continuar comprando</a>
+      </div>
+  
+      <!-- Resumen de objetos en carrito -->
+      <div class="col-md-4">
+        <div class="card">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">0 artículos - $ 0,00</li>
+            <li class="list-group-item">Total (impuestos inc.) - $ 0,00</li>
+          </ul>
+          <div class="card-body">
+            <button type="button" class="btn btn-secondary btn-block rounded-0">Tramitar Pedido</button>
+          </div>
+        </div>
+  
+        <!-- Tarjetas de pago seguro y envío (Falta asociarlas a links) -->
+        <div class="card mt-3">
+          <div class="card-body">
+            <p>Pago seguro con Stripe</p>
+          </div>
+        </div>
+  
+        <div class="card mt-3">
+          <div class="card-body">
+            <p>Envío de 1 a 3 días*</p>
+          </div>
+        </div>
+      </div>
     </div>
-  </nav>
-<!--Navbar 2, donde va el logo, barra de busqueda (si se añade) y el boton de carrito-->
-  <nav style="height:auto" class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <div class="container-fluid">
-      <ul class="navbar-nav">
-       <li class="nav-item">
-          <a href="index.html"><img src="img/logotemp.png" alt="Logo Temporal"> </a>        
-        </li>
-      </ul>
-      <ul class="navbar-nav ms-right">
-            <ul>
-              <button type="button" class="btn btn-warning rounded-0" style="margin-right: 50 px">Carrito</button>
-            </ul>
-        </li>
-    </ul>
-    </div>   
-  </nav>
-<!--Navabar 3, donde va el menu de categorias-->
-  <nav style="height:auto" class="navbar navbar-expand-lg bg-dark">
-    <div class="dropdown">
-      <button class="btn btn-warning dropdown-toggle rounded-0 btn-lg" style="margin-left: 20px;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-          Categorías
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">Cat1</a></li>
-          <li><a class="dropdown-item" href="#">Cat2</a></li>
-          <li><a class="dropdown-item" href="#">Cat3</a></li>
-      </ul>
   </div>
   
   
-
-  </nav>
 </body>
 </html>
