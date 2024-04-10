@@ -9,22 +9,53 @@
     <title>TIENDA DE WARHAMMER</title>
 </head>
 <body>
-    <div>
 
-        <nav class="navbar navbar-expand-sm bg-dark navbar-light">
-          <div class="container">
-            <a class="navbar-brand" href="index.html">TIENDA DE WARHAMMER</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" href="creaciondeusuario.html"><img src="img/User-Circle-Single--Streamline-Core.svg" alt=""></a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-    
+  <header data-bs-theme="dark">
+
+    <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a href="index.html" class="navbar-brand">
+          <strong>WarPaint</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarHeader">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a href="#" class="nav-link active">Catalogo</a>
+            </li>
+
+            <li class="nav-item">
+              <a href="#" class="nav-link">Contacto</a>
+            </li>
+          </ul>
+          <a href="#" class="btn btn-primary">Carrito</a>
+          <a href="creaciondeusuario.html" class="btn btn-secondary m-1">Iniciar Sesion</a>
+        </div>
       </div>
+    </div>
+
+  </header>
+
+  <main>
+    <div class="pt-5 centrado">
+      <form class="pt-5">
+        <div class="pt-5 mb-3">
+          <label for="exampleInputEmail1" class="form-label">Dirección de Correo</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <!--<div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Recuérdame</label>
+        </div>-->
+        <button type="submit" class="btn btn-primary">Registrarme</button>
+      </form>
+    </div>
+  </main>
 </body>
 </html>
