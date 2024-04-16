@@ -9,7 +9,7 @@
     <title>TIENDA DE WARHAMMER</title>
 </head>
 <body>
-    <header data-bs-theme="dark">
+    <!--<header data-bs-theme="dark">
         <div class="navbar navbar-expand-lg navbar-dark bg-dark">
           <div class="container">
             <a href="index.html" class="navbar-brand">
@@ -44,12 +44,48 @@
           </div>
           <div class="offcanvas-body">
             <h2>Soldado de la Legión Negra</h2>
-            <img src="img/mini.jpg"  alt="soldado-inventado">
-
-            <p>El surgimiento de la Legión Negra es la historia de las almas perdidas que se unieron en nombre de Abaddon formando nuevos lazos de hermandad, vínculos compartidos por guerreros que habían visto desmoronarse y desaparecer cualquier rastro de honor en sus antiguas legiones, que no sentían ya ningún aprecio por sus respectivos primarcas, convertidos estos en Príncipes Daemon y que no vislumbraban ningún objetivo en su futuro.</p>
-
-            <button class="btn btn-primary centrado" type="btn-close" data-bs-dismiss="offcanvas">Añadir al carro</button>
+            <img src="img/mini.jpg" class="off-canvas-img m-5" alt="soldado-inventado">
+            
+            <div class="offcanvas-body p-5 m-1">
+              <p>El surgimiento de la Legión Negra es la historia de las almas perdidas que se unieron en nombre de Abaddon formando nuevos lazos de hermandad, vínculos compartidos por guerreros que habían visto desmoronarse y desaparecer cualquier rastro de honor en sus antiguas legiones, que no sentían ya ningún aprecio por sus respectivos primarcas, convertidos estos en Príncipes Daemon y que no vislumbraban ningún objetivo en su futuro.</p>
+              <p>En Stock: 3</p>
+              <div class="m-3 p-3">
+                <h2>Precio Unitario: $10</h2>
+                <p>Cantidad:</p>
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">2</a></li>
+                  <li><a class="dropdown-item" href="#">3</a></li>
+                </ul>
+              </div>
+              <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                Añadir al carro
+              </button>
+            </div>
           </div>
+        </div>
+
+        <div class="offcanvas offcanvas-end" id="anadir">
+          <div class="offcanvas-header">
+            <h1 class="offcanvas-title">Carrito</h1>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+          </div>
+          <div class="offcanvas-body">
+            <h2>Objetos en el carrito: </h2>
+            
+              <img src="img/mini.jpg" class="off-canvas-img m-5"  alt="soldado-inventado">
+            
+              <p>x1</p>
+            
+          </div>
+          <div class="offcanvas-end p-5 m-5 border">
+            <h5>Subtotal: $10</h5>
+            <h5>Total: $10</h5>
+            <button class="btn btn-primary" type="btn-close" data-bs-dismiss="offcanvas">Seguir Comprando</button>
+          </div>
+          
         </div>
       
       <div class="container border p-5">
@@ -57,13 +93,15 @@
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div class="col">
               <div class="card shadow-sm">
-                <img src="img/img1.jpg" alt="">
+                <img src="img/mini.jpg" alt="">
                 <div class="card-body">
                   <h5 class="card-title">Figurita de Warhammer</h5>
                   <p class="card-text">$ 10</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <a href="" class="btn btn-primary">Detalles</a>
+                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                        Añadir
+                      </button>
                     </div>
                     <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
                       Detalles
@@ -75,15 +113,19 @@
 
             <div class="col">
               <div class="card shadow-sm">
-                <img src="img/img2.jpg" alt="">
+                <img src="img/mini.jpg" alt="">
                 <div class="card-body">
                   <h5 class="card-title">Figurita de Warhammer</h5>
                   <p class="card-text">$ 10</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <a href="" class="btn btn-primary">Detalles</a>
+                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                        Añadir
+                      </button>
                     </div>
-                      <a href="" class="btn btn-success">Detalles</a>
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Detalles
+                    </button>
                   </div>
                 </div>
               </div>
@@ -91,15 +133,19 @@
 
             <div class="col">
               <div class="card shadow-sm">
-                <img src="img/img3.jpg" alt="">
+                <img src="img/mini.jpg" alt="">
                 <div class="card-body">
                   <h5 class="card-title">Figurita de Warhammer</h5>
                   <p class="card-text">$ 10</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <a href="" class="btn btn-primary">Detalles</a>
+                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                        Añadir
+                      </button>
                     </div>
-                      <a href="" class="btn btn-success">Detalles</a>
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Detalles
+                    </button>
                   </div>
                 </div>
               </div>
@@ -113,15 +159,19 @@
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div class="col">
               <div class="card shadow-sm">
-                <img src="img/img1.jpg" alt="">
+                <img src="img/mini.jpg" alt="">
                 <div class="card-body">
                   <h5 class="card-title">Figurita de Warhammer</h5>
                   <p class="card-text">$ 10</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <a href="" class="btn btn-primary">Detalles</a>
+                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                        Añadir
+                      </button>
                     </div>
-                      <a href="" class="btn btn-success">Detalles</a>
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Detalles
+                    </button>
                   </div>
                 </div>
               </div>
@@ -129,15 +179,19 @@
 
             <div class="col">
               <div class="card shadow-sm">
-                <img src="img/img2.jpg" alt="">
+                <img src="img/mini.jpg" alt="">
                 <div class="card-body">
                   <h5 class="card-title">Figurita de Warhammer</h5>
                   <p class="card-text">$ 10</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <a href="" class="btn btn-primary">Detalles</a>
+                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                        Añadir
+                      </button>
                     </div>
-                      <a href="" class="btn btn-success">Detalles</a>
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Detalles
+                    </button>
                   </div>
                 </div>
               </div>
@@ -145,15 +199,19 @@
 
             <div class="col">
               <div class="card shadow-sm">
-                <img src="img/img3.jpg" alt="">
+                <img src="img/mini.jpg" alt="">
                 <div class="card-body">
                   <h5 class="card-title">Figurita de Warhammer</h5>
                   <p class="card-text">$ 10</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <a href="" class="btn btn-primary">Detalles</a>
+                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                        Añadir
+                      </button>
                     </div>
-                      <a href="" class="btn btn-success">Detalles</a>
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Detalles
+                    </button>
                   </div>
                 </div>
               </div>
@@ -166,15 +224,19 @@
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div class="col">
               <div class="card shadow-sm">
-                <img src="img/img1.jpg" alt="">
+                <img src="img/mini.jpg" alt="">
                 <div class="card-body">
                   <h5 class="card-title">Figurita de Warhammer</h5>
                   <p class="card-text">$ 10</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <a href="" class="btn btn-primary">Detalles</a>
+                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                        Añadir
+                      </button>
                     </div>
-                      <a href="" class="btn btn-success">Detalles</a>
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Detalles
+                    </button>
                   </div>
                 </div>
               </div>
@@ -182,15 +244,19 @@
 
             <div class="col">
               <div class="card shadow-sm">
-                <img src="img/img2.jpg" alt="">
+                <img src="img/mini.jpg" alt="">
                 <div class="card-body">
                   <h5 class="card-title">Figurita de Warhammer</h5>
                   <p class="card-text">$ 10</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <a href="" class="btn btn-primary">Detalles</a>
+                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                        Añadir
+                      </button>
                     </div>
-                      <a href="" class="btn btn-success">Detalles</a>
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Detalles
+                    </button>
                   </div>
                 </div>
               </div>
@@ -198,17 +264,20 @@
 
             <div class="col">
               <div class="card shadow-sm">
-                <img src="img/img3.jpg" alt="">
+                <img src="img/mini.jpg" alt="">
                 <div class="card-body">
                   <h5 class="card-title">Figurita de Warhammer</h5>
                   <p class="card-text">$ 10</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <a href="" class="btn btn-primary">Detalles</a>
+                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                        Añadir
+                      </button>
                     </div>
-                      <a href="" class="btn btn-success">Detalles</a>
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Detalles
+                    </button>
                   </div>
-                </div>
               </div>
             </div>
 
