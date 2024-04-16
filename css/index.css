@@ -4,3 +4,26 @@
     align-content: center;
     text-align: center;
 }
+
+.centrado-filtro{
+    justify-content: space-between;
+    align-content: space-evenly;
+    text-align: center;
+    margin-top: 200px;
+    margin-left: 200px;
+    
+}
+
+.centrado-catalogo{
+    justify-content: space-between;
+    align-content: space-evenly;
+    text-align: start;
+    margin-top: 50px;
+    margin-left: 200px;
+}
+
+.off-canvas-img {
+    
+    float: left;
+    width: 50%;
+  }

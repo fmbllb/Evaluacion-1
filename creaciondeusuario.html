@@ -30,7 +30,12 @@
               <a href="#" class="nav-link">Contacto</a>
             </li>
           </ul>
-          <a href="#" class="btn btn-primary">Carrito</a>
+          <button type="button" class="btn btn-primary position-relative m-2">
+            Carrito
+            <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+              <span class="visually-hidden">New alerts</span>
+            </span>
+          </button>
           <a href="creaciondeusuario.html" class="btn btn-secondary m-1">Iniciar Sesion</a>
         </div>
       </div>
@@ -39,9 +44,11 @@
   </header>
 
   <main>
+    <h3 class="centrado pt-5">Inicia Sesión con tu cuenta</h3>
     <div class="pt-5 centrado">
-      <form class="pt-5">
-        <div class="pt-5 mb-3">
+      <form class="p-5 border">
+        <img src="img/User-Circle-Single--Streamline-Core.svg" width="35rem" alt="">
+        <div class="p-5 mb-3">
           <label for="exampleInputEmail1" class="form-label">Dirección de Correo</label>
           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
         </div>
@@ -49,11 +56,16 @@
           <label for="exampleInputPassword1" class="form-label">Contraseña</label>
           <input type="password" class="form-control" id="exampleInputPassword1">
         </div>
-        <!--<div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Recuérdame</label>
-        </div>-->
-        <button type="submit" class="btn btn-primary">Registrarme</button>
+        <div class="mb-3 form-check">
+          
+          <a href="seestatrabajandoen.html" class="">¿Olvidó su contraseña?</a>
+        </div>
+        <div class="p-3">
+          <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+        </div>
+        <div class="pt-3 border-top">
+          <p>¿No tienes una cuenta con nosotros? <a href="#">Regístrate</a></p>
+        </div>
       </form>
     </div>
   </main>
