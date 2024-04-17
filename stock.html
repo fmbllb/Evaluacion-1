@@ -7,7 +7,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/index.css" rel="stylesheet">
   <script src="js/bootstrap.bundle.min.js"></script>
-  <title>Administración</title>
+  <title>Stock</title>
 </head>
 
 <body>
@@ -56,52 +56,47 @@
   </header>
   <!-- Fin de navbar -->
 
-  <div class="container mb-5 rounded-0">
-    <main>
-      <h3 class="centrado pt-5">Vista Administrador</h3>
-      <div class="pt-5 centrado">
-        <form class="p-5 border">
-          <img src="img/User-Circle-Single--Streamline-Core.svg" width="35rem" alt="">
-          <div class="p-5 mb-3">
-            <label for="exampleInputEmail1" class="form-label">Cuenta de Administrador</label>
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Nombre del Administrador: </label>
-            <label for="exampleInputPassword1" class="form-label">Juanito Orgullocito</label>
-          </div>
-          <div class="mb-3 form-check">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#olvidoContrasenaModal">¿Olvidó su contraseña?</a>
-          </div>
-          <div class="p-3">
-            <a href="estadisticasfinancieras.html" class="btn btn-warning rounded-0" role="button">Estadísticas</a>
-            <a href="agregarproducto.html" class="btn btn-warning rounded-0" role="button">Agregar Producto</a>
-            <a href="stock.html" class="btn btn-warning rounded-0" role="button">Ver stock</a>
-            <button type="button" class="btn btn-warning rounded-0">Contabilidad</button>
-          </div>
-        </form>
-      </div>
-    </main>
-  </div>
-
-    <!-- Modal para recuperar contraseña -->
-    <div class="modal fade" id="olvidoContrasenaModal" tabindex="-1" aria-labelledby="olvidoContrasenaModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="olvidoContrasenaModalLabel">Recuperar Contraseña</h5>
-            <button type="button" class="btn-close rounded-0" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <p>Por favor ingrese su dirección de correo electrónico para recuperar su contraseña:</p>
-            <input type="email" class="form-control rounded-0" id="recuperarContrasenaEmail" placeholder="Correo Electrónico">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Cancelar</button>
-            <a href="index.html" class="btn btn-warning rounded-0">Enviar</a>
-          </div>
+  <main>
+    <div class="container mt-5">
+        <h1 class="text-center">Stock de productos</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Miniaturas en blanco</h5>
+                        <p class="card-text">Cantidad en stock: 100</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Pintura de color</h5>
+                        <p class="card-text">Cantidad en stock: 75</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Brochas tamaño 5</h5>
+                        <p class="card-text">Cantidad en stock: 50</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Miniaturas pintadas</h5>
+                        <p class="card-text">Cantidad en stock: 120</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+  </main>
 
   <!-- Footer -->
   <footer style="bottom: 0; width: 100%; height: 40px;" class="mt-auto position:absolute">
