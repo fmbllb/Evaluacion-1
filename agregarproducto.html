@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -7,7 +7,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/index.css" rel="stylesheet">
   <script src="js/bootstrap.bundle.min.js"></script>
-  <title>TIENDA DE WARHAMMER</title>
+  <title>Agregar producto</title>
 </head>
 
 <body>
@@ -46,7 +46,7 @@
               <li class="nav-item me-3">
                 <a href="registro.html" class="btn">Regístrate</a>
               </li>
-              <a href="carrito.html" class="btn btn-warning">Carrito</a>
+              <a href="carrito.html" class="btn btn-warning rounded-0">Carrito</a>
               </li>
             </ul>
           </div>
@@ -57,13 +57,44 @@
   <!-- Fin de navbar -->
 
   <main>
-    <h1>Estamos trabajando para...</h1>
-    <p>Estamos trabajando para...</p>
+
+    <div class="container mt-5 rounded-0 mb-5">
+        <h1 class="text-center mb-4">Agregar Producto al Catálogo</h1>
+        <form>
+          <div class="mb-3">
+            <label for="nombreProducto" class="form-label">Nombre del Producto</label>
+            <input type="text" class="form-control rounded-0" id="nombreProducto" placeholder="Ejemplo: Miniatura 1">
+          </div>
+          <div class="mb-3">
+            <label for="descripcionProducto" class="form-label">Descripción</label>
+            <textarea class="form-control rounded-0" id="descripcionProducto" rows="3" placeholder="Ejemplo: Tamaño, peso, material"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="precioProducto" class="form-label ">Precio</label>
+            <input type="number" class="form-control rounded-0" id="precioProducto" placeholder="Ejemplo: $20.000">
+          </div>
+          <div class="mb-3">
+            <label for="imagenProducto" class="form-label">Imagen del Producto</label>
+            <input type="file" class="form-control rounded-0" id="imagenProducto">
+          </div>
+          <div class="mb-3">
+            <label for="categoriaProducto" class="form-label">Categoría</label>
+            <select class="form-select rounded-0" id="categoriaProducto">
+              <option value="ropa">Miniaturas</option>
+              <option value="calzado">Pinturas</option>
+              <option value="accesorios">Accesorios</option>
+              <!-- Agrega más opciones de categoría según tus necesidades -->
+            </select>
+          </div>
+          <a href="administrador.html" class="btn btn-warning rounded-0">Añadir Producto</a>
+        </form>
+      </div>
+
   </main>
 
   <!-- Footer -->
   <footer style="bottom: 0; width: 100%; height: 40px;" class="mt-auto position:absolute">
-    <div class="container-fluid bg-dark text-white py-3">
+    <div class="container-fluid bg-dark text-white py-3"> 
       <div class="row">
         <div class="col-md-4">
           <h5>INFORMACIÓN</h5>
