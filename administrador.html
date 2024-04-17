@@ -46,7 +46,7 @@
               <li class="nav-item me-3">
                 <a href="registro.html" class="btn">Regístrate</a>
               </li>
-              <a href="carrito.html" class="btn btn-warning">Carrito</a>
+              <a href="carrito.html" class="btn btn-warning rounded-0">Carrito</a>
               </li>
             </ul>
           </div>
@@ -70,7 +70,7 @@
             <label for="exampleInputPassword1" class="form-label">Juanito Orgullocito</label>
           </div>
           <div class="mb-3 form-check">
-            <a href="seestatrabajandoen.html" class="">¿Olvidó su contraseña?</a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#olvidoContrasenaModal">¿Olvidó su contraseña?</a>
           </div>
           <div class="p-3">
             <button type="button" class="btn btn-warning rounded-0">Estadísticas</button>
@@ -82,6 +82,26 @@
       </div>
     </main>
   </div>
+
+    <!-- Modal para recuperar contraseña -->
+    <div class="modal fade" id="olvidoContrasenaModal" tabindex="-1" aria-labelledby="olvidoContrasenaModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="olvidoContrasenaModalLabel">Recuperar Contraseña</h5>
+            <button type="button" class="btn-close rounded-0" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Por favor ingrese su dirección de correo electrónico para recuperar su contraseña:</p>
+            <input type="email" class="form-control rounded-0" id="recuperarContrasenaEmail" placeholder="Correo Electrónico">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Cancelar</button>
+            <a href="index.html" class="btn btn-warning rounded-0">Enviar</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
   <!-- Footer -->
   <footer style="bottom: 0; width: 100%; height: 40px;" class="mt-auto position:absolute">
