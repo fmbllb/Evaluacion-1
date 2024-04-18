@@ -37,7 +37,7 @@
                 <li class="nav-item">
                   <a class="nav-link" href="administrador.html">Administración</a>
                 </li>
-                
+
               </ul>
             </div>
             <ul class="navbar-nav flex; align-items: center">
@@ -51,7 +51,7 @@
                 <a href="registro.html" class="btn">Regístrate</a>
               </li class="nav-item me-3">
               <li class="nav-item me-3">
-              <a href="carrito.html" class="btn btn-warning rounded-0">Carrito</a>
+                <a href="carrito.html" class="btn btn-warning rounded-0">Carrito</a>
               </li>
             </ul>
           </div>
@@ -88,7 +88,8 @@
               <li><a class="dropdown-item" href="#">8</a></li>
               <li><a class="dropdown-item" href="#">9</a></li>
               <li><a class="dropdown-item" href="#">10</a></li>
-              <li><input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese un numero..."></li>
+              <li><input type="number" class="form-control" id="exampleFormControlInput1"
+                  placeholder="Ingrese un numero..."></li>
             </ul>
           </div>
           <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
@@ -97,7 +98,7 @@
         </div>
       </div>
     </div>
-    
+
     <!--<div class="offcanvas offcanvas-end" id="anadir">
       <div class="offcanvas-header">
         <h1 class="offcanvas-title">Carrito</h1>
@@ -119,68 +120,85 @@
 
     </div>-->
     <!-- Fin de Canvas -->
-    <div class="container border p-5">
-        <div class="row">
-            <div class="col-12">
-                <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item flex-fill"><h5>Ordenar por: </h5></li>
-                    <li class="list-group-item flex-fill"><div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="checkEjercitoCaos">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Fecha de Ingreso
-                        </label>
-                      </div></li>
-                    <li class="list-group-item flex-fill"><div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="checkEjercitoCaos">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Nombre
-                        </label>
-                      </div></li>
-                    <li class="list-group-item flex-fill">
-                        <div class="dropdown">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-                              Categoría
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="checkEjercitoCaos">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                  Ejército del Caos
-                                </label>
-                              </div></li>
-                              <li><div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="checkEjercitoImperium">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                  Ejército del Imperium
-                                </label>
-                              </div></li>
-                              <li><div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="checkKillTeam">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                  Kill Team
-                                </label>
-                              </div></li>
-                            </ul>
-                          </div>
-                    </li>
-                    <li class="list-group-item flex-fill">                        <div class="dropdown">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-                          Marca
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="checkEjercitoCaos">
-                            <label class="form-check-label" for="flexCheckDefault">
-                              Warhammer
-                            </label>
-                          </div></li>
-                        </ul>
-                      </div></li>
+    <div class="container border p-5 rounded-0">
+      <div class="row">
+        <div class="col-12">
+          <ul class="list-group rounded-0">
+            <li class="list-group-item">
+              <h5>Ordenar por:</h5>
+            </li>
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="checkFechaIngreso">
+                <label class="form-check-label" for="checkFechaIngreso">
+                  Fecha de Ingreso
+                </label>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="checkNombre">
+                <label class="form-check-label" for="checkNombre">
+                  Nombre
+                </label>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="dropdown">
+                <button type="button" class="btn btn-warning rounded-0 dropdown-toggle" data-bs-toggle="dropdown">
+                  Categoría
+                </button>
+                <ul class="dropdown-menu rounded-0 p-2">
+                  <li>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="checkEjercitoCaos">
+                      <label class="form-check-label" for="checkEjercitoCaos">
+                        Ejército del Caos
+                      </label>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="checkEjercitoImperium">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Ejército del Imperio
+                      </label>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="checkKillTeam">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Kill Team
+                      </label>
+                    </div>
+                  </li>
+              </div>
+            </li>
+            <li class="list-group-item flex-fill">
+              <div class="dropdown">
+                <button type="button" class="btn btn-warning rounded-0 dropdown-toggle" data-bs-toggle="dropdown">
+                  Marca
+                </button>
+                <ul class="dropdown-menu rounded-0">
+                  <li>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="checkEjercitoCaos">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Games Workshop
+                      </label>
+                    </div>
+                  </li>
                 </ul>
-            </div>
+              </div>
+            </li>
+          </ul>
         </div>
+        </li>
+      </div>
     </div>
-    
+    </div>
+
     <div class="container border p-5">
       <h4>Figuras</h4>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -380,7 +398,7 @@
 
   <!-- Footer -->
   <footer style="bottom: 0; width: 100%; height: 40px;" class="mt-auto position:absolute">
-    <div class="container-fluid bg-dark text-white py-3"> 
+    <div class="container-fluid bg-dark text-white py-3">
       <div class="row">
         <div class="col-md-4">
           <h5>INFORMACIÓN</h5>
