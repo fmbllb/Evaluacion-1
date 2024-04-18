@@ -13,7 +13,6 @@
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 
 </head>
-
 <body>
 
     <!-- Navbar -->
@@ -59,43 +58,77 @@
         </div>
     </header>
     <!-- Fin de navbar -->
+
+
     <main>
-            <div class="container mt-5 mb-3">
-                <div class="row">
-                    <div class="col-md-8 offset-md-2">
-                        <h5 style="font-size: 90%;"><strong>Identificación y Titularidad</strong></h2>
-                        <p style="font-size: 90%;">En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y Comercio Electrónico, el Titular expone sus datos identificativos:</p>
-                        <ul style="font-size: 90%;">
-                            <li><strong>Titular:</strong> NAYMA2006 S.L.</li>
-                            <li><strong>NIF/CIF:</strong> B97789762</li>
-                            <li><strong>Correo electrónico:</strong> contacto@warpainter.cl</li>
-                            <li><strong>Sitio Web:</strong> warpainter.cl</li>
+        <body>
+            <div class="row mt-3 mb-3 white-background">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-md-6 d-flex justify-content-center align-items-center">
+                        <img src="assets/img/pinturas.jpg" alt="Producto 1" class="img-fluid border" width="35%">
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Seguimiento de Pedido</h4>
+                        <p><strong>Estado de la Entrega:</strong> En tránsito</p>
+                        <p><strong>Información del Pedido:</strong></p>
+                        <ul>
+                            <li><strong>Número de Pedido:</strong> 123456</li>
+                            <li><strong>Fecha de Compra:</strong> 15 de diciembre de 2021</li>
+                            <li><strong>Producto:</strong> Set de pinturas The Army Painter 10 colores</li>
+                            <li><strong>Cantidad:</strong> 1 unidades</li>
+                            <li><strong>Total:</strong> $12.000</li>
                         </ul>
-        
-                        <h5 style="font-size: 90%;"><strong>Finalidad</strong></h2>
-                        <p style="font-size: 90%;">Tienda online de Warhammer y miniaturas.</p>
-        
-                        <h5 style="font-size: 90%;"><strong>Condiciones de Uso</strong></h2>
-                        <p style="font-size: 90%;">La utilización del sitio Web te otorga la condición de Usuario e implica la aceptación completa de todas las cláusulas y condiciones de uso incluidas en las páginas:</p>
-                        <ul style="font-size: 90%;">
-                            <li>Aviso Legal</li>
-                            <li>Términos y condiciones</li>
-                            <li>Política de Privacidad</li>
-                            <li>Política de Cookies</li>
-                        </ul>
-                        <p style="font-size: 90%;">Si no estás conforme con todas y cada una de estas cláusulas y condiciones, te abstendrás de utilizar este sitio Web. El acceso a este sitio Web no supone, en modo alguno, el inicio de una relación comercial con NAYMA2006 S.L. a través de este sitio Web.</p>
-                        <p style="font-size: 90%;">Te comprometes a NO utilizar cualquiera de los contenidos del sitio Web con fines o efectos ilícitos, prohibidos en este Aviso Legal o por la legislación vigente, lesivos de los derechos e intereses de terceros, o que de cualquier forma puedan dañar, inutilizar, sobrecargar, deteriorar o impedir la normal utilización de los contenidos, los equipos informáticos o los documentos, archivos y toda clase de contenidos almacenados en cualquier equipo informático propios o contratados por NAYMA2006 S.L., de otros usuarios o de cualquier usuario de Internet.</p>
-        
-                        <h5 style="font-size: 90%;"><strong>Medidas de seguridad</strong></h2>
-                        <p style="font-size: 90%;">Los datos personales que facilites al Titular pueden ser almacenados en bases de datos automatizadas o no, cuya titularidad corresponde en exclusiva a NAYMA2006 S.L., que asume toda la responsabilidad por las medidas de seguridad de índole técnica y organizativa para proteger la confidencialidad, integridad y disponibilidad de la información de acuerdo con lo establecido en el Reglamento General de Protección de Datos (RGPD).</p>
+                        <button class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Cancelar Pedido</button>
+                        <a href="#" class="btn btn-secondary rounded-0">Detalles de producto</a>
                     </div>
                 </div>
             </div>
+        
+            <hr>
+        
+            <div class="row mt-3 mb-5">
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <img src="assets/img/mini.jpg" alt="Producto 1" class="img-fluid border" width="35%">
+                </div>
+                <div class="col-md-6">
+                    <h4>Seguimiento de Pedido</h4>
+                    <p><strong>Estado de la Entrega:</strong> Entregado</p>
+                    <p><strong>Información del Pedido:</strong></p>
+                    <ul>
+                        <li><strong>Número de Pedido:</strong> 134567</li>
+                        <li><strong>Fecha de Compra:</strong> 13 de diciembre de 2021</li>
+                        <li><strong>Producto:</strong> Miniatura Soldado Lobos Lunares</li>
+                        <li><strong>Cantidad:</strong> 2 unidades</li>
+                        <li><strong>Total:</strong> $15.000</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary rounded-0">Detalles de producto</a>
+                </div>
+        </body>
+    
+
+        
+        <!-- Modal de Confirmación para Cancelar Pedido -->
+        <div class="modal fade" id="confirmCancelModal" tabindex="-1" aria-labelledby="confirmCancelModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmCancelModalLabel">Confirmar Cancelación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que deseas cancelar este pedido? Será redirigido a la página de contacto.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <a href="contacto.html" class="btn btn-danger">Cancelar Pedido</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
-
     <!-- Footer -->
-    <footer style="bottom: 0; width: 100%; height: 40px;  position:absolute bottom" class="mt-auto">
+    <footer style="bottom: 0; width: 100%; height: 40px; position:absolute bottom" class="mt-auto">
         <div class="container-fluid bg-dark text-white py-3">
             <div class="row">
                 <div class="col-md-4">
@@ -120,7 +153,7 @@
                     <ul class="list-unstyled">
                         <li><a class="text-decoration-none text-white" href="vistausuario.html">
                                 <i class="bi bi-chevron-right"></i> Mi cuenta</a></li>
-                        <li><a class="text-decoration-none text-white" href="pedidos.html">
+                        <li><a class="text-decoration-none text-white" href="seguipedido.html">
                                 <i class="bi bi-chevron-right"></i> Mis pedidos</a></li>
                         <li><a class="text-decoration-none text-white" href="carritos.html">
                                 <i class="bi bi-chevron-right"></i> Carritos guardados</a></li>
@@ -148,6 +181,5 @@
             </div>
         </div>
     </footer>
-</body>
 
-</html>
+</body>
