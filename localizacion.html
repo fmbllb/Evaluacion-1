@@ -74,22 +74,41 @@
             </h5>
             <label for="text" class="form-control mb-2" id="direccionUsuario">Pasaje Espinas Espinozas</label>
             <input type="text" class="form-control mb-2" id="cambiodireccion" placeholder="Cambiar dirección principal">
-            <button type="submit" class="btn btn-primary">Guardar Nueva direccion</button>
+            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCambiosLocalizacion">Guardar Nueva direccion</button>
             
         </div>
         <div class="mb-3 p-3">
             <h5>
                 Datos adicionales para su entrega (Color del portón, nombre de quien recibe, etc.)
             </h5>
-            <form action="">
                 <div class="mb-3">
                     <label for="datosAdicionalesDireccion" class="form-label"></label>
                     <input type="text" class="form-control" id="datosadicionales" placeholder="Datos adicionales de domicilio (opcional)">
                 </div>
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCambiosLocalizacion">Guardar</button>
         </div>
     </div>
 
+
+    <!-- Modal de confirmación de cambios -->
+    <div class="modal fade" id="modalCambiosLocalizacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">¿Estás seguro de realizar los cambios?</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Los cambios fueron los siguientes...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary">Guardar cambios</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Fin Modal Confirmacion de Cambios-->
     <!-- Footer -->
     <footer style="bottom: 0; width: 100%; height: 40px;" class="mt-auto position:absolute">
         <div class="container-fluid bg-dark text-white py-3"> 
