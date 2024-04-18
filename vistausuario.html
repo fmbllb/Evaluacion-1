@@ -53,51 +53,49 @@
   </header>
   <!-- Fin de navbar -->
 
-
-    <h3 class="centrado pt-5">Vista Usuario</h3>
-    <div class="pt-5 centrado">
-        <form class="p-5 border">
-        <img src="assets/img/User-Circle-Single--Streamline-Core.svg" width="35rem" alt="">
-        <div class="p-5 mb-3">
-            <label for="exampleInputEmail1" class="form-label">Cuenta de Usuario</label>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Nombre Usuario:</label>
-            <label for="exampleInputPassword1" class="form-label">Pepillo</label>
-        </div>
-        <div class="mb-3 p-3">
-            <label for="" class="form-label">Nombre:</label>
-            <label for="" class="form-label">Pepito Luano</label>
-        </div>
-        <div class="mb-3 p-3">
-            <label for="" class="form-label">Correo Electrónico:</label>
-            <label for="" class="form-label">pepito@gmail.com</label>
-        </div>
-        <div class="mb-3 p-3">
-            <label for="" class="form-label">Contraseña Modificar:</label>
-            <label for="" class="form-label">***********</label>
-        </div>
-        <div class="mb-3">
-            <label for="" class="form-label">Dirección:</label>
-            <label for="" class="form-label">Pasaje Caries Tres Puntos</label>
-        </div>
-        <div class="mb-3">
-            <label for="" class="form-label">Ciudad:</label>
-            <label for="" class="form-label">Nanomuana</label>
-        </div>
-        <div class="mb-3">
-            <label for="" class="form-label">Región:</label>
-            <label for="" class="form-label">Juanas</label>
-        </div>
+  <!-- Comienzo Vista de Usuario --> 
+    <h1 class="m-3 p-5 centrado">Cuenta Usuario</h1>
+    <div class="pt-5 container">
+      
+        <form class="border centrado">
+          <img src="assets/img/User-Circle-Single--Streamline-Core.svg" class="m-4" width="35rem" alt="">
+          <h4 class="m-4 pt-2">Pepito Urrutia Gonzáles</h4>
         <div class="p-3 m-2">
             <a href="ajustesusuarios.html" class="btn btn-warning rounded-0 mt-2" role="button">Ajustes</a>
-            <a href="stock.html" class="btn btn-warning rounded-0 mt-2" role="button">Ver Mis Pedidos</a>
-
+            <a href="pedidoscliente.html" class="btn btn-warning rounded-0 mt-2" role="button">Ver Mis Pedidos</a>
         </div>
         </form>
     </div>
-    </main>
+    <div class="container pt-5">
+      <div class="list-group">
+        <a href="datospersonales.html" class="list-group-item list-group-item-action" aria-current="true">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Información Personal</h5>
+            <img src="assets/img/Arrow-Button-Right-1--Streamline-Ultimate.svg" class="pt-3" alt="">
+          </div>
+          <p class="mb-1">Aquí puedes revisar tu nombre y datos personales.</p>
+          
+        </a>
+        <a href="datoscuenta.html" class="list-group-item list-group-item-action">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Datos de la cuenta</h5>
+            <img src="assets/img/Arrow-Button-Right-1--Streamline-Ultimate.svg" class="pt-3" alt="">
+          </div>
+          <p class="mb-1">Nombre de usuario, teléfono de contacto y Correo</p>
+        </a>
+        <a href="localizacion.html" class="list-group-item list-group-item-action">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Localización</h5>
+            <img src="assets/img/Arrow-Button-Right-1--Streamline-Ultimate.svg" class="pt-3" alt="">
+          </div>
+          <p class="mb-1">Aquí está la dirección de envío, nombre de quién recibe y direcciones adicionales.</p>
+          
+        </a>
+      </div>
     </div>
+
+    <!-- Fin Vista de Usuario --> 
+
 
     <!-- Modal para recuperar contraseña -->
     <div class="modal fade" id="olvidoContrasenaModal" tabindex="-1" aria-labelledby="olvidoContrasenaModalLabel" aria-hidden="true">
