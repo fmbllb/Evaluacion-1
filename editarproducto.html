@@ -67,10 +67,14 @@
     <div class="container mt-5">
       <div class="row">
         <div class="col-md-8">
-          <h2>Carrito</h2>
+          <h2>Producto a Editar</h2>
           <div class="d-flex border align-items-center mb-5">
-            <img src="img/mini.jpg" class="img-fluid border me-3" alt="Imagen del carrito" width="30%">
+            <img src="assets/img/mini.jpg" class="img-fluid border me-3" alt="Imagen del carrito" width="30%">
             <p class="col-md-4">Soldado Lobos Lunares x1</p>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Editar título de la figura</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Titulo de ejemplo...">
+              </div>
           </div>
           <div class="border align-items-center">
             <div class="mb-3">
@@ -87,7 +91,8 @@
               </div>
           </div>
           <br>
-          <a href="index.html" class="btn btn-warning rounded-0 mt-4 float-start">Confirmar Cambios</a>
+          <a href="index.html" class="btn btn-warning rounded-0 mt-4 float-start" data-bs-toggle="modal" data-bs-target="#confirmaCambio">Confirmar Cambios</a>
+          <a href="" class="btn btn-danger rounded-0 mt-4 float-end" data-bs-toggle="modal" data-bs-target="#confirmaCambio">Eliminar Producto</a>
         </div>
         <div class="col-md-4 d-flex flex-column align-items-center">
 
@@ -105,21 +110,21 @@
             <div class="card-body">
 
               <!-- Botón confirmar pago -->
-              <button type="button" class="btn btn-primary">Guardar Cambios</button>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmaCambio">Guardar Cambios</button>
 
-              <!-- Modal pago confirmado -->
-              <div class="modal fade" id="confirmapago" tabindex="-1" aria-labelledby="confirma" aria-hidden="true">
+              <!-- Modal cambio confirmado -->
+              <div class="modal fade" id="confirmaCambio" tabindex="-1" aria-labelledby="confirma" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Pago Exitoso</h5>
+                      <h5 class="modal-title" id="exampleModalLabel">Cambio Exitoso</h5>
                       <button type="button" class="btn-close rounded-0" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      Su pago fue realizado con éxito.
+                      El cambio se ha realizado con éxito...
                     </div>
                     <div class="modal-footer">
-                      <a href="index.html" class="btn btn-secondary" role="button">OK</a>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                   </div>
                 </div>
@@ -133,8 +138,13 @@
 
           <div class="card mt-3">
             <div class="card-body">
-              <p>Editar días de envío</p>
+              
               <p>Envío de 1 a 3 días*</p>
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Editar días de envío</label>
+                <input type="email" class="form-control mb-3" id="exampleFormControlInput1" placeholder="Días de envío...">
+                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#confirmaCambio">Guardar Cambios</button>
+              </div>
             </div>
           </div>
         </div>
