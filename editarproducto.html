@@ -7,7 +7,8 @@
   <link href="assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/css/index.css" rel="stylesheet">
   <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <title>WarPainter</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <title>Editar Producto</title>
 </head>
 
 <body>
@@ -72,7 +73,7 @@
             <img src="assets/img/mini.jpg" class="img-fluid border me-3" alt="Imagen del carrito" width="30%">
             <p class="col-md-4">Soldado Lobos Lunares x1</p>
             <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Editar título de la figura</label>
+                <label for="exampleFormControlInput1" class="form-label">Editar nombre del Producto</label>
                 <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Titulo de ejemplo...">
               </div>
           </div>
@@ -91,7 +92,7 @@
               </div>
           </div>
           <br>
-          <a href="index.html" class="btn btn-warning rounded-0 mt-4 float-start" data-bs-toggle="modal" data-bs-target="#confirmaCambio">Confirmar Cambios</a>
+          <a href="index.html" class="btn btn-warning rounded-0 mt-4 float-start mb-4" data-bs-toggle="modal" data-bs-target="#confirmaCambio">Confirmar Cambios</a>
           <a href="" class="btn btn-danger rounded-0 mt-4 float-end" data-bs-toggle="modal" data-bs-target="#confirmaCambio">Eliminar Producto</a>
         </div>
         <div class="col-md-4 d-flex flex-column align-items-center">
@@ -152,85 +153,52 @@
     </div>
 
   </main>
-  <!-- Footer -->
-  <footer style="bottom: 0; width: 100%; height: 40px;" class="mt-auto position:absolute">
-    <div class="container-fluid bg-dark text-white py-3">
-      <div class="row">
-        <div class="col-md-4">
-          <h5>INFORMACIÓN</h5>
-          <ul class="list-unstyled">
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Aviso legal</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Terminos y Condiciones</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Politica de Cookies</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Politica de Privacidad</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Contactate con nosotros</a></li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <h5>MIS COSAS</h5>
-          <ul class="list-unstyled">
-            <li><a href="vistausuario.html" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Mi cuenta</a></li>
-            <li><a href="seguipedido.html" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Mis pedidos</a></li>
-            <li><a href="localizacion.html" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Mis direcciones</a></li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <h5>DESTACADAS</h5>
-          <ul class="list-unstyled">
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Warhammer 40000</a>
-            </li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Pintura</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Modelismo</a></li>
-          </ul>
-        </div>
+    <!-- Footer -->
+    <footer style="bottom: 0; width: 100%; height: 40px; position:absolute bottom" class="mt-auto">
+      <div class="container-fluid bg-dark text-white py-3">
+          <div class="row">
+              <div class="col-md-4">
+                  <h5>INFORMACIÓN</h5>
+                  <ul class="list-unstyled">
+                      <li><a class="text-decoration-none text-white" href="avisolegal.html">
+                              <i class="bi bi-chevron-right"></i>Aviso Legal
+                          </a></li>
+                      <li><a class="text-decoration-none text-white" href="t&condicion.html">
+                              <i class="bi bi-chevron-right"></i>Terminos y Condiciones
+                          </a></li>
+                      <li><a class="text-decoration-none text-white" href="pcookies.html">
+                              <i class="bi bi-chevron-right"></i> Politica de Cookies</a></li>
+                      <li><a class="text-decoration-none text-white" href="privacidad.html">
+                              <i class="bi bi-chevron-right"></i> Politica de Privacidad</a></li>
+                      <li><a class="text-decoration-none text-white" href="contacto.html">
+                              <i class="bi bi-chevron-right"></i> Contactate con nosotros</a></li>
+                  </ul>
+              </div>
+              <div class="col-md-4">
+                  <h5>MIS COSAS</h5>
+                  <ul class="list-unstyled">
+                      <li><a class="text-decoration-none text-white" href="vistausuario.html">
+                              <i class="bi bi-chevron-right"></i> Mi cuenta</a></li>
+                      <li><a class="text-decoration-none text-white" href="seguipedido.html">
+                              <i class="bi bi-chevron-right"></i> Mis pedidos</a></li>
+                      <li><a class="text-decoration-none text-white" href="direcciones.html">
+                              <i class="bi bi-chevron-right"></i> Mis direcciones</a></li>
+                  </ul>
+              </div>
+              <div class="col-md-4">
+                  <h5>DESTACADAS</h5>
+                  <ul class="list-unstyled">
+                      <li><a class="text-decoration-none text-white" href="#">
+                              <i class="bi bi-chevron-right"></i> Warhammer 40000</a></li>
+                      <li><a class="text-decoration-none text-white" href="#">
+                              <i class="bi bi-chevron-right"></i> Pintura</a></li>
+                      <li><a class="text-decoration-none text-white" href="#">
+                              <i class="bi bi-chevron-right"></i> Modelismo</a></li>
+                  </ul>
+              </div>
+          </div>
       </div>
-    </div>
   </footer>
-
 
 
 </body>
