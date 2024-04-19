@@ -1,19 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/index.css" rel="stylesheet">
-  <script src="js/bootstrap.bundle.min.js"></script>
-=======
   <link href="assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/css/index.css" rel="stylesheet">
   <script src="assets/js/bootstrap.bundle.min.js"></script>
->>>>>>> fabian
-  <title>Stock</title>
+  <title>WarPainter</title>
 </head>
 
 <body>
@@ -43,30 +37,20 @@
                 <li class="nav-item">
                   <a class="nav-link" href="administrador.html">Administración</a>
                 </li>
-<<<<<<< HEAD
-=======
                 
->>>>>>> fabian
               </ul>
             </div>
             <ul class="navbar-nav flex; align-items: center">
               <li class="nav-item me-3">
-<<<<<<< HEAD
-=======
                 <a href="pedidoscliente.html" class="btn">Compras</a>
               </li class="nav-item me-3">
               <li class="nav-item me-3">
->>>>>>> fabian
                 <a href="iniciodesesion.html" class="btn">Ingresar</a>
               </li>
               <li class="nav-item me-3">
                 <a href="registro.html" class="btn">Regístrate</a>
-<<<<<<< HEAD
-              </li>
-=======
               </li class="nav-item me-3">
               <li class="nav-item me-3">
->>>>>>> fabian
               <a href="carrito.html" class="btn btn-warning rounded-0">Carrito</a>
               </li>
             </ul>
@@ -78,50 +62,99 @@
   <!-- Fin de navbar -->
 
   <main>
-    <div class="container mt-5">
-        <h1 class="text-center">Stock de productos</h1>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Miniaturas en blanco</h5>
-                        <p class="card-text">Cantidad en stock: 100</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Pintura de color</h5>
-                        <p class="card-text">Cantidad en stock: 75</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Brochas tamaño 5</h5>
-                        <p class="card-text">Cantidad en stock: 50</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Miniaturas pintadas</h5>
-                        <p class="card-text">Cantidad en stock: 120</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-  </main>
 
+    <!-- Detalles de carrito -->
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-8">
+          <h2>Producto a Editar</h2>
+          <div class="d-flex border align-items-center mb-5">
+            <img src="assets/img/mini.jpg" class="img-fluid border me-3" alt="Imagen del carrito" width="30%">
+            <p class="col-md-4">Soldado Lobos Lunares x1</p>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Editar título de la figura</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Titulo de ejemplo...">
+              </div>
+          </div>
+          <div class="border align-items-center">
+            <div class="mb-3">
+                <label for="tituloDescripcionProducto" class="form-label h5 m-3">Descripción del producto</label>
+                <label type="text" class="form-control" id="" placeholder="">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id sed nemo neque aliquam aliquid voluptatum maxime ea eius hic, modi provident iusto dolorem a temporibus consectetur delectus? Eum, error sapiente.</label>
+              </div>
+              <div class="mb-3">
+                <label for="titleEditarDescripcionProducto" class="form-label h6 m-3">Editar descripción del producto:</label>
+                <textarea class="form-control" id="nuevaDescripcionProducto" rows="3"></textarea>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label h6 m-3">Cambiar Imagen del Producto</label>
+                    <input class="form-control m-3" type="file" id="formFile">
+                  </div>
+              </div>
+          </div>
+          <br>
+          <a href="index.html" class="btn btn-warning rounded-0 mt-4 float-start" data-bs-toggle="modal" data-bs-target="#confirmaCambio">Confirmar Cambios</a>
+          <a href="" class="btn btn-danger rounded-0 mt-4 float-end" data-bs-toggle="modal" data-bs-target="#confirmaCambio">Eliminar Producto</a>
+        </div>
+        <div class="col-md-4 d-flex flex-column align-items-center">
+
+          <!-- Resumen de objetos en el carrito -->
+          <div class="card mt-5 mb-5">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Precio Unitario</label>
+                <label for="exampleFormControlInput1" class="form-label">$6.500</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="$6.500">
+                
+              </div></li>
+              <li class="list-group-item">Total (impuestos inc.) - $ 9.000</li>
+            </ul>
+            <div class="card-body">
+
+              <!-- Botón confirmar pago -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmaCambio">Guardar Cambios</button>
+
+              <!-- Modal cambio confirmado -->
+              <div class="modal fade" id="confirmaCambio" tabindex="-1" aria-labelledby="confirma" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Cambio Exitoso</h5>
+                      <button type="button" class="btn-close rounded-0" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      El cambio se ha realizado con éxito...
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mt-3 mb-5">
+
+          </div>
+
+          <div class="card mt-3">
+            <div class="card-body">
+              
+              <p>Envío de 1 a 3 días*</p>
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Editar días de envío</label>
+                <input type="email" class="form-control mb-3" id="exampleFormControlInput1" placeholder="Días de envío...">
+                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#confirmaCambio">Guardar Cambios</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
   <!-- Footer -->
-  <footer style="bottom: 0; width: 100%; height: 40px; position:absolute" class="mt-auto mb-4">
-    <div class="container-fluid bg-dark text-white py-3"> 
+  <footer style="bottom: 0; width: 100%; height: 40px;" class="mt-auto position:absolute">
+    <div class="container-fluid bg-dark text-white py-3">
       <div class="row">
         <div class="col-md-4">
           <h5>INFORMACIÓN</h5>
@@ -156,31 +189,21 @@
         <div class="col-md-4">
           <h5>MIS COSAS</h5>
           <ul class="list-unstyled">
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+            <li><a href="vistausuario.html" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                   height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
                     d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
                 </svg> Mi cuenta</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+            <li><a href="seguipedido.html" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                   height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
                     d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
                 </svg> Mis pedidos</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Carritos guardados</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+            <li><a href="localizacion.html" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                   height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
                     d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
                 </svg> Mis direcciones</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Mis cupones descuento</a></li>
           </ul>
         </div>
         <div class="col-md-4">
@@ -190,17 +213,8 @@
                   height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
                     d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Warhammer 40000</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Warhammer Age of Sigmar</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Warhammer Fantasy</a></li>
+                </svg> Warhammer 40000</a>
+            </li>
             <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                   height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
@@ -216,6 +230,9 @@
       </div>
     </div>
   </footer>
+
+
+
 </body>
 
 </html>

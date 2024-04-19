@@ -5,7 +5,10 @@
     text-align: center;
 }
 
-<<<<<<< Updated upstream
+.flex-container {
+    display: flex;
+    justify-content: center;
+  }
 .centrado-filtro{
     justify-content: space-between;
     align-content: space-evenly;
@@ -24,7 +27,6 @@
 }
 
 .off-canvas-img {
-    
     float: left;
     width: 50%;
   }
