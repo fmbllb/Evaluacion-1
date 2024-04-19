@@ -2,12 +2,14 @@
 <html lang="es">
 
 <head>
+  <title>Carrito</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/css/index.css" rel="stylesheet">
+  <link href="assets/css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <!--Libreria de iconos-->
   <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <title>WarPainter</title>
 </head>
 
 <body>
@@ -17,7 +19,7 @@
     <div>
       <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
         <div class="container">
-          <a class="navbar-brand" href="index.html"><img src="img/logo.png" alt="Brand image" width="auto"
+          <a class="navbar-brand" href="index.html"><img src="assets/img/logo.png" alt="Brand image" width="auto"
               height="52"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -67,9 +69,9 @@
     <div class="container mt-5">
       <div class="row">
         <div class="col-md-8">
-          <h2>Carrito</h2>
-          <div class="d-flex border align-items-center">
-            <img src="img/mini.jpg" class="img-fluid border me-3" alt="Imagen del carrito" width="30%">
+          <h2 style="font-size:150%"><strong>Carrito de Compras</strong></h2>
+          <div class="d-flex border align-items-center mt-3">
+            <img src="assets/img/mini.jpg" class="img-fluid border me-3" alt="Imagen del carrito" width="30%">
             <p>Soldado Lobos Lunares x1</p>
           </div>
           <br>
@@ -78,7 +80,7 @@
         <div class="col-md-4 d-flex flex-column align-items-center">
 
           <!-- Resumen de objetos en el carrito -->
-          <div class="card mt-5 mb-5">
+          <div class="card mt-5 mb-3">
             <ul class="list-group list-group-flush">
               <li class="list-group-item">1 artículo(s) - $ 6.500</li>
               <li class="list-group-item">Total (impuestos inc.) - $ 9.000</li>
@@ -86,7 +88,8 @@
             <div class="card-body">
 
               <!-- Botón confirmar pago -->
-              <button type="button" class="btn btn-secondary rounded-0" data-bs-toggle="modal" data-bs-target="#confirmapago">Tramitar Compra</button>
+              <button type="button" class="btn btn-secondary rounded-0" data-bs-toggle="modal"
+                data-bs-target="#confirmapago">Tramitar Compra</button>
 
               <!-- Modal pago confirmado -->
               <div class="modal fade" id="confirmapago" tabindex="-1" aria-labelledby="confirma" aria-hidden="true">
@@ -94,7 +97,6 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel">Pago Exitoso</h5>
-                      <button type="button" class="btn-close rounded-0" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                       Su pago fue realizado con éxito.
@@ -108,7 +110,7 @@
             </div>
           </div>
 
-          <div class="card mt-3 mb-5">
+          <div class="card mt-3 mb-2">
             <div class="dropdown">
               <button class="btn btn-primary dropdown-toggle rounded-0" type="button" id="paymentDropdown"
                 data-bs-toggle="dropdown">
@@ -117,24 +119,33 @@
               <ul class="dropdown-menu rounded-0" aria-labelledby="paymentDropdown">
                 <li>
                   <a class="dropdown-item" href="#">
-                    <img src="img/webpay.jpg" alt="Medio de pago 1" class="payment-icon" width="50%">
+                    <img src="assets/img/webpay.jpg" alt="Medio de pago 1" class="payment-icon" width="50%">
                     WebPay
                   </a>
                 </li>
                 <li>
                   <a class="dropdown-item" href="#">
-                    <img src="img/paypal.png" alt="Medio de pago 2" class="payment-icon" width="50%">
+                    <img src="assets/img/paypal.png" alt="Medio de pago 2" class="payment-icon" width="50%">
                     PayPal
                   </a>
                 </li>
-                <!-- Agrega más opciones aquí -->
               </ul>
             </div>
           </div>
 
-          <div class="card mt-3">
-            <div class="card-body">
-              <p>Envío de 1 a 3 días*</p>
+          <!--Seleccion entrega o retiro-->
+          <div class="card mt-3 mb-5 p-2">
+            <div class="form-check text-start">
+              <input class="form-check-input" type="radio" name="exampleRadios" value="option1" checked>
+              <label class="form-check-label" for="exampleRadios1">
+                Retiro en tienda
+              </label>
+            </div>
+            <div class="form-check text-start">
+              <input class="form-check-input" type="radio" name="exampleRadios" value="option2">
+              <label class="form-check-label" for="exampleRadios2">
+                Entrega a domicilio
+              </label>
             </div>
           </div>
         </div>
@@ -142,38 +153,26 @@
     </div>
 
   </main>
+
   <!-- Footer -->
-  <footer style="bottom: 0; width: 100%; height: 40px;" class="mt-auto position:absolute">
+  <footer style="width: 100%; height: 40px; position: absolute; bottom: 0;" class="mt-auto">
     <div class="container-fluid bg-dark text-white py-3">
       <div class="row">
         <div class="col-md-4">
           <h5>INFORMACIÓN</h5>
           <ul class="list-unstyled">
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Aviso legal</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Terminos y Condiciones</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Politica de Cookies</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Politica de Privacidad</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Contactate con nosotros</a></li>
+            <li><a class="text-decoration-none text-white" href="avisolegal.html">
+                <i class="bi bi-chevron-right"></i>Aviso Legal
+              </a></li>
+            <li><a class="text-decoration-none text-white" href="t&condicion.html">
+                <i class="bi bi-chevron-right"></i>Terminos y Condiciones
+              </a></li>
+            <li><a class="text-decoration-none text-white" href="pcookies.html">
+                <i class="bi bi-chevron-right"></i> Politica de Cookies</a></li>
+            <li><a class="text-decoration-none text-white" href="privacidad.html">
+                <i class="bi bi-chevron-right"></i> Politica de Privacidad</a></li>
+            <li><a class="text-decoration-none text-white" href="contacto.html">
+                <i class="bi bi-chevron-right"></i> Contactate con nosotros</a></li>
           </ul>
         </div>
         <div class="col-md-4">
@@ -220,8 +219,6 @@
       </div>
     </div>
   </footer>
-
-
 
 </body>
 
