@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>WarPainter</title>
+    <title>Listado de Pedidos</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -78,8 +78,8 @@
                             <li><strong>Cantidad:</strong> 1 unidades</li>
                             <li><strong>Total:</strong> $12.000</li>
                         </ul>
-                        <button class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Cancelar Pedido</button>
-                        <a href="#" class="btn btn-secondary rounded-0">Detalles de producto</a>
+                        <button class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Eliminar Pedido</button>
+                        <a href="modpedido.html" class="btn btn-secondary rounded-0">Modificar Pedido</a>
                     </div>
                 </div>
             </div>
@@ -101,8 +101,8 @@
                         <li><strong>Cantidad:</strong> 2 unidades</li>
                         <li><strong>Total:</strong> $15.000</li>
                     </ul>
-                    <button class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Cancelar Pedido</button>
-                    <a href="#" class="btn btn-secondary rounded-0">Detalles de producto</a>
+                    <button class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Eliminar Pedido</button>
+                    <a href="modpedido.html" class="btn btn-secondary rounded-0">Modificar Pedido</a>
                 </div>
         </body>
     
@@ -113,15 +113,14 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="confirmCancelModalLabel">Confirmar Cancelación</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="confirmCancelModalLabel">Confirmar Eliminación</h5>
                     </div>
                     <div class="modal-body">
-                        ¿Estás seguro de que deseas cancelar este pedido? Será redirigido a la página de contacto.
+                        ¿Estás seguro de que deseas eliminar este pedido permanentemente?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <a href="contacto.html" class="btn btn-danger">Cancelar Pedido</a>
+                        <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-danger rounded-0" data-bs-dismiss="modal">Eliminar</button>
                     </div>
                 </div>
             </div>
