@@ -62,392 +62,363 @@
   <!-- Fin de navbar -->
 
   <main>
-    <div class="row centrado-filtro">
-      <div id="left-row" class="col-md-2 col-lg-2 col-lg-2">
-        <div id="#" class="hidden-sm-down">
-          <div class="hidden-md-up border">
-            <div>
-              <h4>Filtrar por</h4>
-              <section class="facet clearfix">
-                <p class="h6 facet-title hidden-sm-down">Categorias</p><br>
-                <ul class="list-group">
-                  <li class="list-group-item">
-                    <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">
-                    <label class="form-check-label" for="firstCheckbox">Figuras</label>
+    <!-- Canvas -->
+    <div class="offcanvas offcanvas-start" id="detalles">
+      <div class="offcanvas-header">
+        <h1 class="offcanvas-title">Detalles</h1>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body">
+        <h2>Soldado de la Legión Negra</h2>
+        <img src="img/mini.jpg" class="off-canvas-img m-5" alt="soldado-inventado">
+
+        <div class="offcanvas-body p-5 m-1">
+          <p>En Stock: 3</p>
+          <div class="m-3 p-3">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+              aria-expanded="false">1
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">2</a></li>
+              <li><a class="dropdown-item" href="#">3</a></li>
+              <li><a class="dropdown-item" href="#">4</a></li>
+              <li><a class="dropdown-item" href="#">5</a></li>
+              <li><a class="dropdown-item" href="#">6</a></li>
+              <li><a class="dropdown-item" href="#">7</a></li>
+              <li><a class="dropdown-item" href="#">8</a></li>
+              <li><a class="dropdown-item" href="#">9</a></li>
+              <li><a class="dropdown-item" href="#">10</a></li>
+              <li><input type="number" class="form-control" id="exampleFormControlInput1"
+                  placeholder="Ingrese un numero...">
+              </li>
+            </ul>
+          </div>
+          <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+            Añadir al Stock
+          </button>
+          
+        </div>
+      </div>
+    </div>
+
+    <!--<div class="offcanvas offcanvas-end" id="anadir">
+      <div class="offcanvas-header">
+        <h1 class="offcanvas-title">Carrito</h1>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body">
+        <h2>Objetos en el carrito: </h2>
+
+        <img src="img/mini.jpg" class="off-canvas-img m-5" alt="soldado-inventado">
+
+        <p>x1</p>
+
+      </div>
+      <div class="offcanvas-end p-5 m-5 border">
+        <h5>Subtotal: $10</h5>
+        <h5>Total: $10</h5>
+        <button class="btn btn-primary" type="btn-close" data-bs-dismiss="offcanvas">Seguir Comprando</button>
+      </div>
+
+    </div>-->
+    <!-- Fin de Canvas -->
+
+    <!-- Filtro -->
+    <div class="container border p-5 rounded-0">
+      <div class="row">
+        <div class="col-12">
+          <ul class="list-group rounded-0">
+            <li class="list-group-item">
+              <h5>Ordenar por:</h5>
+            </li>
+            <li class="list-group-item">
+              <form class="row g-3">
+                <div class="col-auto">
+                  <label for="inputPassword2" class="visually-hidden">Password</label>
+                  <input type="password" class="form-control" id="inputPassword2" placeholder="Buscar por Palabra Clave">
+                </div>
+                <div class="col-auto">
+                  <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+                </div>
+              </form>
+            </li>
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="checkFechaIngreso">
+                <label class="form-check-label" for="checkFechaIngreso">
+                  Fecha de Ingreso
+                </label>
+              </div>
+            </li>
+
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="checkNombre">
+                <label class="form-check-label" for="checkNombre">
+                  Nombre
+                </label>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="dropdown">
+                <button type="button" class="btn btn-warning rounded-0 dropdown-toggle" data-bs-toggle="dropdown">
+                  Categoría
+                </button>
+                <ul class="dropdown-menu rounded-0 p-2">
+                  <li>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="checkEjercitoCaos">
+                      <label class="form-check-label" for="checkEjercitoCaos">
+                        Ejército del Caos
+                      </label>
+                    </div>
                   </li>
-                  <li class="list-group-item">
-                    <input class="form-check-input me-1" type="checkbox" value="" id="secondCheckbox">
-                    <label class="form-check-label" for="secondCheckbox">Pinturas</label>
+                  <li>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="checkEjercitoImperium">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Ejército del Imperio
+                      </label>
+                    </div>
                   </li>
-                  <li class="list-group-item">
-                    <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox">
-                    <label class="form-check-label pl-2 " for="thirdCheckbox">Accesorios para pintura</label>
+                  <li>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="checkKillTeam">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Kill Team
+                      </label>
+                    </div>
+                  </li>
+              </div>
+            </li>
+            <li class="list-group-item flex-fill">
+              <div class="dropdown">
+                <button type="button" class="btn btn-warning rounded-0 dropdown-toggle" data-bs-toggle="dropdown">
+                  Marca
+                </button>
+                <ul class="dropdown-menu rounded-0">
+                  <li>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="checkEjercitoCaos">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Games Workshop
+                      </label>
+                    </div>
                   </li>
                 </ul>
-
-            </div>
-            </section>
-          </div>
+              </div>
+            </li>
+          </ul>
         </div>
-
-      </div>
-
-      <div class="offcanvas offcanvas-start" id="detalles">
-        <div class="offcanvas-header">
-          <h1 class="offcanvas-title">Detalles</h1>
-          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
-        </div>
-        <div class="offcanvas-body">
-          <h2>Soldado de la Legión Negra</h2>
-          <img src="img/mini.jpg" class="off-canvas-img m-5" alt="soldado-inventado">
-
-          <div class="offcanvas-body p-5 m-1">
-            <p>El surgimiento de la Legión Negra es la historia de las almas perdidas que se unieron en nombre de
-              Abaddon formando nuevos lazos de hermandad, vínculos compartidos por guerreros que habían visto
-              desmoronarse y desaparecer cualquier rastro de honor en sus antiguas legiones, que no sentían ya ningún
-              aprecio por sus respectivos primarcas, convertidos estos en Príncipes Daemon y que no vislumbraban ningún
-              objetivo en su futuro.</p>
-            <p>En Stock: 3</p>
-            <div class="m-3 p-3">
-              <h2>Precio Unitario: $10</h2>
-              <p>Cantidad:</p>
-              <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-                aria-expanded="false">
-
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">2</a></li>
-                <li><a class="dropdown-item" href="#">3</a></li>
-              </ul>
-            </div>
-            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-              Añadir al carro
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="offcanvas offcanvas-end" id="anadir">
-        <div class="offcanvas-header">
-          <h1 class="offcanvas-title">Carrito</h1>
-          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
-        </div>
-        <div class="offcanvas-body">
-          <h2>Objetos en el carrito: </h2>
-
-          <img src="img/mini.jpg" class="off-canvas-img m-5" alt="soldado-inventado">
-
-          <p>x1</p>
-
-        </div>
-        <div class="offcanvas-end p-5 m-5 border">
-          <h5>Subtotal: $10</h5>
-          <h5>Total: $10</h5>
-          <button class="btn btn-primary" type="btn-close" data-bs-dismiss="offcanvas">Seguir Comprando</button>
-        </div>
-
-      </div>
-
-
-      <div class="right-row col-md-10 col-lg-10 col-lg-10">
-        <h1>Todos los productos</h1>
-        <div class="container border p-5">
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/mini.jpg" alt="">
-                <div class="card-body">
-                  <h5 class="card-title">Figurita de Warhammer</h5>
-                  <p class="card-text">$ 10</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir
-                      </button>
-                    </div>
-                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                      Detalles
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/mini.jpg" alt="">
-                <div class="card-body">
-                  <h5 class="card-title">Figurita de Warhammer</h5>
-                  <p class="card-text">$ 10</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir
-                      </button>
-                    </div>
-                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                      Detalles
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/mini.jpg" alt="">
-                <div class="card-body">
-                  <h5 class="card-title">Figurita de Warhammer</h5>
-                  <p class="card-text">$ 10</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir
-                      </button>
-                    </div>
-                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                      Detalles
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/mini.jpg" alt="">
-                <div class="card-body">
-                  <h5 class="card-title">Figurita de Warhammer</h5>
-                  <p class="card-text">$ 10</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir
-                      </button>
-                    </div>
-                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                      Detalles
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/mini.jpg" alt="">
-                <div class="card-body">
-                  <h5 class="card-title">Figurita de Warhammer</h5>
-                  <p class="card-text">$ 10</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir
-                      </button>
-                    </div>
-                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                      Detalles
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/mini.jpg" alt="">
-                <div class="card-body">
-                  <h5 class="card-title">Figurita de Warhammer</h5>
-                  <p class="card-text">$ 10</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir
-                      </button>
-                    </div>
-                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                      Detalles
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/mini.jpg" alt="">
-                <div class="card-body">
-                  <h5 class="card-title">Figurita de Warhammer</h5>
-                  <p class="card-text">$ 10</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir
-                      </button>
-                    </div>
-                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                      Detalles
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/mini.jpg" alt="">
-                <div class="card-body">
-                  <h5 class="card-title">Figurita de Warhammer</h5>
-                  <p class="card-text">$ 10</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir
-                      </button>
-                    </div>
-                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                      Detalles
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/mini.jpg" alt="">
-                <div class="card-body">
-                  <h5 class="card-title">Figurita de Warhammer</h5>
-                  <p class="card-text">$ 10</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir
-                      </button>
-                    </div>
-                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                      Detalles
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/mini.jpg" alt="">
-                <div class="card-body">
-                  <h5 class="card-title">Figurita de Warhammer</h5>
-                  <p class="card-text">$ 10</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir
-                      </button>
-                    </div>
-                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                      Detalles
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/mini.jpg" alt="">
-                <div class="card-body">
-                  <h5 class="card-title">Figurita de Warhammer</h5>
-                  <p class="card-text">$ 10</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir
-                      </button>
-                    </div>
-                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                      Detalles
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/mini.jpg" alt="">
-                <div class="card-body">
-                  <h5 class="card-title">Figurita de Warhammer</h5>
-                  <p class="card-text">$ 10</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir
-                      </button>
-                    </div>
-                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                      Detalles
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/mini.jpg" alt="">
-                <div class="card-body">
-                  <h5 class="card-title">Figurita de Warhammer</h5>
-                  <p class="card-text">$ 10</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir
-                      </button>
-                    </div>
-                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                      Detalles
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/mini.jpg" alt="">
-                <div class="card-body">
-                  <h5 class="card-title">Figurita de Warhammer</h5>
-                  <p class="card-text">$ 10</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir
-                      </button>
-                    </div>
-                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                      Detalles
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <img src="img/mini.jpg" alt="">
-                <div class="card-body">
-                  <h5 class="card-title">Figurita de Warhammer</h5>
-                  <p class="card-text">$ 10</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir
-                      </button>
-                    </div>
-                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                      Detalles
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
+        </li>
       </div>
     </div>
+    <!-- Fin Filtro    -->
+
+    <div class="container border p-5">
+      <h4>Figuras</h4>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="assets/img/mini.jpg" alt="">
+            <div class="card-body">
+              <h5 class="card-title">Figurita de Warhammer</h5>
+              <p class="card-text">$ 10</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                    Añadir Stock
+                  </button>
+                </div>
+                <a href="editarproducto.html">
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Editar
+                    </button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="img/mini.jpg" alt="">
+            <div class="card-body">
+              <h5 class="card-title">Figurita de Warhammer</h5>
+              <p class="card-text">$ 10</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                    Añadir
+                  </button>
+                </div>
+                <a href="editarproducto.html">
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Editar
+                    </button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="img/mini.jpg" alt="">
+            <div class="card-body">
+              <h5 class="card-title">Figurita de Warhammer</h5>
+              <p class="card-text">$ 10</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                    Añadir Stock
+                  </button>
+                </div>
+                <a href="editarproducto.html">
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Editar
+                    </button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+
+    <div class="container border p-5">
+      <h4>Accesorios</h4>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="img/mini.jpg" alt="">
+            <div class="card-body">
+              <h5 class="card-title">Figurita de Warhammer</h5>
+              <p class="card-text">$ 10</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                    Añadir Stock
+                  </button>
+                </div>
+                <a href="editarproducto.html">
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Editar
+                    </button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="img/mini.jpg" alt="">
+            <div class="card-body">
+              <h5 class="card-title">Figurita de Warhammer</h5>
+              <p class="card-text">$ 10</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                    Añadir
+                  </button>
+                </div>
+                <a href="editarproducto.html">
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Editar
+                    </button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="img/mini.jpg" alt="">
+            <div class="card-body">
+              <h5 class="card-title">Figurita de Warhammer</h5>
+              <p class="card-text">$ 10</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                    Añadir Stock
+                  </button>
+                </div>
+                <a href="editarproducto.html">
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Editar
+                    </button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="container border p-5">
+      <h4>Pinturas</h4>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="img/mini.jpg" alt="">
+            <div class="card-body">
+              <h5 class="card-title">Figurita de Warhammer</h5>
+              <p class="card-text">$ 10</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                    Añadir Stock
+                  </button>
+                </div>
+                <a href="editarproducto.html">
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Editar
+                    </button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="img/mini.jpg" alt="">
+            <div class="card-body">
+              <h5 class="card-title">Figurita de Warhammer</h5>
+              <p class="card-text">$ 10</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                    Añadir Stock
+                  </button>
+                </div>
+                <a href="editarproducto.html">
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Editar
+                    </button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="img/mini.jpg" alt="">
+            <div class="card-body">
+              <h5 class="card-title">Figurita de Warhammer</h5>
+              <p class="card-text">$ 10</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                    Añadir Stock
+                  </button>
+                </div>
+                <a href="editarproducto.html">
+                <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                  Editar
+                </button></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
   </main>
 
   <!-- Footer -->

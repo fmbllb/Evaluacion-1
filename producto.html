@@ -120,84 +120,98 @@
 
     </div>-->
     <!-- Fin de Canvas -->
+    
+    <!-- Filtro -->
     <div class="container border p-5 rounded-0">
-      <div class="row">
-        <div class="col-12">
-          <ul class="list-group rounded-0">
-            <li class="list-group-item">
-              <h5>Ordenar por:</h5>
-            </li>
-            <li class="list-group-item">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="checkFechaIngreso">
-                <label class="form-check-label" for="checkFechaIngreso">
-                  Fecha de Ingreso
-                </label>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="checkNombre">
-                <label class="form-check-label" for="checkNombre">
-                  Nombre
-                </label>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="dropdown">
-                <button type="button" class="btn btn-warning rounded-0 dropdown-toggle" data-bs-toggle="dropdown">
-                  Categoría
-                </button>
-                <ul class="dropdown-menu rounded-0 p-2">
-                  <li>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="checkEjercitoCaos">
-                      <label class="form-check-label" for="checkEjercitoCaos">
-                        Ejército del Caos
-                      </label>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="checkEjercitoImperium">
-                      <label class="form-check-label" for="flexCheckDefault">
-                        Ejército del Imperio
-                      </label>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="checkKillTeam">
-                      <label class="form-check-label" for="flexCheckDefault">
-                        Kill Team
-                      </label>
-                    </div>
-                  </li>
-              </div>
-            </li>
-            <li class="list-group-item flex-fill">
-              <div class="dropdown">
-                <button type="button" class="btn btn-warning rounded-0 dropdown-toggle" data-bs-toggle="dropdown">
-                  Marca
-                </button>
-                <ul class="dropdown-menu rounded-0">
-                  <li>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="checkEjercitoCaos">
-                      <label class="form-check-label" for="flexCheckDefault">
-                        Games Workshop
-                      </label>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul>
+        <div class="row">
+          <div class="col-12">
+            <ul class="list-group rounded-0">
+              <li class="list-group-item">
+                <h5>Ordenar por:</h5>
+              </li>
+              <li class="list-group-item">
+                <form class="row g-3">
+                  <div class="col-auto">
+                    <label for="inputPassword2" class="visually-hidden">Password</label>
+                    <input type="password" class="form-control" id="inputPassword2" placeholder="Buscar por Palabra Clave">
+                  </div>
+                  <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+                  </div>
+                </form>
+              </li>
+              <li class="list-group-item">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="checkFechaIngreso">
+                  <label class="form-check-label" for="checkFechaIngreso">
+                    Fecha de Ingreso
+                  </label>
+                </div>
+              </li>
+  
+              <li class="list-group-item">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="checkNombre">
+                  <label class="form-check-label" for="checkNombre">
+                    Nombre
+                  </label>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="dropdown">
+                  <button type="button" class="btn btn-warning rounded-0 dropdown-toggle" data-bs-toggle="dropdown">
+                    Categoría
+                  </button>
+                  <ul class="dropdown-menu rounded-0 p-2">
+                    <li>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkEjercitoCaos">
+                        <label class="form-check-label" for="checkEjercitoCaos">
+                          Ejército del Caos
+                        </label>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkEjercitoImperium">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Ejército del Imperio
+                        </label>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkKillTeam">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Kill Team
+                        </label>
+                      </div>
+                    </li>
+                </div>
+              </li>
+              <li class="list-group-item flex-fill">
+                <div class="dropdown">
+                  <button type="button" class="btn btn-warning rounded-0 dropdown-toggle" data-bs-toggle="dropdown">
+                    Marca
+                  </button>
+                  <ul class="dropdown-menu rounded-0">
+                    <li>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkEjercitoCaos">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Games Workshop
+                        </label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+          </li>
         </div>
-        </li>
-      </div>
     </div>
-    </div>
+      <!-- Fin Filtro    -->
 
     <div class="container border p-5">
       <h4>Figuras</h4>
@@ -410,6 +424,7 @@
     <div class="container-fluid bg-dark text-white py-3">
       <div class="row">
         <div class="col-md-4">
+          <h5>INFORMACIÓN</h5>
           <ul class="list-unstyled">
             <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                   height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
@@ -441,31 +456,21 @@
         <div class="col-md-4">
           <h5>MIS COSAS</h5>
           <ul class="list-unstyled">
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+            <li><a href="vistausuario.html" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                   height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
                     d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
                 </svg> Mi cuenta</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+            <li><a href="seguipedido.html" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                   height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
                     d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
                 </svg> Mis pedidos</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Carritos guardados</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+            <li><a href="localizacion.html" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                   height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
                     d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
                 </svg> Mis direcciones</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Mis cupones descuento</a></li>
           </ul>
         </div>
         <div class="col-md-4">
@@ -475,17 +480,8 @@
                   height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
                     d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Warhammer 40000</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Warhammer Age of Sigmar</a></li>
-            <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                </svg> Warhammer Fantasy</a></li>
+                </svg> Warhammer 40000</a>
+            </li>
             <li><a href="#" class="text-decoration-none text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                   height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
