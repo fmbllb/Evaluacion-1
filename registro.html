@@ -53,7 +53,7 @@
               </li>
               </li class="nav-item me-3">
               <li class="nav-item me-3">
-              <a href="carrito.html" class="btn btn-warning rounded-0">Carrito</a>
+                <a href="carrito.html" class="btn btn-warning rounded-0">Carrito</a>
               </li>
             </ul>
           </div>
@@ -64,101 +64,112 @@
   <!-- Fin de navbar -->
 
   <main>
-    
+
     <div class="container mt-5 mb-5">
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                <div class="card rounded-0">
-                    <div class="card-body">
-                        <h5 class="card-title">Registro de cuenta</h5>
-                        <form>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Nombre de Usuario</label>
-                                <input type="password" class="form-control rounded-0" id="pass" placeholder="Ingresa tu nombre de usuario">
-                            </div>
-                            <div class="mb-3">
-                                <label for="nombre" class="form-label">Nombre</label>
-                                <input type="text" class="form-control rounded-0" id="nombre" placeholder="Ingresa tu nombre">
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Correo electrónico</label>
-                                <input type="email" class="form-control rounded-0" id="email" placeholder="Ingresa tu correo">
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control rounded-0" id="pass" placeholder="Ingresa tu contraseña">
-                            </div>
-                            <div class="mb-3">
-                                <label for="direccion" class="form-label">Dirección</label>
-                                <input type="text" class="form-control rounded-0" id="direccion" placeholder="Ingresa tu dirección (Calle y numero/depto)">
-                            </div>
-                            <div class="mb-3">
-                                <label for="region" class="form-label">Región</label>
-                                <input type="text" class="form-control rounded-0" id="region" placeholder="Ingresa tu región">
-                            </div>
-                            <div class="mb-3">
-                              <label for="ciudad" class="form-label">Ciudad</label>
-                              <input type="text" class="form-control rounded-0" id="ciudad" placeholder="Ingresa tu ciudad">
-                          </div>
-                            <button class="btn btn-warning rounded-0">Completar Registro</button> <!--ENVÍA LA INFORMACIÓN A LA DB-->
-                        </form>
-                    </div>
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card rounded-0">
+            <div class="card-body">
+              <h5 class="card-title">Registro de cuenta</h5>
+              <form action="" method="post" name="registro" class="was-validation">
+                <div class="mb-3">
+                  <label for="labelNickName" class="form-label">Nombre de Usuario</label>
+                  <input type="text" class="form-control rounded-0" id="pass"
+                    placeholder="Ingresa tu nombre de usuario" required>
+                  <div class="valid-feedback">Gracias por escribir!</div>
+                  <div class="invalid-feedback">Por favor escribe algo en el campo asignado.</div>
                 </div>
+
+                <div class="mb-3">
+                  <label for="labelNombreReal" class="form-label">Nombre</label>
+                  <input type="text" class="form-control rounded-0" id="nombre" placeholder="Ingresa tu nombre">
+                </div>
+                <div class="mb-3">
+                  <label for="labelEmail" class="form-label">Correo electrónico</label>
+                  <input type="email" class="form-control rounded-0" id="email" placeholder="Ingresa tu correo">
+                </div>
+                <div class="mb-3">
+                  <label for="labelPassword" class="form-label">Contraseña</label>
+                  <div class="col-auto mb-2">
+                    <span id="passwordCaracteresMinimos" class="form-text">
+                      Debe ser mínimo 8 carácteres.
+                    </span>
+                  </div>
+                  <input type="password" class="form-control rounded-0" id="pass" placeholder="Ingresa tu contraseña">
+                </div>
+                <div class="mb-3">
+                  <label for="labelDireccion" class="form-label">Dirección</label>
+                  <input type="text" class="form-control rounded-0" id="direccion"
+                    placeholder="Ingresa tu dirección (Calle y numero/depto)">
+                </div>
+                <div class="mb-3">
+                  <label for="labelRegion" class="form-label">Región</label>
+                  <input type="text" class="form-control rounded-0" id="region" placeholder="Ingresa tu región">
+                </div>
+                <div class="mb-3">
+                  <label for="labelCiudad" class="form-label">Ciudad</label>
+                  <input type="text" class="form-control rounded-0" id="ciudad" placeholder="Ingresa tu ciudad">
+                </div>
+                <button type="submit" class="btn btn-warning rounded-0">Completar Registro</button>
+                <!--ENVÍA LA INFORMACIÓN A LA DB-->
+              </form>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    
-    
-        
+
+
+
   </main>
 
 
-    <!-- Footer -->
-    <footer style="bottom: 0; width: 100%; height: 40px; " class="mt-auto">
-      <div class="container-fluid bg-dark text-white py-3">
-          <div class="row">
-              <div class="col-md-4">
-                  <h5>INFORMACIÓN</h5>
-                  <ul class="list-unstyled">
-                      <li><a class="text-decoration-none text-white" href="avisolegal.html">
-                              <i class="bi bi-chevron-right"></i>Aviso Legal
-                          </a></li>
-                      <li><a class="text-decoration-none text-white" href="t&condicion.html">
-                              <i class="bi bi-chevron-right"></i>Terminos y Condiciones
-                          </a></li>
-                      <li><a class="text-decoration-none text-white" href="pcookies.html">
-                              <i class="bi bi-chevron-right"></i> Politica de Cookies</a></li>
-                      <li><a class="text-decoration-none text-white" href="privacidad.html">
-                              <i class="bi bi-chevron-right"></i> Politica de Privacidad</a></li>
-                      <li><a class="text-decoration-none text-white" href="contacto.html">
-                              <i class="bi bi-chevron-right"></i> Contactate con nosotros</a></li>
-                  </ul>
-              </div>
-              <div class="col-md-4">
-                  <h5>MIS COSAS</h5>
-                  <ul class="list-unstyled">
-                      <li><a class="text-decoration-none text-white" href="vistausuario.html">
-                              <i class="bi bi-chevron-right"></i> Mi cuenta</a></li>
-                      <li><a class="text-decoration-none text-white" href="seguipedido.html">
-                              <i class="bi bi-chevron-right"></i> Mis pedidos</a></li>
-                      <li><a class="text-decoration-none text-white" href="localizacion.html">
-                              <i class="bi bi-chevron-right"></i> Mis direcciones</a></li>
-                  </ul>
-              </div>
-              <div class="col-md-4">
-                  <h5>DESTACADAS</h5>
-                  <ul class="list-unstyled">
-                      <li><a class="text-decoration-none text-white" href="#">
-                              <i class="bi bi-chevron-right"></i> Warhammer 40000</a></li>
-                      <li><a class="text-decoration-none text-white" href="#">
-                      <li><a class="text-decoration-none text-white" href="#">
-                              <i class="bi bi-chevron-right"></i> Pintura</a></li>
-                      <li><a class="text-decoration-none text-white" href="#">
-                              <i class="bi bi-chevron-right"></i> Modelismo</a></li>
-                  </ul>
-              </div>
-          </div>
+  <!-- Footer -->
+  <footer style="bottom: 0; width: 100%; height: 40px; " class="mt-auto">
+    <div class="container-fluid bg-dark text-white py-3">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>INFORMACIÓN</h5>
+          <ul class="list-unstyled">
+            <li><a class="text-decoration-none text-white" href="avisolegal.html">
+                <i class="bi bi-chevron-right"></i>Aviso Legal
+              </a></li>
+            <li><a class="text-decoration-none text-white" href="t&condicion.html">
+                <i class="bi bi-chevron-right"></i>Terminos y Condiciones
+              </a></li>
+            <li><a class="text-decoration-none text-white" href="pcookies.html">
+                <i class="bi bi-chevron-right"></i> Politica de Cookies</a></li>
+            <li><a class="text-decoration-none text-white" href="privacidad.html">
+                <i class="bi bi-chevron-right"></i> Politica de Privacidad</a></li>
+            <li><a class="text-decoration-none text-white" href="contacto.html">
+                <i class="bi bi-chevron-right"></i> Contactate con nosotros</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>MIS COSAS</h5>
+          <ul class="list-unstyled">
+            <li><a class="text-decoration-none text-white" href="vistausuario.html">
+                <i class="bi bi-chevron-right"></i> Mi cuenta</a></li>
+            <li><a class="text-decoration-none text-white" href="seguipedido.html">
+                <i class="bi bi-chevron-right"></i> Mis pedidos</a></li>
+            <li><a class="text-decoration-none text-white" href="localizacion.html">
+                <i class="bi bi-chevron-right"></i> Mis direcciones</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>DESTACADAS</h5>
+          <ul class="list-unstyled">
+            <li><a class="text-decoration-none text-white" href="#">
+                <i class="bi bi-chevron-right"></i> Warhammer 40000</a></li>
+            <li><a class="text-decoration-none text-white" href="#">
+            <li><a class="text-decoration-none text-white" href="#">
+                <i class="bi bi-chevron-right"></i> Pintura</a></li>
+            <li><a class="text-decoration-none text-white" href="#">
+                <i class="bi bi-chevron-right"></i> Modelismo</a></li>
+          </ul>
+        </div>
       </div>
+    </div>
   </footer>
 
 </body>
