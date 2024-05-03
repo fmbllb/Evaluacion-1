@@ -71,22 +71,21 @@
           <div class="card rounded-0">
             <div class="card-body">
               <h5 class="card-title">Registro de cuenta</h5>
-              <form action="" method="post" name="registro" class="was-validation">
+              <form action="" method="post" name="registro" class="was-validation" id="registroForm" onsubmit="validar()">
                 <div class="mb-3">
                   <label for="labelNickName" class="form-label">Nombre de Usuario</label>
-                  <input type="text" class="form-control rounded-0" id="pass"
-                    placeholder="Ingresa tu nombre de usuario" required>
+                  <input type="text" class="form-control rounded-0" id="nombreUsuario" placeholder="Ingresa tu nombre de usuario"
+                    required>
                   <div class="valid-feedback">Gracias por escribir!</div>
                   <div class="invalid-feedback">Por favor escribe algo en el campo asignado.</div>
                 </div>
-
                 <div class="mb-3">
                   <label for="labelNombreReal" class="form-label">Nombre</label>
-                  <input type="text" class="form-control rounded-0" id="nombre" placeholder="Ingresa tu nombre">
+                  <input type="text" class="form-control rounded-0" id="nombreRegistro" placeholder="Ingresa tu nombre">
                 </div>
                 <div class="mb-3">
                   <label for="labelEmail" class="form-label">Correo electrónico</label>
-                  <input type="email" class="form-control rounded-0" id="email" placeholder="Ingresa tu correo">
+                  <input type="email" class="form-control rounded-0" id="emailRegistro" placeholder="Ingresa tu correo">
                 </div>
                 <div class="mb-3">
                   <label for="labelPassword" class="form-label">Contraseña</label>
@@ -99,16 +98,16 @@
                 </div>
                 <div class="mb-3">
                   <label for="labelDireccion" class="form-label">Dirección</label>
-                  <input type="text" class="form-control rounded-0" id="direccion"
+                  <input type="text" class="form-control rounded-0" id="direccionRegistro"
                     placeholder="Ingresa tu dirección (Calle y numero/depto)">
                 </div>
                 <div class="mb-3">
                   <label for="labelRegion" class="form-label">Región</label>
-                  <input type="text" class="form-control rounded-0" id="region" placeholder="Ingresa tu región">
+                  <input type="text" class="form-control rounded-0" id="regionRegistro" placeholder="Ingresa tu región">
                 </div>
                 <div class="mb-3">
                   <label for="labelCiudad" class="form-label">Ciudad</label>
-                  <input type="text" class="form-control rounded-0" id="ciudad" placeholder="Ingresa tu ciudad">
+                  <input type="text" class="form-control rounded-0" id="ciudadRegistro" placeholder="Ingresa tu ciudad">
                 </div>
                 <button type="submit" class="btn btn-warning rounded-0">Completar Registro</button>
                 <!--ENVÍA LA INFORMACIÓN A LA DB-->
@@ -171,7 +170,10 @@
       </div>
     </div>
   </footer>
-
+  <script src="assets/js/jquery/queries.js"></script>
+  <script src="assets/js/jquery/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 </body>
 
 </html>
