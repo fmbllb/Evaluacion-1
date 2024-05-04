@@ -9,6 +9,17 @@ function validar() {
   }
 }
 
+function validar() {
+  let texto = document.getElementById("#").value;
+  if (texto == "") {
+    document.getElementById("#").className = "text-danger";
+    document.getElementById("#").innerHTML = "Debe ingresar el nombre";
+  } else {
+    document.getElementById("#").className = "text-success";
+    document.getElementById("#").innerHTML = "Nombre correcto";
+  }
+}
+
 function limpiar() {
   document.getElementById("#").innerHTML = "";
   document.getElementById("#").className = "";
@@ -49,7 +60,7 @@ const expresiones = {
 }
 
 const validarFormulario = () => {
-
+  
 };
 
 inputs.forEach((input) => {
@@ -60,5 +71,3 @@ inputs.forEach((input) => {
 formulario.addEventListener("submit", (e) => {
   e.preventDefault();
 });
-
-
