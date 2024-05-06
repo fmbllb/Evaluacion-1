@@ -49,7 +49,7 @@ var Fn = {
 alert( Fn.validaRut('11111111-1') ? 'Valido' : 'inválido');*/
 
 const formulario = document.getElementById("formulario");
-const inputs = document.querySelectorAll("#formulario input");  // Selecciona todos los inputs del formulario
+const inputs = document.querySelectorAll("#formulario input"); // Selecciona todos los inputs del formulario
 
 const expresiones = {
   usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
@@ -57,11 +57,9 @@ const expresiones = {
   password: /^.{4,12}$/,
   telefono: /^\d{9}$/, // 9 numeros.
   correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-}
-
-const validarFormulario = () => {
-  
 };
+
+const validarFormulario = () => {};
 
 inputs.forEach((input) => {
   input.addEventListener("keyup", validarFormulario);
@@ -70,4 +68,14 @@ inputs.forEach((input) => {
 
 formulario.addEventListener("submit", (e) => {
   e.preventDefault();
+});
+
+let carouselWidth = $(".carousel-inner")[0].scrollWidth;
+let carWidth = $(".carousel-item").width();
+
+let scrollPosition = 0;
+$(".carousel-control-next").on("click", function () {
+  console.log("next");
+  scrollPosition = scrollPosition + carWidth;
+  $(".carousel-inner").animate({ scrollleft: scrollPosition }, 600);
 });

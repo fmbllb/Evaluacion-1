@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/index.css" rel="stylesheet">
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <title>WarPainter</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/index.css" rel="stylesheet">
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <title>WarPainter</title>
 </head>
 
 
@@ -53,7 +53,7 @@
               </li>
               </li class="nav-item me-3">
               <li class="nav-item me-3">
-              <a href="carrito.html" class="btn btn-warning rounded-0">Carrito</a>
+                <a href="carrito.html" class="btn btn-warning rounded-0">Carrito</a>
               </li>
             </ul>
           </div>
@@ -84,14 +84,25 @@
           <div class="m-3 p-3">
             <h2>Precio Unitario: $10</h2>
             <p>Cantidad:</p>
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-              aria-expanded="false">
-
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">2</a></li>
-              <li><a class="dropdown-item" href="#">3</a></li>
-            </ul>
+            <div class="m-3 p-3">
+              <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false">1
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">2</a></li>
+                <li><a class="dropdown-item" href="#">3</a></li>
+                <li><a class="dropdown-item" href="#">4</a></li>
+                <li><a class="dropdown-item" href="#">5</a></li>
+                <li><a class="dropdown-item" href="#">6</a></li>
+                <li><a class="dropdown-item" href="#">7</a></li>
+                <li><a class="dropdown-item" href="#">8</a></li>
+                <li><a class="dropdown-item" href="#">9</a></li>
+                <li><a class="dropdown-item" href="#">10</a></li>
+                <li><input type="number" class="form-control" id="exampleFormControlInput1"
+                    placeholder="Ingrese un numero...">
+                </li>
+              </ul>
+            </div>
           </div>
           <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
             Añadir al carro
@@ -99,7 +110,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="offcanvas offcanvas-end" id="anadir">
       <div class="offcanvas-header">
         <h1 class="offcanvas-title">Carrito</h1>
@@ -116,13 +127,24 @@
       <div class="offcanvas-end p-5 m-5 border">
         <h5>Subtotal: $10</h5>
         <h5>Total: $10</h5>
-        <button class="btn btn-primary" type="btn-close" data-bs-dismiss="offcanvas">Seguir Comprando</button>
+        <button class="btn btn-primary mb-2" type="btn-close" data-bs-dismiss="offcanvas">Seguir Comprando</button>
+        <button class="btn btn-success" type="btn-close" data-bs-dismiss="offcanvas">Ir a Pagar</button>
       </div>
 
     </div>
     <!-- Fin de Canvas -->
-    
-    <div class="container p-5">
+
+
+
+    <!-- Carousel -->
+    <!-- Final Carousel -->
+
+
+
+
+
+
+    <div class="container  p-5 mt-5">
       <h4>Figuras en Oferta</h4>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col">
@@ -319,54 +341,57 @@
       </div>
   </main>
 
-    <!-- Footer -->
-    <footer style="bottom: 0; width: 100%; height: 40px; " class="mt-auto">
-      <div class="container-fluid bg-dark text-white py-3">
-          <div class="row">
-              <div class="col-md-4">
-                  <h5>INFORMACIÓN</h5>
-                  <ul class="list-unstyled">
-                      <li><a class="text-decoration-none text-white" href="avisolegal.html">
-                              <i class="bi bi-chevron-right"></i>Aviso Legal
-                          </a></li>
-                      <li><a class="text-decoration-none text-white" href="t&condicion.html">
-                              <i class="bi bi-chevron-right"></i>Terminos y Condiciones
-                          </a></li>
-                      <li><a class="text-decoration-none text-white" href="pcookies.html">
-                              <i class="bi bi-chevron-right"></i> Politica de Cookies</a></li>
-                      <li><a class="text-decoration-none text-white" href="privacidad.html">
-                              <i class="bi bi-chevron-right"></i> Politica de Privacidad</a></li>
-                      <li><a class="text-decoration-none text-white" href="contacto.html">
-                              <i class="bi bi-chevron-right"></i> Contactate con nosotros</a></li>
-                  </ul>
-              </div>
-              <div class="col-md-4">
-                  <h5>MIS COSAS</h5>
-                  <ul class="list-unstyled">
-                      <li><a class="text-decoration-none text-white" href="vistausuario.html">
-                              <i class="bi bi-chevron-right"></i> Mi cuenta</a></li>
-                      <li><a class="text-decoration-none text-white" href="seguipedido.html">
-                              <i class="bi bi-chevron-right"></i> Mis pedidos</a></li>
-                      <li><a class="text-decoration-none text-white" href="localizacion.html">
-                              <i class="bi bi-chevron-right"></i> Mis direcciones</a></li>
-                  </ul>
-              </div>
-              <div class="col-md-4">
-                  <h5>DESTACADAS</h5>
-                  <ul class="list-unstyled">
-                      <li><a class="text-decoration-none text-white" href="#">
-                              <i class="bi bi-chevron-right"></i> Warhammer 40000</a></li>
-                      <li><a class="text-decoration-none text-white" href="#">
-                      <li><a class="text-decoration-none text-white" href="#">
-                              <i class="bi bi-chevron-right"></i> Pintura</a></li>
-                      <li><a class="text-decoration-none text-white" href="#">
-                              <i class="bi bi-chevron-right"></i> Modelismo</a></li>
-                  </ul>
-              </div>
-          </div>
+  <!-- Footer -->
+  <footer style="bottom: 0; width: 100%; height: 40px; " class="mt-auto">
+    <div class="container-fluid bg-dark text-white py-3">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>INFORMACIÓN</h5>
+          <ul class="list-unstyled">
+            <li><a class="text-decoration-none text-white" href="avisolegal.html">
+                <i class="bi bi-chevron-right"></i>Aviso Legal
+              </a></li>
+            <li><a class="text-decoration-none text-white" href="t&condicion.html">
+                <i class="bi bi-chevron-right"></i>Terminos y Condiciones
+              </a></li>
+            <li><a class="text-decoration-none text-white" href="pcookies.html">
+                <i class="bi bi-chevron-right"></i> Politica de Cookies</a></li>
+            <li><a class="text-decoration-none text-white" href="privacidad.html">
+                <i class="bi bi-chevron-right"></i> Politica de Privacidad</a></li>
+            <li><a class="text-decoration-none text-white" href="contacto.html">
+                <i class="bi bi-chevron-right"></i> Contactate con nosotros</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>MIS COSAS</h5>
+          <ul class="list-unstyled">
+            <li><a class="text-decoration-none text-white" href="vistausuario.html">
+                <i class="bi bi-chevron-right"></i> Mi cuenta</a></li>
+            <li><a class="text-decoration-none text-white" href="seguipedido.html">
+                <i class="bi bi-chevron-right"></i> Mis pedidos</a></li>
+            <li><a class="text-decoration-none text-white" href="localizacion.html">
+                <i class="bi bi-chevron-right"></i> Mis direcciones</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>DESTACADAS</h5>
+          <ul class="list-unstyled">
+            <li><a class="text-decoration-none text-white" href="#">
+                <i class="bi bi-chevron-right"></i> Warhammer 40000</a></li>
+            <li><a class="text-decoration-none text-white" href="#">
+            <li><a class="text-decoration-none text-white" href="#">
+                <i class="bi bi-chevron-right"></i> Pintura</a></li>
+            <li><a class="text-decoration-none text-white" href="#">
+                <i class="bi bi-chevron-right"></i> Modelismo</a></li>
+          </ul>
+        </div>
       </div>
+    </div>
   </footer>
   <!--Fin del footer-->
+  <!--Scripts-->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </body>
 
 </html>
