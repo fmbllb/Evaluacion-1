@@ -141,6 +141,48 @@ $(document).ready(function () {
   });
 });
 
+$(document).ready(function () {
+  $("#registroInicio").validate({
+    rules: {
+      inicioCorreo: {
+        required: true,
+        minlength: 3,
+        expresionesReg: /^[a-zA-Z!@#$%^&()_+\-=,.<>?]+$/,
+      }
+    },
+    messages: {
+      inicioCorreo: {
+        required: "Por favor, ingresa tu nombre de usuario.",
+        minlength: "Tu nombre de usuario debe tener al menos 3 caracteres.",
+        expresionesReg: "Por favor, ingresa un nombre de usuario válido. (Solo se aceptan letras y caracteres especiales, excepto '*').",
+      },
+    },
+    errorElement: "em",
+    errorPlacement: function (error, element) {
+      // Add the `help-block` class to the error element
+      error.addClass("help-block");
+
+      if (element.prop("type") === "checkbox") {
+        error.insertAfter(element.parent("label"));
+      } else {
+        error.insertAfter(element);
+      }
+    },
+    highlight: function (element, errorClass, validClass) {
+      $(element)
+        .parents(".col-sm-10")
+        .addClass("has-error")
+        .removeClass("has-success");
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element)
+        .parents(".col-sm-10")
+        .addClass("has-success")
+        .removeClass("has-error");
+    },
+  });
+});
+
 $.validator.addMethod(
   "expresionesReg",
   function (value, element, regex) {
@@ -148,6 +190,9 @@ $.validator.addMethod(
   },
   "Por favor, introduce un valor válido."
 );
+
+
+
 
 /*$(document).ready(function () {
   let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
