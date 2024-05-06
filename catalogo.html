@@ -70,39 +70,47 @@
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
       </div>
       <div class="offcanvas-body">
-        <h2>Soldado de la Legión Negra</h2>
-        <img src="assets/img/mini.jpg" class="off-canvas-img m-5" alt="soldado-inventado">
+        <h4>Soldado de la Legión Negra</h4>
+        
+          <img src="assets/img/mini.jpg" class="off-canvas-img m-5" alt="soldado-inventado">
 
         <div class="offcanvas-body p-5 m-1">
+          <p>El surgimiento de la Legión Negra es la historia de las almas perdidas que se unieron en nombre de Abaddon
+            formando nuevos lazos de hermandad, vínculos compartidos por guerreros que habían visto desmoronarse y
+            desaparecer cualquier rastro de honor en sus antiguas legiones, que no sentían ya ningún aprecio por sus
+            respectivos primarcas, convertidos estos en Príncipes Daemon y que no vislumbraban ningún objetivo en su
+            futuro.</p>
           <p>En Stock: 3</p>
-          <div class="m-3 p-3">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-              aria-expanded="false">1
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">2</a></li>
-              <li><a class="dropdown-item" href="#">3</a></li>
-              <li><a class="dropdown-item" href="#">4</a></li>
-              <li><a class="dropdown-item" href="#">5</a></li>
-              <li><a class="dropdown-item" href="#">6</a></li>
-              <li><a class="dropdown-item" href="#">7</a></li>
-              <li><a class="dropdown-item" href="#">8</a></li>
-              <li><a class="dropdown-item" href="#">9</a></li>
-              <li><a class="dropdown-item" href="#">10</a></li>
-              <li><input type="number" class="form-control" id="exampleFormControlInput1"
-                  placeholder="Ingrese un numero...">
-              </li>
-            </ul>
+          <div class="m-3 p-3 border">
+            <h2>Precio Unitario: $10</h2>
+            <p>Cantidad:</p>
+            <div class="m-3 p-3">
+              <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false">1
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">2</a></li>
+                <li><a class="dropdown-item" href="#">3</a></li>
+                <li><a class="dropdown-item" href="#">4</a></li>
+                <li><a class="dropdown-item" href="#">5</a></li>
+                <li><a class="dropdown-item" href="#">6</a></li>
+                <li><a class="dropdown-item" href="#">7</a></li>
+                <li><a class="dropdown-item" href="#">8</a></li>
+                <li><a class="dropdown-item" href="#">9</a></li>
+                <li><a class="dropdown-item" href="#">10</a></li>
+                <li><input type="number" class="form-control" id="exampleFormControlInput1"
+                    placeholder="Ingrese un numero...">
+                </li>
+              </ul>
+            </div>
           </div>
           <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-            Añadir al Stock
-          </button> <!--ENVÍA INFORMACIÓN A LA DB-->
-
+            Añadir al carro
+          </button>
         </div>
       </div>
     </div>
-
-    <!--<div class="offcanvas offcanvas-end" id="anadir">
+    <div class="offcanvas offcanvas-end" id="anadir">
       <div class="offcanvas-header">
         <h1 class="offcanvas-title">Carrito</h1>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
@@ -117,18 +125,19 @@
       </div>
       <div class="offcanvas-end p-5 m-5 border">
         <h5>Subtotal: $10</h5>
-        <h5>Total: $10</h5>
-        <button class="btn btn-primary" type="btn-close" data-bs-dismiss="offcanvas">Seguir Comprando</button>
+        <h5 class="mb-2">Total: $10</h5>
+        <button class="btn btn-primary mb-2" type="btn-close" data-bs-dismiss="offcanvas">Seguir Comprando</button>
+        <button class="btn btn-success" type="btn-close" data-bs-dismiss="offcanvas">Ir a Pagar</button>
       </div>
 
-    </div>-->
+    </div>
     <!-- Fin de Canvas -->
 
 
     <div class="row">
       <!-- Filtro -->
-      <div class="col col-lg-12 col-xl-2 col-md-12 col-xs-12 mt-5 p-4" >
-        <div class="container p-5 rounded-0">
+      <div class="col col-lg-12 col-xl-2 col-md-12 col-xs-12 mt-5 p-4">
+        <div class="container m-5 rounded-0">
           <div class="row">
             <div class="col-12">
               <ul class="list-group rounded-0">
@@ -233,16 +242,13 @@
                   <p class="card-text">$ 10</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#detalles">
-                        Añadir Stock
+                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                        Añadir
                       </button>
                     </div>
-                    <a href="editarproducto.html">
-                      <button class="btn btn-success" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#detalles">
-                        Editar
-                      </button></a>
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Detalles
+                    </button>
                   </div>
                 </div>
               </div>
@@ -260,11 +266,9 @@
                         Añadir
                       </button>
                     </div>
-                    <a href="editarproducto.html">
-                      <button class="btn btn-success" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#detalles">
-                        Editar
-                      </button></a>
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Detalles
+                    </button>
                   </div>
                 </div>
               </div>
@@ -279,14 +283,12 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir Stock
+                        Añadir
                       </button>
                     </div>
-                    <a href="editarproducto.html">
-                      <button class="btn btn-success" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#detalles">
-                        Editar
-                      </button></a>
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Detalles
+                    </button>
                   </div>
                 </div>
               </div>
@@ -307,14 +309,12 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir Stock
+                        Añadir
                       </button>
                     </div>
-                    <a href="editarproducto.html">
-                      <button class="btn btn-success" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#detalles">
-                        Editar
-                      </button></a>
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Detalles
+                    </button>
                   </div>
                 </div>
               </div>
@@ -333,11 +333,9 @@
                         Añadir
                       </button>
                     </div>
-                    <a href="editarproducto.html">
-                      <button class="btn btn-success" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#detalles">
-                        Editar
-                      </button></a>
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Detalles
+                    </button>
                   </div>
                 </div>
               </div>
@@ -353,14 +351,13 @@
                     <div class="btn-group">
                       <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#detalles">
-                        Añadir Stock
+                        Añadir
                       </button>
                     </div>
-                    <a href="editarproducto.html">
-                      <button class="btn btn-success" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#detalles">
-                        Editar
-                      </button></a>
+
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Detalles
+                    </button>
                   </div>
                 </div>
               </div>
@@ -380,14 +377,13 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir Stock
+                        Añadir
                       </button>
                     </div>
-                    <a href="editarproducto.html">
-                      <button class="btn btn-success" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#detalles">
-                        Editar
-                      </button></a>
+
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Detalles
+                    </button>
                   </div>
                 </div>
               </div>
@@ -402,14 +398,13 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir Stock
+                        Añadir
                       </button>
                     </div>
-                    <a href="editarproducto.html">
-                      <button class="btn btn-success" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#detalles">
-                        Editar
-                      </button></a>
+
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Detalles
+                    </button>
                   </div>
                 </div>
               </div>
@@ -424,14 +419,13 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                        Añadir Stock
+                        Añadir
                       </button>
                     </div>
-                    <a href="editarproducto.html">
-                      <button class="btn btn-success" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#detalles">
-                        Editar
-                      </button></a>
+
+                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                      Detalles
+                    </button>
                   </div>
                 </div>
               </div>
