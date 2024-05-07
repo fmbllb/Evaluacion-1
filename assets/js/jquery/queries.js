@@ -269,6 +269,32 @@ $(document).ready(function() {
   });
 });
 
+$(document).ready(function() {
+  $("#formProductoNuevo").validate();
+
+  // Captura el evento de cambio en los campos
+  $("#nombreProducto, #descripcionProducto, #precioProducto, #categoriaProducto, #imagenProducto").on("input change", function() {
+      validarCampos();
+  });
+
+  // Función para validar los campos
+  function validarCampos() {
+      let nombreProducto = $("#nombreProducto").val();
+      let descripcionProducto = $("#descripcionProducto").val();
+      let precioProducto = $("#precioProducto").val();
+      let categoriaProducto = $("#categoriaProducto").val();
+      let imagenProducto = $("#imagenProducto").val();
+
+      if (nombreProducto !== "" && descripcionProducto !== "" && precioProducto !== "" && categoriaProducto !== "" && imagenProducto !== "") {
+          $("#btnAñadirProducto").prop("disabled", false);
+      } else {
+          $("#btnAñadirProducto").prop("disabled", true);
+      }
+  }
+});
+
+
+
 /*$(document).ready(function () {
   let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
