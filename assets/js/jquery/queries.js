@@ -249,6 +249,21 @@ function adjustQuantity(change) {
   }
 }
 
+$(document).ready(function() {
+  $('#recuperarContrasenaEmail').blur(function() {
+      var email = $(this).val();
+      var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+      if (!emailRegex.test(email)) {
+          // Agrega la clase 'error' al campo de entrada
+          $(this).addClass('error');
+          // Puedes mostrar un mensaje de error o realizar otras acciones
+      } else {
+          // El correo electrónico es válido, puedes quitar la clase 'error'
+          $(this).removeClass('error');
+      }
+  });
+});
+
 
 
 /*$(document).ready(function () {
