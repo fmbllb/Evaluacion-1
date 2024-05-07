@@ -91,25 +91,27 @@
 
   <!-- Modal para recuperar contraseña -->
   <div class="modal fade" id="olvidoContrasenaModal" tabindex="-1" aria-labelledby="olvidoContrasenaModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
+  aria-hidden="true">
+  <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="olvidoContrasenaModalLabel">Recuperar Contraseña</h5>
-          <button type="button" class="btn-close rounded-0" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Por favor ingrese su dirección de correo electrónico para recuperar su contraseña:</p>
-          <input type="email" class="form-control rounded-0" id="recuperarContrasenaEmail"
-            placeholder="Correo Electrónico">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Cancelar</button>
-          <a href="index.html" class="btn btn-warning rounded-0">Enviar</a>
-        </div>
+          <div class="modal-header">
+              <h5 class="modal-title" id="olvidoContrasenaModalLabel">Recuperar Contraseña</h5>
+              <button type="button" class="btn-close rounded-0" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <p>Por favor ingrese su dirección de correo electrónico para recuperar su contraseña:</p>
+              <input type="email" class="form-control rounded-0" id="recuperarContrasenaEmail"
+                  placeholder="Correo Electrónico">
+              <!-- Mensaje de error -->
+              <div id="errorEmail"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Cancelar</button>
+            <a href="index.html" class="btn btn-warning rounded-0" id="btnEnviar">Enviar</a>
+          </div>
       </div>
-    </div>
   </div>
+</div>
 
 
   <!-- Footer -->

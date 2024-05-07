@@ -174,7 +174,7 @@ $(document).ready(function () {
     errorElement: "em",
     errorPlacement: function (error, element) {
       // Add the `help-block` class to the error element
-      error.addClass("help-block").css("color", "red");;
+      error.addClass("help-block").css("color", "red");
 
       if (element.prop("type") === "checkbox") {
         error.insertAfter(element.parent("label"));
@@ -251,20 +251,23 @@ function adjustQuantity(change) {
 
 $(document).ready(function() {
   $('#recuperarContrasenaEmail').blur(function() {
-      var email = $(this).val();
-      var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-      if (!emailRegex.test(email)) {
-          // Agrega la clase 'error' al campo de entrada
-          $(this).addClass('error');
-          // Puedes mostrar un mensaje de error o realizar otras acciones
-      } else {
-          // El correo electrónico es válido, puedes quitar la clase 'error'
-          $(this).removeClass('error');
-      }
+    const email = $(this).val();
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+    if (!emailRegex.test(email)) {
+      // El correo no es válido, deshabilita el botón de enviar
+      $('#btnEnviar').prop('disabled', true);
+      $('#errorEmail').text('Ingrese un correo electrónico válido').css("color", "red");
+      // Agrega la clase 'error' al campo de entrada (opcional)
+      $(this).addClass('error');
+    } else {
+      // El correo electrónico es válido, habilita el botón de enviar
+      $('#btnEnviar').prop('disabled', false);
+      $('#errorEmail').text('');
+      $(this).removeClass('error');
+    }
   });
 });
-
-
 
 /*$(document).ready(function () {
   let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
