@@ -228,7 +228,15 @@ function calculateTotal() {
   const price = 6500; // Precio del producto (ajústalo según tus necesidades)
   const quantity = parseInt(quantityInput.val());
   const total = price * quantity;
+  const impuestos = total * 0.38; // Supongamos un 38% de impuestos
+  const totalConImpuestos = total + impuestos;
+
   $('#totalValue').text(`$${total}`);
+
+    // Actualizar los valores en las secciones correspondientes
+    $('#totalValue').text(`$${total}`);
+    $('#ctdTotalProductos').text(`${quantity} artículo(s) - $ ${total}`);
+    $('#totalConImpuestos').text(`Total (impuestos inc.) - $ ${totalConImpuestos.toFixed(2)}`);
 }
 
 function adjustQuantity(change) {
@@ -240,6 +248,7 @@ function adjustQuantity(change) {
     calculateTotal();
   }
 }
+
 
 
 /*$(document).ready(function () {
