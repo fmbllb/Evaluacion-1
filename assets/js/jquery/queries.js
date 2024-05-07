@@ -1,6 +1,6 @@
 $.validator.setDefaults({
   submitHandler: function () {
-    alert("Formulario enviado.");
+    console.log("Formulario enviado.");
   },
 });
 
@@ -25,7 +25,7 @@ $(document).ready(function () {
       },
       registroEmail: {
         required: true,
-        email: true,
+        email: true,  
         expresionesReg: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
       },
       /*comments: {
@@ -146,15 +146,29 @@ $(document).ready(function () {
     rules: {
       inicioCorreo: {
         required: true,
+        email: true,
         minlength: 3,
-        expresionesReg: /^[a-zA-Z!@#$%^&()_+\-=,.<>?]+$/,
-      }
+        expresionesReg: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+      },
+      passInicio: { 
+        required: true, 
+        minlength: 8, 
+        maxlength: 16,
+        expresionesReg: /^(?=.*[$%&*()\-_=+!#])(?=.*[a-z])(?=.*[A-Z])\S+$/,
+      },
     },
     messages: {
       inicioCorreo: {
         required: "Por favor, ingresa tu nombre de usuario.",
+        email: "Por favor, ingresa un correo electrónico válido.",
         minlength: "Tu nombre de usuario debe tener al menos 3 caracteres.",
-        expresionesReg: "Por favor, ingresa un nombre de usuario válido. (Solo se aceptan letras y caracteres especiales, excepto '*').",
+        expresionesReg: "Por favor, ingresa un correo valido. (Solo se aceptan letras y caracteres especiales (No se acepta *)).",
+      },
+      passInicio: { 
+        required: "Por favor, ingresa tu contraseña.", 
+        minlength: "Tu contraseña debe tener al menos 8 caracteres.", 
+        maxlength: "Tu contraseña no debe exceder los 16 caracteres.",
+        expresionesReg: "Debes introducir una contraseña valida.",
       },
     },
     errorElement: "em",
