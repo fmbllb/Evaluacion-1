@@ -65,37 +65,36 @@
   <main>
 
     <div class="container mt-5 rounded-0 mb-5">
-        <h1 class="text-center mb-4">Agregar Producto al Catálogo</h1>
-        <form>
-          <div class="mb-3">
-            <FORM></FORM><!--ESTO DEBERÍA SER UN FORMULARIO-->
-            <label for="nombreProducto" class="form-label">Nombre del Producto</label>
-            <input type="text" class="form-control rounded-0" id="nombreProducto" placeholder="Ejemplo: Miniatura 1">
-          </div>
-          <div class="mb-3">
-            <label for="descripcionProducto" class="form-label">Descripción</label>
-            <textarea class="form-control rounded-0" id="descripcionProducto" rows="3" placeholder="Ejemplo: Tamaño, peso, material"></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="precioProducto" class="form-label ">Precio</label>
-            <input type="number" class="form-control rounded-0" id="precioProducto" placeholder="Ejemplo: $20.000">
-          </div>
-          <div class="mb-3">
-            <label for="imagenProducto" class="form-label">Imagen del Producto</label>
-            <input type="file" class="form-control rounded-0" id="imagenProducto">
-          </div>
-          <div class="mb-3">
-            <label for="categoriaProducto" class="form-label">Categoría</label>
-            <select class="form-select rounded-0" id="categoriaProducto">
-              <option value="ropa">Miniaturas</option>
-              <option value="calzado">Pinturas</option>
-              <option value="accesorios">Accesorios</option>
-              <!-- Agrega más opciones de categoría según tus necesidades -->
-            </select>
-          </div>
-          <a href="administrador.html" class="btn btn-warning rounded-0">Añadir Producto</a>
-        </form>
-      </div>
+      <h1 class="text-center mb-4">Agregar Producto al Catálogo</h1>
+      <form id="formProductoNuevo">
+        <div class="mb-3">
+          <label for="nombreProducto" class="form-label">Nombre del Producto</label>
+          <input type="text" class="form-control rounded-0" id="nombreProducto" placeholder="Ejemplo: Miniatura 1" required>
+        </div>
+        <div class="mb-3">
+          <label for="descripcionProducto" class="form-label">Descripción</label>
+          <textarea class="form-control rounded-0" id="descripcionProducto" rows="3" placeholder="Ejemplo: Tamaño, peso, material" required></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="precioProducto" class="form-label">Precio</label>
+          <input type="number" class="form-control rounded-0" id="precioProducto" placeholder="Ejemplo: $20.000" required>
+        </div>
+        <div class="mb-3">
+          <label for="imagenProducto" class="form-label">Imagen del Producto</label>
+          <input type="file" class="form-control rounded-0" id="imagenProducto" required>
+        </div>
+        <div class="mb-3">
+          <label for="categoriaProducto" class="form-label">Categoría</label>
+          <select class="form-select rounded-0" id="categoriaProducto">
+            <option value="ropa">Miniaturas</option>
+            <option value="calzado">Pinturas</option>
+            <option value="accesorios">Accesorios</option>
+            <!-- Agrega más opciones de categoría según tus necesidades -->
+          </select>
+        </div>
+        <button type="submit" class="btn btn-warning rounded-0">Añadir Producto</button>
+      </form>
+    </div>
 
   </main>
 
