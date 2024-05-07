@@ -121,6 +121,10 @@
     </div>-->
     <!-- Fin de Canvas -->
 
+    <div class="row">
+      <div class="col container col-lg-12 col-xl-2 col-md-12 col-xs-12 mt-5 p-4">
+        <!-- Filtro -->
+        <div class="col m-5">
     <!-- Filtro -->
     <div class="container border p-5 rounded-0 mt-5 mb-3">
       <div class="row">
@@ -136,61 +140,68 @@
             <li class="list-group-item">
               <form class="row g-3">
                 <div class="col-auto">
-                  <label for="inputBuscadorFiltro" class="visually-hidden">Password</label>
+                  <label for="inputBuscadorFiltro" class="visually-hidden">Busca por palabra...</label>
                   <input type="text" class="form-control" id="buscadorFiltro" placeholder="Buscar por Palabra Clave">
-                </div>
-                <div class="col-auto">
-                  <button type="submit" class="btn btn-primary mb-3 rounded-0">Buscar</button>
                 </div>
               </form>
             </li>
             <li class="list-group-item">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="checkFechaIngreso">
-                <label class="form-check-label" for="checkFechaIngreso">
-                  Fecha de Ingreso <!--HAY QUE MANEJAR UNA FECHA AQUÍ-->
-                </label>
-              </div>
-            </li>
-
-            <li class="list-group-item">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="checkNombre">
-                <label class="form-check-label" for="checkNombre">
+                <button type="button" class="btn btn-outline-secondary">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5" />
+                  </svg>
+                  <span class="visually-hidden">Button</span>
+                </button>
+                <label class="form-check-label ps-4" for="checkNombre">
                   Nombre
                 </label>
               </div>
             </li>
             <li class="list-group-item">
-              <div class="dropdown">
-                <button type="button" class="btn btn-warning rounded-0 dropdown-toggle" data-bs-toggle="dropdown">
+              <div class="">
+
+                <button class="btn btn-warning rounded-0" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseCategoria" aria-expanded="false" aria-controls="collapseCategoria">
                   Categoría
                 </button>
-                <ul class="dropdown-menu rounded-0 p-2">
-                  <li>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="checkEjercitoCaos">
-                      <label class="form-check-label" for="checkEjercitoCaos">
-                        Ejército del Caos
-                      </label>
+
+                <div class="collapse" id="collapseCategoria">
+                  <div class="">
+                    <div class="container">
+                      <ul class="rounded-0 p-2 list-group">
+                        <li class="list-group-item">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="checkEjercitoCaos">
+                            <label class="form-check-label" for="checkEjercitoCaos">
+                              Ejército del Caos
+                            </label>
+                          </div>
+                        </li>
+                        <li class="list-group-item">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="checkEjercitoImperium"
+                              id="checkEjercitoImperium" name="checkEjercitoImperium">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Ejército del Imperio
+                            </label>
+                          </div>
+                        </li>
+                        <li class="list-group-item">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="checkKillTeam" id="checkKillTeam">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Kill Team
+                            </label>
+                          </div>
+                        </li>
+                      </ul>
                     </div>
-                  </li>
-                  <li>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="checkEjercitoImperium">
-                      <label class="form-check-label" for="flexCheckDefault">
-                        Ejército del Imperio
-                      </label>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="checkKillTeam">
-                      <label class="form-check-label" for="flexCheckDefault">
-                        Kill Team
-                      </label>
-                    </div>
-                  </li>
+                  </div>
+                </div>
+
               </div>
             </li>
             <li class="list-group-item flex-fill">
@@ -211,150 +222,82 @@
               </div>
             </li>
           </ul>
+          <div class="col-auto mt-3">
+            <button type="submit" class="btn btn-primary mb-3 rounded-0">Buscar</button>
+          </div>
         </div>
-        </li>
+
+        <!-- Fin Filtro    -->
       </div>
-    </div>
-    <!-- Fin Filtro    -->
-
-    <div class="container border p-5">
-      <h4>Figuras</h4>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="assets/img/mini.jpg" alt="">
-            <div class="card-body">
-              <h5 class="card-title">Figurita de Warhammer</h5>
-              <p class="card-text">$ 10</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                    Añadir Stock
-                  </button>
+      <div class="col col-lg-12 col-xl-10 col-md-12 col-xs-12">
+        <div class="container p-5 mt-5">
+          <h4>Figuras</h4>
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="assets/img/mini.jpg" alt="">
+                <div class="card-body">
+                  <h5 class="card-title">Figurita de Warhammer</h5>
+                  <p class="card-text">$ 10</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                        Añadir Stock
+                      </button>
+                    </div>
+                    <a href="editarproducto.html">
+                      <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="">
+                        Editar
+                      </button></a>
+                  </div>
                 </div>
-                <a href="editarproducto.html">
-                  <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                    Editar
-                  </button></a>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="assets/img/mini.jpg" alt="">
-            <div class="card-body">
-              <h5 class="card-title">Figurita de Warhammer</h5>
-              <p class="card-text">$ 10</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                    Añadir
-                  </button>
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="assets/img/mini.jpg" alt="">
+                <div class="card-body">
+                  <h5 class="card-title">Figurita de Warhammer</h5>
+                  <p class="card-text">$ 10</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                        Añadir Stock
+                      </button>
+                    </div>
+                    <a href="editarproducto.html">
+                      <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="">
+                        Editar
+                      </button></a>
+                  </div>
                 </div>
-                <a href="editarproducto.html">
-                  <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                    Editar
-                  </button></a>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="assets/img/mini.jpg" alt="">
-            <div class="card-body">
-              <h5 class="card-title">Figurita de Warhammer</h5>
-              <p class="card-text">$ 10</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                    Añadir Stock
-                  </button>
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="assets/img/mini.jpg" alt="">
+                <div class="card-body">
+                  <h5 class="card-title">Figurita de Warhammer</h5>
+                  <p class="card-text">$ 10</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                        Añadir Stock
+                      </button>
+                    </div>
+                    <a href="editarproducto.html">
+                      <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="">
+                        Editar
+                      </button></a>
+                  </div>
                 </div>
-                <a href="editarproducto.html">
-                  <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                    Editar
-                  </button></a>
               </div>
             </div>
+
           </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="container border p-5">
-      <h4>Accesorios</h4>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="assets/img/mini.jpg" alt="">
-            <div class="card-body">
-              <h5 class="card-title">Figurita de Warhammer</h5>
-              <p class="card-text">$ 10</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
-                    Añadir Stock
-                  </button>
-                </div>
-                <a href="editarproducto.html">
-                  <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                    Editar
-                  </button></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="assets/img/mini.jpg" alt="">
-            <div class="card-body">
-              <h5 class="card-title">Figurita de Warhammer</h5>
-              <p class="card-text">$ 10</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                    Añadir
-                  </button>
-                </div>
-                <a href="editarproducto.html">
-                  <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                    Editar
-                  </button></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="assets/img/mini.jpg" alt="">
-            <div class="card-body">
-              <h5 class="card-title">Figurita de Warhammer</h5>
-              <p class="card-text">$ 10</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                    Añadir Stock
-                  </button>
-                </div>
-                <a href="editarproducto.html">
-                  <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
-                    Editar
-                  </button></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <div class="container border p-5">
+      <div class="mt-5">
       <h4>Pinturas</h4>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col">
@@ -365,12 +308,12 @@
               <p class="card-text">$ 10</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
                     Añadir Stock
                   </button>
                 </div>
                 <a href="editarproducto.html">
-                  <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                  <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="">
                     Editar
                   </button></a>
               </div>
@@ -386,12 +329,12 @@
               <p class="card-text">$ 10</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
                     Añadir Stock
                   </button>
                 </div>
                 <a href="editarproducto.html">
-                  <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                  <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="">
                     Editar
                   </button></a>
               </div>
@@ -407,12 +350,12 @@
               <p class="card-text">$ 10</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#anadir">
+                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
                     Añadir Stock
                   </button>
                 </div>
                 <a href="editarproducto.html">
-                  <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#detalles">
+                  <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="">
                     Editar
                   </button></a>
               </div>
@@ -421,6 +364,14 @@
 
         </div>
       </div>
+    </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container p-5">
+      
   </main>
 
   <!-- Footer -->
