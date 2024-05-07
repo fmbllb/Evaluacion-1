@@ -206,6 +206,40 @@ $.validator.addMethod(
 );
 
 
+$(document).ready(function() {
+  // Manejar el evento de clic en el botón de decremento
+  $('#decrement').on('click', function() {
+    adjustQuantity(-1);
+  });
+
+  // Manejar el evento de clic en el botón de incremento
+  $('#increment').on('click', function() {
+    adjustQuantity(1);
+  });
+
+  // Calcular el valor total al cambiar la cantidad
+  $('#qtyInput').on('input', function() {
+    calculateTotal();
+  });
+});
+
+function calculateTotal() {
+  const quantityInput = $('#qtyInput');
+  const price = 6500; // Precio del producto (ajústalo según tus necesidades)
+  const quantity = parseInt(quantityInput.val());
+  const total = price * quantity;
+  $('#totalValue').text(`$${total}`);
+}
+
+function adjustQuantity(change) {
+  const quantityInput = $('#qtyInput');
+  const currentValue = parseInt(quantityInput.val());
+  const newValue = currentValue + change;
+  if (newValue >= 1 && newValue <= 10) {
+    quantityInput.val(newValue);
+    calculateTotal();
+  }
+}
 
 
 /*$(document).ready(function () {

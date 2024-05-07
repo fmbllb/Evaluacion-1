@@ -79,3 +79,4 @@ $(".carousel-control-next").on("click", function () {
   scrollPosition = scrollPosition + carWidth;
   $(".carousel-inner").animate({ scrollleft: scrollPosition }, 600);
 });
+
