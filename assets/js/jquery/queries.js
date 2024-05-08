@@ -225,10 +225,10 @@ $(document).ready(function() {
 
 function calculateTotal() {
   const quantityInput = $('#qtyInput');
-  const price = 6500; // Precio del producto (ajústalo según tus necesidades)
+  const price = 6500; // Precio del producto
   const quantity = parseInt(quantityInput.val());
   const total = price * quantity;
-  const impuestos = total * 0.38; // Supongamos un 38% de impuestos
+  const impuestos = total * 0.38; // 38% de impuestos
   const totalConImpuestos = total + impuestos;
 
   $('#totalValue').text(`$${total}`);
@@ -293,6 +293,10 @@ $(document).ready(function() {
   }
 });
 
+
+  // Desactiva el campo de input del carrito de compras
+  $("#qtyInput").attr("disabled", true)
+ 
 
 
 /*$(document).ready(function () {
