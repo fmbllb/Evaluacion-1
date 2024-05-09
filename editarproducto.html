@@ -64,96 +64,66 @@
 
   <main>
 
-    <!-- Detalles de carrito -->
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-md-8">
-          <h2>Producto a Editar</h2>
-          <div class="d-flex border align-items-center mb-5">
-            <img src="assets/img/mini.jpg" class="img-fluid border me-3" alt="Imagen del carrito" width="30%">
-            <p class="col-md-4">Soldado Lobos Lunares x1</p>
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Editar nombre del Producto</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Titulo de ejemplo...">
-              </div>
-          </div>
-          <div class="border align-items-center">
-            <div class="mb-3">
-                <label for="tituloDescripcionProducto" class="form-label h5 m-3">Descripción del producto</label>
-                <label type="text" class="form-control" id="" placeholder="">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id sed nemo neque aliquam aliquid voluptatum maxime ea eius hic, modi provident iusto dolorem a temporibus consectetur delectus? Eum, error sapiente.</label>
-              </div>
-              <div class="mb-3">
-                <label for="titleEditarDescripcionProducto" class="form-label h6 m-3">Editar descripción del producto:</label>
-                <textarea class="form-control" id="nuevaDescripcionProducto" rows="3"></textarea>
-                <div class="mb-3">
-                    <label for="formFile" class="form-label h6 m-3">Cambiar Imagen del Producto</label>
-                    <input class="form-control m-3" type="file" id="formFile">
-                  </div>
-              </div>
-          </div>
-          <br>
-          <a href="index.html" class="btn btn-warning rounded-0 mt-4 float-start mb-4" data-bs-toggle="modal" data-bs-target="#confirmaCambio">Confirmar Cambios</a>
-          <a href="" class="btn btn-danger rounded-0 mt-4 float-end" data-bs-toggle="modal" data-bs-target="#confirmaCambio">Eliminar Producto</a>
+    <div class="container mt-5 rounded-0 mb-auto">
+      <h1 class="text-center mb-4">Editar información del producto</h1>
+      <!--Formulario agregar producto-->
+      <form id="formProductoNuevo" class="needs-validation mb-5" method="post" name="agregarProducto">
+        <div class="mb-3">
+          <label for="nombreProducto" class="form-label">Nombre del Producto</label>
+          <input type="text" class="form-control rounded-0" id="nombreProducto" name="nombreProducto"
+            placeholder="Ejemplo: Miniatura 1" required>
         </div>
-        <div class="col-md-4 d-flex flex-column align-items-center">
+        <div class="mb-3">
+          <label for="descripcionProducto" class="form-label">Descripción</label>
+          <textarea class="form-control rounded-0" id="descripcionProducto" name="descripcionProducto" rows="3"
+            placeholder="Ejemplo: Tamaño, peso, material"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="precioProducto" class="form-label">Precio</label>
+          <input type="number" class="form-control rounded-0" id="precioProducto" name="precioProducto"
+            placeholder="Ejemplo: $20.000">
+            <div id="mensajePrecio"></div>
+        </div>
+        <div class="mb-3">
+          <label for="imagenProducto" class="form-label">Imagen del Producto</label>
+          <input type="file" class="form-control rounded-0" id="imagenProducto" name="imagenProducto">
+        </div>
+        <div class="mb-3">
+          <label for="categoriaProducto" class="form-label">Categoría</label>
+          <select class="form-select rounded-0" id="categoriaProducto" name="categoriaProducto">
+            <option value="">Selecciona una categoría</option>
+            <option value="miniaturas">Miniaturas</option>
+            <option value="pinturas">Pinturas</option>
+            <option value="accesorios">Accesorios</option>
+          </select>
+        </div>
+        <button type="button" class="btn btn-success rounded-0" id="btnGuardarCambios" data-bs-toggle="modal"
+          data-bs-target="#confirmacionModal" disabled value="SUBMIT">Guardar Cambios</button>
+        <a href="producto.html" class="btn btn-danger rounded-0">Cancelar</a>
+      </form>
+    </div>
 
-          <!-- Resumen de objetos en el carrito -->
-          <div class="card mt-5 mb-5">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Precio Unitario</label>
-                <label for="exampleFormControlInput1" class="form-label">$6.500</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="$6.500">
-                
-              </div></li>
-              <li class="list-group-item">Total (impuestos inc.) - $ 9.000</li>
-            </ul>
-            <div class="card-body">
-
-              <!-- Botón confirmar pago -->
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmaCambio">Guardar Cambios</button>
-
-              <!-- Modal cambio confirmado -->
-              <div class="modal fade" id="confirmaCambio" tabindex="-1" aria-labelledby="confirma" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Cambio Exitoso</h5>
-                      <button type="button" class="btn-close rounded-0" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      El cambio se ha realizado con éxito...
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <!-- Modal de confirmación -->
+    <div class="modal fade" id="confirmacionModal" tabindex="-1" role="dialog" aria-labelledby="confirmacionModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirmacionModalLabel">Producto Añadido</h5>
           </div>
-
-          <div class="card mt-3 mb-5">
-
+          <div class="modal-body">
+            ¡El producto se ha añadido correctamente!
           </div>
-
-          <div class="card mt-3">
-            <div class="card-body">
-              
-              <p>Envío de 1 a 3 días*</p>
-              <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Editar días de envío</label>
-                <input type="email" class="form-control mb-3" id="exampleFormControlInput1" placeholder="Días de envío...">
-                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#confirmaCambio">Guardar Cambios</button>
-              </div>
-            </div>
+          <div class="modal-footer">
+            <a href="producto.html" class="btn btn-secondary rounded-0">OK</a>
           </div>
         </div>
       </div>
     </div>
-
+    
   </main>
-    <!-- Footer -->
+  
+  <!-- Footer -->
     <footer style="bottom: 0; width: 100%; height: 40px; position:absolute bottom" class="mt-auto">
       <div class="container-fluid bg-dark text-white py-3">
           <div class="row">
@@ -202,5 +172,10 @@
 
 
 </body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script src="assets/js/jquery/queries.js"></script>
 
 </html>

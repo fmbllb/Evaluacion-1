@@ -323,6 +323,7 @@ $(document).ready(function() {
   });
 });
 
+//Valida que los campos de "Agregar Producto" no estén vacíos
 $(document).ready(function() {
   function validarCampos() {
     let nombreProducto = $("#nombreProducto").val();
@@ -354,17 +355,49 @@ $(document).ready(function() {
 });
 
 
-  // Desactiva el campo de input del carrito de compras
-  $("#qtyInput").attr("disabled", true)
+//Valida los campos de "Editar Producto"
+$(document).ready(function() {
+  function validarCampos() {
+    let nombreProducto = $("#nombreProducto").val();
+    let descripcionProducto = $("#descripcionProducto").val();
+    let precioProducto = $("#precioProducto").val();
+    let categoriaProducto = $("#categoriaProducto").val();
+    let imagenProducto = $("#imagenProducto").val();
+
+    if (nombreProducto !== "" && descripcionProducto !== "" && precioProducto !== "" && categoriaProducto !== "" && imagenProducto !== "") {
+      // Todos los campos están llenos
+      if (!precioProducto.includes('-')) {
+        // El precio no contiene "-"
+        $("#btnGuardarCambios").prop("disabled", false);
+        $("#mensajePrecio").text(""); // Borra el mensaje de error
+      } else {
+        // El precio contiene "-", por lo que no permitimos agregar el producto
+        $("#btnGuardarCambios").prop("disabled", true);
+        $("#mensajePrecio").text("No se pueden ingresar valores negativos en el precio del producto.").css("color", "red");
+      }
+    } else {
+      // No todos los campos están llenos
+      $("#btnGuardarCambios").prop("disabled", true);
+      $("#mensajePrecio").text(""); // Borra el mensaje de error si los campos no están llenos
+    }
+  }
+
+  // Llama a la función validarCampos cuando se cambia el valor de cualquier campo
+  $("#nombreProducto, #descripcionProducto, #precioProducto, #categoriaProducto, #imagenProducto").on("input", validarCampos);
+});
+
+// Desactiva el campo de input del carrito de compras
+$("#qtyInput").attr("disabled", true)
  
 
-  //Elimina un elemento de los pedidos al confirmar eliminacion en el modal
+//Elimina elemento de la lista de los pedidos del administrador
 $(document).ready(function() {
   $("#confirmacionEliminarPedido").click(function() {
       // Esconde los elementos en el div con id "contenedor"
-      $("#pedido1Usuario").children().hide();
+      $("#pedido1Admin").children().hide();
   });
 });
+
 
 
 /*$(document).ready(function () {

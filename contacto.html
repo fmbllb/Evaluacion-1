@@ -62,8 +62,8 @@
   <!-- Fin de navbar -->
 
     <main>
-        <div class="row container form-control form-control-lg p-5 m-5 rounded-0">
-            <div id="right-row" class="col-lg-8 col-lg-8">
+        <div class="container ps-5 pe-5 mt-5 rounded-0  border  ">
+            <form id="right-row" class="col-lg-8 col-lg-8" method="post" name="formContacto">
                 <div class="pt-3 pb-3">
                     <h3>Contacta con nosotros</h3>
                 </div>
@@ -84,7 +84,7 @@
                 <div class="mb-3 rounded-0">
                     <label for="exampleFormControlInput1" class="form-label">Email</label>
                     <input type="email" class="form-control" id="exampleFormControlInput1"
-                        placeholder="name@example.com">
+                        placeholder="name@example.com" required>
                 </div>
                 <div class="mb-3 rounded-0">
                     <label for="formFile" class="form-label">Archivo adjunto</label>
@@ -93,24 +93,24 @@
 
                 <div class="mb-3 rounded-0">
                     <label for="exampleFormControlTextarea1" class="form-label">Añade tus comentarios</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
                 </div>
                 <div class="mb-3 rounded-0">
                     <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">
-                    <label class="form-check-label" for="firstCheckbox">Acepto los términos y condiciones de la
+                    <label class="form-check-label" for="firstCheckbox" required>Acepto los términos y condiciones de la
                         tienda.</label>
                 </div>
                 <div class="col-auto mb-3 rounded-0">
-                    <button type="submit" class="btn btn-warning mb-3 rounded-0">Enviar Formulario</button>
+                    <a href="index.html" type="submit" class="btn btn-warning mb-3 rounded-0" value="SUBMIT">Enviar Formulario</a>
                 </div>
                 <h5>Whatssapp</h5>
                 <p>1236785187</p>
-            </div>
+            </form>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer style="bottom: 0; width: 100%; height: 40px;" class="mt-auto position:absolute">
+    <footer style="bottom: 0; width: 100%; height: 40px;  position:absolute" class="mt-auto position:absolute">
         <div class="container-fluid bg-dark text-white py-3">
           <div class="row">
             <div class="col-md-4">
