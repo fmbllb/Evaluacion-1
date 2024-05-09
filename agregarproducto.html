@@ -66,7 +66,7 @@
 
     <div class="container mt-5 rounded-0 mb-auto">
       <h1 class="text-center mb-4">Agregar Producto al Catálogo</h1>
-      <form id="formProductoNuevo" class="needs-validation mb-5">
+      <form id="formProductoNuevo" class="needs-validation mb-5" method="post" name="agregarProducto">
         <div class="mb-3">
           <label for="nombreProducto" class="form-label">Nombre del Producto</label>
           <input type="text" class="form-control rounded-0" id="nombreProducto" name="nombreProducto"
@@ -97,7 +97,7 @@
           </select>
         </div>
         <button type="button" class="btn btn-warning rounded-0" id="btnAñadirProducto" data-bs-toggle="modal"
-          data-bs-target="#confirmacionModal" disabled>Añadir Producto</button>
+          data-bs-target="#confirmacionModal" disabled value="SUBMIT">Añadir Producto</button>
         <a href="producto.html" class="btn btn-danger rounded-0">Cancelar</a>
       </form>
     </div>
