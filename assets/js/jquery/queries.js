@@ -304,6 +304,14 @@ $(document).ready(function() {
   $("#qtyInput").attr("disabled", true)
  
 
+  //Elimina un elemento de los pedidos al confirmar eliminacion en el modal
+$(document).ready(function() {
+  $("#confirmacionEliminarPedido").click(function() {
+      // Esconde los elementos en el div con id "contenedor"
+      $("#pedido1Usuario").children().hide();
+  });
+});
+
 
 /*$(document).ready(function () {
   let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;

@@ -67,7 +67,7 @@
 
     <main>
         <body>
-            <div class="row mt-3 mb-3 white-background">
+            <div class="row mt-3 mb-3 white-background" id="pedido1Usuario">
                 <div class="row justify-content-center align-items-center">
                     <div class="col-md-6 d-flex justify-content-center align-items-center">
                         <img src="assets/img/pinturas.jpg" alt="Producto 1" class="img-fluid border" width="35%">
@@ -90,15 +90,16 @@
                         </div>
                     </div>
                 </div>
+                <hr class="mt-5">
             </div>
         
-            <hr>
+
         
             <div class="row mt-3 mb-5">
                 <div class="col-md-6 d-flex justify-content-center align-items-center">
                     <img src="assets/img/mini.jpg" alt="Producto 1" class="img-fluid border" width="35%">
                 </div>
-                <div class="col-md-6 px-5 mt-3">
+                <div class="col-md-6 px-5 mt-3" id="pedido2Usuario">
                     <h4>Seguimiento de Pedido</h4>
                     <!--Pedido 2-->
                     <p><strong>Estado de la Entrega:</strong> Entregado</p>
@@ -113,6 +114,7 @@
                     <div class="justify-content-center">
                       <a href="#" class="btn btn-secondary rounded-0 mt-2">Detalles de producto</a>
                     </div>
+                    <hr class="mt-5">
                 </div>
         </body>
     
@@ -131,7 +133,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button href="contacto.html" class="btn btn-danger" data-bs-dismiss="">Cancelar Pedido</button><!--ENVÍA LA INFORMAICÓN A LA DB-->
+                        <button href="contacto.html" class="btn btn-danger" data-bs-dismiss="modal" id="confirmacionEliminarPedido">Cancelar Pedido</button><!--ENVÍA LA INFORMAICÓN A LA DB-->
                     </div>
                 </div>
             </div>
@@ -139,7 +141,7 @@
     </main>
 
     <!-- Footer -->
-    <footer style="bottom: 0; width: 100%; height: 40px; " class="mt-auto">
+    <footer style="bottom: 0; width: 100%; height: 40px; position:absolute bottom" class="mt-auto">
         <div class="container-fluid bg-dark text-white py-3">
             <div class="row">
                 <div class="col-md-4">
@@ -185,5 +187,10 @@
             </div>
         </div>
     </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="assets/js/jquery/queries.js"></script>
 
 </body>

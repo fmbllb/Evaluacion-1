@@ -69,53 +69,42 @@
   <main>
 
     <body>
-      <div class="row mt-3 mb-3 white-background">
-        <div class="row justify-content-center align-items-center">
-          <div class="col-md-6 d-flex justify-content-center align-items-center">
-            <img src="assets/img/pinturas.jpg" alt="Producto 1" class="img-fluid border" width="35%">
-          </div>
-          <div class="col-md-6 ml-2">
-            <h4>Seguimiento de Pedido</h4>
-            
-            <!-- Información pedido 1 -->        
-            <p><strong>Estado de la Entrega:</strong> En tránsito</p>
-            <p><strong>Información del Pedido:</strong></p>
-            <ul>
-              <li><strong>Número de Pedido:</strong> 123456</li>
-              <li><strong>Fecha de Compra:</strong> 15 de diciembre de 2021</li>
-              <li><strong>Producto:</strong> Set de pinturas The Army Painter 10 colores</li>
-              <li><strong>Cantidad:</strong> 1 unidades</li>
-              <li><strong>Total:</strong> $12.000</li>
-            </ul>
-            <button class="btn btn-danger rounded-0" data-bs-toggle="modal"
-              data-bs-target="#confirmCancelModal">Eliminar Pedido</button>
-            <a href="modpedido.html" class="btn btn-secondary rounded-0">Modificar Pedido</a>
-          </div>
-        </div>
-      </div>
-
-      <hr>
-
-      <div class="row mt-3 mb-5">
-        <div class="col-md-6 d-flex justify-content-center align-items-center">
-          <img src="assets/img/mini.jpg" alt="Producto 1" class="img-fluid border" width="35%">
-        </div>
-        <div class="col-md-6">
-          <h4>Seguimiento de Pedido</h4>
-          <!-- Información pedido 2 -->  
-          <p><strong>Estado de la Entrega:</strong>En tránsito</p>
-          <p><strong>Información del Pedido:</strong></p>
-          <ul>
-            <li><strong>Número de Pedido:</strong> 134567</li>
-            <li><strong>Fecha de Compra:</strong> 13 de diciembre de 2021</li>
-            <li><strong>Producto:</strong> Miniatura Soldado Lobos Lunares</li>
-            <li><strong>Cantidad:</strong> 2 unidades</li>
-            <li><strong>Total:</strong> $15.000</li>
-          </ul>
-          <button class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Eliminar
-            Pedido</button>
-          <a href="modpedido.html" class="btn btn-secondary rounded-0">Modificar Pedido</a>
-        </div>
+      <div class="table-responsive px-5 mt-5 mb-5">
+        <table class="table table-striped border">
+          <thead>
+            <tr>
+              <th>Número de Pedido</th>
+              <th>Nombre del Producto</th>
+              <th>Cantidad</th>
+              <th>Fecha de Compra</th>
+              <th>Estado de Entrega</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>001</td>
+              <td>Producto 1</td>
+              <td>5</td>
+              <td>2024-05-09</td>
+              <td>Entregado</td>
+            </tr>
+            <tr>
+              <td>002</td>
+              <td>Producto 2</td>
+              <td>3</td>
+              <td>2024-05-08</td>
+              <td>En camino</td>
+            </tr>
+            <tr>
+              <td>003</td>
+              <td>Producto 3</td>
+              <td>2</td>
+              <td>2024-05-07</td>
+              <td>Pendiente</td>
+            </tr>
+            <!-- Agrega más filas según sea necesario -->
+          </tbody>
+        </table>
     </body>
 
 
@@ -141,7 +130,7 @@
   </main>
 
   <!-- Footer -->
-  <footer style="bottom: 0; width: 100%; height: 40px; " class="mt-auto">
+  <footer style="bottom: 0; width: 100%; height: 40px; position:absolute" class="mt-auto">
     <div class="container-fluid bg-dark text-white py-3">
       <div class="row">
         <div class="col-md-4">
