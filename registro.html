@@ -9,6 +9,8 @@
   <link href="assets/css/index.css" rel="stylesheet">
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+
   <title>Registro de Usuario</title>
 </head>
 
@@ -71,19 +73,20 @@
           <div class="card rounded-0">
             <div class="card-body">
               <h5 class="card-title mb-4">Registro de cuenta</h5>
+              <form id="validacion-live" class="form">
+                <div class="control-group">
+                  <label class="control-label" for="inputEmail">RUT</label>
+                  <div class="controls">
+                    <input type="text" placeholder="14.569.484-1" class="form-control rounded-0" id="registroRut" required>
+                  </div>
+                </div>
+              </form>
               <form action="" class="" id="registroForm" method="post" name="registro">
                 <div class="mb-3">
                   <label for="labelNickName" class="form-label">Usuario</label>
                   <input type="text" class="form-control rounded-0" id="registroNombreUsuario"
                     name="registroNombreUsuario" placeholder="Ingresa tu nombre de usuario" required>
                 </div>
-                <form action="" id="formato-live input" name="formato-live input">
-                  <div class="mb-3">
-                    <label for="labelRut" class="form-label">Rut</label>
-                    <input type="text" class="form-control rounded-0" id="registroRut" name="registroRut"
-                      placeholder="Ingresa tu Rut" required>
-                  </div>
-                </form>
                 <div class="mb-3">
                   <label for="labelNombreReal" class="form-label">Nombre</label>
                   <input type="text" class="form-control rounded-0" id="registroNombre" name="registroNombre"
@@ -477,10 +480,9 @@
                     <option value="Yumbel">Yumbel</option>
                     <option value="Yungay">Yungay</option>
                     <option value="Zapallar">Zapallar</option>
-
                   </select>
                 </div>
-                <button type="submit" class="btn btn-warning rounded-0">Completar Registro</button>
+                <button type="submit" value="SUBMIT" class="btn btn-warning rounded-0">Completar Registro</button>
                 <!--ENVÍA LA INFORMACIÓN A LA DB-->
               </form>
             </div>
@@ -541,11 +543,22 @@
       </div>
     </div>
   </footer>
+
+
   <script src="assets/js/jquery/jquery-3.7.1.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"
     integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="assets/js/jquery/queries.js"></script>
+  <script src="assets/js/jquery/jquery.rut.js"></script>
+  <script type="text/javascript">
+    $(function () {
+
+      $("#validacion-live input").rut({ formatOn: 'keyup', validateOn: 'keyup' }).on('rutInvalido', function () { $(this).parents(".control-group").addClass("error") }).on('rutValido', function () { $(this).parents(".control-group").removeClass("error") });
+    });
+  </script>
 
 </body>
 

@@ -67,7 +67,7 @@ $(document).ready(function () {
       },
       registroNombre: {
         required: "Por favor, ingresa tu nombre completo.",
-        minlength: "Tu nombre debe ser de al menos 5 caracteres.",
+        minlength: "Tu nombre debe ser de al menos 3 caracteres.",
         expresionesReg: "Por favor, ingresa un nombre válido. (solo letras)",
       },
       registroApellido: {
@@ -140,16 +140,19 @@ $(document).ready(function () {
     },
   });
 });
-
+// Validando el registro de inicio de sesión
 $(document).ready(function () {
   $("#registroInicio").validate({
+    //Declarando las reglas explicitas de validacion
     rules: {
+      //Valida que el correo este presente
       inicioCorreo: {
         required: true,
         email: true,
         minlength: 3,
         expresionesReg: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
       },
+      //Valida que la contraseña este presente y con el formato correcto
       passInicio: { 
         required: true, 
         minlength: 8, 
@@ -158,6 +161,7 @@ $(document).ready(function () {
       },
     },
     messages: {
+      //Envia mensajes de error si no se cumple con las reglas de validacion
       inicioCorreo: {
         required: "Por favor, ingresa tu nombre de usuario.",
         email: "Por favor, ingresa un correo electrónico válido.",
@@ -173,7 +177,7 @@ $(document).ready(function () {
     },
     errorElement: "em",
     errorPlacement: function (error, element) {
-      // Add the `help-block` class to the error element
+      //Gestionar errores.
       error.addClass("help-block").css("color", "red");
 
       if (element.prop("type") === "checkbox") {
@@ -197,13 +201,63 @@ $(document).ready(function () {
   });
 });
 
-$.validator.addMethod(
-  "expresionesReg",
-  function (value, element, regex) {
-    return this.optional(element) || regex.test(value);
-  },
-  "Por favor, introduce un valor válido."
-);
+//Validacion del rut.registroRut
+$(document).ready(function () {
+  $("#validacion-live").validate({
+    //Declarando las reglas explicitas de validacion
+    rules: {
+      //Valida que el rut este presente
+      registroRut: {
+        required: true,
+        minlength: 7,
+        expresionesReg: /^[0-9]+[-|‐]{1}[0-9kK]{1}$/,
+      },
+
+    },
+    messages: {
+      //Envia mensajes de error si no se cumple con las reglas de validacion
+      registroRut: {
+        required: "Por favor, ingresa tu rut.",
+        minlength: "Tu rut debe tener al menos 7 caracteres.",
+        expresionesReg: "Por favor, ingresa un rut valido.",
+      },
+    },
+    errorElement: "em",
+    errorPlacement: function (error, element) {
+      //Gestionar errores.
+      error.addClass("help-block").css("color", "red");
+
+      if (element.prop("type") === "checkbox") {
+        error.insertAfter(element.parent("label"));
+      } else {
+        error.insertAfter(element);
+      }
+    },
+    highlight: function (element, errorClass, validClass) {
+      $(element)
+        .parents(".col-sm-10")
+        .addClass("has-error")
+        .removeClass("has-success");
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element)
+        .parents(".col-sm-10")
+        .addClass("has-success")
+        .removeClass("has-error");
+    },
+  });
+});
+
+$(document).ready(function () {
+  // Definir la regla personalizada utilizando addMethod
+  $.validator.addMethod(
+    "expresionesReg",
+    function (value, element, regex) {
+      return this.optional(element) || regex.test(value);
+    },
+    "Por favor, introduce un valor válido."
+  );
+});
 
 
 $(document).ready(function() {
