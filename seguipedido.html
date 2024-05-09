@@ -72,8 +72,9 @@
                     <div class="col-md-6 d-flex justify-content-center align-items-center">
                         <img src="assets/img/pinturas.jpg" alt="Producto 1" class="img-fluid border" width="35%">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 px-5 mt-3">
                         <h4>Seguimiento de Pedido</h4>
+                        <!--Pedido 1-->
                         <p><strong>Estado de la Entrega:</strong> En tránsito</p>
                         <p><strong>Información del Pedido:</strong></p>
                         <ul>
@@ -83,8 +84,10 @@
                             <li><strong>Cantidad:</strong> 1 unidades</li>
                             <li><strong>Total:</strong> $12.000</li>
                         </ul>
-                        <button class="btn btn-danger rounded-0" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Cancelar Pedido</button>
-                        <a href="#" class="btn btn-secondary rounded-0">Detalles de producto</a>
+                        <div class="justify-content-center">
+                          <button class="btn btn-danger rounded-0 mt-2" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Cancelar Pedido</button>
+                          <a href="#" class="btn btn-secondary rounded-0 mt-2">Detalles de producto</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -95,8 +98,9 @@
                 <div class="col-md-6 d-flex justify-content-center align-items-center">
                     <img src="assets/img/mini.jpg" alt="Producto 1" class="img-fluid border" width="35%">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 px-5 mt-3">
                     <h4>Seguimiento de Pedido</h4>
+                    <!--Pedido 2-->
                     <p><strong>Estado de la Entrega:</strong> Entregado</p>
                     <p><strong>Información del Pedido:</strong></p>
                     <ul>
@@ -106,7 +110,9 @@
                         <li><strong>Cantidad:</strong> 2 unidades</li>
                         <li><strong>Total:</strong> $15.000</li>
                     </ul>
-                    <a href="#" class="btn btn-secondary rounded-0">Detalles de producto</a>
+                    <div class="justify-content-center">
+                      <a href="#" class="btn btn-secondary rounded-0 mt-2">Detalles de producto</a>
+                    </div>
                 </div>
         </body>
     
@@ -125,7 +131,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button href="contacto.html" class="btn btn-danger">Cancelar Pedido</button><!--ENVÍA LA INFORMAICÓN A LA DB-->
+                        <button href="contacto.html" class="btn btn-danger" data-bs-dismiss="">Cancelar Pedido</button><!--ENVÍA LA INFORMAICÓN A LA DB-->
                     </div>
                 </div>
             </div>
