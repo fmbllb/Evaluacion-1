@@ -77,11 +77,13 @@
                   <input type="text" class="form-control rounded-0" id="registroNombreUsuario"
                     name="registroNombreUsuario" placeholder="Ingresa tu nombre de usuario" required>
                 </div>
-                <div class="mb-3">
-                  <label for="labelRut" class="form-label">Rut</label>
-                  <input type="text" class="form-control rounded-0" id="registroRut"
-                    name="registroRut" placeholder="Ingresa tu Rut" required>
-                </div>
+                <form action="" id="formato-live input" name="formato-live input">
+                  <div class="mb-3">
+                    <label for="labelRut" class="form-label">Rut</label>
+                    <input type="text" class="form-control rounded-0" id="registroRut" name="registroRut"
+                      placeholder="Ingresa tu Rut" required>
+                  </div>
+                </form>
                 <div class="mb-3">
                   <label for="labelNombreReal" class="form-label">Nombre</label>
                   <input type="text" class="form-control rounded-0" id="registroNombre" name="registroNombre"
@@ -478,7 +480,7 @@
 
                   </select>
                 </div>
-                <button type="submit" class="btn btn-warning rounded-0" value="SUBMIT">Completar Registro</button>
+                <button type="submit" class="btn btn-warning rounded-0">Completar Registro</button>
                 <!--ENVÍA LA INFORMACIÓN A LA DB-->
               </form>
             </div>
@@ -544,6 +546,7 @@
     integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="assets/js/jquery/queries.js"></script>
+
 </body>
 
 </html>
