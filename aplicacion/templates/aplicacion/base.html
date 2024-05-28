@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django</title>
+    <link href='{% static "aplicacion/css/estilo.css" %}' rel='stylesheet'>
+
+
+</head>
+
+<body>
+    <!--Header-->
+    <header>
+
+    </header>
+   <!--Fin de header-->
+
+    {% block contenido %}
+    
+    {% endblock contenido %}
+
+    <!--Footer-->
+    <footer>
+
+    </footer>
+    <!--Fin de footer-->
+    
+    <script src='{% static "aplicacion/js/script.js" %}'></script>
+    <script>
+        ver_en_consola()
+    </script>
+    <footer class="footer">
+        Este es el footer
+    </footer>
+</body>
+
+</html>
