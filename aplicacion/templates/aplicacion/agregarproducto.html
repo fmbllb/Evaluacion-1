@@ -1,0 +1,67 @@
+{% extends "aplicacion/base.html" %}
+    
+
+{% block contenido %}
+{% load static %}
+
+<div class="container mt-5 rounded-0 mb-auto">
+    <h1 class="text-center mb-4">Agregar Producto al Catálogo</h1>
+    <!--Formulario agregar producto-->
+    <form id="formProductoNuevo" class="needs-validation mb-5" method="post" name="agregarProducto">
+      <div class="mb-3">
+        <label for="nombreProducto" class="form-label">Nombre del Producto</label>
+        <input type="text" class="form-control rounded-0" id="nombreProducto" name="nombreProducto"
+          placeholder="Ejemplo: Miniatura 1" required>
+      </div>
+      <div class="mb-3">
+        <label for="descripcionProducto" class="form-label">Descripción</label>
+        <textarea class="form-control rounded-0" id="descripcionProducto" name="descripcionProducto" rows="3"
+          placeholder="Ejemplo: Tamaño, peso, material"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="precioProducto" class="form-label">Precio</label>
+        <input type="number" class="form-control rounded-0" id="precioProducto" name="precioProducto"
+          placeholder="Ejemplo: $20.000">
+          <div id="mensajePrecio"></div>
+      </div>
+      <div class="mb-3">
+        <label for="imagenProducto" class="form-label">Imagen del Producto</label>
+        <input type="file" class="form-control rounded-0" id="imagenProducto" name="imagenProducto">
+      </div>
+      <div class="mb-3">
+        <label for="categoriaProducto" class="form-label">Categoría</label>
+        <select class="form-select rounded-0" id="categoriaProducto" name="categoriaProducto">
+          <option value="">Selecciona una categoría</option>
+          <option value="miniaturas">Miniaturas</option>
+          <option value="pinturas">Pinturas</option>
+          <option value="accesorios">Accesorios</option>
+        </select>
+      </div>
+      <button type="button" class="btn btn-warning rounded-0" id="btnAñadirProducto" data-bs-toggle="modal"
+        data-bs-target="#confirmacionModal" disabled value="SUBMIT">Añadir Producto</button>
+      <a href="producto.html" class="btn btn-danger rounded-0">Cancelar</a>
+    </form>
+  </div>
+
+
+
+  <!-- Modal de confirmación -->
+  <div class="modal fade" id="confirmacionModal" tabindex="-1" role="dialog" aria-labelledby="confirmacionModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmacionModalLabel">Producto Añadido</h5>
+        </div>
+        <div class="modal-body">
+          ¡El producto se ha añadido correctamente!
+        </div>
+        <div class="modal-footer">
+          <a href="producto.html" class="btn btn-secondary rounded-0">OK</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock contenido %}

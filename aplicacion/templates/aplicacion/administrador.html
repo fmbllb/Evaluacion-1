@@ -1,0 +1,55 @@
+{% extends "aplicacion/base.html" %}
+    
+
+{% block contenido %}
+{% load static %}
+
+<div class="container mb-5 rounded-0">
+    <main>
+      <h3 class="centrado pt-5">Vista Administrador</h3>
+      <div class="pt-5 centrado">
+        <form class="p-5 border">
+          <img src="{% static 'img/User-Circle-Single--Streamline-Core.svg' %}" width="75rem" alt="">
+          <div class="p-5 mb-3">
+            <p>Cuenta de Administrador</p>
+          </div>
+          <div class="m-3">
+            <p>Nombre del Administrador: </p>
+            <label for="exampleInputUser" class="form-label">Juanito Orgullocito</label>
+          </div>
+          <div class="mb-3 form-check">
+            <a href="#" data-bs-toggle="modal" data-bs-target="#olvidoContrasenaModal">¿Olvidó su contraseña?</a>
+          </div>
+          <div class="p-3">
+            <a href="estadisticasfinancieras.html" class="btn btn-warning rounded-0 mt-2" role="button">Estadísticas</a>
+            <a href="#" class="btn btn-warning rounded-0 mt-2" role="button">Contabilidad</a>
+            <a href="producto.html" class="btn btn-warning rounded-0 mt-2">Productos</a>
+            <a href="pedidosadmin.html" class="btn btn-warning rounded-0 mt-2">Pedidos</a>
+            <a href="listausuarios.html" class="btn btn-warning rounded-0 mt-2">Usuarios</a>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+    <!-- Modal para recuperar contraseña -->
+    <div class="modal fade" id="olvidoContrasenaModal" tabindex="-1" aria-labelledby="olvidoContrasenaModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="olvidoContrasenaModalLabel">Recuperar Contraseña</h5>
+            <button type="button" class="btn-close rounded-0" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Por favor ingrese su dirección de correo electrónico para recuperar su contraseña:</p>
+            <input type="email" class="form-control rounded-0" id="recuperarContrasenaEmail" placeholder="Correo Electrónico">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Cancelar</button>
+            <button href="index.html" class="btn btn-warning rounded-0">Enviar</button><!--ENVIAR INFORMACIÓN A LA DB-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock contenido %}

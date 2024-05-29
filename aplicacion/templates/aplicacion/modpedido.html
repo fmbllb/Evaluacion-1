@@ -1,0 +1,56 @@
+{% extends "aplicacion/base.html" %}
+    
+    
+    
+{% block contenido %}
+
+<div class="container mt-5 align-items-center justify-content-center ">
+    <div class="row">
+      <div class="col-md-8">
+        <h2><strong>Pedido N°123456</strong></h2>
+        <div class="d-flex align-items-center mb-5">
+          <img src="static/img/mini.jpg" class="img-fluid border me-3" alt="Imagen del carrito" width="30%">
+        </div>
+        <h3><strong>Información del Pedido:</strong></h3>
+        <div class="border align-items-center">
+          <div class="mb-5 px-3">
+            <p><strong>Número de Pedido:</strong></p>
+            <a><input type="number" class="form-control" id="replyNumber" min="0" data-bind="value:replyNumber" placeholder="123456"/></a>
+            <p><strong>Fecha de Compra:</strong></p><!--HAY UNA FECHA QUE MANEJAR AQUÍ-->
+            <a><input type="date" class="form-control" id="exampleFormControlInput1" placeholder="13 de diciembre de 2021"></a>
+            <p><strong>Producto:</strong></p>
+            <a><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Soldado Lobos Lunares"></a>
+            <p><strong>Cantidad:</strong></p>
+            <a><input type="number" class="form-control" id="replyNumber" min="0" data-bind="value:replyNumber" placeholder="2">
+            <p><strong>Total:</strong></p>
+            <a><input type="number" class="form-control" placeholder="$15.000"></a>
+          </div>
+        </div>      
+        <br>
+    </div>
+  </div>
+
+  <div class="container text-center mt-5 mb-5">
+    <button class="btn btn-success rounded-0" data-bs-toggle="modal" data-bs-target="#confirmGuardarCambios">Guardar Cambios</button>
+    <a href="pedidosadmin.html" class="btn btn-secondary rounded-0">Atrás</a>
+</div>
+
+      <!-- Modal de Confirmación para Guardar Cambios -->
+      <div class="modal fade" id="confirmGuardarCambios" tabindex="-1" aria-labelledby="confirmGuardarCambiosLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmGuardarCambiosLabel">Confirmar Cancelación</h5>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro que quieres guardar los cambios realizados? ¡Este proceso es irreversible!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button href="#" class="btn btn-success">Guardar Cambios</button><!--ESTE BOTÓN ES EL QUE ENVÍA LA INFORMAICÓN A LA DB-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock contenido %}

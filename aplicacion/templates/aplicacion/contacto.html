@@ -1,0 +1,52 @@
+{% extends "aplicacion/base.html" %}
+    
+
+{% block contenido %}
+
+<div class="container ps-5 pe-5 mt-5 rounded-0  border  ">
+    <form id="right-row" class="col-lg-8 col-lg-8" method="post" name="formContacto">
+        <div class="pt-3 pb-3">
+            <h3>Contacta con nosotros</h3>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Asunto</label>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-secondary dropdown-toggle rounded-0" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Servicio Atencion al Cliente
+                </button>
+                <ul class="dropdown-menu rounded-0">
+                    <li><a class="dropdown-item" href="#">Problemas con tu envio</a></li>
+                    <li><a class="dropdown-item" href="#">Problemas con la página</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mb-3 rounded-0">
+            <label for="exampleFormControlInput1" class="form-label">Email</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1"
+                placeholder="name@example.com" required>
+        </div>
+        <div class="mb-3 rounded-0">
+            <label for="formFile" class="form-label">Archivo adjunto</label>
+            <input class="form-control" type="file" id="formFile">
+        </div>
+
+        <div class="mb-3 rounded-0">
+            <label for="exampleFormControlTextarea1" class="form-label">Añade tus comentarios</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
+        </div>
+        <div class="mb-3 rounded-0">
+            <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">
+            <label class="form-check-label" for="firstCheckbox" required>Acepto los términos y condiciones de la
+                tienda.</label>
+        </div>
+        <div class="col-auto mb-3 rounded-0">
+            <a href="index.html" type="submit" class="btn btn-warning mb-3 rounded-0" value="SUBMIT">Enviar Formulario</a>
+        </div>
+        <h5>Whatssapp</h5>
+        <p>1236785187</p>
+    </form>
+</div>
+
+{% endblock contenido %}
