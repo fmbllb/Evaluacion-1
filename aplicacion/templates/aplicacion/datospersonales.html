@@ -1,0 +1,57 @@
+{% extends "aplicacion/base.html" %}
+    
+
+{% block contenido %}
+
+  <!--Información de Ajustes -->
+  <div class="container border p-3 mb-5 mt-5">
+    <h3>
+        Datos personales
+    </h3>
+    <p>Se utilizan los datos solo para mejorar su experiencia de usuario.</p>
+</div>
+
+<div class="container border mb-5 ">
+    <div class="mb-3 p-3">
+        <h5>
+            Información de Contacto
+        </h5>
+        <label for="">correo@example.com</label>
+        <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modalCambioDatosPersonales">Cambiar</button>
+    </div>
+    <div class="mb-3 p-3">
+      <h5>
+          Número de Teléfono
+      </h5>
+      <label for="">+5691278331725</label>
+      <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modalCambioDatosPersonales">Cambiar</button>
+  </div>
+    <div class="mb-3 p-3">
+        <h5>
+            Fecha de nacimiento
+        </h5>
+        <label for="">99/99/9999</label>
+        <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modalCambioDatosPersonales">Cambiar</button>
+    </div>
+</div>
+
+<!-- Model de Confirmacion de Cambios en la cuenta-->
+<div class="modal fade" id="modalCambioDatosPersonales" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">¿Estás seguro de realizar los cambios?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Los cambios fueron los siguientes...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock contenido %}

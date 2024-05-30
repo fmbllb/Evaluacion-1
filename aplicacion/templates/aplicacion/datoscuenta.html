@@ -1,0 +1,73 @@
+{% extends "aplicacion/base.html" %}
+    
+
+{% block contenido %}
+
+<div class="container border p-3 mb-3 mt-5">
+    <h3>
+        Datos de la Cuenta
+    </h3>
+    <p>Aquí podrá modificar el estado de su cuenta y el nombre de usuario</p>
+</div>
+
+<div class="container border mb-5">
+    <div class="mb-3 p-3">
+        <h5>
+            Nombre de Usuario
+        </h5>
+        <div class="mb-3 row g-3">
+          <label for="nombreUsuario" class="form-label">PepitoUser123455</label>
+          <div class="col-sm-10 col-md-4">
+            <input type="text" class="form-control " id="nombreUsuario" placeholder="Nuevo Nombre de Usuario">
+          </div>
+        </div>
+          <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCambiosCuenta">Guardar</button>
+    </div>
+    <div class="mb-3 p-3">
+        <h5>
+            Eliminar o Desactivación de la Cuenta
+        </h5>
+        <button type="button" class="btn btn-danger mt-2" data-bs-toggle="modal" data-bs-target="#modalEliminarCuenta">Eliminar</button>
+        <button type="button" class="btn btn-warning mt-2" data-bs-toggle="modal" data-bs-target="#modalEliminarCuenta">Desactivar</button>
+    </div>
+</div>
+
+<!-- Modal de confirmación de cambios -->
+<div class="modal fade" id="modalCambiosCuenta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">¿Estás seguro de realizar los cambios?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Los cambios fueron los siguientes...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Eliminacion Desactivacion de la Cuenta -->
+<div class="modal fade" id="modalEliminarCuenta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Estamos seguros que es por un buen motivo</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Pero aun asi, lamentamos que te vayas...
+      </div>
+      <div class="modal-footer">
+        <a href="index.html"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">¡Hasta Luego!</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin Modal -->
+
+{% endblock contenido %}

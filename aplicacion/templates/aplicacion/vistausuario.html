@@ -1,0 +1,69 @@
+{% extends "aplicacion/base.html" %}
+    
+
+{% block contenido %}
+
+<h1 class="m-3 p-5 centrado">Cuenta Usuario</h1>
+<div class="pt-5 container">
+  
+    <form class="border centrado">
+      <img src="static/img/User-Circle-Single--Streamline-Core.svg" class="m-4" width="35rem" alt="">
+      <h4 class="m-4 pt-2">Pepito Urrutia Gonzáles</h4>
+    <div class="p-3 m-2">
+
+        <a href="seguipedido.html" class="btn btn-warning rounded-0 mt-2" role="button">Ver Mis Pedidos</a>
+    </div>
+    </form>
+</div>
+<div class="container pt-5 mb-5">
+  <div class="list-group">
+    <a href="datospersonales.html" class="list-group-item list-group-item-action" aria-current="true">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Información Personal</h5>
+        <img src="static/img/Arrow-Button-Right-1--Streamline-Ultimate.svg" class="pt-3" alt="">
+      </div>
+      <p class="mb-1">Aquí puedes revisar tu nombre y datos personales.</p>
+      
+    </a>
+    <a href="datoscuenta.html" class="list-group-item list-group-item-action">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Ajustes de la cuenta</h5>
+        <img src="static/img/Arrow-Button-Right-1--Streamline-Ultimate.svg" class="pt-3" alt="">
+      </div>
+      <p class="mb-1">Nombre de usuario, eliminación o desactivación de la cuenta.</p>
+    </a>
+    <a href="localizacion.html" class="list-group-item list-group-item-action">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Localización</h5>
+        <img src="static/img/Arrow-Button-Right-1--Streamline-Ultimate.svg" class="pt-3" alt="">
+      </div>
+      <p class="mb-1">Aquí está la dirección de envío, nombre de quién recibe y direcciones adicionales.</p>
+      
+    </a>
+  </div>
+</div>
+
+<!-- Fin Vista de Usuario --> 
+
+
+<!-- Modal para recuperar contraseña -->
+<div class="modal fade" id="olvidoContrasenaModal" tabindex="-1" aria-labelledby="olvidoContrasenaModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="olvidoContrasenaModalLabel">Recuperar Contraseña</h5>
+        <button type="button" class="btn-close rounded-0" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <p>Por favor ingrese su dirección de correo electrónico para recuperar su contraseña:</p>
+        <input type="email" class="form-control rounded-0" id="recuperarContrasenaEmail" placeholder="Correo Electrónico">
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-warning rounded-0">Enviar</button> <!--ENVÍA LA INFORMACIÓN A LA DB-->
+    </div>
+    </div>
+</div>
+</div>
+
+{% endblock contenido %}
