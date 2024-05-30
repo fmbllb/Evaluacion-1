@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/index.css" rel="stylesheet">
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <title>WarPainter</title>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <header data-bs-theme="dark">
+    <div>
+      <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container">
+          <a class="navbar-brand" href="index.html"><img src="img/logo.png" alt="Brand image" width="auto"
+              height="52"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="container-fluid">
+              <!-- Links en navbar -->
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="catalogo.html">Catálogo</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="administrador.html">Administración</a>
+                </li>
+
+              </ul>
+            </div>
+            <ul class="navbar-nav flex; align-items: center">
+              <li class="nav-item me-3">
+                <a href="seguipedido.html" class="btn">Compras</a>
+              </li class="nav-item me-3">
+              <li class="nav-item me-3">
+                <a href="iniciodesesion.html" class="btn">Ingresar</a>
+              </li>
+              <li class="nav-item me-3">
+                <a href="registro.html" class="btn">Regístrate</a>
+              </li class="nav-item me-3">
+              <li class="nav-item me-3">
+                <a href="carrito.html" class="btn btn-warning rounded-0">Carrito</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <!-- Fin de navbar -->
+
+  <main>
+
+    <div class="container mt-5 rounded-0 mb-auto">
+      <h1 class="text-center mb-4">Agregar Producto al Catálogo</h1>
+      <!--Formulario agregar producto-->
+      <form id="formProductoNuevo" class="needs-validation mb-5" method="post" name="agregarProducto">
+        <div class="mb-3">
+          <label for="nombreProducto" class="form-label">Nombre del Producto</label>
+          <input type="text" class="form-control rounded-0" id="nombreProducto" name="nombreProducto"
+            placeholder="Ejemplo: Miniatura 1" required>
+        </div>
+        <div class="mb-3">
+          <label for="descripcionProducto" class="form-label">Descripción</label>
+          <textarea class="form-control rounded-0" id="descripcionProducto" name="descripcionProducto" rows="3"
+            placeholder="Ejemplo: Tamaño, peso, material"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="precioProducto" class="form-label">Precio</label>
+          <input type="number" class="form-control rounded-0" id="precioProducto" name="precioProducto"
+            placeholder="Ejemplo: $20.000">
+            <div id="mensajePrecio"></div>
+        </div>
+        <div class="mb-3">
+          <label for="imagenProducto" class="form-label">Imagen del Producto</label>
+          <input type="file" class="form-control rounded-0" id="imagenProducto" name="imagenProducto">
+        </div>
+        <div class="mb-3">
+          <label for="categoriaProducto" class="form-label">Categoría</label>
+          <select class="form-select rounded-0" id="categoriaProducto" name="categoriaProducto">
+            <option value="">Selecciona una categoría</option>
+            <option value="miniaturas">Miniaturas</option>
+            <option value="pinturas">Pinturas</option>
+            <option value="accesorios">Accesorios</option>
+          </select>
+        </div>
+        <button type="button" class="btn btn-warning rounded-0" id="btnAñadirProducto" data-bs-toggle="modal"
+          data-bs-target="#confirmacionModal" disabled value="SUBMIT">Añadir Producto</button>
+        <a href="producto.html" class="btn btn-danger rounded-0">Cancelar</a>
+      </form>
+    </div>
+
+
+
+    <!-- Modal de confirmación -->
+    <div class="modal fade" id="confirmacionModal" tabindex="-1" role="dialog" aria-labelledby="confirmacionModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirmacionModalLabel">Producto Añadido</h5>
+          </div>
+          <div class="modal-body">
+            ¡El producto se ha añadido correctamente!
+          </div>
+          <div class="modal-footer">
+            <a href="producto.html" class="btn btn-secondary rounded-0">OK</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer style="bottom: 0; width: 100%; height: 40px; position:absolute bottom" class="mt-auto mt-">
+    <div class="container-fluid bg-dark text-white py-3">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>INFORMACIÓN</h5>
+          <ul class="list-unstyled">
+            <li><a class="text-decoration-none text-white" href="avisolegal.html">
+                <i class="bi bi-chevron-right"></i>Aviso Legal
+              </a></li>
+            <li><a class="text-decoration-none text-white" href="t&condicion.html">
+                <i class="bi bi-chevron-right"></i>Terminos y Condiciones
+              </a></li>
+            <li><a class="text-decoration-none text-white" href="pcookies.html">
+                <i class="bi bi-chevron-right"></i> Politica de Cookies</a></li>
+            <li><a class="text-decoration-none text-white" href="privacidad.html">
+                <i class="bi bi-chevron-right"></i> Politica de Privacidad</a></li>
+            <li><a class="text-decoration-none text-white" href="contacto.html">
+                <i class="bi bi-chevron-right"></i> Contactate con nosotros</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>MIS COSAS</h5>
+          <ul class="list-unstyled">
+            <li><a class="text-decoration-none text-white" href="vistausuario.html">
+                <i class="bi bi-chevron-right"></i> Mi cuenta</a></li>
+            <li><a class="text-decoration-none text-white" href="seguipedido.html">
+                <i class="bi bi-chevron-right"></i> Mis pedidos</a></li>
+            <li><a class="text-decoration-none text-white" href="localizacion.html">
+                <i class="bi bi-chevron-right"></i> Mis direcciones</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>DESTACADAS</h5>
+          <ul class="list-unstyled">
+            <li><a class="text-decoration-none text-white" href="#">
+                <i class="bi bi-chevron-right"></i> Warhammer 40000</a></li>
+            <li><a class="text-decoration-none text-white" href="#">
+            <li><a class="text-decoration-none text-white" href="#">
+                <i class="bi bi-chevron-right"></i> Pintura</a></li>
+            <li><a class="text-decoration-none text-white" href="#">
+                <i class="bi bi-chevron-right"></i> Modelismo</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+  <script src="assets/js/jquery/queries.js"></script>
+
+</body>
+
+</html>
