@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/index.css" rel="stylesheet">
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <title>WarPainter</title>
+</head>
+<body>
+    
+  <!-- Navbar -->
+  <header data-bs-theme="dark">
+    <div>
+      <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container">
+          <a class="navbar-brand" href="index.html"><img src="img/logo.png" alt="Brand image" width="auto"
+              height="52"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="container-fluid">
+              <!-- Links en navbar -->
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="catalogo.html">Catálogo</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="administrador.html">Administración</a>
+                </li>
+                
+              </ul>
+            </div>
+            <ul class="navbar-nav flex; align-items: center">
+              <li class="nav-item me-3">
+                <a href="seguipedido.html" class="btn">Compras</a>
+              </li class="nav-item me-3">
+              <li class="nav-item me-3">
+                <a href="iniciodesesion.html" class="btn">Ingresar</a>
+              </li>
+              <li class="nav-item me-3">
+                <a href="registro.html" class="btn">Regístrate</a>
+              </li class="nav-item me-3">
+              <li class="nav-item me-3">
+              <a href="carrito.html" class="btn btn-warning rounded-0">Carrito</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <!-- Fin de navbar -->
+
+  <!--Información de Ajustes -->
+    <div class="container border p-3 mb-5 mt-5">
+        <h3>
+            Datos personales
+        </h3>
+        <p>Se utilizan los datos solo para mejorar su experiencia de usuario.</p>
+    </div>
+
+    <div class="container border mb-5 ">
+        <div class="mb-3 p-3">
+            <h5>
+                Información de Contacto
+            </h5>
+            <label for="">correo@example.com</label>
+            <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modalCambioDatosPersonales">Cambiar</button>
+        </div>
+        <div class="mb-3 p-3">
+          <h5>
+              Número de Teléfono
+          </h5>
+          <label for="">+5691278331725</label>
+          <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modalCambioDatosPersonales">Cambiar</button>
+      </div>
+        <div class="mb-3 p-3">
+            <h5>
+                Fecha de nacimiento
+            </h5>
+            <label for="">99/99/9999</label>
+            <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modalCambioDatosPersonales">Cambiar</button>
+        </div>
+    </div>
+
+    <!-- Model de Confirmacion de Cambios en la cuenta-->
+    <div class="modal fade" id="modalCambioDatosPersonales" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">¿Estás seguro de realizar los cambios?</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Los cambios fueron los siguientes...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary">Guardar cambios</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="bottom: 0; width: 100%; height: 40px; " class="mt-auto">
+        <div class="container-fluid bg-dark text-white py-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>INFORMACIÓN</h5>
+                    <ul class="list-unstyled">
+                        <li><a class="text-decoration-none text-white" href="avisolegal.html">
+                                <i class="bi bi-chevron-right"></i>Aviso Legal
+                            </a></li>
+                        <li><a class="text-decoration-none text-white" href="t&condicion.html">
+                                <i class="bi bi-chevron-right"></i>Terminos y Condiciones
+                            </a></li>
+                        <li><a class="text-decoration-none text-white" href="pcookies.html">
+                                <i class="bi bi-chevron-right"></i> Politica de Cookies</a></li>
+                        <li><a class="text-decoration-none text-white" href="privacidad.html">
+                                <i class="bi bi-chevron-right"></i> Politica de Privacidad</a></li>
+                        <li><a class="text-decoration-none text-white" href="contacto.html">
+                                <i class="bi bi-chevron-right"></i> Contactate con nosotros</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>MIS COSAS</h5>
+                    <ul class="list-unstyled">
+                        <li><a class="text-decoration-none text-white" href="vistausuario.html">
+                                <i class="bi bi-chevron-right"></i> Mi cuenta</a></li>
+                        <li><a class="text-decoration-none text-white" href="seguipedido.html">
+                                <i class="bi bi-chevron-right"></i> Mis pedidos</a></li>
+                        <li><a class="text-decoration-none text-white" href="localizacion.html">
+                                <i class="bi bi-chevron-right"></i> Mis direcciones</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>DESTACADAS</h5>
+                    <ul class="list-unstyled">
+                        <li><a class="text-decoration-none text-white" href="#">
+                                <i class="bi bi-chevron-right"></i> Warhammer 40000</a></li>
+                        <li><a class="text-decoration-none text-white" href="#">
+                        <li><a class="text-decoration-none text-white" href="#">
+                                <i class="bi bi-chevron-right"></i> Pintura</a></li>
+                        <li><a class="text-decoration-none text-white" href="#">
+                                <i class="bi bi-chevron-right"></i> Modelismo</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

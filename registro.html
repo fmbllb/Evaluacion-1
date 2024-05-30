@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/index.css" rel="stylesheet">
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+  <script src="assets/js/apigoogleautocomplete.js"></script>
+  <title>Registro de Usuario</title>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <header data-bs-theme="dark">
+
+  </header>
+  <!-- Fin de navbar -->
+
+  <main>
+
+    <div class="container mt-5 mb-5">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card rounded-0">
+            <div class="card-body">
+              <h5 class="card-title mb-4">Registro de cuenta</h5>
+              <form id="validacion-live" class="form">
+                <div class="control-group">
+                  <label class="control-label" for="inputEmail">RUT</label>
+                  <div class="controls">
+                    <input type="text" placeholder="14.569.484-1" class="form-control rounded-0" id="registroRut"
+                      required>
+                  </div>
+                </div>
+              </form>
+              <form action="" class="" id="registroForm" method="post" name="registro">
+                <div class="mb-3">
+                  <label for="labelNickName" class="form-label">Usuario</label>
+                  <input type="text" class="form-control rounded-0" id="registroNombreUsuario"
+                    name="registroNombreUsuario" placeholder="Ingresa tu nombre de usuario" required>
+                </div>
+                <div class="mb-3">
+                  <label for="labelNombreReal" class="form-label">Nombre</label>
+                  <input type="text" class="form-control rounded-0" id="registroNombre" name="registroNombre"
+                    placeholder="Ingresa tu nombre" required>
+                </div>
+                <div class="mb-3">
+                  <label for="labelApellido" class="form-label">Apellido</label>
+                  <input type="text" class="form-control rounded-0" id="registroApellido" name="registroApellido"
+                    placeholder="Ingresa tu apellido" required>
+                </div>
+                <div class="mb-3">
+                  <label for="labelEmail" class="form-label">Correo electrónico</label>
+                  <input type="email" class="form-control rounded-0" id="registroEmail" name="registroEmail"
+                    placeholder="Ingresa tu correo" required>
+                </div>
+                <div class="mb-3">
+                  <label for="labelPassword" class="form-label">Contraseña</label>
+                  <div class="col-auto mb-2">
+                    <span id="passwordCaracteresMinimos" class="form-text">
+                      (Mínimo 8 carácteres y máximo 16)
+                    </span>
+                  </div>
+                  <input type="password" class="form-control rounded-0" id="registroPass" name="registroPass"
+                    minlength="8" placeholder="Ingresa tu contraseña" required>
+                </div>
+                <div class="mb-3">
+                  <label for="labelConfirmarPass" class="form-label">Repita la Contraseña</label>
+                  <input type="password" class="form-control rounded-0" id="registroRepetirPass"
+                    name="registroRepetirPass" minlength="8" placeholder="Ingresa tu contraseña" required>
+                </div>
+                
+                <div class="mb-3">
+                  <label for="labelNumeroDireccion" class="form-label">Número de Casa/Departamento</label>
+                  <input type="number" class="form-control rounded-0" id="registroNumeroDireccion"
+                    name="registroNumeroDireccion"
+                    placeholder="Ingresa tu número de dirección (Número de casa/Departamento)" required>
+                </div>
+                <div class="">
+                  <div class="pac-card" id="pac-card">
+                    <div>
+                      <div id="title">Ingresa tu dirección</div>
+                      <br />
+                    </div>
+                    <div id="pac-container">
+                      <input id="pac-input" class="form-control rounded-0" type="text"
+                        placeholder="Ej. Rosario, Calle Milenio" />
+                    </div>
+                  </div>
+                  <div id="map"></div>
+                  <div id="infowindow-content">
+                    <span id="place-name" class="title"></span><br />
+                    <span id="place-address"></span>
+                  </div>
+                </div>
+                <div class="mt-2 centrado">
+                  <button type="submit" value="SUBMIT" class="btn btn-warning rounded-0 me-5">Completar Registro</button>
+                
+                  <a href="index.html" class="btn btn-danger text rounded-0 ms-5">
+                    Volver
+                  </a>
+                
+                </div>
+                <!--ENVÍA LA INFORMACIÓN A LA DB-->
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </main>
+
+
+  <!-- Footer -->
+  <footer style="bottom: 0; width: 100%; height: 40px; " class="mt-auto">
+    <div class="container-fluid bg-dark text-white py-3">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>INFORMACIÓN</h5>
+          <ul class="list-unstyled">
+            <li><a class="text-decoration-none text-white" href="avisolegal.html">
+                <i class="bi bi-chevron-right"></i>Aviso Legal
+              </a></li>
+            <li><a class="text-decoration-none text-white" href="t&condicion.html">
+                <i class="bi bi-chevron-right"></i>Terminos y Condiciones
+              </a></li>
+            <li><a class="text-decoration-none text-white" href="pcookies.html">
+                <i class="bi bi-chevron-right"></i> Politica de Cookies</a></li>
+            <li><a class="text-decoration-none text-white" href="privacidad.html">
+                <i class="bi bi-chevron-right"></i> Politica de Privacidad</a></li>
+            <li><a class="text-decoration-none text-white" href="contacto.html">
+                <i class="bi bi-chevron-right"></i> Contactate con nosotros</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>MIS COSAS</h5>
+          <ul class="list-unstyled">
+            <li><a class="text-decoration-none text-white" href="vistausuario.html">
+                <i class="bi bi-chevron-right"></i> Mi cuenta</a></li>
+            <li><a class="text-decoration-none text-white" href="seguipedido.html">
+                <i class="bi bi-chevron-right"></i> Mis pedidos</a></li>
+            <li><a class="text-decoration-none text-white" href="localizacion.html">
+                <i class="bi bi-chevron-right"></i> Mis direcciones</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>DESTACADAS</h5>
+          <ul class="list-unstyled">
+            <li><a class="text-decoration-none text-white" href="#">
+                <i class="bi bi-chevron-right"></i> Warhammer 40000</a></li>
+            <li><a class="text-decoration-none text-white" href="#">
+            <li><a class="text-decoration-none text-white" href="#">
+                <i class="bi bi-chevron-right"></i> Pintura</a></li>
+            <li><a class="text-decoration-none text-white" href="#">
+                <i class="bi bi-chevron-right"></i> Modelismo</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="assets/js/jquery/jquery-3.7.1.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"
+    integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="assets/js/jquery/queries.js"></script>
+  <script src="assets/js/jquery/jquery.rut.js"></script>
+  <script type="text/javascript">
+    $(function () {
+
+      $("#validacion-live input").rut({ formatOn: 'keyup', validateOn: 'keyup' }).on('rutInvalido', function () { $(this).parents(".control-group").addClass("error") }).on('rutValido', function () { $(this).parents(".control-group").removeClass("error") });
+    });
+  </script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=places&v=weekly&solution_channel=GMP_CCS_autocomplete_v1"
+    defer></script>
+
+</body>
+
+</html>
