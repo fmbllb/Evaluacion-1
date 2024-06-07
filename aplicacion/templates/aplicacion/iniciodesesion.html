@@ -2,11 +2,12 @@
     
 
 {% block contenido %}
+{%load static%}
 
 <h3 class="centrado pt-5">Inicia Sesión con tu cuenta</h3>
 <div class="pt-5 centrado mb-5 ">
   <form class="p-5 border" action="" class="" id="registroInicio" method="post" name="registroInicio">
-    <img src="static/img/User-Circle-Single--Streamline-Core.svg" width="75rem" alt="">
+    <img src="{%static 'img/User-Circle-Single--Streamline-Core.svg' %}" width="75rem" alt="">
     <div class="pt-5 mb-3">
       <label for="inicioNombreUsuario" class="form-label">Dirección de Correo</label>
       <input type="email" class="form-control" minlength="3" id="inicioCorreo" name="inicioCorreo" placeholder="Ingresa tu correo"
@@ -23,7 +24,7 @@
       <button type="submit" class="btn btn-warning rounded-0" value="SUBMIT">Iniciar Sesión</button>
     </div>
     <div class="pt-3 border-top">
-      <p>¿No tienes una cuenta con nosotros? <a href="registro.html">Regístrate</a></p>
+      <p>¿No tienes una cuenta con nosotros? <a href="{% url 'registro'%}">Regístrate</a></p>
     </div>
   </form>
 </div>
@@ -47,7 +48,7 @@ aria-hidden="true">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Cancelar</button>
-        <a href="index.html" class="btn btn-warning rounded-0" id="btnEnviar">Enviar</a>
+        <a href="{% url 'index'%}" class="btn btn-warning rounded-0" id="btnEnviar">Enviar</a>
       </div>
   </div>
 </div>

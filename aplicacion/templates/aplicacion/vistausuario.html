@@ -2,40 +2,41 @@
     
 
 {% block contenido %}
+{%load static%}
 
 <h1 class="m-3 p-5 centrado">Cuenta Usuario</h1>
 <div class="pt-5 container">
   
     <form class="border centrado">
-      <img src="static/img/User-Circle-Single--Streamline-Core.svg" class="m-4" width="35rem" alt="">
+      <img src="{% static 'img/User-Circle-Single--Streamline-Core.svg'%}" class="m-4" width="35rem" alt="">
       <h4 class="m-4 pt-2">Pepito Urrutia Gonzáles</h4>
     <div class="p-3 m-2">
 
-        <a href="seguipedido.html" class="btn btn-warning rounded-0 mt-2" role="button">Ver Mis Pedidos</a>
+        <a href="{% url 'seguipedido'%}" class="btn btn-warning rounded-0 mt-2" role="button">Ver Mis Pedidos</a>
     </div>
     </form>
 </div>
 <div class="container pt-5 mb-5">
   <div class="list-group">
-    <a href="datospersonales.html" class="list-group-item list-group-item-action" aria-current="true">
+    <a href="{% url 'datospersonales'%}" class="list-group-item list-group-item-action" aria-current="true">
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1">Información Personal</h5>
-        <img src="static/img/Arrow-Button-Right-1--Streamline-Ultimate.svg" class="pt-3" alt="">
+        <img src="{%static 'img/Arrow-Button-Right-1--Streamline-Ultimate.svg'%}" class="pt-3" alt="">
       </div>
       <p class="mb-1">Aquí puedes revisar tu nombre y datos personales.</p>
       
     </a>
-    <a href="datoscuenta.html" class="list-group-item list-group-item-action">
+    <a href="{% url 'datoscuenta'%}" class="list-group-item list-group-item-action">
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1">Ajustes de la cuenta</h5>
-        <img src="static/img/Arrow-Button-Right-1--Streamline-Ultimate.svg" class="pt-3" alt="">
+        <img src="{%static 'img/Arrow-Button-Right-1--Streamline-Ultimate.svg'%}" class="pt-3" alt="">
       </div>
       <p class="mb-1">Nombre de usuario, eliminación o desactivación de la cuenta.</p>
     </a>
-    <a href="localizacion.html" class="list-group-item list-group-item-action">
+    <a href="{% url 'localizacion'%}" class="list-group-item list-group-item-action">
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1">Localización</h5>
-        <img src="static/img/Arrow-Button-Right-1--Streamline-Ultimate.svg" class="pt-3" alt="">
+        <img src="{%static 'img/Arrow-Button-Right-1--Streamline-Ultimate.svg'%}" class="pt-3" alt="">
       </div>
       <p class="mb-1">Aquí está la dirección de envío, nombre de quién recibe y direcciones adicionales.</p>
       

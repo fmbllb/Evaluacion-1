@@ -25,7 +25,7 @@
             <a href="#" class="btn btn-warning rounded-0 mt-2" role="button">Contabilidad</a>
             <a href="{% url 'producto' %}" class="btn btn-warning rounded-0 mt-2">Productos</a>
             <a href="{% url 'pedidosadmin' %}" class="btn btn-warning rounded-0 mt-2">Pedidos</a>
-            <a href="{% url 'listausuarios' %}"" class="btn btn-warning rounded-0 mt-2">Usuarios</a>
+            <a href="{% url 'listausuarios' %}" class="btn btn-warning rounded-0 mt-2">Usuarios</a>
           </div>
         </form>
       </div>
@@ -46,7 +46,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Cancelar</button>
-            <button href="index.html" class="btn btn-warning rounded-0">Enviar</button><!--ENVIAR INFORMACIÓN A LA DB-->
+            <button href="{% url 'index' %}" class="btn btn-warning rounded-0">Enviar</button><!--ENVIAR INFORMACIÓN A LA DB-->
           </div>
         </div>
       </div>
