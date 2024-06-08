@@ -12,18 +12,6 @@ class Usuario(models.Model):
     numero_casa_departamento=models.IntegerField("Numero de Casa")
     direccion=models.CharField("Direccion", max_length=50)
 
-class Empleado(models.Model):
-    fecha_ingreso=models.DateField("Fecha Ingreso", auto_now=False, auto_now_add=False)
-    fecha_salida=models.DateField("Fecha Salida", auto_now=False, auto_now_add=False)
-    salario=models.IntegerField("Salario")
-    tipo_contrato=models.CharField("Contrato", max_length=1, choices=TIPOS_CONTRATO)
-
-class Tienda(models.Model):
-    nombre=models.CharField("Nombre Tienda", max_length=50)
-    direccion=models.CharField("Direccion", max_length=50)
-    fecha_creacion=models.DateField("Fecha Creacion", auto_now=False, auto_now_add=False)
-    telefono=models.IntegerField("Telefono")
-    correo=models.CharField("Correo", max_length=50)
 
 class Producto(models.Model):
     nombre=models.CharField("Nombre Producto", max_length=50)
@@ -45,14 +33,31 @@ class Factura(models.Model):
     descuento=models.IntegerField("Descuento")
     bruto=models.IntegerField("Bruto")
 
-"""class Encuesta(models.Model):
-     pregunta=models.CharField("Pregunta", max_length=50)
-     respuesta=models.CharField("Respuesta", max_length=50)
-     fecha_encuesta=models.DateField("Fecha", auto_now=False, auto_now_add=False)
-     opcion_encuesta=models.CharField("", max_length=5, choices=*)"""
-    
 class Promocion(models.Model):
     porcentaje_descuento=models.IntegerField("Descuento")
     descripcion=models.CharField("Descripcion", max_length=50)
     fecha_inicio_promo=models.DateField("Fecha Inicio", auto_now=False, auto_now_add=False)
     fecha_fin_promo=models.DateField("Fecha Fin", auto_now=False, auto_now_add=False)
+
+class Empleado(models.Model):
+    fecha_ingreso=models.DateField("Fecha Ingreso", auto_now=False, auto_now_add=False)
+    fecha_salida=models.DateField("Fecha Salida", auto_now=False, auto_now_add=False)
+    salario=models.IntegerField("Salario")
+    tipo_contrato=models.CharField("Contrato", max_length=1, choices=TIPOS_CONTRATO)
+
+class Tienda(models.Model):
+    nombre=models.CharField("Nombre Tienda", max_length=50)
+    direccion=models.CharField("Direccion", max_length=50)
+    fecha_creacion=models.DateField("Fecha Creacion", auto_now=False, auto_now_add=False)
+    telefono=models.IntegerField("Telefono")
+    correo=models.CharField("Correo", max_length=50)
+
+
+
+
+#QUIERO MANEJAR ESTO COMO UNA ENCUESTA GOOGLE, PERO AUN NO SÉ COMO HACERLO.
+"""class Encuesta(models.Model):
+     pregunta=models.CharField("Pregunta", max_length=50)
+     respuesta=models.CharField("Respuesta", max_length=50)
+     fecha_encuesta=models.DateField("Fecha", auto_now=False, auto_now_add=False)
+     opcion_encuesta=models.CharField("", max_length=5, choices=*)"""
