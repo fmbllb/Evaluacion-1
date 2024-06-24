@@ -1,29 +1,23 @@
-TIPO_SEXO={
-    ("F","FEMENINO"),
-    ("M","MASCULINO"),
-    ("O","OTRO")
-}
+TIPOS_CONTRATO = (
+    ('F', 'Full-time'),
+    ('P', 'Part-time'),
+)
 
-TIPOS_CONTRATO={
-    ("CO","Contrato por obra"),
-    ("CF","Contrato de trabajo fijo"),
-    ("CI","Contrato de trabajo indefinido"),
-    ("CA","Contrato de aprendizaje"),
-    ("CT", "Contrato temporal")
-}
+TIPO_PRODUCTO = (
+    ('1', 'Electronics'),
+    ('2', 'Clothing'),
+    # Agrega más categorías según sea necesario
+)
 
-TIPO_PRODUCTO={
-    ("F","Figuras"),
-    ("A","Accesorios"),
-    ("P","Pinturas")
-}
+TIPO_GIRO = (
+    ('A', 'Retail'),
+    ('B', 'Wholesale'),
+    # Agrega más giros según sea necesario
+)
 
-TIPO_GIRO={
-    ("GC","Giro Comercial Mayorista")
-}
-
-TIPO_PAGO={
-    ("TC","Tarjeta de Crédito"),
-    ("TD","Tarjeta de Débito"),
-    ("TB","Transferencia Bancaria")
-}
+TIPO_PAGO = (
+    ('C', 'Credit Card'),
+    ('D', 'Debit Card'),
+    ('P', 'PayPal'),
+    # Agrega más medios de pago según sea necesario
+)

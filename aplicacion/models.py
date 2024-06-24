@@ -1,57 +1,70 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.utils.translation import gettext_lazy as _
+from .enumeraciones import *
 
-# Create your models here.
-class Uduario(models.Model):
-    rut=models.CharField("Rut", max_length=10, primary_key=True)
-    nick=models.CharField("Nombre usuario", max_length=16)
-    nombre=models.CharField("Nombre", max_length=16)
-    apellido=models.CharField("Apellido", max_length=16)
-    correo=models.EmailField("correo", max_length=50)
-    contrasena=models.CharField("Contraseña", max_length=50)
-    numero_casa_departamento=models.IntegerField("Numero de Casa")
-    direccion=models.CharField("Direccion", max_length=50)
+class Usuario(models.Model):
+    rut = models.CharField(_("RUT"), max_length=10, primary_key=True)
+    nick = models.CharField(_("Nombre usuario"), max_length=16, unique=True)
+    nombre = models.CharField(_("Nombre"), max_length=16)
+    apellido = models.CharField(_("Apellido"), max_length=16)
+    correo = models.EmailField(_("Correo electrónico"), max_length=50, unique=True)
+    contrasena = models.CharField(_("Contraseña"), max_length=50)
+    numero_casa_departamento = models.IntegerField(_("Número de Casa"))
+    direccion = models.CharField(_("Dirección"), max_length=50)
 
-class Empleadxo(models.Model):
-    fecha_ingreso=models.DateField("Fecha Ingreso", auto_now=False, auto_now_add=False)
-    fecha_salida=models.DateField("Fecha Salida", auto_now=False, auto_now_add=False)
-    salario=models.IntegerField("Salario")
-    tipo_contrato=models.CharField("Contrato", max_length=1, choices=*)
+    class Meta:
+        verbose_name = _("Usuario")
+        verbose_name_plural = _("Usuarios")
+        indexes = [
+            models.Index(fields=['nick']),
+        ]
+
+class Promocion(models.Model):
+    porcentaje_descuento = models.IntegerField(
+        _("Descuento"), validators=[MinValueValidator(0), MaxValueValidator(100)]
+    )
+    descripcion = models.CharField(_("Descripción"), max_length=50)
+    fecha_inicio_promo = models.DateField(_("Fecha de inicio"))
+    fecha_fin_promo = models.DateField(_("Fecha de finalización"))
+
+    class Meta:
+        verbose_name = _("Promoción")
+        verbose_name_plural = _("Promociones")
 
 class Tienda(models.Model):
-    nombre=models.CharField("Nombre Tienda", max_length=50)
-    direccion=models.CharField("Direccion", max_length=50)
-    fecha_creacion=models.DateField("Fecha Creacion", auto_now=False, auto_now_add=False)
-    telefono=models.IntegerField("Telefono")
-    correo=models.CharField("Correo", max_length=50)
+    nombre = models.CharField(_("Nombre de la tienda"), max_length=50)
+    direccion = models.CharField(_("Dirección"), max_length=50)
+    fecha_creacion = models.DateField(_("Fecha de creación"))
+    telefono = models.CharField(_("Teléfono"), max_length=15)
+    correo = models.EmailField(_("Correo electrónico"), max_length=50)
+
+    class Meta:
+        verbose_name = _("Tienda")
+        verbose_name_plural = _("Tiendas")
 
 class Producto(models.Model):
-    nombre=models.CharField("Nombre Producto", max_length=50)
-    precio=models.IntegerField("Precio")
-    descripcion=models.CharField("Descripcion", max_length=200)
-    categoria=models.CharField("Categoria", max_length=1, choices=*)
+    nombre = models.CharField(_("Nombre del producto"), max_length=50)
+    precio = models.IntegerField(_("Precio"), validators=[MinValueValidator(0)])
+    descripcion = models.CharField(_("Descripción"), max_length=200)
+    categoria_producto = models.CharField(_("Categoría"), max_length=2, choices=TIPO_PRODUCTO)
+    foto = models.ImageField(_("Foto"), upload_to='productos', null=True, blank=True)
+    fk_tienda = models.ForeignKey(Tienda, on_delete=models.DO_NOTHING, verbose_name=_("Tienda"))
+    fk_promocion = models.ForeignKey(Promocion, on_delete=models.DO_NOTHING, verbose_name=_("Promoción"), null=True, blank=True)
+
+    class Meta:
+        verbose_name = _("Producto")
+        verbose_name_plural = _("Productos")
 
 class Boleta(models.Model):
-    giro=models.CharField("Giro", max_length=1, choices=*)
-    medio_pago=models.CharField("Medio Pago", max_length=2, choices=*)
-    subtotal=models.IntegerField("Subtotal")
-    total=models.IntegerField("Total")
-    fecha_boleta=models.DateField("Fecha", auto_now=False, auto_now_add=False)
+    subtotal = models.IntegerField(_("Subtotal"), validators=[MinValueValidator(0)])
+    total = models.IntegerField(_("Total"), validators=[MinValueValidator(0)])
+    fecha_boleta = models.DateField(_("Fecha"))
+    giro = models.CharField(_("Giro"), max_length=1, choices=TIPO_GIRO)
+    medio_pago = models.CharField(_("Medio de pago"), max_length=2, choices=TIPO_PAGO)
+    fk_usuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING, verbose_name=_("Usuario"))
+    fk_producto = models.ForeignKey(Producto, on_delete=models.DO_NOTHING, verbose_name=_("Producto"))
 
-class Factura(models.Model):
-    iva=models.IntegerField("IVA")
-    descripcion=models.CharField("Descripcion", max_length=50)
-    fecha=models.DateField("Fecha", auto_now=False, auto_now_add=False)
-    descuento=models.IntegerField("Descuento")
-    bruto=models.IntegerField("Bruto")
-
-class Encuesta(models.Model):
-    pregunta=models.CharField("Pregunta", max_length=50)
-    respuesta=models.CharField("Respuesta", max_length=50)
-    opcion=models.CharField("", max_length=5, choices=*)
-    fecha_encuesta=models.DateField("Fecha", auto_now=False, auto_now_add=False)
-    
-class Promocion(models.Model):
-    porcentaje_descuento=models.IntegerField("Descuento")
-    descripcion=models.CharField("Descripcion", max_length=50)
-    fecha_inicio_promo=models.DateField("Fecha Inicio", auto_now=False, auto_now_add=False)
-    fecha_fin_promo=models.DateField("Fecha Fin", auto_now=False, auto_now_add=False)
+    class Meta:
+        verbose_name = _("Boleta")
+        verbose_name_plural = _("Boletas")
