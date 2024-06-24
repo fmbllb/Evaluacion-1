@@ -3,6 +3,7 @@
     
     
 {% block contenido %}
+{% load static%}
     
 <div class="container mt-5 container-fluid">
     <h1 class="mb-4">Usuarios Registrados</h1>
@@ -62,7 +63,7 @@
         </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">Cancelar</button>
-                <a href="listausuarios.html" class="btn btn-danger rounded-0">Eliminar</a>
+                <a href="{% url 'listausuarios'%}" class="btn btn-danger rounded-0">Eliminar</a>
             </div>
         </div>
     </div>

@@ -3,6 +3,7 @@
     
     
 {% block contenido %}
+{%load static%}
 
 <body>
     <div class="table-responsive px-5 mt-5 mb-5">
@@ -58,7 +59,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <a href="contacto.html" class="btn btn-danger" data-bs-dismiss="modal" id="confirmacionEliminarPedido">Cancelar Pedido</a>
+                    <a href="{% url 'contacto'%}" class="btn btn-danger" data-bs-dismiss="modal" id="confirmacionEliminarPedido">Cancelar Pedido</a>
                 </div>
             </div>
         </div>

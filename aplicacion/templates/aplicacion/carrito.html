@@ -9,7 +9,7 @@
       <div class="col-md-8">
         <h2 style="font-size:150%"><strong>Carrito de Compras</strong></h2>
         <div class="d-flex border align-items-center mt-3 text-wrap">
-          <img src="static/img/mini.jpg" class="img-fluid me-3" alt="Imagen del carrito" width="20%">
+          <img src="{%static 'img/mini.jpg' %}" class="img-fluid me-3" alt="Imagen del carrito" width="20%">
           <div>
             <p>Soldado Lobos Lunares</p>
             <p id="precioProducto" class="fw-bold">$6.500</p>
@@ -22,7 +22,7 @@
           </div>
         </div>
         <br>
-        <a href="index.html" class="btn btn-warning rounded-0 mt-4 float-start">Continuar comprando</a>
+        <a href="{% url 'index' %}" class="btn btn-warning rounded-0 mt-4 float-start">Continuar comprando</a>
       </div>
     <div class="col-md-4 d-flex flex-column align-items-center">
 
@@ -60,7 +60,7 @@
                   Su pago fue realizado con éxito.
                 </div>
                 <div class="modal-footer">
-                  <a href="index.html" class="btn btn-secondary" data-bs-dismiss="modal" value="SUBMIT">OK</a>
+                  <a href="{% url 'index'%}" class="btn btn-secondary" data-bs-dismiss="modal" value="SUBMIT">OK</a>
                 </div>
               </div>
             </div>

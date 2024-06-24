@@ -2,6 +2,7 @@
     
 
 {% block contenido %}
+{%load static%}
 
     <div class="container mt-5 mb-5">
       <div class="row">
@@ -81,7 +82,7 @@
                 <div class="mt-2 centrado">
                   <button type="submit" value="SUBMIT" class="btn btn-warning rounded-0 me-5">Completar Registro</button>
                 
-                  <a href="index.html" class="btn btn-danger text rounded-0 ms-5">
+                  <a href="{% url 'index' %}" class="btn btn-danger text rounded-0 ms-5">
                     Volver
                   </a>
                 

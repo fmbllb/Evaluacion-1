@@ -2,6 +2,7 @@
     
 
 {% block contenido %}
+{%load static%}
 
 <div class="container mt-5 rounded-0 mb-auto">
     <h1 class="text-center mb-4">Editar información del producto</h1>
@@ -38,7 +39,7 @@
       </div>
       <button type="button" class="btn btn-success rounded-0" id="btnGuardarCambios" data-bs-toggle="modal"
         data-bs-target="#confirmacionModal" disabled value="SUBMIT">Guardar Cambios</button>
-      <a href="producto.html" class="btn btn-danger rounded-0">Cancelar</a>
+      <a href="{% url 'producto' %}" class="btn btn-danger rounded-0">Cancelar</a>
     </form>
   </div>
 
@@ -54,7 +55,7 @@
           ¡El producto se ha añadido correctamente!
         </div>
         <div class="modal-footer">
-          <a href="producto.html" class="btn btn-secondary rounded-0">OK</a>
+          <a href="{% url 'producto' %}" class="btn btn-secondary rounded-0">OK</a>
         </div>
       </div>
     </div>

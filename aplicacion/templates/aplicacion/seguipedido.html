@@ -2,12 +2,13 @@
     
 
 {% block contenido %}
+{%load static%}
 
 <body>
     <div class="row mt-3 mb-3 white-background" id="pedido1Usuario">
         <div class="row justify-content-center align-items-center">
             <div class="col-md-6 d-flex justify-content-center align-items-center">
-                <img src="static/img/pinturas.jpg" alt="Producto 1" class="img-fluid border" width="35%">
+                <img src="{%static 'img/pinturas.jpg' %}" alt="Producto 1" class="img-fluid border" width="35%">
             </div>
             <div class="col-md-6 px-5 mt-3">
                 <h4>Seguimiento de Pedido</h4>
@@ -34,7 +35,7 @@
 
     <div class="row mt-3 mb-5">
         <div class="col-md-6 d-flex justify-content-center align-items-center">
-            <img src="static/img/mini.jpg" alt="Producto 1" class="img-fluid border" width="35%">
+            <img src="{% static 'img/mini.jpg'%}" alt="Producto 1" class="img-fluid border" width="35%">
         </div>
         <div class="col-md-6 px-5 mt-3" id="pedido2Usuario">
             <h4>Seguimiento de Pedido</h4>
@@ -63,14 +64,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="confirmCancelModalLabel">Confirmar Cancelación</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close rounded-0" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 ¿Estás seguro de que deseas cancelar este pedido? Será redirigido a la página de contacto.
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <a href="contacto.html" class="btn btn-danger" id="confirmacionEliminarPedido">Cancelar Pedido</a><!--ENVÍA LA INFORMAICÓN A LA DB-->
+                <a href="{% url 'contacto' %}" class="btn btn-danger" id="confirmacionEliminarPedido">Cancelar Pedido</a><!--ENVÍA LA INFORMAICÓN A LA DB-->
             </div>
         </div>
     </div>

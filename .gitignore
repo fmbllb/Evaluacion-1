@@ -1,2 +1,4 @@
 aplicacion/__pycache__/
 ventaminis/__pycache__/
+entorno/
+db.sqlite3/

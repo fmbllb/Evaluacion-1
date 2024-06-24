@@ -2,6 +2,7 @@
     
 
 {% block contenido %}
+{%load static%}
 
 <div class="container border p-3 mb-3 mt-5">
     <h3>
@@ -21,14 +22,14 @@
             <input type="text" class="form-control " id="nombreUsuario" placeholder="Nuevo Nombre de Usuario">
           </div>
         </div>
-          <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCambiosCuenta">Guardar</button>
+          <button type="submit" class="btn btn-primary rounded-0" data-bs-toggle="modal" data-bs-target="#modalCambiosCuenta">Guardar</button>
     </div>
     <div class="mb-3 p-3">
         <h5>
             Eliminar o Desactivación de la Cuenta
         </h5>
-        <button type="button" class="btn btn-danger mt-2" data-bs-toggle="modal" data-bs-target="#modalEliminarCuenta">Eliminar</button>
-        <button type="button" class="btn btn-warning mt-2" data-bs-toggle="modal" data-bs-target="#modalEliminarCuenta">Desactivar</button>
+        <button type="button" class="btn btn-danger mt-2 rounded-0" data-bs-toggle="modal" data-bs-target="#modalEliminarCuenta">Eliminar</button>
+        <button type="button" class="btn btn-warning mt-2 rounded-0" data-bs-toggle="modal" data-bs-target="#modalEliminarCuenta">Desactivar</button>
     </div>
 </div>
 
@@ -63,7 +64,7 @@
         Pero aun asi, lamentamos que te vayas...
       </div>
       <div class="modal-footer">
-        <a href="index.html"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">¡Hasta Luego!</button></a>
+        <a href="{% url 'index'%}"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">¡Hasta Luego!</button></a>
       </div>
     </div>
   </div>
