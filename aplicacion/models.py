@@ -2,23 +2,26 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
 from .enumeraciones import *
+from django.contrib.auth.models import User
+
+class Perfil(models.Model):
+        usuario = models.OneToOneField(User, related_name='usuario', on_delete=models.CASCADE) 
+        telefono=models.CharField(max_length=9, null=True)
+        direccion=models.CharField(max_length=500, null=False)
+
 
 class Usuario(models.Model):
     rut = models.CharField(_("RUT"), max_length=10, primary_key=True)
-    nick = models.CharField(_("Nombre usuario"), max_length=16, unique=True)
     nombre = models.CharField(_("Nombre"), max_length=16)
     apellido = models.CharField(_("Apellido"), max_length=16)
     correo = models.EmailField(_("Correo electrónico"), max_length=50, unique=True)
-    contrasena = models.CharField(_("Contraseña"), max_length=50)
     numero_casa_departamento = models.IntegerField(_("Número de Casa"))
     direccion = models.CharField(_("Dirección"), max_length=50)
 
-    class Meta:
-        verbose_name = _("Usuario")
-        verbose_name_plural = _("Usuarios")
-        indexes = [
-            models.Index(fields=['nick']),
-        ]
+    def __str__(self):
+        return f"{self.rut} - {self.nombre} {self.apellido}"
+
+
 
 class Promocion(models.Model):
     porcentaje_descuento = models.IntegerField(

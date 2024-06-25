@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import *
+from .views import cerrar_sesion, index, login2, crearcuenta, registro, administrador, listausuarios, localizacion, catalogo, producto, carrito, contacto, datospersonales, datoscuenta, vistausuario, seguipedido, modpedido, pedidosadmin, finanzas, stock, editarproducto, agregarproducto, guardado
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('administrador/', administrador, name='administrador'),
@@ -7,13 +9,14 @@ urlpatterns = [
     path('carrito/', carrito, name='carrito'),
     path('catalogo/', catalogo, name='catalogo'),
     path('contacto/', contacto, name='contacto'),
+    path('crearcuenta/', crearcuenta, name='crearcuenta'),
     path('datoscuenta/', datoscuenta, name='datoscuenta'),
     path('datospersonales/', datospersonales, name='datospersonales'),
     path('editarproducto/', editarproducto, name='editarproducto'),
     path('finanzas/', finanzas, name='finanzas'),
     path('guardado/', guardado, name='guardado'),
     path('', index, name='index'),
-    path('iniciodesesion/', iniciodesesion, name='iniciodesesion'),
+    #path('iniciodesesion/', iniciodesesion, name='iniciodesesion'),
     path('listausuarios/', listausuarios, name='listausuarios'),
     path('localizacion/', localizacion, name='localizacion'),
     path('modpedido/', modpedido, name='modpedido'),
@@ -23,4 +26,10 @@ urlpatterns = [
     path('seguipedido/', seguipedido, name='seguipedido'),
     path('stock/', stock, name='stock'),
     path('vistausuario/', vistausuario, name='vistausuario'),
+    path('login2/', login2, name='login2'),
+    path('cerrar_sesion/', cerrar_sesion, name='cerrar_sesion'),
+
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
