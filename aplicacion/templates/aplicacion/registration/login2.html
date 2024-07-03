@@ -5,6 +5,7 @@
 {% block contenido %}
 <div class="row">
     <div class="col-sm-4"></div>
+
     <div class="col-sm-4">
         <div class="border rounded shadow mt-4">
             <div class="bg-primary p-4">
@@ -29,17 +30,19 @@
                     </div>
                 {% endfor %}
                 <form action="" method="post">
-                    
-                    {% csrf_token %}
-                    {{form | crispy}}
-                    <button type="submit" class="btn btn-warning btn-lg">Iniciar Sesion</button>
+                        {% csrf_token %}
+                        {{form | crispy}}
+                    <div class="d-grid gap-2 col-3 mx-auto">
+                        <button type="submit" class="btn btn-warning btn-lg">Iniciar Sesion</button>
+                    </div>
                 </form>
             </div>
-            <div class="text-center text-primary pt-3 pb-5">
-                <a href="{% url 'crearcuenta' %}" class="nav-link">Crear Cuenta</a>
+            <div class="text-center text-primary pt-2 mb-3">
+                <a href="{% url 'crearcuenta' %}" class="">Crear Cuenta</a>
             </div>
         </div>
     </div>
+
     <div class="col-sm-4"></div>
 </div>
 {% endblock contenido %}

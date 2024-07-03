@@ -9,7 +9,7 @@
   
     <form class="border centrado">
       <img src="{% static 'img/User-Circle-Single--Streamline-Core.svg'%}" class="m-4" width="35rem" alt="">
-      <h4 class="m-4 pt-2">Pepito Urrutia Gonzáles</h4>
+      <h4 class="m-4 pt-2">{{ user.username }}</h4>
     <div class="p-3 m-2">
 
         <a href="{% url 'seguipedido'%}" class="btn btn-warning rounded-0 mt-2" role="button">Ver Mis Pedidos</a>
@@ -26,7 +26,7 @@
       <p class="mb-1">Aquí puedes revisar tu nombre y datos personales.</p>
       
     </a>
-    <a href="{% url 'datoscuenta'%}" class="list-group-item list-group-item-action">
+    <a href="{% url 'ajustescuenta' request.user.id%}" class="list-group-item list-group-item-action">
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1">Ajustes de la cuenta</h5>
         <img src="{%static 'img/Arrow-Button-Right-1--Streamline-Ultimate.svg'%}" class="pt-3" alt="">

@@ -1,0 +1,82 @@
+{% extends "aplicacion/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block contenido %}
+{%load static%}
+
+
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <div class="container p-3 mb-3 mt-5">
+      <h3>
+          Ajustes de la Cuenta
+      </h3>
+      <p>Aquí podrá modificar el estado de su cuenta y el nombre de usuario</p>
+    </div>
+    <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{form | crispy}}
+      <div>
+        <input type="submit" value="Modificar Persona" class="btn btn-warning">
+      </div>
+    </form>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+<div class="container mb-5">
+
+
+
+</div>
+
+
+
+<!-- Modal de confirmación de cambios -->
+<div class="modal fade" id="modalEliminarCuenta">
+  <div class="modal-dialog">
+      <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+              <h4 class="modal-title">Confirmar Eliminación</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+              <p>¿Está seguro que desea eliminar la cuenta {{user.username}}?</p>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+              <form action="" method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <input type="submit" class="btn btn-danger" data-bs-dismiss="modal" value="Confirmar Eliminación">
+                  <input type="button" class="start btn btn-secondary" data-bs-dismiss="modal" value="Cancelar">
+              </form>
+          </div>
+
+      </div>
+  </div>
+
+<!-- Modal Eliminacion Desactivacion de la Cuenta -->
+<div class="modal fade" id="modalEliminarCuenta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Estamos seguros que es por un buen motivo</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Pero aun asi, lamentamos que te vayas...
+      </div>
+      <div class="modal-footer">
+        <a href="{% url 'index'%}"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">¡Hasta Luego!</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin Modal -->
+
+{% endblock contenido %}

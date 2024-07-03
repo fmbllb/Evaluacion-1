@@ -1,20 +1,42 @@
 from django import forms
-from .models import Usuario, Perfil
+from aplicacion.models import Producto
+# from .models import Usuario, Perfil
 from .enumeraciones import *
 from django.contrib.auth.forms import UserCreationForm
 
 
-class PerfilForm(forms.ModelForm):
-    class Meta:
-        model = Perfil
-        fields = ['telefono', 'direccion']
 
 class UsuarioForm(UserCreationForm):
+    email = forms.EmailField(label="Correo electrónico", widget=forms.EmailInput(attrs={"id": 'email'}))
+    first_name = forms.CharField(label="Nombre", widget=forms.TextInput(attrs={"id": 'first_name'}))
+    last_name = forms.CharField(label="Apellido", widget=forms.TextInput(attrs={"id": 'last_name'}))
     username = forms.CharField(label="Nombre de usuario", widget=forms.TextInput(attrs={"id": 'username'}))
     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput(attrs={"id": 'password1'}))
     password2 = forms.CharField(label="Confirmar contraseña", widget=forms.PasswordInput(attrs={"id": 'password2'}))
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.email = self.cleaned_data['email']
+        if commit:
+            user.save()
+        return user
+    
+class ProductoForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = ['nombre', 'precio', 'descripcion', 'categoria_producto', 'foto']
 
-class UpdatePersonaForm(forms.ModelForm):
+class StuffForm(UserCreationForm):
+    username=forms.CharField(label="Nombre de usuario", widget=forms.TextInput(attrs={"id": 'username'}))
+    is_staff=forms.BooleanField(label="Es administrador", widget=forms.CheckboxInput(attrs={"id": 'is_staff'}))
+    password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput(attrs={"id": 'password1'}))
+    password2 = forms.CharField(label="Confirmar contraseña", widget=forms.PasswordInput(attrs={"id": 'password2'}))
+
+""" 
+class PerfilForm(forms.ModelForm):
+    class Meta:
+        model = Perfil
+        fields = ['telefono', 'direccion'] """
+""" class UpdatePersonaForm(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = ['rut', 'numero_casa_departamento', 'direccion']
@@ -25,4 +47,4 @@ class LoginForm(forms.ModelForm):
 
     class Meta:
         model = Usuario
-        fields = ['correo', 'contrasena']
+        fields = ['correo', 'contrasena'] """
