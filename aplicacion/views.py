@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
 #from .models import Usuario, Perfil
 from django.contrib.auth.decorators import login_required
-from .forms import ProductoForm
+from .forms import ProductoForm, EmailUpdateForm, UserUpdateForm
 
 # Create your views here.
 
@@ -31,6 +31,7 @@ def contacto(request):
 """ def perfil():
     return render() """
 
+@login_required
 def stuff(request):
     form = AuthenticationForm()
     if request.method == "POST":
@@ -77,6 +78,7 @@ def login2(request):
 
     return render(request, 'aplicacion/registration/login2.html', {'form': form})
 
+@login_required
 def cerrar_sesion(request):
     logout(request)
     return redirect(to='index')
@@ -113,6 +115,7 @@ def ajustescuenta(request, id):
             }
             return render(request, 'aplicacion/crud/ajustescuenta.html', datos)
 
+@login_required
 def vistausuario(request, id):
     usuario = get_object_or_404(User, id=id)
     context = {
@@ -123,6 +126,41 @@ def vistausuario(request, id):
 @login_required
 def datospersonales(request):
     return render(request, 'aplicacion/crud/datospersonales.html')
+
+@login_required
+def actualizar_correo(request):
+    if request.method == 'POST':
+        form = EmailUpdateForm(request.POST, instance=request.user, user=request.user)
+        if form.is_valid():
+            request.user.email = form.cleaned_data['email']
+            request.user.save()
+            messages.success(request, 'Correo actualizado exitosamente')
+            return redirect('datospersonales')  # Reemplaza con tu URL de redirección correcta
+        else:
+            messages.error(request, 'Error al actualizar correo')
+    else:
+        form = EmailUpdateForm(instance=request.user, user=request.user)
+    
+    return render(request, 'aplicacion/crud/actualizarcorreo.html', {
+        'form': form
+    })
+
+@login_required
+def actualizar_usuario(request):
+    if request.method == 'POST':
+        form = UserUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Usuario actualizado exitosamente')
+            return redirect('datospersonales')  # Reemplaza con tu URL de redirección correcta
+        else:
+            messages.error(request, 'Error al actualizar usuario. Por favor, corrija los errores.')
+    else:
+        form = UserUpdateForm(instance=request.user)
+    
+    return render(request, 'aplicacion/crud/actualizarusuario.html', {
+        'form': form
+    })
 
 def editarproducto(request):
     return render(request, 'aplicacion/editarproducto.html')

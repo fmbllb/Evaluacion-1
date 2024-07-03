@@ -10,7 +10,7 @@
         Datos de la cuenta
     </h3>
     <p>Se utilizan los datos solo para mejorar su experiencia de usuario.</p>
-</div>
+  </div>
 
 <div class="container border mb-3 ">
     <div class="p-3">
@@ -20,6 +20,9 @@
       <div class="mb-3 row g-3">
         <label for="nombreUsuario" class="form-label">{{user.username}}</label>
       </div>
+      <div class="mb-3">
+        <a href="{% url 'actualizarusuario' %}" class="btn btn-warning">Cambiar</a>
+      </div>
   </div>
     <div class="mb-3 p-3">
       {% if user.email %}
@@ -27,7 +30,12 @@
             Información de Contacto 
         </h5>
             <!-- Muestra el correo del usuario autenticado -->
+          <div class="mb-3">
             <label for="">{{ user.email }}</label>
+          </div>
+            <div class="mb-3">
+              <a href="{% url 'actualizarcorreo' %}" class="btn btn-warning">Cambiar</a>
+            </div>
         {% else %}
         <div>
           <h5>
@@ -45,7 +53,7 @@
           Número de Teléfono
       </h5>
       <div>
-        <a href={% url 'ajustescuenta' user.id %} class="btn btn-warning">Añadir telefono</a>
+        <a href="{% url 'ajustescuenta' user.id %}" class="btn btn-warning">Añadir telefono</a>
       </div>
   </div>
 </div>

@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
 from .enumeraciones import *
+from django.contrib.auth.models import User
 #from django.contrib.auth.models import User
 
 
@@ -26,6 +27,14 @@ class Boleta(models.Model):
     class Meta:
         verbose_name = _("Boleta")
         verbose_name_plural = _("Boletas")
+
+class Perfil(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    rut = models.CharField(_("RUT"), max_length=10, primary_key=True)
+    foto_perfil = models.ImageField(upload_to='fotos_perfil/', null=True, blank=True)
+
+    def __str__(self):
+        return f'Perfil de {self.user.username}'
 
 """class Perfil(models.Model):
     rut = models.CharField(_("RUT"), max_length=10, primary_key=True)
