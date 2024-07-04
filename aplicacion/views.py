@@ -36,6 +36,11 @@ def catalogo(request):
     return render(request, 'aplicacion/catalogo.html', datos)
 
 
+#Detalles de producto
+def detalle_producto(request, nombre_producto):
+    producto = get_object_or_404(Producto, nombre=nombre_producto)
+    return render(request, 'detalle_producto.html', {'producto': producto})
+
 def contacto(request):
     return render(request, 'aplicacion/contacto.html')
 #futuro formulario de perfil

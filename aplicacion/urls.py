@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (stuff, ajustescuenta,cerrar_sesion, index, login2, crearcuenta, registro, 
     administrador, listausuarios, localizacion, catalogo, producto, carrito, contacto, 
     datospersonales, vistausuario, seguipedido, modpedido, pedidosadmin, finanzas, stock, 
-    editarproducto, agregarproducto, guardado, actualizar_correo, actualizar_usuario)
+    editarproducto, agregarproducto, guardado, actualizar_correo, actualizar_usuario, detalle_producto)
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -11,6 +11,7 @@ urlpatterns = [
     path('agregarproducto/', agregarproducto, name='agregarproducto'),
     path('carrito/', carrito, name='carrito'),
     path('catalogo/', catalogo, name='catalogo'),
+    path('detalle_producto', detalle_producto, name='detalle_producto')
     path('contacto/', contacto, name='contacto'),
     path('crearcuenta/', crearcuenta, name='crearcuenta'),
     path('ajustescuenta/<id>', ajustescuenta, name='ajustescuenta'),

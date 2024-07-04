@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 
 
 class Producto(models.Model):
-    nombre = models.CharField(_("Nombre del producto"), max_length=50)
+    nombre = models.CharField(_("Nombre del producto"), max_length=50, unique=True)
     precio = models.IntegerField(_("Precio"), validators=[MinValueValidator(0)])
     descripcion = models.CharField(_("Descripción"), max_length=500)
     categoria_producto = models.CharField(_("Categoría"), max_length=2, choices=TIPO_PRODUCTO)
