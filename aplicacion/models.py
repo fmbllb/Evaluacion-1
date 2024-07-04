@@ -15,6 +15,11 @@ class Producto(models.Model):
     class Meta:
         verbose_name = _("Producto")
         verbose_name_plural = _("Productos")
+    
+
+def __str__(self):
+	return self.nombre
+
 
 class Boleta(models.Model):
     subtotal = models.IntegerField(_("Subtotal"), validators=[MinValueValidator(0)])

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import  AuthenticationForm
-from .forms import  UsuarioForm
+from .forms import *
 from os import remove, path
 from django.conf import settings
 from django.contrib.auth import logout, login
@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
 #from .models import Usuario, Perfil
 from django.contrib.auth.decorators import login_required
-from .forms import ProductoForm, EmailUpdateForm, UserUpdateForm
+from .models import *
 
 # Create your views here.
 
@@ -23,9 +23,17 @@ def carrito(request):
     return render(request, 'aplicacion/carrito.html')
 
 def catalogo(request):
-    context = {}
+    productos = Producto.objects.all()
 
-    return render(request, 'aplicacion/catalogo.html')
+    form = FiltroCategoriaForm(request.GET)
+    if form.is_valid():
+        categoria = form.cleaned_data.get('categoria')
+        if categoria:
+            productos = productos.filter(categoria_producto=categoria)
+
+    datos = {'productos': productos, 'form': form}
+
+    return render(request, 'aplicacion/catalogo.html', datos)
 
 def contacto(request):
     return render(request, 'aplicacion/contacto.html')

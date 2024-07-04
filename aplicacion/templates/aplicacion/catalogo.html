@@ -1,27 +1,26 @@
 {% extends "aplicacion/base.html" %}
-
 {% load static %}
-
 {% block contenido %}
 
+<form method="get" class="mb-4 mt-5">
+  {{ form }}
+  <button type="submit" class="btn btn-sm btn-primary rounded-0 ">Filtrar</button>
+  <a class="btn btn-sm btn-warning rounded-0" href="{% url 'catalogo' %}">Borrar Filtro</a>
+</form>
+
   <div class="row">
+    {% for producto in productos %}
     <div class="col-lg-4 mb-4">
-      
+      <img class="thumbnail" src={{producto.foto.url}}>
       <div class="box-element producto"></div>
+        <h6><strong>{{producto.nombre}}</strong></h6>
+        <hr>
+        <button class="btn btn-success add-btn rounded-0">Añadir a Carrito</button>
+        <a class="btn btn-secondary rounded-0" href="#">Detalles</a>
+        <h4 style="float: right;">${{producto.precio|floatformat:2}}</h4>   
     </div>
-
-    <div class="col-lg-4 mb-4">
-      
-      <div class="box-element producto"></div>
-    </div>
-
-    <div class="col-lg-4 mb-4">
-      
-      <div class="box-element producto"></div>
-    </div>
-
+    {% endfor %}
   </div>
-
 
 
 {% endblock contenido %}

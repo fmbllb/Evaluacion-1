@@ -21,10 +21,10 @@ class UsuarioForm(UserCreationForm):
             user.save()
         return user
     
-class ProductoForm(forms.ModelForm):
-    class Meta:
-        model = Producto
-        fields = ['nombre', 'precio', 'descripcion', 'categoria_producto', 'foto']
+
+class FiltroCategoriaForm(forms.Form):
+    categoria = forms.ChoiceField(choices=TIPO_PRODUCTO, required=False, label='Categoría')
+
 
 class StuffForm(UserCreationForm):
     username=forms.CharField(label="Nombre de usuario", widget=forms.TextInput(attrs={"id": 'username'}))

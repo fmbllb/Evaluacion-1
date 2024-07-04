@@ -4,8 +4,9 @@ TIPOS_CONTRATO = (
 )
 
 TIPO_PRODUCTO = (
-    ('1', 'Electronics'),
-    ('2', 'Clothing'),
+    ('1', 'Miniaturas'),
+    ('2', 'Pinturas'),
+    ('3', 'Accesorios'),    
     # Agrega más categorías según sea necesario
 )
 
