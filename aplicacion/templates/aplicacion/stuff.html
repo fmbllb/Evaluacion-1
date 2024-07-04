@@ -1,0 +1,19 @@
+{% extends "aplicacion/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block contenido %}
+
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <h1>Bienvenido, parte de WarPainte.es</h1>
+        <form action="POST">
+            {% csrf_token %}
+            {{form | crispy}}
+        </form>
+    </div>
+    <div class="col-sm-4"></div>
+</div>
+
+{% endblock contenido %}

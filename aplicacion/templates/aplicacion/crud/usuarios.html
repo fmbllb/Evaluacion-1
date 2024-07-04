@@ -1,0 +1,42 @@
+<!--Lstado y CRUD de todos los usuarios
+Se tiene acceso desde el boton Usuarios en la cuenta de admin.-->
+{% extends "crud/base.html" %}
+{% load static %}
+
+
+{% block contenido %}
+
+<div class="container px-5 mt-4">
+    <h3>Registro de Usuarios</h3>
+    <a href="{% url "crearpersona" %}" role="button">+ Agregar Persona</a>
+    <!--['rut','nombre','apellido','foto','fnacto','correo','sexo']-->
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>APELLIDO</th>
+                <th>E-MAIL</th>
+                <th>ACCIONES<th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in personas  %}
+            <tr>
+                <td><img src="{{p.foto.url}}" alt="foto" height="100"></td>
+                <td>{{p.id}}</td>
+                <td>{{p.nombre}}</td>
+                <td>{{p.apellido}}</td>
+                <td>{{p.correo}}</td>
+                <td><a href="{% url "detallepersona" p.rut %}" role="button" class="btn btn-info btn-sm text-light">Ver detalle</a></td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+
+
+</div>
+
+{% endblock contenido %}
