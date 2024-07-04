@@ -1,37 +1,41 @@
 {% extends "aplicacion/base.html" %}
-    
 
 {% block contenido %}
 {% load static %}
 
 <div class="container mt-5">
-    <div class="row">
-      <div class="col-md-8">
-        <h2 style="font-size:150%"><strong>Carrito de Compras</strong></h2>
-        <div class="d-flex border align-items-center mt-3 text-wrap">
-          <img src="{%static 'img/mini.jpg' %}" class="img-fluid me-3" alt="Imagen del carrito" width="20%">
-          <div>
-            <p>Soldado Lobos Lunares</p>
-            <p id="precioProducto" class="fw-bold">$6.500</p>
-          </div> 
-          <div class="input-group ms-5 p-3" style="width: auto; min-width: 110px;">
-            <button class="btn btn-outline-secondary  rounded-0" type="button" id="decrement">-</button>
-            <input type="number" value="1" min="1" max="10" class="form-control text-center" id="qtyInput">
-            <button class="btn btn-outline-secondary rounded-0" type="button" id="increment">+</button>
-            <p class="fw-bold ms-3 d-block mt-2" style="font-size: x-large;" id="totalValue">$6.500</p>
-          </div>
+  <div class="row">
+    <div class="col-md-8">
+      <h2 style="font-size:150%"><strong>Carrito de Compras</strong></h2>
+      {% for item in carrito.items.all %}
+      <div class="d-flex border align-items-center mt-3 text-wrap">
+        {% if item.producto.foto %}
+        <img src="{{ item.producto.foto.url }}" class="img-fluid me-3" alt="Imagen del producto" width="20%">
+        {% else %}
+        <img src="{% static 'img/default-product-image.jpg' %}" class="img-fluid me-3" alt="Imagen por defecto" width="20%">
+        {% endif %}
+        <div>
+          <p>{{ item.producto.nombre }}</p>
+          <p id="precioProducto" class="fw-bold">${{ item.producto.precio }}</p>
+        </div> 
+        <div class="input-group ms-5 p-3" style="width: auto; min-width: 110px;">
+          <button class="btn btn-outline-secondary  rounded-0 decrement" type="button" data-item="{{ item.id }}">-</button>
+          <input type="number" value="{{ item.cantidad }}" min="1" max="10" class="form-control text-center qtyInput" data-item="{{ item.id }}">
+          <button class="btn btn-outline-secondary rounded-0 increment" type="button" data-item="{{ item.id }}">+</button>
+          <p class="fw-bold ms-3 d-block mt-2" style="font-size: x-large;" id="totalValue">$ {{ item.total }}</p>
         </div>
-        <br>
-        <a href="{% url 'index' %}" class="btn btn-warning rounded-0 mt-4 float-start">Continuar comprando</a>
       </div>
+      <br>
+      {% endfor %}
+      <a href="{% url 'index' %}" class="btn btn-warning rounded-0 mt-4 float-start">Continuar comprando</a>
+    </div>
     <div class="col-md-4 d-flex flex-column align-items-center">
 
       <!-- Resumen de objetos en el carrito -->
       <div class="card mt-5 mb-3 rounded-0 overflow-hidden p-4">
-        <ul class="list-group list-group-flush"><div class="input-group">
-        </div>
-          <li class="list-group-item" id="ctdTotalProductos">1 artículo(s) - $ 6.500
-          <li class="list-group-item" id="totalConImpuestos">Total (impuestos inc.) - $ 9.000</li>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Artículo(s) en el carrito: {{ carrito.items.count }}</li>
+          <li class="list-group-item">Total: $ {{ carrito.total }}</li>
         </ul>
         <button class="btn btn-link text-start" type="button" data-bs-toggle="collapse" data-bs-target="#cuponCollapse">
           ¿Tienes un cupón de descuento?
@@ -60,7 +64,7 @@
                   Su pago fue realizado con éxito.
                 </div>
                 <div class="modal-footer">
-                  <a href="{% url 'index'%}" class="btn btn-secondary" data-bs-dismiss="modal" value="SUBMIT">OK</a>
+                  <a href="{% url 'index'%}" class="btn btn-secondary" data-bs-dismiss="modal">OK</a>
                 </div>
               </div>
             </div>
@@ -77,13 +81,13 @@
           <ul class="dropdown-menu rounded-0" aria-labelledby="paymentDropdown">
             <li>
               <a class="dropdown-item" href="#">
-                <img src="static/img/webpay.jpg" alt="Medio de pago 1" class="payment-icon" width="50%">
+                <img src="{% static 'img/webpay.jpg' %}" alt="Medio de pago 1" class="payment-icon" width="50%">
                 WebPay
               </a>
             </li>
             <li>
               <a class="dropdown-item" href="#">
-                <img src="static/img/paypal.png" alt="Medio de pago 2" class="payment-icon" width="50%">
+                <img src="{% static 'img/paypal.png' %}" alt="Medio de pago 2" class="payment-icon" width="50%">
                 PayPal
               </a>
             </li>
@@ -91,7 +95,7 @@
         </div>
       </div>
 
-      <!--Seleccion entrega o retiro-->
+      <!--Selección entrega o retiro-->
       <div class="card mt-3 mb-5 p-2">
         <div class="form-check text-start">
           <input class="form-check-input" type="radio" name="exampleRadios" value="option1" checked>
@@ -106,8 +110,67 @@
           </label>
         </div>
       </div>
+
+    </div>
+  </div>
+  <div class="row mb-3">
+    <h2>OFERTAS DISPONIBLES</h2>
+  </div>
+  <div class="row">
+    <div class="row">
+      {% for producto in productos %}
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          {% if producto.foto %}
+          <img src="{{ producto.foto.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+          {% else %}
+          <img src="{% static 'img/default-product.jpg' %}" class="card-img-top" alt="Producto sin imagen">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ producto.nombre }}</h5>
+            <p class="card-text">{{ producto.descripcion }}</p>
+            <p class="card-text fw-bold">$ {{ producto.precio }}</p>
+            <a href="{% url 'agregar_producto_carrito' producto.id %}" class="btn btn-primary">Agregar al Carrito</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const incrementButtons = document.querySelectorAll(".increment");
+    const decrementButtons = document.querySelectorAll(".decrement");
+    const qtyInputs = document.querySelectorAll(".qtyInput");
+
+    incrementButtons.forEach(btn => {
+      btn.addEventListener("click", function() {
+        const itemId = this.getAttribute("data-item");
+        const input = document.querySelector(`.qtyInput[data-item="${itemId}"]`);
+        input.stepUp();
+      });
+    });
+
+    decrementButtons.forEach(btn => {
+      btn.addEventListener("click", function() {
+        const itemId = this.getAttribute("data-item");
+        const input = document.querySelector(`.qtyInput[data-item="${itemId}"]`);
+        if (parseInt(input.value) > parseInt(input.min)) {
+          input.stepDown();
+        }
+      });
+    });
+
+    qtyInputs.forEach(input => {
+      input.addEventListener("change", function() {
+        const itemId = this.getAttribute("data-item");
+        const input = document.querySelector(`.qtyInput[data-item="${itemId}"]`);
+        
+      });
+    });
+  });
+</script>
 
 {% endblock contenido %}

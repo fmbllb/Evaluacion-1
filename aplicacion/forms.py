@@ -2,6 +2,7 @@ from django import forms
 from aplicacion.models import Producto
 # from .models import Usuario, Perfil
 from .enumeraciones import *
+from .models import ItemCarrito
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -74,20 +75,16 @@ class UserUpdateForm(forms.ModelForm):
         if commit:
             user.save()
         return user
-""" 
-class PerfilForm(forms.ModelForm):
-    class Meta:
-        model = Perfil
-        fields = ['telefono', 'direccion'] """
-""" class UpdatePersonaForm(forms.ModelForm):
-    class Meta:
-        model = Usuario
-        fields = ['rut', 'numero_casa_departamento', 'direccion']
 
-class LoginForm(forms.ModelForm):
-    correo = forms.EmailField(label="Correo")
-    contrasena = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
+from django import forms
+from .models import ItemCarrito
 
+class AgregarAlCarritoForm(forms.ModelForm):
     class Meta:
-        model = Usuario
-        fields = ['correo', 'contrasena'] """
+        model = ItemCarrito
+        fields = ['cantidad']
+        labels = {'cantidad': 'Cantidad'}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['cantidad'].widget.attrs['min'] = 1

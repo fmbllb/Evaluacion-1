@@ -8,7 +8,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('administrador/', administrador, name='administrador'),
-    path('agregarproducto/', agregarproducto, name='agregarproducto'),
+    path('agregarproducto/<product_id>/', agregarproducto, name='agregarproducto'),
     path('carrito/', carrito, name='carrito'),
     path('catalogo/', catalogo, name='catalogo'),
     path('contacto/', contacto, name='contacto'),
@@ -34,6 +34,7 @@ urlpatterns = [
     path('stuff/', stuff, name='stuff'),
     path('actualizarcorreo/', actualizar_correo, name='actualizarcorreo'),
     path('actualizarusuario/', actualizar_usuario, name='actualizarusuario'),
+    # path('actualizartelefono/', actualizar_telefono, name='actualizartelefono'),
 ]
 
 if settings.DEBUG:

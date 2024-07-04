@@ -3,6 +3,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
 from .enumeraciones import *
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 #from django.contrib.auth.models import User
 
 
@@ -28,33 +30,25 @@ class Boleta(models.Model):
         verbose_name = _("Boleta")
         verbose_name_plural = _("Boletas")
 
-class Perfil(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    rut = models.CharField(_("RUT"), max_length=10, primary_key=True)
-    foto_perfil = models.ImageField(upload_to='fotos_perfil/', null=True, blank=True)
+
+class Carrito(models.Model):
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'Perfil de {self.user.username}'
+        return f"Carrito de {self.usuario.username}"
 
-"""class Perfil(models.Model):
-    rut = models.CharField(_("RUT"), max_length=10, primary_key=True)
-    direccion = models.CharField(_("Dirección"), max_length=50)
-    telefono = models.CharField(_("Teléfono"), max_length=9)
-    """
+@receiver(post_save, sender=User)
+def crear_carrito_para_usuario(sender, instance, created, **kwargs):
+    if created:
+        Carrito.objects.create(usuario=instance)
 
-""" class Perfil(models.Model):
-        usuario = models.OneToOneField(User, related_name='usuario', on_delete=models.CASCADE) 
-        telefono=models.CharField(max_length=9, null=True)
-        direccion=models.CharField(max_length=500, null=False)
-
-
-class Usuario(models.Model):
-    rut = models.CharField(_("RUT"), max_length=10, primary_key=True)
-    nombre = models.CharField(_("Nombre"), max_length=16)
-    apellido = models.CharField(_("Apellido"), max_length=16)
-    correo = models.EmailField(_("Correo electrónico"), max_length=50, unique=True)
-    numero_casa_departamento = models.IntegerField(_("Número de Casa"))
-    direccion = models.CharField(_("Dirección"), max_length=50)
+class ItemCarrito(models.Model):
+    carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE, related_name='items')
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return f"{self.rut} - {self.nombre} {self.apellido}" """
+        return f"{self.cantidad} x {self.producto.nombre} en el carrito de {self.carrito.usuario.username}"
+
+    def total(self):
+        return self.cantidad * self.producto.precio
