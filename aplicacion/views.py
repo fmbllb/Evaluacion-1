@@ -35,6 +35,7 @@ def catalogo(request):
 
     return render(request, 'aplicacion/catalogo.html', datos)
 
+
 def contacto(request):
     return render(request, 'aplicacion/contacto.html')
 #futuro formulario de perfil

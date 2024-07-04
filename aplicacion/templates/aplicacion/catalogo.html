@@ -2,25 +2,35 @@
 {% load static %}
 {% block contenido %}
 
-<form method="get" class="mb-4 mt-5">
-  {{ form }}
-  <button type="submit" class="btn btn-sm btn-primary rounded-0 ">Filtrar</button>
-  <a class="btn btn-sm btn-warning rounded-0" href="{% url 'catalogo' %}">Borrar Filtro</a>
-</form>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-3 mb-4">
+            <!-- Filtro-->
+             <h5>Filtrar por:</h5>
+            <form method="get" class="mb-4 mt-2">
+                {{ form }}
+                <button type="submit" class="btn btn-sm btn-primary rounded-0 mt-2">Filtrar</button>
+                <a class="btn btn-sm btn-warning rounded-0 mt-2" href="{% url 'catalogo' %}">Borrar Filtro</a>
+            </form>
+        </div>
 
-  <div class="row">
-    {% for producto in productos %}
-    <div class="col-lg-4 mb-4">
-      <img class="thumbnail" src={{producto.foto.url}}>
-      <div class="box-element producto"></div>
-        <h6><strong>{{producto.nombre}}</strong></h6>
-        <hr>
-        <button class="btn btn-success add-btn rounded-0">Añadir a Carrito</button>
-        <a class="btn btn-secondary rounded-0" href="#">Detalles</a>
-        <h4 style="float: right;">${{producto.precio|floatformat:2}}</h4>   
+        <!-- Catalogo -->
+        <div class="col-lg-9">
+            <div class="row">
+                {% for producto in productos %}
+                <div class="col-lg-3 mb-4">
+                    <a href="#"><img class="thumbnail" src="{{ producto.foto.url }}" alt="{{ producto.nombre }}" ></a>
+                    <div class="box-element producto"></div>
+                    <h6><strong>{{ producto.nombre }}</strong></h6>
+                    <hr>
+                    <div class="text-center">
+                        <h4 class="mt-2 mx-5" style="float: bottom;">${{ producto.precio|floatformat:2 }}</h4>
+                        <button class="btn mt-1 btn-success add-btn rounded-0">Añadir a Carrito</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-    {% endfor %}
-  </div>
-
-
+</div>
 {% endblock contenido %}
