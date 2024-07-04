@@ -8,7 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href='{% static "css/bootstrap.min.css" %}' rel='stylesheet'>
   <link href='{% static "css/index.css" %}' rel='stylesheet'>
-  <link href='{% static "css/style.css" %}' rel='stylesheet'>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <title>WarPainter</title>
 
@@ -92,9 +91,16 @@
                 </div>
         {% endif %}
     {% endif %}
+    
+<div class="container">
+    <br>
     {% block contenido %}
     
+
+
     {% endblock contenido %}
+</div>
+
   </main>
 
   <!--Footer-->

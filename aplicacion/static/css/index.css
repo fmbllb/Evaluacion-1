@@ -9,6 +9,7 @@
     display: flex;
     justify-content: center;
   }
+
 .centrado-filtro{
     justify-content: space-between;
     align-content: space-evenly;
@@ -16,14 +17,6 @@
     margin-top: 200px;
     margin-left: 200px;
     
-}
-
-.centrado-catalogo{
-    justify-content: space-between;
-    align-content: space-evenly;
-    text-align: start;
-    margin-top: 50px;
-    margin-left: 200px;
 }
 
 .off-canvas-img {
@@ -65,4 +58,25 @@
     .img-wrapper{
         height: 23vw;
     }
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+.box-element {
+    box-shadow: 0 4px 8px hsl(0, 0%, 80%);
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.producto {
+    border-radius: 0 0 4px 4px;
 }

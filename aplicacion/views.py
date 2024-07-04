@@ -23,6 +23,8 @@ def carrito(request):
     return render(request, 'aplicacion/carrito.html')
 
 def catalogo(request):
+    context = {}
+
     return render(request, 'aplicacion/catalogo.html')
 
 def contacto(request):
