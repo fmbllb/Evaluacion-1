@@ -1,4 +1,5 @@
 aplicacion/__pycache__/
 ventaminis/__pycache__/
 entorno/
+migrations/__pycache__/
 db.sqlite3/
