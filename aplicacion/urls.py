@@ -12,6 +12,7 @@ urlpatterns = [
     path('agregarproducto/', agregarproducto, name='agregarproducto'),
     path('carrito/', carrito, name='carrito'),
     path('catalogo/', catalogo, name='catalogo'),
+    path('detalle_producto/<str:nombre_producto>/', detalle_producto, name='detalle_producto'),
     path('contacto/', contacto, name='contacto'),
     path('crearcuenta/', crearcuenta, name='crearcuenta'),
     path('ajustescuenta/<id>', ajustescuenta, name='ajustescuenta'),
@@ -41,6 +42,7 @@ urlpatterns = [
     path('actualizartelefono/', actualizar_telefono, name='actualizartelefono'),
     path('eliminar_cuenta/', eliminar_cuenta, name='eliminar_cuenta'),
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

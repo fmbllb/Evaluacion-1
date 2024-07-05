@@ -23,10 +23,25 @@ class UsuarioForm(UserCreationForm):
             user.save()
         return user
     
-class ProductoForm(forms.ModelForm):
+
+class FiltroCategoriaForm(forms.Form):
+    categoria = forms.ChoiceField(choices=TIPO_PRODUCTO, required=False, label='Categoría')
+    
+    def __init__(self, *args, **kwargs):
+        super(FiltroCategoriaForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'get'
+        self.helper.add_input(Submit('submit', 'Filtrar'))
+
+
+class DescripcionForm(forms.ModelForm):
     class Meta:
         model = Producto
-        fields = ['nombre', 'precio', 'descripcion', 'categoria_producto', 'foto']
+        fields = '__all__'
+        widgets = {
+            'descripcion': forms.Textarea(attrs={'rows': 10, 'cols': 80}),
+        }
+
 
 class StuffForm(UserCreationForm):
     username=forms.CharField(label="Nombre de usuario", widget=forms.TextInput(attrs={"id": 'username'}))
@@ -79,7 +94,3 @@ class UserUpdateForm(forms.ModelForm):
         return user
 
 #Clase para actualizar el teléfono
-
-
-
-

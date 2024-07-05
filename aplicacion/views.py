@@ -97,7 +97,26 @@ def detalle_producto(request, producto_id):
     return render(request, 'aplicacion/detalleproducto.html', context)
 
 def catalogo(request):
-    return render(request, 'aplicacion/catalogo.html')
+    productos = Producto.objects.all()
+
+    form = FiltroCategoriaForm(request.GET)
+    if form.is_valid():
+        categoria = form.cleaned_data.get('categoria')
+        if categoria:
+            productos = productos.filter(categoria_producto=categoria)
+
+    datos = {'productos': productos, 'form': form}
+
+    return render(request, 'aplicacion/catalogo.html', datos)
+
+
+#Detalles de producto
+def detalle_producto(request, nombre_producto):
+
+    producto = get_object_or_404(Producto, nombre=nombre_producto)
+    return render(request, 'aplicacion/detalle_producto.html', {'producto': producto})
+
+
 
 
 
@@ -252,8 +271,20 @@ def finanzas(request):
 def guardado(request):
     return render(request, 'aplicacion/guardado.html')
 
+#Index
 def index(request):
-    return render(request, 'aplicacion/index.html')
+    categorias = dict(TIPO_PRODUCTO)
+    productos_por_categoria = {}
+
+    # Agrupar productos por categoría
+    for key, label in TIPO_PRODUCTO:
+        productos_por_categoria[label] = Producto.objects.filter(categoria_producto=key)
+
+    datos = {
+        'categorias': categorias,
+        'productos_por_categoria': productos_por_categoria
+    }
+    return render(request, 'aplicacion/index.html', datos)
 
 def listausuarios(request):
     return render(request, 'aplicacion/listausuarios.html')
