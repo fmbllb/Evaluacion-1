@@ -47,6 +47,7 @@
         <div class="mb-3 p-3">
             <!-- Aquí puedes mostrar el teléfono si está registrado o permitir agregarlo -->
             {% if user.perfil.telefono %}
+                <h5>Teléfono</h5>
                 <div class="mb-3">
                     <label>{{ user.perfil.telefono }}</label>
                 </div>
@@ -60,6 +61,24 @@
                 </div>
                 <div>
                     <a href="{% url 'actualizartelefono' %}" class="btn btn-warning">Actualizar Teléfono</a>
+                </div>
+            {% endif %}
+
+            {% if user.perfil.direccion %}
+                <h5>Direccion</h5>
+                <div class="mb-3">
+                    <label>{{ user.perfil.direccion }}</label>
+                </div>
+                <div class="mb-3">
+                    <a href="{% url 'actualizardireccion' %}" class="btn btn-warning">Cambiar</a>
+                </div>
+            {% else %}
+                <h5>Direccion (El Perfil no está completo)</h5>
+                <div class="mb-3">
+                    <label>{{ user.perfil.direccion }}</label>
+                </div>
+                <div class="mb-3">
+                    <a href="{% url 'actualizardireccion' %}" class="btn btn-warning">Cambiar</a>
                 </div>
             {% endif %}
         </div>
