@@ -18,9 +18,13 @@ class Producto(models.Model):
         verbose_name = _("Producto")
         verbose_name_plural = _("Productos")
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 =======
     
+>>>>>>> Stashed changes
+=======
+        
 >>>>>>> Stashed changes
     def __str__(self):
         return self.nombre
