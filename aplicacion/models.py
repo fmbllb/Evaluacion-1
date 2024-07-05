@@ -8,9 +8,9 @@ from django.dispatch import receiver
 #from django.contrib.auth.models import User
 
 class Producto(models.Model):
-    nombre = models.CharField(_("Nombre del producto"), max_length=50)
+    nombre = models.CharField(_("Nombre del producto"), max_length=50, unique=True)
     precio = models.IntegerField(_("Precio"), validators=[MinValueValidator(0)])
-    descripcion = models.CharField(_("Descripción"), max_length=200)
+    descripcion = models.CharField(_("Descripción"), max_length=2000)
     categoria_producto = models.CharField(_("Categoría"), max_length=2, choices=TIPO_PRODUCTO)
     foto = models.ImageField(_("Foto"), upload_to='productos', null=True, blank=True)
 
@@ -19,7 +19,10 @@ class Producto(models.Model):
         verbose_name_plural = _("Productos")
 
     def __str__(self):
-        return self.nombre
+	    return self.nombre
+
+
+
 
 class Boleta(models.Model):
     subtotal = models.IntegerField(_("Subtotal"), validators=[MinValueValidator(0)])
