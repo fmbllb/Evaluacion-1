@@ -47,6 +47,10 @@ def agregar_producto_carrito(request, producto_id):
 
     return render(request, 'aplicacion/carrito.html', context)
 
+
+def historial_compras(request):
+    return render(request, 'aplicacion/seguipedido.html')
+
 @login_required
 def actualizar_telefono(request):
     perfil, creado = Perfil.objects.get_or_create(usuario=request.user)
