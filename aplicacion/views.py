@@ -47,8 +47,36 @@ def agregar_producto_carrito(request, producto_id):
 
     return render(request, 'aplicacion/carrito.html', context)
 
+@login_required
 def actualizar_telefono(request):
-    return render(request, 'aplicacion/crud/actualizartelefono.html')
+    perfil, creado = Perfil.objects.get_or_create(usuario=request.user)
+
+    if request.method == 'POST':
+        form = PhoneUpdateForm(request.POST, instance=perfil, user=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Tu teléfono ha sido actualizado correctamente.')
+            return redirect('datospersonales')  # Reemplaza 'perfil' con el nombre de tu vista de perfil
+    else:
+        form = PhoneUpdateForm(instance=perfil, user=request.user)
+
+    return render(request, 'aplicacion/crud/actualizartelefono.html', {'form': form})
+
+@login_required
+def actualizar_direccion(request):
+    if request.method == 'POST':
+        form = DirectionUpdateForm(request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Dirección actualizada correctamente.')
+            return redirect('perfil')  # Cambia 'perfil' por el nombre de la vista de perfil
+    else:
+        form = DirectionUpdateForm(user=request.user)
+
+    context = {
+        'form': form
+    }
+    return render(request, 'aplicacion/crud/actualizardireccion.html', context)
 
 @login_required
 def eliminar_producto_carrito(request, item_id):

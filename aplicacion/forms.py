@@ -1,5 +1,5 @@
 from django import forms
-from .models import Producto
+from .models import *
 # from .models import Usuario, Perfil
 from .enumeraciones import *
 from django.contrib.auth.models import User
@@ -95,7 +95,51 @@ class UserUpdateForm(forms.ModelForm):
         return user
 
 #Clase para actualizar el teléfono
+class PhoneUpdateForm(forms.ModelForm):
+    password = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
 
+    class Meta:
+        model = Perfil  # Asegúrate de que el modelo sea tu modelo de Perfil
+        fields = ['telefono']  # Campos que quieres actualizar en el perfil
 
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
 
+    def clean_password(self):
+        password = self.cleaned_data.get('password')
+        if not self.user.check_password(password):
+            raise forms.ValidationError('La contraseña no es válida.')
+        return password
 
+    def save(self, commit=True):
+        perfil = super().save(commit=False)
+        perfil.usuario = self.user  # Asignar el usuario al perfil
+        if commit:
+            perfil.save()
+        return perfil
+    
+#Clase para actualizar la direccion
+class DirectionUpdateForm(forms.ModelForm):
+    password = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
+
+    class Meta:
+        model = Perfil  # Asegúrate de que el modelo sea tu modelo de Perfil
+        fields = ['direccion']  # Campos que quieres actualizar en el perfil
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+
+    def clean_password(self):
+        password = self.cleaned_data.get('password')
+        if not self.user.check_password(password):
+            raise forms.ValidationError('La contraseña no es válida.')
+        return password
+
+    def save(self, commit=True):
+        perfil = super().save(commit=False)
+        perfil.usuario = self.user  # Asignar el usuario al perfil
+        if commit:
+            perfil.save()
+        return perfil
