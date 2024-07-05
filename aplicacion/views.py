@@ -13,6 +13,7 @@ from .enumeraciones import TIPO_PRODUCTO
 
 # Create your views here.
 
+@login_required
 def administrador(request):
     return render(request, 'aplicacion/administrador.html')
 

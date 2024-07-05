@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .views import (stuff, ajustescuenta,cerrar_sesion, index, login2, crearcuenta, registro, 
     administrador, listausuarios, localizacion, catalogo, agregar_producto_carrito, carrito, contacto, 
     datospersonales, vistausuario, seguipedido, modpedido, pedidosadmin, finanzas, stock, 
@@ -21,6 +21,7 @@ urlpatterns = [
     path('finanzas/', finanzas, name='finanzas'),
     path('guardado/', guardado, name='guardado'),
     path('', index, name='index'),
+    path('', include('django.contrib.auth.urls')),
     path('productosadmin/', productosadmin, name='productosadmin'),
     path('listausuarios/', listausuarios, name='listausuarios'),
     path('localizacion/', localizacion, name='localizacion'),
