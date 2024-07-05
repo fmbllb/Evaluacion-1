@@ -171,3 +171,17 @@ input[type=number] {
 .product-card {
     padding: 1rem; /* Ajusta el padding del contenedor de producto */
 }
+
+.img-thumbnail {
+    display: block;
+    margin: 0 auto;
+    max-width: 200px;
+}
+
+textarea {
+    resize: none;
+}
+
+.form-control-file {
+    width: 100%;
+}

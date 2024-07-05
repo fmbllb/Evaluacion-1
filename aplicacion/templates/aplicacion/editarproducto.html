@@ -1,30 +1,69 @@
 {% extends "aplicacion/base.html" %}
-    
-
+{%load static%}  
+{% load crispy_forms_tags %}
 {% block contenido %}
-{%load static%}
 
-<div class="row">
-  {% for producto in productos %}
-  <div class="col-md-4 mb-4">
-      <div class="card">
+<div class="container mt-5">
+  <div class="card p-4">
+      <h2 class="mb-4">Editar Producto: {{ producto.nombre }}</h2>
+      <form method="post" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
+          {% for field in form %}
+              {% if field.name == 'descripcion' %}
+                  <div class="mb-3">
+                      {{ field.label_tag }}
+                      {{ field }}
+                  </div>
+              {% else %}
+                  <div class="mb-3">
+                      {{ field.label_tag }}
+                      <div>
+                        {{ field }}
+                      </div>
+                      {% if field.errors %}
+                          <div class="invalid-feedback" style="display: block;">
+                              {% for error in field.errors %}
+                                  <p>{{ error }}</p>
+                              {% endfor %}
+                          </div>
+                      {% endif %}
+                  </div>
+              {% endif %}
+          {% endfor %}
           {% if producto.foto %}
-          <img src="{{ producto.foto.url }}" class="card-img-top" alt="{{ producto.nombre }}">
-          {% else %}
-          <img src="{% static 'img/default-product.jpg' %}" class="card-img-top" alt="Producto sin imagen">
+              <div class="mb-3">
+                  <label>Imagen Actual:</label><br>
+                  <img src="{{ producto.foto.url }}" alt="{{ producto.nombre }}" class="img-thumbnail" style="max-width: 200px;">
+              </div>
           {% endif %}
-          <div class="card-body">
-              <h5 class="card-title">{{ producto.nombre }}</h5>
-              <p class="card-text">{{ producto.descripcion }}</p>
-              <p class="card-text fw-bold">$ {{ producto.precio }}</p>
-              <form method="post" action="{% url 'agregar_producto_carrito' producto.id %}">
-                  {% csrf_token %}
-                  <button type="submit" class="btn btn-primary">Agregar al Carrito</button>
-              </form>
-              <a href="{% url 'carrito' %}" class="btn btn-secondary">Ver Detalles</a>
+          <div class="d-flex justify-content-between mt-3">
+              <!-- Botón de Eliminar Producto con Bootstrap 5 -->
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDelete">Eliminar Producto</button>
+              <div>
+                  <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                  <a href="{% url 'productosadmin' %}" class="btn btn-secondary">Cancelar</a>
+              </div>
+          </div>
+      </form>
+  </div>
+</div>
+
+<!-- Modal de Confirmación de Eliminación con Bootstrap 5 -->
+<div class="modal fade" id="confirmDelete" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="confirmDeleteLabel">Confirmar Eliminación</h5>
+          </div>
+          <div class="modal-body">
+              ¿Estás seguro de que deseas eliminar este producto?
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <a href="{% url 'eliminar_producto' producto.nombre %}" class="btn btn-danger">Eliminar</a>
           </div>
       </div>
   </div>
-  {% endfor %}
 </div>
+
 {% endblock contenido %}

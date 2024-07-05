@@ -12,6 +12,7 @@
                     <h5 class="card-title">Filtrar por:</h5>
                     {% crispy form %}
                     <a class="btn btn-warning mt-2" href="{% url 'productosadmin' %}">Borrar Filtro</a>
+                    <a href="{% url 'agregar_producto' %}" class="btn btn-success mt-4">Agregar Nuevo Producto</a>
                 </div>
             </div>
         </div>
@@ -29,7 +30,7 @@
                     <hr>
                     <div class="text-center">
                         <h4 class="mt-2">${{ producto.precio|floatformat:2 }}</h4>
-                        <a class="btn btn-secondary mt-2" href="{% url 'editarproducto' %}">Editar Producto</a>
+                        <a class="btn btn-secondary mt-2" href="{% url 'editarproducto' producto.nombre  %}">Editar Producto</a>
                     </div>
                 </div>
                 {% endfor %}

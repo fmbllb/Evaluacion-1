@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from django.core.exceptions import ValidationError
 # from .models import Usuario, Perfil
 from .enumeraciones import *
 from django.contrib.auth.models import User
@@ -7,6 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout , Submit , Div ,Field ,HTML
+from aplicacion import static
 
 
 
@@ -145,7 +147,67 @@ class DirectionUpdateForm(forms.ModelForm):
         return perfil
     
 class EditarProductoForm(forms.ModelForm):
-        class Meta:
-            model = Producto
-            fields = ['nombre', 'precio', 'descripcion', 'foto']  # ajusta los campos según tu modelo Producto
-            # opcionalmente, puedes personalizar widgets o validaciones aquí
+    class Meta:
+        model = Producto
+        fields = ['nombre', 'precio', 'descripcion', 'categoria_producto', 'foto']
+        labels = {
+            'nombre': 'Nombre del producto',
+            'precio': 'Precio',
+            'descripcion': 'Descripción',
+            'categoria_producto': 'Categoría',
+            'foto': 'Foto del producto'
+        }
+        widgets = {
+            'nombre': forms.Textarea(attrs={'rows': 1, 'cols': 30}),
+            'descripcion': forms.Textarea(attrs={'rows': 10, 'cols': 110}),
+            'foto': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(EditarProductoForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.layout = Layout(
+            Field('nombre', css_class='form-control mb-3'),
+            Field('precio', css_class='form-control mb-3'),
+            Div(
+                'descripcion',
+                css_class='mb-3'
+            ),
+            Field('categoria_producto', css_class='form-control mb-3'),
+            Field('foto', css_class='form-control mb-3'),
+            Div(
+                Submit('submit', 'Guardar Cambios', css_class='btn btn-primary mr-2'),
+                HTML('<a href="{% url \'productosadmin\' %}" class="btn btn-secondary mr-2">Cancelar</a>'),
+                css_class='d-flex justify-content-between mt-3'
+            ),
+        )
+
+    def clean_precio(self):
+        precio = self.cleaned_data.get('precio')
+        if precio is None:
+            raise ValidationError('Este campo es obligatorio.')
+        if precio < 0:
+            raise ValidationError('El precio no puede ser negativo.')
+        return precio
+
+    def clean(self):
+        cleaned_data = super().clean()
+        nombre = cleaned_data.get("nombre")
+        descripcion = cleaned_data.get("descripcion")
+        categoria_producto = cleaned_data.get("categoria_producto")
+
+        if not nombre:
+            self.add_error('nombre', 'Este campo es obligatorio.')
+        if not descripcion:
+            self.add_error('descripcion', 'Este campo es obligatorio.')
+        if not categoria_producto:
+            self.add_error('categoria_producto', 'Este campo es obligatorio.')
+
+        return cleaned_data
+    
+
+class AgregarProductoForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = ['nombre', 'precio', 'descripcion', 'categoria_producto', 'foto']

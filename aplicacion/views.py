@@ -21,8 +21,16 @@ def administrador(request):
 
 #VISTAS DEL PRODUCTO
 @login_required
-def agregarproducto(request):
-    return render(request, 'aplicacion/agregarproducto.html')
+def agregar_producto(request):
+    if request.method == 'POST':
+        form = AgregarProductoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('productosadmin')  # Redirige a la lista de productos administrativos
+    else:
+        form = AgregarProductoForm()
+
+    return render(request, 'aplicacion/agregar_producto.html', {'form': form})
 
 @login_required
 def agregar_producto_carrito(request, producto_id):
@@ -291,14 +299,14 @@ def editarproducto(request, nombre_producto):
     producto = get_object_or_404(Producto, nombre=nombre_producto)
     
     if request.method == 'POST':
-        form = EditarProductoForm(request.POST, instance=producto)
+        form = EditarProductoForm(request.POST, request.FILES, instance=producto)
         if form.is_valid():
             form.save()
             return redirect('productosadmin')  # redirige de vuelta a la lista de productos administrativos
     else:
         form = EditarProductoForm(instance=producto)
     
-    return render(request, 'editarproducto.html', {'form': form, 'producto': producto})
+    return render(request, 'aplicacion/editarproducto.html', {'form': form, 'producto': producto})
 
 def finanzas(request):
     return render(request, 'aplicacion/finanzas.html')
@@ -354,4 +362,10 @@ def registro(request):
 
 def stock(request):
     return render(request, 'aplicacion/stock.html')
+
+#Eliminar producto
+def eliminar_producto(request, nombre_producto):
+    producto = get_object_or_404(Producto, nombre=nombre_producto)
+    producto.delete()
+    return redirect('productosadmin')
 
