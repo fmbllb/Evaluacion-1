@@ -8,6 +8,7 @@ from django import forms
 
 
 
+
 class UsuarioForm(UserCreationForm):
     email = forms.EmailField(label="Correo electrónico", widget=forms.EmailInput(attrs={"id": 'email'}))
     first_name = forms.CharField(label="Nombre", widget=forms.TextInput(attrs={"id": 'first_name'}))
@@ -33,6 +34,7 @@ class StuffForm(UserCreationForm):
     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput(attrs={"id": 'password1'}))
     password2 = forms.CharField(label="Confirmar contraseña", widget=forms.PasswordInput(attrs={"id": 'password2'}))
 
+#Clase para actualizar el correo electrónico
 class EmailUpdateForm(forms.ModelForm):
     password = forms.CharField(label="Contraseña", widget=forms.PasswordInput(attrs={"id": 'password'}))
 
@@ -76,6 +78,7 @@ class UserUpdateForm(forms.ModelForm):
             user.save()
         return user
 
+#Clase para actualizar el teléfono
 
 
 

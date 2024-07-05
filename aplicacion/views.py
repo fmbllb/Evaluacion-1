@@ -165,13 +165,10 @@ def cerrar_sesion(request):
 
 @login_required
 def eliminar_cuenta(request):
-    if request.method == 'POST':
-        request.user.delete()
-        messages.success(request, 'Tu cuenta ha sido eliminada exitosamente.')
-        logout(request)
-        return redirect('home')  # Redirigir a la página de inicio u otra página adecuada
-
-    return render(request, 'aplicacion/eliminar_cuenta.html')
+    request.user.delete()
+    messages.success(request, 'Tu cuenta ha sido eliminada exitosamente.')
+    logout(request)
+    return redirect(to='index')  # Redirigir a la página de inicio u otra página adecuada
 
 @login_required
 #ajustescuenta--------------------------------------------------------------------------------------------------------------------
@@ -244,6 +241,7 @@ def actualizar_usuario(request):
     return render(request, 'aplicacion/crud/actualizarusuario.html', {
         'form': form
     })
+
 
 def editarproducto(request):
     return render(request, 'aplicacion/editarproducto.html')

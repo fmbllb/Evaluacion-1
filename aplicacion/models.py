@@ -80,3 +80,16 @@ class Compra(models.Model):
         return f"Compra de {self.carrito.usuario.username} - {self.fecha_compra}"
 
 
+class Perfil(models.Model):
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    telefono = models.CharField(max_length=20)
+    direccion = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.usuario.username
+
+# Signal to create a Profile when a new User is created
+@receiver(post_save, sender=User)
+def crear_perfil(sender, instance, created, **kwargs):
+    if created:
+        Perfil.objects.create(usuario=instance)

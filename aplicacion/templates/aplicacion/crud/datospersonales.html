@@ -63,7 +63,7 @@
                 </div>
             {% endif %}
         </div>
-
+{% comment %} 
         <!-- Ejemplo para Rut -->
         <div class="mb-3 p-3">
             <!-- Aquí puedes mostrar el rut si está registrado o permitir agregarlo -->
@@ -83,7 +83,31 @@
                     <a href="{% url 'ajustescuenta' user.id %}" class="btn btn-warning">Añadir Rut</a>
                 </div>
             {% endif %}
+        </div> 
+{% endcomment %}
+        <div class="container">
+            <h2>Perfil de usuario</h2>
+            <button type="button" class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#eliminarCuenta">
+                Eliminar cuenta
+            </button>
         </div>
-
+        
+        <div class="modal fade" id="eliminarCuenta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Cuenta</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.
+                </div>
+                <div class="modal-footer">
+                    <a href="{% url 'eliminar_cuenta' %}" class="btn btn-danger">Eliminar cuenta</a>
+                    <a href="{% url 'datospersonales' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
