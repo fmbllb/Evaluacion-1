@@ -21,6 +21,7 @@ urlpatterns = [
     path('finanzas/', finanzas, name='finanzas'),
     path('guardado/', guardado, name='guardado'),
     path('', index, name='index'),
+    path('productosadmin/', productosadmin, name='productosadmin')
     #path('iniciodesesion/', iniciodesesion, name='iniciodesesion'),
     path('listausuarios/', listausuarios, name='listausuarios'),
     path('localizacion/', localizacion, name='localizacion'),

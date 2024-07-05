@@ -325,7 +325,7 @@ def modpedido(request):
 def pedidosadmin(request):
     return render(request, 'aplicacion/pedidosadmin.html')
 
-def producto(request):
+def productosadmin(request):
     return render(request, 'aplicacion/producto.html')
 
 def registro(request):
