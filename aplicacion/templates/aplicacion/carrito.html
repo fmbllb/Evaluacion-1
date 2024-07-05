@@ -1,34 +1,41 @@
 {% extends "aplicacion/base.html" %}
-
+{% load crispy_forms_tags %}
 {% block contenido %}
 {% load static %}
 
 <div class="container mt-5">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-sm-8">
       <h2 style="font-size:150%"><strong>Carrito de Compras</strong></h2>
-      {% for item in carrito.items.all %}
-      <div class="d-flex border align-items-center mt-3 text-wrap">
-        {% if item.producto.foto %}
-        <img src="{{ item.producto.foto.url }}" class="img-fluid me-3" alt="Imagen del producto" width="20%">
-        {% else %}
-        <img src="{% static 'img/default-product-image.jpg' %}" class="img-fluid me-3" alt="Imagen por defecto" width="20%">
-        {% endif %}
-        <div>
-          <p>{{ item.producto.nombre }}</p>
-          <p id="precioProducto" class="fw-bold">${{ item.producto.precio }}</p>
-        </div> 
-        <div class="input-group ms-5 p-3" style="width: auto; min-width: 110px;">
-          <button class="btn btn-outline-secondary  rounded-0 decrement" type="button" data-item="{{ item.id }}">-</button>
-          <input type="number" value="{{ item.cantidad }}" min="1" max="10" class="form-control text-center qtyInput" data-item="{{ item.id }}">
-          <button class="btn btn-outline-secondary rounded-0 increment" type="button" data-item="{{ item.id }}">+</button>
-          <p class="fw-bold ms-3 d-block mt-2" style="font-size: x-large;" id="totalValue">$ {{ item.total }}</p>
-        </div>
-      </div>
-      <br>
-      {% endfor %}
-      <a href="{% url 'index' %}" class="btn btn-warning rounded-0 mt-4 float-start">Continuar comprando</a>
-    </div>
+      {% if carrito.items.all %}
+          {% for item in carrito.items.all %}
+          <div class="d-flex border align-items-center mt-3 text-wrap">
+              {% if item.producto.foto %}
+                  <img src="{{ item.producto.foto.url }}" class="img-fluid me-3" alt="Imagen del producto" width="20%">
+              {% else %}
+                  <img src="{% static 'img/default-product-image.jpg' %}" class="img-fluid me-3" alt="Imagen por defecto" width="20%">
+              {% endif %}
+              <div>
+                  <p>{{ item.producto.nombre }}</p>
+                  <p id="precioProducto-{{ item.id }}" class="fw-bold">${{ item.producto.precio }}</p>
+              </div>
+              <div class="input-group ms-5 p-3" style="width: auto; min-width: 110px;">
+                  <button class="btn btn-outline-secondary rounded-0 decrement" type="button" data-item="{{ item.id }}">-</button>
+                  <input type="number" value="{{ item.cantidad }}" min="1" max="10" class="form-control text-center qtyInput" data-item="{{ item.id }}">
+                  <button class="btn btn-outline-secondary rounded-0 increment" type="button" data-item="{{ item.id }}">+</button>
+                  <p class="fw-bold ms-3 d-block mt-2" style="font-size: x-large;" id="totalValue-{{ item.id }}">$ {{ item.total }}</p>
+              </div>
+              <a href="{% url 'eliminar_producto_carrito' item.id %}" class="btn btn-danger ms-3">Eliminar</a>
+          </div>
+          <br>
+          {% endfor %}
+      {% else %}
+          <p>No hay productos en el carrito</p>
+      {% endif %}
+  </div>
+    
+  
+  
     <div class="col-md-4 d-flex flex-column align-items-center">
 
       <!-- Resumen de objetos en el carrito -->
@@ -112,65 +119,99 @@
       </div>
 
     </div>
+  
   </div>
   <div class="row mb-3">
-    <h2>OFERTAS DISPONIBLES</h2>
+    <h2>MAS PRODUCTOS</h2>
   </div>
   <div class="row">
-    <div class="row">
-      {% for producto in productos %}
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          {% if producto.foto %}
-          <img src="{{ producto.foto.url }}" class="card-img-top" alt="{{ producto.nombre }}">
-          {% else %}
-          <img src="{% static 'img/default-product.jpg' %}" class="card-img-top" alt="Producto sin imagen">
-          {% endif %}
-          <div class="card-body">
-            <h5 class="card-title">{{ producto.nombre }}</h5>
-            <p class="card-text">{{ producto.descripcion }}</p>
-            <p class="card-text fw-bold">$ {{ producto.precio }}</p>
-            <a href="{% url 'agregar_producto_carrito' producto.id %}" class="btn btn-primary">Agregar al Carrito</a>
-          </div>
+    {% for producto in productos %}
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        {% if producto.foto %}
+        <img src="{{ producto.foto.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+        {% else %}
+        <img src="{% static 'img/default-product.jpg' %}" class="card-img-top" alt="Producto sin imagen">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ producto.nombre }}</h5>
+          <p class="card-text">{{ producto.descripcion }}</p>
+          <p class="card-text fw-bold">$ {{ producto.precio }}</p>
+          <form method="post" action="{% url 'agregar_producto_carrito' producto.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Agregar al Carrito</button>
+          </form>
+          <a href="{% url 'detalle_producto' producto.id %}" class="btn btn-primary">Ver Detalle</a>
         </div>
       </div>
-      {% endfor %}
     </div>
+    {% endfor %}
   </div>
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const incrementButtons = document.querySelectorAll(".increment");
-    const decrementButtons = document.querySelectorAll(".decrement");
-    const qtyInputs = document.querySelectorAll(".qtyInput");
-
-    incrementButtons.forEach(btn => {
-      btn.addEventListener("click", function() {
-        const itemId = this.getAttribute("data-item");
-        const input = document.querySelector(`.qtyInput[data-item="${itemId}"]`);
-        input.stepUp();
+  document.addEventListener('DOMContentLoaded', function() {
+    // Obtener todos los elementos de incremento y decremento
+    const incrementButtons = document.querySelectorAll('.increment');
+    const decrementButtons = document.querySelectorAll('.decrement');
+  
+    // Asignar eventos a los botones de incremento
+    incrementButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const itemId = this.getAttribute('data-item');
+        const qtyInput = document.querySelector(`.qtyInput[data-item="${itemId}"]`);
+        const totalValue = document.querySelector(`#totalValue-${itemId}`);
+        const precioProducto = document.querySelector(`#precioProducto-${itemId}`);
+  
+        // Incrementar la cantidad
+        qtyInput.value = parseInt(qtyInput.value) + 1;
+  
+        // Calcular el nuevo precio total
+        const nuevoTotal = parseInt(qtyInput.value) * parseInt(precioProducto.innerText.replace('$', ''));
+        totalValue.innerText = `$ ${nuevoTotal}`;
       });
     });
-
-    decrementButtons.forEach(btn => {
-      btn.addEventListener("click", function() {
-        const itemId = this.getAttribute("data-item");
-        const input = document.querySelector(`.qtyInput[data-item="${itemId}"]`);
-        if (parseInt(input.value) > parseInt(input.min)) {
-          input.stepDown();
+  
+    // Asignar eventos a los botones de decremento
+    decrementButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const itemId = this.getAttribute('data-item');
+        const qtyInput = document.querySelector(`.qtyInput[data-item="${itemId}"]`);
+        const totalValue = document.querySelector(`#totalValue-${itemId}`);
+        const precioProducto = document.querySelector(`#precioProducto-${itemId}`);
+  
+        // Decrementar la cantidad, asegurándose de no bajar de 1
+        if (parseInt(qtyInput.value) > 1) {
+          qtyInput.value = parseInt(qtyInput.value) - 1;
+  
+          // Calcular el nuevo precio total
+          const nuevoTotal = parseInt(qtyInput.value) * parseInt(precioProducto.innerText.replace('$', ''));
+          totalValue.innerText = `$ ${nuevoTotal}`;
         }
       });
     });
-
+  
+    // Asignar eventos al cambio directo de la cantidad
+    const qtyInputs = document.querySelectorAll('.qtyInput');
     qtyInputs.forEach(input => {
-      input.addEventListener("change", function() {
-        const itemId = this.getAttribute("data-item");
-        const input = document.querySelector(`.qtyInput[data-item="${itemId}"]`);
-        
+      input.addEventListener('change', function() {
+        const itemId = this.getAttribute('data-item');
+        const qtyInput = this;
+        const totalValue = document.querySelector(`#totalValue-${itemId}`);
+        const precioProducto = document.querySelector(`#precioProducto-${itemId}`);
+  
+        // Validar el valor mínimo de 1
+        if (parseInt(qtyInput.value) < 1) {
+          qtyInput.value = 1;
+        }
+  
+        // Calcular el nuevo precio total
+        const nuevoTotal = parseInt(qtyInput.value) * parseInt(precioProducto.innerText.replace('$', ''));
+        totalValue.innerText = `$ ${nuevoTotal}`;
       });
     });
   });
-</script>
+  </script>
+  
 
 {% endblock contenido %}

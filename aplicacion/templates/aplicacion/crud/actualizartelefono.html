@@ -3,21 +3,5 @@
 
 {% block contenido %}
 {%load static%}
-
-
-<div class="container border mb-3 mt-3">
-    <h2>Actualizar Telefono</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form | crispy }}
-        <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Actualizar</button>
-        </div>
-    </form>
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-        {% endfor %}
-    {% endif %}
-</div>
+<h2>HOLA</h2>
 {% endblock %}

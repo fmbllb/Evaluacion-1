@@ -5,35 +5,40 @@
 {%load static%}
 
 <body>
-    <div class="row mt-3 mb-3 white-background" id="pedido1Usuario">
-        <div class="row justify-content-center align-items-center">
+    <div class="container mt-5">
+        <h2>Historial de Compras</h2>
+        {% for compra in compras %}
+        <div class="row mt-3 mb-3 white-background" id="pedido{{ forloop.counter }}Usuario">
+          <div class="row justify-content-center align-items-center">
             <div class="col-md-6 d-flex justify-content-center align-items-center">
-                <img src="{%static 'img/pinturas.jpg' %}" alt="Producto 1" class="img-fluid border" width="35%">
+              <!-- Aquí puedes poner la lógica para mostrar la imagen del producto, por ejemplo: -->
+              <img src="{% static 'img/default-product.jpg' %}" alt="Producto {{ forloop.counter }}" class="img-fluid border" width="35%">
             </div>
             <div class="col-md-6 px-5 mt-3">
-                <h4>Seguimiento de Pedido</h4>
-                <!--Pedido 1-->
-                <p><strong>Estado de la Entrega:</strong> En tránsito</p>
-                <p><strong>Información del Pedido:</strong></p>
-                <ul>
-                    <li><strong>Número de Pedido:</strong> 123456</li>
-                    <li><strong>Fecha de Compra:</strong> 15 de diciembre de 2021</li>
-                    <li><strong>Producto:</strong> Set de pinturas The Army Painter 10 colores</li>
-                    <li><strong>Cantidad:</strong> 1 unidades</li>
-                    <li><strong>Total:</strong> $12.000</li>
-                </ul>
-                <div class="justify-content-center">
-                  <button class="btn btn-danger rounded-0 mt-2" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Cancelar Pedido</button>
-                  <a href="#" class="btn btn-secondary rounded-0 mt-2">Detalles de producto</a>
-                </div>
+              <h4>Seguimiento de Pedido</h4>
+              <p><strong>Estado de la Entrega:</strong> {{ compra.estado_entrega }}</p>
+              <p><strong>Información del Pedido:</strong></p>
+              <ul>
+                <li><strong>Número de Pedido:</strong> {{ compra.id }}</li>
+                <li><strong>Fecha de Compra:</strong> {{ compra.fecha_compra|date:"d/m/Y" }}</li>
+                <li><strong>Producto:</strong> {{ compra.boleta.fk_producto.nombre }}</li>
+                <li><strong>Cantidad:</strong> {{ compra.carrito.items.count }}</li>
+                <li><strong>Total:</strong> ${{ compra.boleta.total }}</li>
+              </ul>
+              <div class="justify-content-center">
+                <a href="#" class="btn btn-secondary rounded-0 mt-2">Detalles de producto</a>
+              </div>
             </div>
+          </div>
+          <hr class="mt-5">
         </div>
-        <hr class="mt-5">
-    </div>
+        {% endfor %}
+      </div>
 
-
-
-    <div class="row mt-3 mb-5">
+{% comment %}     
+  <button class="btn btn-danger rounded-0 mt-2" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Cancelar Pedido</button>
+  <a href="#" class="btn btn-secondary rounded-0 mt-2">Detalles de producto</a> 
+      <div class="row mt-3 mb-5">
         <div class="col-md-6 d-flex justify-content-center align-items-center">
             <img src="{% static 'img/mini.jpg'%}" alt="Producto 1" class="img-fluid border" width="35%">
         </div>
@@ -53,9 +58,27 @@
               <a href="#" class="btn btn-secondary rounded-0 mt-2">Detalles de producto</a>
             </div>
             <hr class="mt-5">
-        </div>
+          </div>
+      </div>
+{% endcomment %}
 </body>
-
+{% comment %}  ACTUALIZACION DE LOS CAMBIOS EN EL CARRITO DE COMPRAS
+<div class="container border mb-3 mt-3">
+  <h2>Actualizar Telefono</h2>
+  <form method="POST">
+      {% csrf_token %}
+      {{ form | crispy }}
+      <div class="mb-3">
+          <button type="submit" class="btn btn-primary">Actualizar</button>
+      </div>
+  </form>
+  {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+  {% endif %}
+</div> 
+{% endcomment %}
 
 
 <!-- Modal de Confirmación para Cancelar Pedido -->
@@ -71,7 +94,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <a href="{% url 'contacto' %}" class="btn btn-danger" id="confirmacionEliminarPedido">Cancelar Pedido</a><!--ENVÍA LA INFORMAICÓN A LA DB-->
+                <a href="#" class="btn btn-danger" id="confirmacionEliminarPedido">Cancelar Pedido</a><!--ENVÍA LA INFORMAICÓN A LA DB-->
             </div>
         </div>
     </div>
