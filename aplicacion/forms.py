@@ -4,6 +4,8 @@ from aplicacion.models import Producto
 from .enumeraciones import *
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django import forms
+
 
 
 
@@ -32,6 +34,7 @@ class StuffForm(UserCreationForm):
     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput(attrs={"id": 'password1'}))
     password2 = forms.CharField(label="Confirmar contraseña", widget=forms.PasswordInput(attrs={"id": 'password2'}))
 
+#Clase para actualizar el correo electrónico
 class EmailUpdateForm(forms.ModelForm):
     password = forms.CharField(label="Contraseña", widget=forms.PasswordInput(attrs={"id": 'password'}))
 
@@ -74,20 +77,9 @@ class UserUpdateForm(forms.ModelForm):
         if commit:
             user.save()
         return user
-""" 
-class PerfilForm(forms.ModelForm):
-    class Meta:
-        model = Perfil
-        fields = ['telefono', 'direccion'] """
-""" class UpdatePersonaForm(forms.ModelForm):
-    class Meta:
-        model = Usuario
-        fields = ['rut', 'numero_casa_departamento', 'direccion']
 
-class LoginForm(forms.ModelForm):
-    correo = forms.EmailField(label="Correo")
-    contrasena = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
+#Clase para actualizar el teléfono
 
-    class Meta:
-        model = Usuario
-        fields = ['correo', 'contrasena'] """
+
+
+

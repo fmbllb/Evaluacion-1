@@ -7,7 +7,6 @@ from django.contrib.auth import logout, login
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
-#from .models import Usuario, Perfil
 from django.contrib.auth.decorators import login_required
 from .models import *
 
@@ -16,11 +15,85 @@ from .models import *
 def administrador(request):
     return render(request, 'aplicacion/administrador.html')
 
+
+
+
+#VISTAS DEL PRODUCTO
+@login_required
 def agregarproducto(request):
     return render(request, 'aplicacion/agregarproducto.html')
 
+@login_required
+def agregar_producto_carrito(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    carrito, creado = Carrito.objects.get_or_create(usuario=request.user)
+    
+    if request.method == 'POST':
+        cantidad = int(request.POST.get('cantidad', 1))  # Obtener la cantidad del formulario o asignar 1 por defecto
+        carrito.agregar_producto(producto, cantidad)
+        messages.success(request, f"{producto.nombre} ha sido agregado al carrito.")
+        return redirect('carrito')
+
+    total_items = carrito.items.count()
+    productos = Producto.objects.all()
+    
+    context = {
+        'producto': producto,
+        'carrito': carrito,
+        'productos': productos,
+        'total_items': total_items,
+    }
+
+    return render(request, 'aplicacion/carrito.html', context)
+
+def actualizar_telefono(request):
+    return render(request, 'aplicacion/crud/actualizartelefono.html')
+
+@login_required
+def eliminar_producto_carrito(request, item_id):
+    item = get_object_or_404(ItemCarrito, id=item_id)
+    if item.carrito.usuario != request.user:
+        return redirect('carrito')  # Redirige si no tiene permisos
+    
+    # Elimina el item del carrito
+    item.eliminar()
+    
+    messages.success(request, f"{item.producto.nombre} ha sido eliminado del carrito.")
+    return redirect('carrito')
+
+def lista_productos(request):
+    productos = Producto.objects.all()
+    return render(request, 'aplicacion/carrito.html', {'productos': productos})
+
+@login_required
+def seguipedido(request):
+    compras = Compra.objects.filter(carrito__usuario=request.user).order_by('-fecha_compra')
+    return render(request, 'aplicacion/seguipedido.html', {'compras': compras})
+
+@login_required
 def carrito(request):
-    return render(request, 'aplicacion/carrito.html')
+    carrito = Carrito.objects.filter(usuario=request.user).first()
+    
+    if not carrito:
+        # Si el usuario no tiene un carrito, podemos crear uno nuevo
+        carrito = Carrito.objects.create(usuario=request.user)
+    
+    total_items = carrito.items.count()
+    productos = Producto.objects.all()
+    
+    context = {
+        'carrito': carrito,
+        'total_items': total_items,
+        'productos': productos,
+    }
+    return render(request, 'aplicacion/carrito.html', context)
+
+def detalle_producto(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    context = {
+        'producto': producto,
+    }
+    return render(request, 'aplicacion/detalleproducto.html', context)
 
 def catalogo(request):
     productos = Producto.objects.all()
@@ -36,6 +109,9 @@ def catalogo(request):
     return render(request, 'aplicacion/catalogo.html', datos)
 
 
+
+
+#VISTA DE CONTACTO
 def contacto(request):
     return render(request, 'aplicacion/contacto.html')
 #futuro formulario de perfil
@@ -57,6 +133,9 @@ def stuff(request):
             # Manejo de errores de autenticación
             messages.error(request, 'Usuario o contraseña incorrectos.')
     return render(request, 'aplicacion/stuff.html', {'form': form})
+
+
+#VISTAS DE USUARIO/CUENTA
 
 def crearcuenta(request):
     if request.method == "POST":
@@ -94,12 +173,12 @@ def cerrar_sesion(request):
     logout(request)
     return redirect(to='index')
 
-""" def usuarios(request):
-    people=Usuario.objects.all()
-    datos={
-        "usuarios":usuarios
-    }
-    return render(request, 'aplicacion/usuarios.html', datos) """
+@login_required
+def eliminar_cuenta(request):
+    request.user.delete()
+    messages.success(request, 'Tu cuenta ha sido eliminada exitosamente.')
+    logout(request)
+    return redirect(to='index')  # Redirigir a la página de inicio u otra página adecuada
 
 @login_required
 #ajustescuenta--------------------------------------------------------------------------------------------------------------------
@@ -173,6 +252,7 @@ def actualizar_usuario(request):
         'form': form
     })
 
+
 def editarproducto(request):
     return render(request, 'aplicacion/editarproducto.html')
 
@@ -185,9 +265,6 @@ def guardado(request):
 def index(request):
     return render(request, 'aplicacion/index.html')
 
-"""def iniciodesesion(request):
-    return render(request, 'aplicacion/registration/login.html')"""
-
 def listausuarios(request):
     return render(request, 'aplicacion/listausuarios.html')
 
@@ -199,24 +276,13 @@ def modpedido(request):
 
 def pedidosadmin(request):
     return render(request, 'aplicacion/pedidosadmin.html')
-#intentando hacer que se pueda crear un producto
+
 def producto(request):
-    if request.method == 'GET':
-        return render(request, 'creacion_producto.html', {
-            'form':TaskForm
-        })
-    else:
-        form = TaskForm(request.POST)
-        new_task = form.save(commet=False)
-        return render(request, 'aplicacion/producto.html', {
-            'form': TaskForm
-        })
+    return render(request, 'aplicacion/producto.html')
 
 def registro(request):
     return render(request, 'aplicacion/registro.html')
 
-def seguipedido(request):
-    return render(request, 'aplicacion/seguipedido.html')
 
 def stock(request):
     return render(request, 'aplicacion/stock.html')

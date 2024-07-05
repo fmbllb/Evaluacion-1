@@ -1,0 +1,25 @@
+{% extends "aplicacion/base.html" %}
+
+{% block contenido %}
+{% load static %}
+<div class="row">
+    {% for producto in productos %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            {% if producto.foto %}
+            <img src="{{ producto.foto.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+            {% else %}
+            <img src="{% static 'img/default-product.jpg' %}" class="card-img-top" alt="Producto sin imagen">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ producto.nombre }}</h5>
+                <p class="card-text">{{ producto.descripcion }}</p>
+                <p class="card-text fw-bold">$ {{ producto.precio }}</p>
+                <a href="{% url 'agregar_producto_carrito' producto.id %}" class="btn btn-primary">Agregar al Carrito</a>
+                <a href="{% url 'carrito' %}" class="btn btn-secondary">Ver Detalles</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock contenido %}

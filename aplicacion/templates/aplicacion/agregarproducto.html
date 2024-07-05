@@ -39,7 +39,7 @@
       </div>
       <button type="button" class="btn btn-warning rounded-0" id="btnAñadirProducto" data-bs-toggle="modal"
         data-bs-target="#confirmacionModal" disabled value="SUBMIT">Añadir Producto</button>
-      <a href="{% url 'producto' %}" class="btn btn-danger rounded-0">Cancelar</a>
+      <a href="{% url 'index' %}" class="btn btn-danger rounded-0">Cancelar</a>
     </form>
   </div>
 
@@ -57,7 +57,7 @@
           ¡El producto se ha añadido correctamente!
         </div>
         <div class="modal-footer">
-          <a href="{% url 'producto' %}" class="btn btn-secondary rounded-0">OK</a>
+          <a href="{% url 'index' %}" class="btn btn-secondary rounded-0">OK</a>
         </div>
       </div>
     </div>
