@@ -10,7 +10,7 @@ from django.shortcuts import get_object_or_404, redirect
 #from .models import Usuario, Perfil
 from django.contrib.auth.decorators import login_required
 from .models import *
-from .enumeraciones import *
+from .enumeraciones import TIPO_PRODUCTO
 
 # Create your views here.
 
@@ -193,16 +193,18 @@ def guardado(request):
 
 #Index
 def index(request):
-    categorias = dict(TIPO_PRODUCTO)
-    productos_por_categoria = {}
+    productos=Producto.objects.all()
+    categorias={producto.categoria_producto: [] for producto in productos}
 
-    # Agrupar productos por categoría
-    for key, label in TIPO_PRODUCTO:
-        productos_por_categoria[label] = Producto.objects.filter(categoria_producto=key)
+    for producto in productos:
+        categorias[producto.categoria_producto].append(producto)
+
+
+
 
     datos = {
         'categorias': categorias,
-        'productos_por_categoria': productos_por_categoria
+        'productos':productos
     }
     return render(request, 'aplicacion/index.html', datos)
 
