@@ -4,6 +4,8 @@ from aplicacion.models import Producto
 from .enumeraciones import *
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout , Submit , Div ,Field ,HTML
 
 
 
@@ -24,6 +26,21 @@ class UsuarioForm(UserCreationForm):
 
 class FiltroCategoriaForm(forms.Form):
     categoria = forms.ChoiceField(choices=TIPO_PRODUCTO, required=False, label='Categoría')
+    
+    def __init__(self, *args, **kwargs):
+        super(FiltroCategoriaForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'get'
+        self.helper.add_input(Submit('submit', 'Filtrar'))
+
+
+class DescripcionForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = '__all__'
+        widgets = {
+            'descripcion': forms.Textarea(attrs={'rows': 10, 'cols': 80}),
+        }
 
 
 class StuffForm(UserCreationForm):

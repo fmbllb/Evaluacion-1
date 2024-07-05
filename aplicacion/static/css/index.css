@@ -98,3 +98,76 @@ main {
     margin-top: 0; /* Elimina el margen superior del precio */
     margin-bottom: 10px; /* Añade un margen inferior al precio */
 }
+
+.img-producto {
+    max-width: 100%;
+    height: auto;
+
+}
+
+.vr {
+    border-left: 1px solid black;
+    height: 100%;
+    margin: 0 20px;
+}
+
+@media (max-width: 767.98px) {
+    .vr {
+        display: none;
+    }
+}
+
+.texto-pequeno {
+    font-size: small;
+}
+
+.linea-horizontal {
+    display: none;
+}
+@media (max-width: 767.98px) {
+    .vr {
+        display: none;
+    }
+    .linea-horizontal {
+        display: block;
+        border: 0;
+        margin: 10px 0;
+    }
+}
+
+.input-group{
+    width: 100%;
+    max-width: 175px; /* Ajusta el ancho máximo según tus necesidades */
+    margin-right: auto;
+}
+
+@media (max-width: 992px) {
+    .input-group {
+        width: 100%;
+        max-width: 250px; /* Ajusta el ancho máximo según tus necesidades */
+        margin-right: auto;
+    }
+}
+
+/* Estilos para ocultar las flechas del input number */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+        
+input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+    appearance: textfield;
+}
+
+.product-title {
+    margin-top: 0.5rem; /* Ajusta el margen superior según sea necesario */
+    margin-bottom: 0; /* Elimina el margen inferior */
+    white-space: nowrap; /* Evita el salto de línea */
+    overflow: hidden; /* Oculta el contenido que sobresale */
+    text-overflow: ellipsis; /* Añade puntos suspensivos al final si el texto es demasiado largo */
+}
+.product-card {
+    padding: 1rem; /* Ajusta el padding del contenedor de producto */
+}
