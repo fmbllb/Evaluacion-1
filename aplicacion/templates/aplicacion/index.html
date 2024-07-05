@@ -4,31 +4,68 @@
 {%load static%}
     
 <div class="container mt-5">
-  {% for key, label in categorias.items %}
-  <h2>{{ label }}</h2>
-  <div id="carousel{{ forloop.counter }}" class="carousel slide mb-4" data-ride="carousel">
-      <div class="carousel-inner">
-          {% for producto in productos_por_categoria.label %}
-          <div class="carousel-item {% if forloop.first %}active{% endif %}">
-              <img src="{{ producto.foto.url }}" class="d-block w-100" alt="{{ producto.nombre }}">
-              <div class="carousel-caption d-none d-md-block">
-                  <h5>{{ producto.nombre }}</h5>
-                  <p>{{ producto.descripcion }}</p>
-                  <p>Precio: ${{ producto.precio }}</p>
-              </div>
-          </div>
-          {% endfor %}
-      </div>
-      <a class="carousel-control-prev" href="#carousel{{ forloop.counter }}" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Anterior</span>
-      </a>
-      <a class="carousel-control-next" href="#carousel{{ forloop.counter }}" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Siguiente</span>
-      </a>
+    {% for key, label in categorias.items %}
+    <h2>{{ label }}</h2>
+    <div id="carousel{{ forloop.counter }}" class="carousel slide mb-4" data-ride="carousel">
+        <div class="carousel-inner">
+            {% for producto in productos_por_categoria.key %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ producto.foto.url }}" class="d-block w-100" alt="{{ producto.nombre }}">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>{{ producto.nombre }}</h5>
+                    <p>{{ producto.descripcion }}</p>
+                    <p>Precio: ${{ producto.precio }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <a class="carousel-control-prev" href="#carousel{{ forloop.counter }}" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#carousel{{ forloop.counter }}" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Siguiente</span>
+        </a>
+    </div>
+    {% endfor %}
   </div>
-  {% endfor %}
-</div>
+  
+  
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/lightslider.js' %}"></script>
+  <script>
+    $(document).ready(function(){
+      {% for key, label in categorias.items %}
+      $('#carousel{{ forloop.counter }}').lightSlider({
+        item: 3, // Mostrar 3 productos por categoría en cada slide
+        loop:true,
+        slideMove: 1,
+        slideMargin: 10,
+        controls: true,
+        prevHtml: '<',
+        nextHtml: '>',
+        responsive:[
+          {
+            breakpoint: 768,
+            settings: {
+              item: 2,
+              slideMove: 1,
+              slideMargin: 6,
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              item: 1,
+              slideMove: 1
+            }
+          }
+        ]
+      });
+      {% endfor %}
+    });
+  </script>
 
-{% endblock contenido %}
+
+  {% endblock contenido %}
