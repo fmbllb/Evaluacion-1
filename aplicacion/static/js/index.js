@@ -80,3 +80,64 @@ $(".carousel-control-next").on("click", function () {
   $(".carousel-inner").animate({ scrollleft: scrollPosition }, 600);
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  // Obtener todos los elementos de incremento y decremento
+  const incrementButtons = document.querySelectorAll('.increment');
+  const decrementButtons = document.querySelectorAll('.decrement');
+
+  // Asignar eventos a los botones de incremento
+  incrementButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const itemId = this.getAttribute('data-item');
+      const qtyInput = document.querySelector(`.qtyInput[data-item="${itemId}"]`);
+      const totalValue = document.querySelector(`#totalValue-${itemId}`);
+      const precioProducto = document.querySelector(`#precioProducto-${itemId}`);
+
+      // Incrementar la cantidad
+      qtyInput.value = parseInt(qtyInput.value) + 1;
+
+      // Calcular el nuevo precio total
+      const nuevoTotal = parseInt(qtyInput.value) * parseInt(precioProducto.innerText.replace('$', ''));
+      totalValue.innerText = `$ ${nuevoTotal}`;
+    });
+  });
+
+  // Asignar eventos a los botones de decremento
+  decrementButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const itemId = this.getAttribute('data-item');
+      const qtyInput = document.querySelector(`.qtyInput[data-item="${itemId}"]`);
+      const totalValue = document.querySelector(`#totalValue-${itemId}`);
+      const precioProducto = document.querySelector(`#precioProducto-${itemId}`);
+
+      // Decrementar la cantidad, asegurándose de no bajar de 1
+      if (parseInt(qtyInput.value) > 1) {
+        qtyInput.value = parseInt(qtyInput.value) - 1;
+
+        // Calcular el nuevo precio total
+        const nuevoTotal = parseInt(qtyInput.value) * parseInt(precioProducto.innerText.replace('$', ''));
+        totalValue.innerText = `$ ${nuevoTotal}`;
+      }
+    });
+  });
+
+  // Asignar eventos al cambio directo de la cantidad
+  const qtyInputs = document.querySelectorAll('.qtyInput');
+  qtyInputs.forEach(input => {
+    input.addEventListener('change', function() {
+      const itemId = this.getAttribute('data-item');
+      const qtyInput = this;
+      const totalValue = document.querySelector(`#totalValue-${itemId}`);
+      const precioProducto = document.querySelector(`#precioProducto-${itemId}`);
+
+      // Validar el valor mínimo de 1
+      if (parseInt(qtyInput.value) < 1) {
+        qtyInput.value = 1;
+      }
+
+      // Calcular el nuevo precio total
+      const nuevoTotal = parseInt(qtyInput.value) * parseInt(precioProducto.innerText.replace('$', ''));
+      totalValue.innerText = `$ ${nuevoTotal}`;
+    });
+  });
+});

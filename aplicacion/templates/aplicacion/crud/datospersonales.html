@@ -2,79 +2,112 @@
     
 
 {% block contenido %}
-{%load static%}
+    {% load static %}
 
-  <!--Información de Ajustes -->
-  <div class="container border p-3 mb-5 mt-5">
-    <h3>
-        Datos de la cuenta
-    </h3>
-    <p>Se utilizan los datos solo para mejorar su experiencia de usuario.</p>
-  </div>
+    <!-- Información de Ajustes -->
+    <div class="container border p-3 mb-5 mt-5">
+        <h3>Datos de la cuenta</h3>
+        <p>Se utilizan los datos solo para mejorar su experiencia de usuario.</p>
+    </div>
 
-<div class="container border mb-3 ">
-    <div class="p-3">
-      <h5>
-          Nombre de Usuario
-      </h5>
-      <div class="mb-3 row g-3">
-        <label for="nombreUsuario" class="form-label">{{user.username}}</label>
-      </div>
-      <div class="mb-3">
-        <a href="{% url 'actualizarusuario' %}" class="btn btn-warning">Cambiar</a>
-      </div>
-  </div>
-    <div class="mb-3 p-3">
-      {% if user.email %}
-        <h5>
-            Información de Contacto 
-        </h5>
-            <!-- Muestra el correo del usuario autenticado -->
-          <div class="mb-3">
-            <label for="">{{ user.email }}</label>
-          </div>
-            <div class="mb-3">
-              <a href="{% url 'actualizarcorreo' %}" class="btn btn-warning">Cambiar</a>
+    <div class="container border mb-3">
+        <div class="p-3">
+            <h5>Nombre de Usuario</h5>
+            <div class="mb-3 row g-3">
+                <label for="nombreUsuario" class="form-label">{{ user.username }}</label>
             </div>
-        {% else %}
-        <div>
-          <h5>
-            Correo Electrónico (El Perfil no está completo)
-          </h5>
-          <label for="" class="mb-3">Para autenticar rellene la informacion</label>
+            <div class="mb-3">
+                <a href="{% url 'actualizarusuario' %}" class="btn btn-warning">Cambiar</a>
+            </div>
         </div>
-        <div>
-          <a href="{% url 'ajustescuenta' user.id %}" class="btn btn-warning">Añadir correo</a>
+
+        <div class="mb-3 p-3">
+            <h5>Información de Contacto</h5>
+            {% if user.email %}
+                <!-- Muestra el correo del usuario autenticado -->
+                <div class="mb-3">
+                    <label>{{ user.email }}</label>
+                </div>
+                <div class="mb-3">
+                    <a href="{% url 'actualizarcorreo' %}" class="btn btn-warning">Cambiar</a>
+                </div>
+            {% else %}
+                <div>
+                    <h5>Correo Electrónico (El Perfil no está completo)</h5>
+                    <label class="mb-3">Para autenticar rellene la información</label>
+                </div>
+                <div>
+                    <a href="{% url 'ajustescuenta' user.id %}" class="btn btn-warning">Añadir correo</a>
+                </div>
+            {% endif %}
         </div>
-        {% endif %}
-    </div>
-    <div class="mb-3 p-3">
-      <h5>
-          Número de Teléfono
-      </h5>
-      <div>
-        <a href="{% url 'ajustescuenta' user.id %}" class="btn btn-warning">Añadir telefono</a>
-      </div>
-  </div>
-</div>
 
-<!-- Model de Confirmacion de Cambios en la cuenta-->
-<div class="modal fade" id="modalCambioDatosPersonales" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">¿Estás seguro de realizar los cambios?</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Los cambios fueron los siguientes...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar cambios</button>
-      </div>
+        <!-- Aquí puedes agregar más secciones para otros campos del perfil, como teléfono y rut -->
+        <!-- Ejemplo para teléfono -->
+        <div class="mb-3 p-3">
+            <!-- Aquí puedes mostrar el teléfono si está registrado o permitir agregarlo -->
+            {% if user.perfil.telefono %}
+                <div class="mb-3">
+                    <label>{{ user.perfil.telefono }}</label>
+                </div>
+                <div class="mb-3">
+                    <a href="{% url 'actualizartelefono' %}" class="btn btn-warning">Cambiar</a>
+                </div>
+            {% else %}
+                <div>
+                    <h5>Teléfono (El Perfil no está completo)</h5>
+                    <label class="mb-3">Añade tu número de teléfono para mejorar la comunicación</label>
+                </div>
+                <div>
+                    <a href="{% url 'actualizartelefono' %}" class="btn btn-warning">Actualizar Teléfono</a>
+                </div>
+            {% endif %}
+        </div>
+{% comment %} 
+        <!-- Ejemplo para Rut -->
+        <div class="mb-3 p-3">
+            <!-- Aquí puedes mostrar el rut si está registrado o permitir agregarlo -->
+            {% if user.perfil.rut %}
+                <div class="mb-3">
+                    <label>{{ user.perfil.rut }}</label>
+                </div>
+                <div class="mb-3">
+                    <a href="{% url 'actualizarrut' %}" class="btn btn-warning">Cambiar</a>
+                </div>
+            {% else %}
+                <div>
+                    <h5>Rut (El Perfil no está completo)</h5>
+                    <label class="mb-3">Añade tu RUT para completar tu perfil</label>
+                </div>
+                <div>
+                    <a href="{% url 'ajustescuenta' user.id %}" class="btn btn-warning">Añadir Rut</a>
+                </div>
+            {% endif %}
+        </div> 
+{% endcomment %}
+        <div class="container">
+            <h2>Perfil de usuario</h2>
+            <button type="button" class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#eliminarCuenta">
+                Eliminar cuenta
+            </button>
+        </div>
+        
+        <div class="modal fade" id="eliminarCuenta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Cuenta</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.
+                </div>
+                <div class="modal-footer">
+                    <a href="{% url 'eliminar_cuenta' %}" class="btn btn-danger">Eliminar cuenta</a>
+                    <a href="{% url 'datospersonales' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
-
-{% endblock contenido %}
+{% endblock %}

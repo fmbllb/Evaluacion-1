@@ -4,8 +4,8 @@ from aplicacion.models import Producto
 from .enumeraciones import *
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout , Submit , Div ,Field ,HTML
+from django import forms
+
 
 
 
@@ -23,25 +23,10 @@ class UsuarioForm(UserCreationForm):
             user.save()
         return user
     
-
-class FiltroCategoriaForm(forms.Form):
-    categoria = forms.ChoiceField(choices=TIPO_PRODUCTO, required=False, label='Categoría')
-    
-    def __init__(self, *args, **kwargs):
-        super(FiltroCategoriaForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_method = 'get'
-        self.helper.add_input(Submit('submit', 'Filtrar'))
-
-
-class DescripcionForm(forms.ModelForm):
+class ProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
-        fields = '__all__'
-        widgets = {
-            'descripcion': forms.Textarea(attrs={'rows': 10, 'cols': 80}),
-        }
-
+        fields = ['nombre', 'precio', 'descripcion', 'categoria_producto', 'foto']
 
 class StuffForm(UserCreationForm):
     username=forms.CharField(label="Nombre de usuario", widget=forms.TextInput(attrs={"id": 'username'}))
@@ -49,6 +34,7 @@ class StuffForm(UserCreationForm):
     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput(attrs={"id": 'password1'}))
     password2 = forms.CharField(label="Confirmar contraseña", widget=forms.PasswordInput(attrs={"id": 'password2'}))
 
+#Clase para actualizar el correo electrónico
 class EmailUpdateForm(forms.ModelForm):
     password = forms.CharField(label="Contraseña", widget=forms.PasswordInput(attrs={"id": 'password'}))
 
@@ -91,20 +77,9 @@ class UserUpdateForm(forms.ModelForm):
         if commit:
             user.save()
         return user
-""" 
-class PerfilForm(forms.ModelForm):
-    class Meta:
-        model = Perfil
-        fields = ['telefono', 'direccion'] """
-""" class UpdatePersonaForm(forms.ModelForm):
-    class Meta:
-        model = Usuario
-        fields = ['rut', 'numero_casa_departamento', 'direccion']
 
-class LoginForm(forms.ModelForm):
-    correo = forms.EmailField(label="Correo")
-    contrasena = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
+#Clase para actualizar el teléfono
 
-    class Meta:
-        model = Usuario
-        fields = ['correo', 'contrasena'] """
+
+
+
