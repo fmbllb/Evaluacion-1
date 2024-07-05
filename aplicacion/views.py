@@ -47,6 +47,10 @@ def agregar_producto_carrito(request, producto_id):
 
     return render(request, 'aplicacion/carrito.html', context)
 
+
+def historial_compras(request):
+    return render(request, 'aplicacion/seguipedido.html')
+
 @login_required
 def actualizar_telefono(request):
     perfil, creado = Perfil.objects.get_or_create(usuario=request.user)
@@ -64,19 +68,17 @@ def actualizar_telefono(request):
 
 @login_required
 def actualizar_direccion(request):
+    perfil, created = Perfil.objects.get_or_create(usuario=request.user)
     if request.method == 'POST':
-        form = DirectionUpdateForm(request.POST, user=request.user)
+        form = DirectionUpdateForm(request.POST, instance=perfil, user=request.user)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Dirección actualizada correctamente.')
-            return redirect('perfil')  # Cambia 'perfil' por el nombre de la vista de perfil
+            messages.success(request, 'Tu dirección ha sido actualizada.')
+            return redirect('datospersonales')
     else:
-        form = DirectionUpdateForm(user=request.user)
+        form = DirectionUpdateForm(instance=perfil, user=request.user)
 
-    context = {
-        'form': form
-    }
-    return render(request, 'aplicacion/crud/actualizardireccion.html', context)
+    return render(request, 'aplicacion/crud/actualizardireccion.html', {'form': form})
 
 @login_required
 def eliminar_producto_carrito(request, item_id):

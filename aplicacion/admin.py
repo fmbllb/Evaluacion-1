@@ -8,3 +8,4 @@ from .forms import DescripcionForm
 admin.site.register(Producto)
 admin.site.register(Carrito)
 admin.site.register(ItemCarrito)
+admin.site.register(Perfil)

@@ -1,15 +1,29 @@
 {% extends "aplicacion/base.html" %}
-{% load crispy_forms_tags %}
 
 {% block contenido %}
-{%load static%}
-
-
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Autocompletado de Dirección con LocationIQ</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
 <div class="container border mb-3 mt-3">
-    <h2>Actualizar Informacion de Usuario</h2>
-    <form method="POST">
+    <h2>Actualizar Información de Usuario</h2>
+    <form method="POST" id="addressForm">
         {% csrf_token %}
-        {{ form | crispy }}
+        {{ form.non_field_errors }}
+        <div class="mb-3">
+            <label for="id_password">Contraseña:</label>
+            {{ form.password }}
+            {{ form.password.errors }}
+        </div>
+        <div class="mb-3">
+            <label for="id_direccion">Dirección:</label>
+            {{ form.direccion }}
+            <div id="addressSuggestions"></div>
+        </div>
         <div class="mb-3">
             <button type="submit" class="btn btn-primary">Actualizar</button>
         </div>
@@ -20,4 +34,53 @@
         {% endfor %}
     {% endif %}
 </div>
+<script>
+    const form = document.getElementById('addressForm');
+    const addressInput = document.getElementById('id_direccion');
+    const addressSuggestions = document.getElementById('addressSuggestions');
+    const btnRellenar = document.getElementById('btnRellenar');
+
+    btnRellenar.addEventListener('click', function() {
+        const suggestedAddress = '123 Calle Principal, Ciudad';  // Dirección sugerida (puedes cambiarla según necesites)
+
+        addressInput.value = suggestedAddress;
+
+        // Simular el envío del formulario
+        form.submit();
+    });
+
+    addressInput.addEventListener('input', function() {
+        const inputValue = this.value.trim();
+        if (inputValue.length > 2) {
+            getAddressSuggestions(inputValue);
+        } else {
+            addressSuggestions.innerHTML = '';
+        }
+    });
+
+    function getAddressSuggestions(query) {
+        const url = `https://us1.locationiq.com/v1/autocomplete.php?key=pk.e83322dce52da266c333e74084904fd6&q=${query}&format=json`;
+        
+        axios.get(url)
+            .then(response => {
+                const suggestions = response.data;
+                addressSuggestions.innerHTML = ''; // Limpiar las sugerencias anteriores
+                suggestions.forEach(suggestion => {
+                    const suggestionElement = document.createElement('div');
+                    suggestionElement.textContent = suggestion.display_name;
+                    suggestionElement.classList.add('suggestion');
+                    suggestionElement.addEventListener('click', function() {
+                        addressInput.value = suggestion.display_name;
+                        addressSuggestions.innerHTML = ''; // Limpiar las sugerencias después de seleccionar una
+                    });
+                    addressSuggestions.appendChild(suggestionElement);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching address suggestions:', error);
+            });
+    }
+</script>
+</body>
+</html>
 {% endblock %}
