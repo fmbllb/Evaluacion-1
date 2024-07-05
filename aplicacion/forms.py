@@ -211,3 +211,36 @@ class AgregarProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
         fields = ['nombre', 'precio', 'descripcion', 'categoria_producto', 'foto']
+        labels = {
+            'nombre': 'Nombre del Producto',
+            'precio': 'Precio',
+            'descripcion': 'Descripción',
+            'categoria_producto': 'Categoría del Producto',
+            'foto': 'Imagen del Producto',
+        }
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre del Producto'}),
+            'precio': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Precio'}),
+            'descripcion': forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Descripción'}),
+            'categoria_producto': forms.Select(attrs={'class': 'form-control'}),
+            'foto': forms.ClearableFileInput(attrs={'class': 'form-control', 'accept': 'image/*'}),
+        }
+        error_messages = {
+            'nombre': {
+                'required': "Por favor ingrese el nombre del producto.",
+            },
+            'precio': {
+                'required': "Por favor ingrese el precio del producto.",
+                'min_value': "El precio no puede ser negativo.",
+            },
+            'descripcion': {
+                'required': "Por favor ingrese la descripción del producto.",
+            },
+            'categoria_producto': {
+                'required': "Por favor seleccione la categoría del producto.",
+            },
+            'foto': {
+                'required': "Por favor seleccione una imagen para el producto.",
+            },
+        }
+        

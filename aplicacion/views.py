@@ -26,10 +26,9 @@ def agregar_producto(request):
         form = AgregarProductoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('productosadmin')  # Redirige a la lista de productos administrativos
+            return redirect('productosadmin')
     else:
         form = AgregarProductoForm()
-
     return render(request, 'aplicacion/agregar_producto.html', {'form': form})
 
 @login_required

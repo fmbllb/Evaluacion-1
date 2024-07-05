@@ -4,5 +4,45 @@
 {% block contenido %}
 
 
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="{{ form.nombre.id_for_label }}" class="form-label">Nombre del Producto</label>
+        {{ form.nombre }}
+        {% for error in form.nombre.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="mb-3">
+        <label for="{{ form.precio.id_for_label }}" class="form-label">Precio</label>
+        {{ form.precio }}
+        {% for error in form.precio.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="mb-3">
+        <label for="{{ form.descripcion.id_for_label }}" class="form-label">Descripción</label>
+        {{ form.descripcion }}
+        {% for error in form.descripcion.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="mb-3">
+        <label for="{{ form.categoria_producto.id_for_label }}" class="form-label">Categoría del Producto</label>
+        {{ form.categoria_producto }}
+        {% for error in form.categoria_producto.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="mb-3">
+        <label for="{{ form.foto.id_for_label }}" class="form-label">Imagen del Producto</label>
+        {{ form.foto }}
+        {% for error in form.foto.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar Producto</button>
+    <a href="{% url 'productosadmin' %}" class="btn btn-secondary">Cancelar</a>
+</form>
 
 {% endblock contenido %}
