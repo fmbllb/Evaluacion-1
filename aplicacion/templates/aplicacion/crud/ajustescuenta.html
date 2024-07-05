@@ -7,20 +7,37 @@
 
 <div class="row">
   <div class="col-sm-4"></div>
-  <div class="col-sm-4">
+  <div class="col-sm-4 border">
     <div class="container p-3 mb-3 mt-5">
       <h3>
           Ajustes de la Cuenta
       </h3>
       <p>Aquí podrá modificar el estado de su cuenta y el nombre de usuario</p>
     </div>
-    <form action="" method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{form | crispy}}
-      <div>
-        <input type="submit" value="Modificar Persona" class="btn btn-warning">
+    <div class="container">
+      <h2>Perfil de usuario</h2>
+      <button type="button" class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#eliminarCuenta">
+          Eliminar cuenta
+      </button>
+  </div>
+  
+  <div class="modal fade" id="eliminarCuenta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Cuenta</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              ¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.
+          </div>
+          <div class="modal-footer">
+              <a href="{% url 'eliminar_cuenta' %}" class="btn btn-danger">Eliminar cuenta</a>
+              <a href="{% url 'vistausuario' user.id %}" class="btn btn-secondary">Cancelar</a>
+          </div>
       </div>
-    </form>
+      </div>
+  </div>
   </div>
   <div class="col-sm-4"></div>
 </div>

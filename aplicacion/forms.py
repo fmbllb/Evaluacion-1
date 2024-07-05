@@ -119,13 +119,12 @@ class PhoneUpdateForm(forms.ModelForm):
             perfil.save()
         return perfil
     
-#Clase para actualizar la direccion
 class DirectionUpdateForm(forms.ModelForm):
     password = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
 
     class Meta:
-        model = Perfil  # Asegúrate de que el modelo sea tu modelo de Perfil
-        fields = ['direccion']  # Campos que quieres actualizar en el perfil
+        model = Perfil
+        fields = ['direccion']
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)

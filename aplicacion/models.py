@@ -90,7 +90,6 @@ class Perfil(models.Model):
     def __str__(self):
         return self.usuario.username
 
-# Signal to create a Profile when a new User is created
 @receiver(post_save, sender=User)
 def crear_perfil(sender, instance, created, **kwargs):
     if created:
