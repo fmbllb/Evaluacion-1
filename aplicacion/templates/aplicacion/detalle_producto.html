@@ -31,7 +31,10 @@
             <!--Botones-->
             <div class="mt-5 d-flex justify-content-lg-between justify-content-center">
                 <a href="{% url 'catalogo' %}" class="btn btn-primary rounded-0">Volver al catálogo</a>
-                <button class="btn btn-success rounded-0">Añadir a Carrito</button>
+                <form method="post" action="{% url 'agregar_producto_carrito' producto.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success">Agregar al Carrito</button>
+                </form>
             </div>
         </div>
     </div>
