@@ -4,43 +4,31 @@
 {%load static%}
     
 <div class="container mt-5">
-    {% for key, label in categorias.items %}
-    <h2>{{ label }}</h2>
-    <div id="carousel{{ forloop.counter }}" class="owl-carousel owl-theme mb-4">
-        {% for producto in productos_por_categoria.key %}
-        <div class="item">
-            <a href="{% url 'detalle_producto' producto.nombre %}">
-                <img src="{{ producto.foto.url }}" alt="{{ producto.nombre }}">
-                <h5>{{ producto.nombre }}</h5>
-                <p>{{ producto.descripcion }}</p>
-                <p>Precio: ${{ producto.precio }}</p>
-            </a>
-        </div>
-        {% endfor %}
-    </div>
-    {% endfor %}
+  {% for key, label in categorias.items %}
+  <h2>{{ label }}</h2>
+  <div id="carousel{{ forloop.counter }}" class="carousel slide mb-4" data-ride="carousel">
+      <div class="carousel-inner">
+          {% for producto in productos_por_categoria.label %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <img src="{{ producto.foto.url }}" class="d-block w-100" alt="{{ producto.nombre }}">
+              <div class="carousel-caption d-none d-md-block">
+                  <h5>{{ producto.nombre }}</h5>
+                  <p>{{ producto.descripcion }}</p>
+                  <p>Precio: ${{ producto.precio }}</p>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+      <a class="carousel-control-prev" href="#carousel{{ forloop.counter }}" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Anterior</span>
+      </a>
+      <a class="carousel-control-next" href="#carousel{{ forloop.counter }}" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Siguiente</span>
+      </a>
   </div>
-  
-  <script>
-    $(document).ready(function(){
-      {% for key, label in categorias.items %}
-      $('#carousel{{ forloop.counter }}').owlCarousel({
-        loop:true,
-        margin:10,
-        nav:true,
-        responsive:{
-          0:{
-            items:1
-          },
-          600:{
-            items:3
-          },
-          1000:{
-            items:4
-          }
-        }
-      });
-      {% endfor %}
-    });
-  </script>
-{% endblock %}
+  {% endfor %}
+</div>
+
+{% endblock contenido %}
