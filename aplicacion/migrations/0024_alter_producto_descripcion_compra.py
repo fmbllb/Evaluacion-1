@@ -7,11 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-<<<<<<< Updated upstream
         ('aplicacion', '0023_merge_20240705_0036'),
-=======
-        ('aplicacion', '0023_merge_0018_alter_producto_descripcion_0022_perfil'),
->>>>>>> Stashed changes
     ]
 
     operations = [
