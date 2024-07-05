@@ -10,7 +10,7 @@ from django.dispatch import receiver
 class Producto(models.Model):
     nombre = models.CharField(_("Nombre del producto"), max_length=50, unique=True)
     precio = models.IntegerField(_("Precio"), validators=[MinValueValidator(0)])
-    descripcion = models.CharField(_("Descripción"), max_length=500)
+    descripcion = models.CharField(_("Descripción"), max_length=5000)
     categoria_producto = models.CharField(_("Categoría"), max_length=20, choices=TIPO_PRODUCTO)
     foto = models.ImageField(_("Foto"), upload_to='productos', null=True, blank=True)
 

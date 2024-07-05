@@ -2,14 +2,14 @@ from django.urls import path
 from .views import (stuff, ajustescuenta,cerrar_sesion, index, login2, crearcuenta, registro, 
     administrador, listausuarios, localizacion, catalogo, agregar_producto_carrito, carrito, contacto, 
     datospersonales, vistausuario, seguipedido, modpedido, pedidosadmin, finanzas, stock, 
-    editarproducto, agregarproducto, guardado, actualizar_correo, actualizar_telefono, actualizar_usuario, detalle_producto,
-    detalle_producto, eliminar_producto_carrito, eliminar_cuenta, actualizar_direccion)
+    editarproducto, agregar_producto, guardado, actualizar_correo, actualizar_telefono, actualizar_usuario, detalle_producto,
+    detalle_producto, eliminar_producto_carrito, eliminar_cuenta, actualizar_direccion, productosadmin, eliminar_producto)
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('administrador/', administrador, name='administrador'),
-    path('agregarproducto/', agregarproducto, name='agregarproducto'),
+    path('agregar_producto/', agregar_producto, name='agregar_producto'),
     path('carrito/', carrito, name='carrito'),
     path('catalogo/', catalogo, name='catalogo'),
     path('detalle_producto/<str:nombre_producto>/', detalle_producto, name='detalle_producto'),
@@ -17,11 +17,11 @@ urlpatterns = [
     path('crearcuenta/', crearcuenta, name='crearcuenta'),
     path('ajustescuenta/<id>', ajustescuenta, name='ajustescuenta'),
     path('datospersonales/', datospersonales, name='datospersonales'),
-    path('editarproducto/', editarproducto, name='editarproducto'),
+    path('editarproducto/<str:nombre_producto>/', editarproducto, name='editarproducto'),
     path('finanzas/', finanzas, name='finanzas'),
     path('guardado/', guardado, name='guardado'),
     path('', index, name='index'),
-    #path('iniciodesesion/', iniciodesesion, name='iniciodesesion'),
+    path('productosadmin/', productosadmin, name='productosadmin'),
     path('listausuarios/', listausuarios, name='listausuarios'),
     path('localizacion/', localizacion, name='localizacion'),
     path('modpedido/', modpedido, name='modpedido'),
@@ -42,6 +42,7 @@ urlpatterns = [
     path('actualizartelefono/', actualizar_telefono, name='actualizartelefono'),
     path('eliminar_cuenta/', eliminar_cuenta, name='eliminar_cuenta'),
     path('actualizardireccion/', actualizar_direccion, name='actualizardireccion'),
+    path('eliminar_producto/<str:nombre_producto>/', eliminar_producto, name='eliminar_producto'),
 ]
 
 
