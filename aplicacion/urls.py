@@ -3,7 +3,7 @@ from .views import (stuff, ajustescuenta,cerrar_sesion, index, login2, crearcuen
     administrador, listausuarios, localizacion, catalogo, agregar_producto_carrito, carrito, contacto, 
     datospersonales, vistausuario, seguipedido, modpedido, pedidosadmin, finanzas, stock, 
     editarproducto, agregarproducto, guardado, actualizar_correo, actualizar_telefono, actualizar_usuario, detalle_producto,
-    detalle_producto, eliminar_producto_carrito, eliminar_cuenta, actualizar_direccion)
+    detalle_producto, eliminar_producto_carrito, eliminar_cuenta, actualizar_direccion, productosadmin,)
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -17,12 +17,11 @@ urlpatterns = [
     path('crearcuenta/', crearcuenta, name='crearcuenta'),
     path('ajustescuenta/<id>', ajustescuenta, name='ajustescuenta'),
     path('datospersonales/', datospersonales, name='datospersonales'),
-    path('editarproducto/', editarproducto, name='editarproducto'),
+    path('editarproducto/<int:producto_id>/', editarproducto, name='editarproducto'),
     path('finanzas/', finanzas, name='finanzas'),
     path('guardado/', guardado, name='guardado'),
     path('', index, name='index'),
-    path('productosadmin/', productosadmin, name='productosadmin')
-    #path('iniciodesesion/', iniciodesesion, name='iniciodesesion'),
+    path('productosadmin/', productosadmin, name='productosadmin'),
     path('listausuarios/', listausuarios, name='listausuarios'),
     path('localizacion/', localizacion, name='localizacion'),
     path('modpedido/', modpedido, name='modpedido'),

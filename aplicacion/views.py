@@ -287,8 +287,18 @@ def actualizar_usuario(request):
     })
 
 
-def editarproducto(request):
-    return render(request, 'aplicacion/editarproducto.html')
+def editarproducto(request, nombre_producto):
+    producto = get_object_or_404(Producto, nombre=nombre_producto)
+    
+    if request.method == 'POST':
+        form = EditarProductoForm(request.POST, instance=producto)
+        if form.is_valid():
+            form.save()
+            return redirect('productosadmin')  # redirige de vuelta a la lista de productos administrativos
+    else:
+        form = EditarProductoForm(instance=producto)
+    
+    return render(request, 'editar_producto.html', {'form': form, 'producto': producto})
 
 def finanzas(request):
     return render(request, 'aplicacion/finanzas.html')
@@ -326,7 +336,17 @@ def pedidosadmin(request):
     return render(request, 'aplicacion/pedidosadmin.html')
 
 def productosadmin(request):
-    return render(request, 'aplicacion/producto.html')
+    productos = Producto.objects.all()
+
+    form = FiltroCategoriaForm(request.GET)
+    if form.is_valid():
+        categoria = form.cleaned_data.get('categoria')
+        if categoria:
+            productos = productos.filter(categoria_producto=categoria)
+
+    datos = {'productos': productos, 'form': form}
+
+    return render(request, 'aplicacion/catalogo.html', datos)
 
 def registro(request):
     return render(request, 'aplicacion/registro.html')

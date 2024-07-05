@@ -143,3 +143,9 @@ class DirectionUpdateForm(forms.ModelForm):
         if commit:
             perfil.save()
         return perfil
+    
+class EditarProductoForm(forms.ModelForm):
+        class Meta:
+            model = Producto
+            fields = ['nombre', 'precio', 'descripcion', 'foto']  # ajusta los campos según tu modelo Producto
+            # opcionalmente, puedes personalizar widgets o validaciones aquí
