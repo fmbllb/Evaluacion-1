@@ -12,6 +12,7 @@ urlpatterns = [
     path('agregarproducto/', agregarproducto, name='agregarproducto'),
     path('carrito/', carrito, name='carrito'),
     path('catalogo/', catalogo, name='catalogo'),
+    path('detalle_producto/<str:nombre_producto>/', detalle_producto, name='detalle_producto'),
     path('contacto/', contacto, name='contacto'),
     path('crearcuenta/', crearcuenta, name='crearcuenta'),
     path('ajustescuenta/<id>', ajustescuenta, name='ajustescuenta'),

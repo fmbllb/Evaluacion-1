@@ -1,30 +1,34 @@
 {% extends "aplicacion/base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block contenido %}
 
-<div class="container mt-5">
+<div class="container-fluid mt-5 mx-0 px-0">
     <div class="row">
+        <!-- Filtro (col-lg-3) -->
         <div class="col-lg-3 mb-4">
-            <!-- Filtro-->
-             <h5>Filtrar por:</h5>
-            <form method="get" class="mb-4 mt-2">
-                {{ form }}
-                <button type="submit" class="btn btn-sm btn-primary rounded-0 mt-2">Filtrar</button>
-                <a class="btn btn-sm btn-warning rounded-0 mt-2" href="{% url 'catalogo' %}">Borrar Filtro</a>
-            </form>
+            <div class="card rounded-0">
+                <div class="card-body">
+                    <h5 class="card-title">Filtrar por:</h5>
+                    {% crispy form %}
+                    <a class="btn btn-warning mt-2" href="{% url 'catalogo' %}">Borrar Filtro</a>
+                </div>
+            </div>
         </div>
 
         <!-- Catalogo -->
-        <div class="col-lg-9">
+        <div class="col-lg-9 mb-5">
             <div class="row">
                 {% for producto in productos %}
-                <div class="col-lg-3 mb-4">
-                    <a href="#"><img class="thumbnail" src="{{ producto.foto.url }}" alt="{{ producto.nombre }}" ></a>
+                <div class="col-lg-3 mb-4" >
+                    <a href="{% url 'detalle_producto' producto.nombre %}">
+                        <img class="thumbnail" src="{{ producto.foto.url }}" alt="{{ producto.nombre }}" >
+                    </a>
                     <div class="box-element producto"></div>
-                    <h6><strong>{{ producto.nombre }}</strong></h6>
+                    <h6 class="product-title"><strong>{{ producto.nombre }}</strong></h6>
                     <hr>
                     <div class="text-center">
-                        <h4 class="mt-2 mx-5" style="float: bottom;">${{ producto.precio|floatformat:2 }}</h4>
+                        <h4 class="mt-2">${{ producto.precio|floatformat:2 }}</h4>
                         <button class="btn mt-1 btn-success add-btn rounded-0">Añadir a Carrito</button>
                     </div>
                 </div>

@@ -1,0 +1,49 @@
+{% extends "aplicacion/base.html" %}
+{% load static %}
+{% block contenido %}
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-lg-5 d-flex justify-content-center align-items-center">
+            {% if producto.foto %}
+                <img class="img-producto" src="{{ producto.foto.url }}" alt="Foto de {{ producto.nombre }}">
+            {% endif %}
+        </div>
+        
+        <div class="col-lg-1 d-flex justify-content-center align-items-center">
+            <div class="vr"></div>
+        </div>
+        
+        <div class="linea-horizontal"></div>
+
+        <div class="col-lg-6">
+            <h3>{{ producto.nombre }}</h1>
+            <p class="mt-3">En stock: # Articulo(s)</p>
+            <p style="font-size: x-large;"><strong>${{ producto.precio }}</strong></p>
+            
+            <!-- Contador -->
+            <div class="input-group ms-5 p-3">
+                <button class="btn btn-outline-secondary rounded-0" type="button" id="decrement">-</button>
+                <input type="number" value="1" min="1" max="10" class="form-control text-center" id="qtyInput">
+                <button class="btn btn-outline-secondary rounded-0" type="button" id="increment">+</button>
+            </div>
+
+            <!--Botones-->
+            <div class="mt-5 d-flex justify-content-lg-between justify-content-center">
+                <a href="{% url 'catalogo' %}" class="btn btn-primary rounded-0">Volver al catálogo</a>
+                <button class="btn btn-success rounded-0">Añadir a Carrito</button>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <!--Descripcion-->
+    <div class="descripcion-producto mb-5">
+        <h2>Descripción</h2>
+        <div class="texto-pequeno mt-3">
+            {{ producto.descripcion|linebreaks }}
+        </div>
+    </div>
+
+
+{% endblock contenido %}

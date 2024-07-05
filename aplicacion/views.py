@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import *
+from .enumeraciones import TIPO_PRODUCTO
 
 # Create your views here.
 
@@ -109,9 +110,14 @@ def catalogo(request):
     return render(request, 'aplicacion/catalogo.html', datos)
 
 
+#Detalles de producto
+def detalle_producto(request, nombre_producto):
+
+    producto = get_object_or_404(Producto, nombre=nombre_producto)
+    return render(request, 'aplicacion/detalle_producto.html', {'producto': producto})
 
 
-#VISTA DE CONTACTO
+
 def contacto(request):
     return render(request, 'aplicacion/contacto.html')
 #futuro formulario de perfil
@@ -262,8 +268,22 @@ def finanzas(request):
 def guardado(request):
     return render(request, 'aplicacion/guardado.html')
 
+#Index
 def index(request):
-    return render(request, 'aplicacion/index.html')
+    productos=Producto.objects.all()
+    categorias={producto.categoria_producto: [] for producto in productos}
+
+    for producto in productos:
+        categorias[producto.categoria_producto].append(producto)
+
+
+
+
+    datos = {
+        'categorias': categorias,
+        'productos':productos
+    }
+    return render(request, 'aplicacion/index.html', datos)
 
 def listausuarios(request):
     return render(request, 'aplicacion/listausuarios.html')
