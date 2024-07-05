@@ -89,8 +89,8 @@ def carrito(request):
     }
     return render(request, 'aplicacion/carrito.html', context)
 
-def detalle_producto(request, producto_id):
-    producto = get_object_or_404(Producto, id=producto_id)
+def detalle_producto(request, nombre_producto):
+    producto = get_object_or_404(Producto, id=id)
     context = {
         'producto': producto,
     }
