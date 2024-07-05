@@ -298,7 +298,7 @@ def editarproducto(request, nombre_producto):
     else:
         form = EditarProductoForm(instance=producto)
     
-    return render(request, 'editar_producto.html', {'form': form, 'producto': producto})
+    return render(request, 'editarproducto.html', {'form': form, 'producto': producto})
 
 def finanzas(request):
     return render(request, 'aplicacion/finanzas.html')
@@ -346,7 +346,7 @@ def productosadmin(request):
 
     datos = {'productos': productos, 'form': form}
 
-    return render(request, 'aplicacion/catalogo.html', datos)
+    return render(request, 'aplicacion/productosadmin.html', datos)
 
 def registro(request):
     return render(request, 'aplicacion/registro.html')
