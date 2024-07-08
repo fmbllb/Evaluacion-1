@@ -29,7 +29,7 @@
                     <h6 class="product-title"><strong>{{ producto.nombre }}</strong></h6>
                     <hr>
                     <div class="text-center">
-                        <h4 class="mt-2">${{ producto.precio|floatformat:2 }}</h4>
+                        <h4 class="mt-2">${{ producto.precio }}</h4>
                         <a class="btn btn-secondary mt-2" href="{% url 'editarproducto' producto.nombre  %}">Editar Producto</a>
                     </div>
                 </div>

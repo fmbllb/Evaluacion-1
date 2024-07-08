@@ -28,7 +28,7 @@
                     <h6 class="product-title"><strong>{{ producto.nombre }}</strong></h6>
                     <hr>
                     <div class="text-center">
-                        <h4 class="mt-2">${{ producto.precio|floatformat:2 }}</h4>
+                        <h4 class="mt-2">${{ producto.precio }}</h4>
                         <form method="post" action="{% url 'agregar_producto_carrito' producto.id %}">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-primary">Agregar al Carrito</button>

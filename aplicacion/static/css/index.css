@@ -182,3 +182,23 @@ textarea {
     background-color: #f8d7da;
     border-color: #f5c6cb;
 }
+
+/*Estilo de navbar solo visible en dispositivos mobiles*/
+@media (max-width: 991.98px) {
+    .navbar-nav.d-lg-none ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      list-style-type: none;
+      padding-inline-start: 0;
+    }
+  
+    .navbar-nav.d-lg-none li {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+  
+    .navbar-nav.d-lg-none .btn {
+      width: 100%;
+    }
+  }
