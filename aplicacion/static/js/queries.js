@@ -323,101 +323,15 @@ $(document).ready(function() {
   });
 });
 
-//Valida que los campos de "Agregar Producto" no estén vacíos
-$(document).ready(function() {
-  function validarCampos() {
-    let nombreProducto = $("#nombreProducto").val();
-    let descripcionProducto = $("#descripcionProducto").val();
-    let precioProducto = $("#precioProducto").val();
-    let categoriaProducto = $("#categoriaProducto").val();
-    let imagenProducto = $("#imagenProducto").val();
+//Valida que no se puedan agregar letras en los campos de precio y stock de un producto
+$(document).ready(function () {
+  // Validación de número en campo de precio
+  $('#id_precio').on('input', function () {
+      this.value = this.value.replace(/[^0-9]/g, ''); // Solo permite números
+  });
 
-    if (nombreProducto !== "" && descripcionProducto !== "" && precioProducto !== "" && categoriaProducto !== "" && imagenProducto !== "") {
-      // Todos los campos están llenos
-      if (!precioProducto.includes('-')) {
-        // El precio no contiene "-"
-        $("#btnAñadirProducto").prop("disabled", false);
-        $("#mensajePrecio").text(""); // Borra el mensaje de error
-      } else {
-        // El precio contiene "-", por lo que no permitimos agregar el producto
-        $("#btnAñadirProducto").prop("disabled", true);
-        $("#mensajePrecio").text("No se pueden ingresar valores negativos en el precio del producto.").css("color", "red");
-      }
-    } else {
-      // No todos los campos están llenos
-      $("#btnAñadirProducto").prop("disabled", true);
-      $("#mensajePrecio").text(""); // Borra el mensaje de error si los campos no están llenos
-    }
-  }
-
-  // Llama a la función validarCampos cuando se cambia el valor de cualquier campo
-  $("#nombreProducto, #descripcionProducto, #precioProducto, #categoriaProducto, #imagenProducto").on("input", validarCampos);
-});
-
-
-//Valida los campos de "Editar Producto"
-$(document).ready(function() {
-  function validarCampos() {
-    let nombreProducto = $("#nombreProducto").val();
-    let descripcionProducto = $("#descripcionProducto").val();
-    let precioProducto = $("#precioProducto").val();
-    let categoriaProducto = $("#categoriaProducto").val();
-    let imagenProducto = $("#imagenProducto").val();
-
-    if (nombreProducto !== "" && descripcionProducto !== "" && precioProducto !== "" && categoriaProducto !== "" && imagenProducto !== "") {
-      // Todos los campos están llenos
-      if (!precioProducto.includes('-')) {
-        // El precio no contiene "-"
-        $("#btnGuardarCambios").prop("disabled", false);
-        $("#mensajePrecio").text(""); // Borra el mensaje de error
-      } else {
-        // El precio contiene "-", por lo que no permitimos agregar el producto
-        $("#btnGuardarCambios").prop("disabled", true);
-        $("#mensajePrecio").text("No se pueden ingresar valores negativos en el precio del producto.").css("color", "red");
-      }
-    } else {
-      // No todos los campos están llenos
-      $("#btnGuardarCambios").prop("disabled", true);
-      $("#mensajePrecio").text(""); // Borra el mensaje de error si los campos no están llenos
-    }
-  }
-
-  // Llama a la función validarCampos cuando se cambia el valor de cualquier campo
-  $("#nombreProducto, #descripcionProducto, #precioProducto, #categoriaProducto, #imagenProducto").on("input", validarCampos);
-});
-
-// Desactiva el campo de input del carrito de compras
-$("#qtyInput").attr("disabled", true)
- 
-
-//Elimina elemento de la lista de los pedidos del administrador
-$(document).ready(function() {
-  $("#confirmacionEliminarPedido").click(function() {
-      // Esconde los elementos en el div con id "contenedor"
-      $("#pedido1Admin").children().hide();
+  // Validación de número en campo de stock
+  $('#id_stock').on('input', function () {
+      this.value = this.value.replace(/[^0-9]/g, ''); // Solo permite números
   });
 });
-
-
-
-/*$(document).ready(function () {
-  let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-
-  // Lógica para validar una dirección de correo electrónico
-  $("#registroForm").submit(function (event) {
-    // Evitar que se envíe el formulario por defecto
-    event.preventDefault();
-
-    // Obtener el valor del campo de correo electrónico
-    let email = $("#registroEmail").val();
-
-    // Validar el correo electrónico usando la expresión regular
-    if (emailRegex.test(email)) {
-      // El correo electrónico es válido
-      alert("Correo electrónico válido.");
-    } else {
-      // El correo electrónico no es válido
-      alert("Correo electrónico inválido.");
-    }
-  });
-});*/

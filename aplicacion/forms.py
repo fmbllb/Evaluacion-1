@@ -150,7 +150,7 @@ class EditarProductoForm(forms.ModelForm):
 
     class Meta:
         model = Producto
-        fields = ['nombre', 'precio', 'descripcion', 'categoria_producto', 'foto']
+        fields = ['nombre', 'precio', 'descripcion', 'categoria_producto', 'foto', 'stock']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -162,6 +162,7 @@ class EditarProductoForm(forms.ModelForm):
             'descripcion',
             'categoria_producto',
             'foto',
+            'stock',  # Agregar el campo stock al formulario
             ButtonHolder(
                 Submit('submit', 'Guardar cambios', css_class='btn btn-primary mr-2'),
                 HTML('<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Eliminar producto</button>'),
