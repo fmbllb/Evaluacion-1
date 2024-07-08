@@ -3,7 +3,7 @@ from .views import (stuff, ajustescuenta,cerrar_sesion, index, login2, crearcuen
     administrador, listausuarios, localizacion, catalogo, agregar_producto_carrito, carrito, contacto, 
     datospersonales, vistausuario, seguipedido, modpedido, pedidosadmin, finanzas, stock, 
     editarproducto, agregar_producto, guardado, actualizar_correo, actualizar_telefono, actualizar_usuario, detalle_producto,
-    detalle_producto, eliminar_producto_carrito, eliminar_cuenta, actualizar_direccion, productosadmin, eliminar_producto, buscar_productos)
+    eliminar_producto_carrito, eliminar_cuenta, actualizar_direccion, productosadmin, eliminar_producto, autocompletar)
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -44,7 +44,7 @@ urlpatterns = [
     path('eliminar_cuenta/', eliminar_cuenta, name='eliminar_cuenta'),
     path('eliminar_producto/<str:nombre_producto>/', eliminar_producto, name='eliminar_producto'),
     path('actualizardireccion/', actualizar_direccion, name='actualizardireccion'),
-    path('buscar/', buscar_productos, name='buscar_productos'),
+    path('autocomplete/', autocompletar, name='autocomplete'),
     ]
 
 

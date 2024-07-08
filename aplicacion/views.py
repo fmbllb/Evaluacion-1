@@ -4,6 +4,7 @@ from .forms import *
 from os import remove, path
 from django.http import JsonResponse
 from django.conf import settings
+from django.urls import reverse
 from django.contrib.auth import logout, login
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -407,8 +408,15 @@ def eliminar_producto(request, nombre_producto):
     # Si no se confirma la eliminación, redirige a la página de edición del producto
     return redirect('editar_producto', nombre_producto=nombre_producto)
 
-#Buscar producto
-def buscar_productos(request):
-    query = request.GET.get('q')
-    productos = Producto.objects.filter(nombre__icontains=query)
-    return render(request, 'buscar_resultados.html', {'productos': productos, 'query': query})
+#Autocompletado barra de busqueda
+def autocompletar(request):
+    if 'term' in request.GET:
+        term = request.GET.get('term')
+        productos = Producto.objects.filter(nombre__icontains=term)
+        results = []
+        for producto in productos:
+            producto_json = {}
+            producto_json['label'] = producto.nombre
+            producto_json['value'] = reverse('detalle_producto', args=[producto.nombre])
+            results.append(producto_json)
+        return JsonResponse(results, safe=False)
