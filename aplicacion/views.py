@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.forms import  AuthenticationForm
 from .forms import *
 from os import remove, path
-import os
+from django.http import JsonResponse
 from django.conf import settings
 from django.contrib.auth import logout, login
 from django.contrib.auth.models import User
@@ -406,3 +406,9 @@ def eliminar_producto(request, nombre_producto):
 
     # Si no se confirma la eliminación, redirige a la página de edición del producto
     return redirect('editar_producto', nombre_producto=nombre_producto)
+
+#Buscar producto
+def buscar_productos(request):
+    query = request.GET.get('q')
+    productos = Producto.objects.filter(nombre__icontains=query)
+    return render(request, 'buscar_resultados.html', {'productos': productos, 'query': query})

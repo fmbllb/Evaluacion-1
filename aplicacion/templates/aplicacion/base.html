@@ -42,13 +42,26 @@
               {% endif %}
             </ul>
   
-            <!--Barra de busqueda para dispositivos grandes (lg y superior) -->
-            <form class="d-none d-lg-block mx-auto">
+            <!-- Barra de búsqueda para dispositivos grandes (lg y superior) -->
+            <form class="d-none d-lg-block mx-auto" method="get" action="{% url 'buscar_productos' %}">
               <div class="input-group">
-                <input class="form-control" type="search" placeholder="Buscar" aria-label="Search">
+                <input class="form-control" type="search" placeholder="Buscar" aria-label="Search" name="q">
                 <button class="btn btn-outline-success" type="submit">Buscar</button>
               </div>
             </form>
+  
+            <!-- Barra de búsqueda para dispositivos pequeños (menos de lg) -->
+            <form class="d-lg-none mt-3" method="get" action="{% url 'buscar_productos' %}">
+              <div class="input-group">
+                <input class="form-control" type="search" placeholder="Buscar" aria-label="Search" name="q">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+              </div>
+            </form>
+  
+            <!-- Resultados de búsqueda -->
+            <div id="searchResults" class="mt-3">
+              <!-- Aquí se mostrarán los resultados de la búsqueda -->
+            </div>
   
             <ul class="navbar-nav">
               {% if request.user.is_authenticated %}
@@ -61,7 +74,7 @@
                 <a href="{% url 'vistausuario' request.user.id %}" class="nav-link">Perfil</a>
                 {% endif %}
               </li>
-
+  
               <li class="nav-item me-3">
                 <a href="{% url 'cerrar_sesion' %}" class="nav-link">Cerrar</a>
               </li>
@@ -73,19 +86,10 @@
                 <a href="{% url 'crearcuenta' %}" class="nav-link">Registrarse</a>
               </li>
               {% endif %}
-
+  
               <li class="nav-item me-3">
                 <a href="{% url 'carrito' %}" class="btn btn-warning">Carrito</a>
               </li>
-
-              <!--Barra de busqueda para dispositivos pequeños (menos de lg) -->
-              <form class="d-lg-none mt-3">
-                <div class="input-group">
-                  <input class="form-control" type="search" placeholder="Buscar" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Buscar</button>
-                </div>
-              </form>
-
             </ul>
           </div>
         </div>
