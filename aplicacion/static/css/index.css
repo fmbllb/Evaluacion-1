@@ -135,20 +135,6 @@ main {
     }
 }
 
-.input-group{
-    width: 100%;
-    max-width: 175px; /* Ajusta el ancho máximo según tus necesidades */
-    margin-right: auto;
-}
-
-@media (max-width: 992px) {
-    .input-group {
-        width: 100%;
-        max-width: 250px; /* Ajusta el ancho máximo según tus necesidades */
-        margin-right: auto;
-    }
-}
-
 /* Estilos para ocultar las flechas del input number */
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {

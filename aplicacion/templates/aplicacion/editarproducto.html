@@ -3,67 +3,37 @@
 {% load crispy_forms_tags %}
 {% block contenido %}
 
+
 <div class="container mt-5">
-  <div class="card p-4">
-      <h2 class="mb-4">Editar Producto: {{ producto.nombre }}</h2>
-      <form method="post" enctype="multipart/form-data" novalidate>
-          {% csrf_token %}
-          {% for field in form %}
-              {% if field.name == 'descripcion' %}
-                  <div class="mb-3">
-                      {{ field.label_tag }}
-                      {{ field }}
-                  </div>
-              {% else %}
-                  <div class="mb-3">
-                      {{ field.label_tag }}
-                      <div>
-                        {{ field }}
-                      </div>
-                      {% if field.errors %}
-                          <div class="invalid-feedback" style="display: block;">
-                              {% for error in field.errors %}
-                                  <p>{{ error }}</p>
-                              {% endfor %}
-                          </div>
-                      {% endif %}
-                  </div>
-              {% endif %}
-          {% endfor %}
-          {% if producto.foto %}
-              <div class="mb-3">
-                  <label>Imagen Actual:</label><br>
-                  <img src="{{ producto.foto.url }}" alt="{{ producto.nombre }}" class="img-thumbnail" style="max-width: 200px;">
-              </div>
-          {% endif %}
-          <div class="d-flex justify-content-between mt-3">
-              <!-- Botón de Eliminar Producto con Bootstrap 5 -->
-              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDelete">Eliminar Producto</button>
-              <div>
-                  <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                  <a href="{% url 'productosadmin' %}" class="btn btn-secondary">Cancelar</a>
-              </div>
-          </div>
-      </form>
-  </div>
+    <h1>Editar Producto</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% crispy form %}
+    </form>
 </div>
 
-<!-- Modal de Confirmación de Eliminación con Bootstrap 5 -->
-<div class="modal fade" id="confirmDelete" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
-  <div class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="confirmDeleteLabel">Confirmar Eliminación</h5>
-          </div>
-          <div class="modal-body">
-              ¿Estás seguro de que deseas eliminar este producto?
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <a href="{% url 'eliminar_producto' producto.nombre %}" class="btn btn-danger">Eliminar</a>
-          </div>
-      </div>
-  </div>
+<!-- Modal de confirmación para eliminar producto -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas eliminar el producto "{{ form.instance.nombre }}"?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <form id="eliminarForm" method="post" action="{% url 'eliminar_producto' producto.nombre %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="eliminar" value="True">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
 
 {% endblock contenido %}

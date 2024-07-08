@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.forms import  AuthenticationForm
 from .forms import *
 from os import remove, path
+import os
 from django.conf import settings
 from django.contrib.auth import logout, login
 from django.contrib.auth.models import User
@@ -297,18 +298,6 @@ def actualizar_usuario(request):
     })
 
 
-def editarproducto(request, nombre_producto):
-    producto = get_object_or_404(Producto, nombre=nombre_producto)
-    
-    if request.method == 'POST':
-        form = EditarProductoForm(request.POST, request.FILES, instance=producto)
-        if form.is_valid():
-            form.save()
-            return redirect('productosadmin')  # redirige de vuelta a la lista de productos administrativos
-    else:
-        form = EditarProductoForm(instance=producto)
-    
-    return render(request, 'aplicacion/editarproducto.html', {'form': form, 'producto': producto})
 
 def finanzas(request):
     return render(request, 'aplicacion/finanzas.html')
@@ -347,15 +336,25 @@ def pedidosadmin(request):
 
 def productosadmin(request):
     productos = Producto.objects.all()
-
-    form = FiltroCategoriaForm(request.GET)
+    form = FiltroCategoriaForm(request.GET or None)  # Inicializa el formulario con GET o None
+    
+    if request.method == 'POST':
+        nombre_producto = request.POST.get('nombre_producto')
+        if nombre_producto:
+            producto = Producto.objects.filter(nombre=nombre_producto).first()
+            if producto:
+                producto.delete()
+                return redirect('aplicacion/productosadmin')  # Redirige a la página de administración después de eliminar
+    
     if form.is_valid():
         categoria = form.cleaned_data.get('categoria')
         if categoria:
             productos = productos.filter(categoria_producto=categoria)
 
-    datos = {'productos': productos, 'form': form}
-
+    datos = {
+        'productos': productos,
+        'form': form,
+    }
     return render(request, 'aplicacion/productosadmin.html', datos)
 
 def registro(request):
@@ -365,9 +364,45 @@ def registro(request):
 def stock(request):
     return render(request, 'aplicacion/stock.html')
 
+#Editar un producto existente
+def editarproducto(request, nombre_producto):
+    produc=get_object_or_404(Producto,nombre= nombre_producto)
+    form=EditarProductoForm(instance=produc)
+    imagen_anterior = produc.foto.path if produc.foto else None
+    
+    if request.method=="POST":
+            form=EditarProductoForm(data=request.POST,files=request.FILES,instance=produc)
+            if form.is_valid():
+                imagen_nueva = form.cleaned_data.get('foto') if len(form.cleaned_data.get('foto').name.split("/")) == 1 else None
+                if imagen_nueva and imagen_anterior:
+                # Comprobar si la nueva imagen es diferente de la anterior
+                    if imagen_nueva.name != path.basename(imagen_anterior):
+                    # Eliminar la imagen anterior
+                        if path.exists(imagen_anterior):
+                            remove(imagen_anterior)
+                    
+                form.save()
+                return redirect(to="productosadmin")
+                
+    datos={
+        "form":form ,
+        "producto":produc
+    }
+    
+    return render(request,'aplicacion/editarproducto.html',datos)
+    
+
 #Eliminar producto
 def eliminar_producto(request, nombre_producto):
-    producto = get_object_or_404(Producto, nombre=nombre_producto)
-    producto.delete()
-    return redirect('productosadmin')
 
+    producto = get_object_or_404(Producto, nombre=nombre_producto)
+    if request.method == 'POST' and request.POST.get('eliminar') == 'True':
+        # Eliminar la imagen asociada al producto si existe
+        if producto.foto:
+            producto.foto.delete()
+        # Eliminar el producto de la base de datos
+        producto.delete()
+        return redirect('productosadmin')  # Redirige a la página de administración de productos después de eliminar
+
+    # Si no se confirma la eliminación, redirige a la página de edición del producto
+    return redirect('editar_producto', nombre_producto=nombre_producto)

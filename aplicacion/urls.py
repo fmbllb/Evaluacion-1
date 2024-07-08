@@ -42,9 +42,9 @@ urlpatterns = [
     path('eliminarproductocarrito/<item_id>/', eliminar_producto_carrito, name='eliminar_producto_carrito'),
     path('actualizartelefono/', actualizar_telefono, name='actualizartelefono'),
     path('eliminar_cuenta/', eliminar_cuenta, name='eliminar_cuenta'),
-    path('actualizardireccion/', actualizar_direccion, name='actualizardireccion'),
     path('eliminar_producto/<str:nombre_producto>/', eliminar_producto, name='eliminar_producto'),
-]
+    path('actualizardireccion/', actualizar_direccion, name='actualizardireccion'),
+    ]
 
 
 if settings.DEBUG:
