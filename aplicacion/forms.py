@@ -152,6 +152,16 @@ class EditarProductoForm(forms.ModelForm):
         model = Producto
         fields = ['nombre', 'precio', 'descripcion', 'categoria_producto', 'foto', 'stock']
 
+
+        
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre del Producto'}),
+            'precio': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Precio'}),
+            'descripcion': forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Descripción'}),
+            'categoria_producto': forms.Select(attrs={'class': 'form-control'}),
+            'foto': forms.ClearableFileInput(attrs={'class': 'form-control', 'accept': 'image/*'}),
+        }
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
