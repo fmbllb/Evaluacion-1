@@ -5,27 +5,27 @@
 
 <div class="container mt-5">
   <div class="row">
+    <!-- carrito.html -->
     <div class="col-sm-8">
       <h2 style="font-size:150%"><strong>Carrito de Compras</strong></h2>
-      <form method="post">
+      <form method="post" id="carrito-form">
         {% csrf_token %}
         {{ compra_form|crispy }}
+
         {% if carrito.items.all %}
-        {% for item in carrito.items.all %}
-        <div class="d-flex border align-items-center mt-3 p-2">
-          <div class="me-3">
-            {% if item.producto.foto %}
-              <img src="{{ item.producto.foto.url }}" class="img-fluid" alt="Imagen del producto" width="100">
-            {% else %}
-              <img src="{% static 'img/default-product-image.jpg' %}" class="img-fluid" alt="Imagen por defecto" width="100">
-            {% endif %}
-          </div>
-          <div class="flex-grow-1">
-            <p>{{ item.producto.nombre }}</p>
-            <p class="fw-bold">Precio Unitario: ${{ item.producto.precio }}</p>
-          </div>
-          <div class="input-group">
-            <label for="cantidad">Cantidad:</label>
+          {% for item in carrito.items.all %}
+          <div class="d-flex border align-items-center mt-3 p-2" data-item-id="{{ item.id }}">
+            <div class="me-3">
+              {% if item.producto.foto %}
+                <img src="{{ item.producto.foto.url }}" class="img-fluid" alt="Imagen del producto" width="100">
+              {% else %}
+                <img src="{% static 'img/default-product-image.jpg' %}" class="img-fluid" alt="Imagen por defecto" width="100">
+              {% endif %}
+            </div>
+            <div class="flex-grow-1">
+              <p>{{ item.producto.nombre }}</p>
+              <p class="fw-bold">Precio Unitario: ${{ item.producto.precio }}</p>
+            </div>
             <div class="input-group">
                 <button type="button" class="btn btn-outline-secondary btn-minus" data-item-id="{{ item.id }}">-</button>
                 <input type="number" name="cantidades" class="form-control item-quantity" min="1" value="{{ item.cantidad }}" data-item-id="{{ item.id }}">
@@ -54,6 +54,8 @@
       </form>
     </div>
 
+    
+
     <div class="col-md-4 d-flex flex-column align-items-center">
       <!-- Resumen de objetos en el carrito -->
       <div class="card mt-5 mb-3 rounded-0 overflow-hidden p-4">
@@ -64,7 +66,7 @@
               <p>{{ item.producto.nombre }}</p>
             </li>
           {% endfor %}
-          <li class="list-group-item" id="totalCarrito">Total: ${{ total }}</li>
+          <p>Total en el carrito: ${{ total }}</p>
         </ul>
         <div class="card-body">
         <!-- Botón para abrir el modal -->
