@@ -430,22 +430,40 @@ $(document).ready(function() {
   }
 });
 
-//Validacion de numero de campo de cantidad en carrito
+//Script para funciones de carrito
 $(document).ready(function () {
+  // Función para obtener el valor de una cookie por su nombre
+  function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              // Busca la cookie por su nombre
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+
+  // Función para establecer el valor de una cookie
+  function setCookie(name, value) {
+      document.cookie = name + '=' + encodeURIComponent(value) + ';path=/';
+  }
+
   // Deshabilitar los campos de entrada al cargar la página
   $('.qtyInputCarrito').prop('disabled', true);
 
-  // Habilitar el campo de entrada al hacer clic en los botones + o -
-  $('.btn-minus, .btn-plus').on('click', function () {
-    var itemID = $(this).closest('.input-group').find('.qtyInputCarrito').data('item-id');
-    $('#qtyInputCarrito-' + itemID).prop('disabled', false);
-  });
-
-  // Validar y restringir entrada a números solo cuando el campo está habilitado
-  $('.qtyInputCarrito').on('input', function () {
-    if (!$(this).prop('disabled')) {
-      this.value = this.value.replace(/[^0-9]/g, ''); // Solo permite números
-    }
+  // Cargar cantidades guardadas desde las cookies al cargar la página
+  $('.qtyInputCarrito').each(function () {
+      var itemID = $(this).data('item-id');
+      var cantidad = getCookie('cantidad_' + itemID);
+      if (cantidad !== null && cantidad !== '') {
+          $(this).val(cantidad);
+      }
   });
 });
 
