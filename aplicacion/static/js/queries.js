@@ -272,13 +272,13 @@ $(document).ready(function() {
   });
 
   // Calcular el valor total al cambiar la cantidad
-  $('#qtyInput').on('input', function() {
+  $('#qtyInputCarrito').on('input', function() {
     calculateTotal();
   });
 });
 
 function calculateTotal() {
-  const quantityInput = $('#qtyInput');
+  const quantityInput = $('#qtyInputCarrito');
   const price = 6500; // Precio del producto
   const quantity = parseInt(quantityInput.val());
   const total = price * quantity;
@@ -294,7 +294,7 @@ function calculateTotal() {
 }
 
 function adjustQuantity(change) {
-  const quantityInput = $('#qtyInput');
+  const quantityInput = $('#qtyInputCarrito');
   const currentValue = parseInt(quantityInput.val());
   const newValue = currentValue + change;
   if (newValue >= 1 && newValue <= 10) {
@@ -331,7 +331,141 @@ $(document).ready(function () {
   });
 
   // Validación de número en campo de stock
-  $('#id_stock').on('input', function () {
+$('#id_stock').on('input', function () {
       this.value = this.value.replace(/[^0-9]/g, ''); // Solo permite números
   });
 });
+
+//Valida los campos de "Editar Producto"
+$(document).ready(function() {
+  function validarCampos() {
+    let nombreProducto = $("#nombreProducto").val();
+    let descripcionProducto = $("#descripcionProducto").val();
+    let precioProducto = $("#precioProducto").val();
+    let categoriaProducto = $("#categoriaProducto").val();
+    let imagenProducto = $("#imagenProducto").val();
+
+    if (nombreProducto !== "" && descripcionProducto !== "" && precioProducto !== "" && categoriaProducto !== "" && imagenProducto !== "") {
+      // Todos los campos están llenos
+      if (!precioProducto.includes('-')) {
+        // El precio no contiene "-"
+        $("#btnGuardarCambios").prop("disabled", false);
+        $("#mensajePrecio").text(""); // Borra el mensaje de error
+      } else {
+        // El precio contiene "-", por lo que no permitimos agregar el producto
+        $("#btnGuardarCambios").prop("disabled", true);
+        $("#mensajePrecio").text("No se pueden ingresar valores negativos en el precio del producto.").css("color", "red");
+      }
+    } else {
+      // No todos los campos están llenos
+      $("#btnGuardarCambios").prop("disabled", true);
+      $("#mensajePrecio").text(""); // Borra el mensaje de error si los campos no están llenos
+    }
+  }
+
+  // Llama a la función validarCampos cuando se cambia el valor de cualquier campo
+  $("#nombreProducto, #descripcionProducto, #precioProducto, #categoriaProducto, #imagenProducto").on("input", validarCampos);
+});
+
+// Desactiva el campo de input del carrito de compras
+$("#qtyInputCarrito").attr("disabled", true)
+
+//Elimina elemento de la lista de los pedidos del administrador
+$(document).ready(function() {
+  $("#confirmacionEliminarPedido").click(function() {
+      // Esconde los elementos en el div con id "contenedor"
+      $("#pedido1Admin").children().hide();
+  });
+});
+
+//Script aumento y decremento de carrito
+$(document).ready(function() {
+  // Botón de disminuir cantidad
+  $('.btn-minus').click(function(e) {
+      e.preventDefault();
+      var $input = $(this).parent().find('input.cantidad-input');
+      var cantidad = parseInt($input.val()) - 1;
+      cantidad = cantidad < 1 ? 1 : cantidad;
+      $input.val(cantidad);
+      actualizarPrecioTotal($input);
+      $input.trigger('change');
+  });
+
+  // Botón de aumentar cantidad
+  $('.btn-plus').click(function(e) {
+      e.preventDefault();
+      var $input = $(this).parent().find('input.cantidad-input');
+      var cantidad = parseInt($input.val()) + 1;
+      cantidad = cantidad > parseInt($input.attr('max')) ? parseInt($input.attr('max')) : cantidad;
+      $input.val(cantidad);
+      actualizarPrecioTotal($input);
+      $input.trigger('change');
+  });
+
+  // Función para actualizar el precio total por producto
+  function actualizarPrecioTotal($input) {
+      var cantidad = parseInt($input.val());
+      var precioUnitario = parseFloat($input.data('precio'));
+      var precioTotal = cantidad * precioUnitario;
+      $input.closest('.d-flex').find('.card-text').text('$ ' + precioTotal.toFixed(2));
+  }
+});
+
+//Script para funciones de carrito
+$(document).ready(function () {
+  // Función para obtener el valor de una cookie por su nombre
+  function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              // Busca la cookie por su nombre
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+
+  // Función para establecer el valor de una cookie
+  function setCookie(name, value) {
+      document.cookie = name + '=' + encodeURIComponent(value) + ';path=/';
+  }
+
+  // Deshabilitar los campos de entrada al cargar la página
+  $('.qtyInputCarrito').prop('disabled', true);
+
+  // Cargar cantidades guardadas desde las cookies al cargar la página
+  $('.qtyInputCarrito').each(function () {
+      var itemID = $(this).data('item-id');
+      var cantidad = getCookie('cantidad_' + itemID);
+      if (cantidad !== null && cantidad !== '') {
+          $(this).val(cantidad);
+      }
+  });
+});
+
+/*$(document).ready(function () {
+  let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+  // Lógica para validar una dirección de correo electrónico
+  $("#registroForm").submit(function (event) {
+    // Evitar que se envíe el formulario por defecto
+    event.preventDefault();
+
+    // Obtener el valor del campo de correo electrónico
+    let email = $("#registroEmail").val();
+
+    // Validar el correo electrónico usando la expresión regular
+    if (emailRegex.test(email)) {
+      // El correo electrónico es válido
+      alert("Correo electrónico válido.");
+    } else {
+      // El correo electrónico no es válido
+      alert("Correo electrónico inválido.");
+    }
+  });
+});*/

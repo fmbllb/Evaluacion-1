@@ -1,0 +1,41 @@
+{% extends "aplicacion/base.html" %}
+{% load crispy_forms_tags %}
+{% block contenido %}
+{% load static %}
+<h2>HOLA</h2>
+{% if boletas %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Número de Boleta</th>
+                <th>Nombre del Producto</th>
+                <th>Subtotal</th>
+                <th>Total</th>
+                <th>Fecha de Boleta</th>
+                <th>Giro</th>
+                <th>Medio de Pago</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for boleta in boletas %}
+                <tr>
+                    <td>{{ boleta.id }}</td>
+                    <td>{{ boleta.fk_producto.nombre }}</td>
+                    <td>${{ boleta.subtotal }}</td>
+                    <td>${{ boleta.total }}</td>
+                    <td>{{ boleta.fecha_boleta }}</td>
+                    <td>{{ boleta.get_giro_display }}</td>
+                    <td>{{ boleta.get_medio_pago_display }}</td>
+                    <td>
+                        <a href="{% url 'detalle_boleta' boleta.id %}" class="btn btn-info">Ver</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No hay boletas registradas.</p>
+{% endif %}
+
+{% endblock contenido %}

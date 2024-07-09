@@ -7,71 +7,81 @@
   <div class="row">
     <div class="col-sm-8">
       <h2 style="font-size:150%"><strong>Carrito de Compras</strong></h2>
-      {% if carrito.items.all %}
+      <form id="carritoForm" method="post">
+        {% csrf_token %}
+        {{ compra_form|crispy }}
+        {% if carrito.items.all %}
           {% for item in carrito.items.all %}
-          <div class="d-flex border align-items-center mt-3 text-wrap">
-              {% if item.producto.foto %}
-                  <img src="{{ item.producto.foto.url }}" class="img-fluid me-3" alt="Imagen del producto" width="20%">
-              {% else %}
-                  <img src="{% static 'img/default-product-image.jpg' %}" class="img-fluid me-3" alt="Imagen por defecto" width="20%">
-              {% endif %}
-              <div>
-                  <p>{{ item.producto.nombre }}</p>
-                  <p id="precioProducto-{{ item.id }}" class="fw-bold">${{ item.producto.precio }}</p>
+            <div class="d-flex border align-items-center mt-3 p-2">
+              <div class="me-3">
+                {% if item.producto.foto %}
+                  <img src="{{ item.producto.foto.url }}" class="img-fluid" alt="Imagen del producto" width="100">
+                {% else %}
+                  <img src="{% static 'img/default-product-image.jpg' %}" class="img-fluid" alt="Imagen por defecto" width="100">
+                {% endif %}
               </div>
-              <div class="input-group ms-5 p-3" style="width: auto; min-width: 110px;">
-                  <button class="btn btn-outline-secondary rounded-0 decrement" type="button" data-item="{{ item.id }}">-</button>
-                  <input type="number" value="{{ item.cantidad }}" min="1" max="10" class="form-control text-center qtyInput" data-item="{{ item.id }}">
-                  <button class="btn btn-outline-secondary rounded-0 increment" type="button" data-item="{{ item.id }}">+</button>
-                  <p class="fw-bold ms-3 d-block mt-2" style="font-size: x-large;" id="totalValue-{{ item.id }}">$ {{ item.total }}</p>
+              <div class="flex-grow-1">
+                <p>{{ item.producto.nombre }}</p>
+                <p class="fw-bold">Precio Unitario: ${{ item.producto.precio }}</p>
               </div>
-              <a href="{% url 'eliminar_producto_carrito' item.id %}" class="btn btn-danger ms-3">Eliminar</a>
-          </div>
-          <br>
+              <div class="mb-3 w-25">
+                <label for="cantidad">Cantidad:</label>
+                <div class="input-group">
+                  <button type="button" class="btn btn-outline-secondary btn-minus" onclick="disminuirCantidad({{ item.id }})">-</button>
+                  <input id="qtyInputCarrito-{{ item.id }}" class="qtyInputCarrito form-control form-control-sm cantidad-input" type="number" name="cantidades" min="1" value="{{ item.cantidad }}" data-precio="{{ item.producto.precio }}" data-item-id="{{ item.id }}">
+                  <button type="button" class="btn btn-outline-secondary btn-plus" onclick="aumentarCantidad({{ item.id }})">+</button>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="precio">Precio Total:</label>
+                <p class="card-text fw-bold" id="precioTotal-{{ item.id }}">${{ item.total }}</p>
+              </div>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="{% url 'eliminar_producto_carrito' item.id %}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto del carrito?')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket3" viewBox="0 0 16 16">
+                    <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM3.394 15l-1.48-6h-.97l1.525 6.426a.75.75 0 0 0 .729.574h9.606a.75.75 0 0 0 .73-.574L15.056 9h-.972l-1.479 6z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <br>
           {% endfor %}
-      {% else %}
+        {% else %}
           <p>No hay productos en el carrito</p>
-      {% endif %}
-  </div>
-    
-  
-  
-    <div class="col-md-4 d-flex flex-column align-items-center">
+        {% endif %}
+      </form>
+    </div>
 
+    <div class="col-md-4 d-flex flex-column align-items-center">
       <!-- Resumen de objetos en el carrito -->
       <div class="card mt-5 mb-3 rounded-0 overflow-hidden p-4">
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Artículo(s) en el carrito: {{ carrito.items.count }}</li>
-          <li class="list-group-item">Total: $ {{ carrito.total }}</li>
+          <li class="list-group-item">Producto(s) en el carrito: {{ carrito.items.count }}</li>
+          {% for item in carrito.items.all %}
+            <li class="list-group-item">
+              <p>{{ item.producto.nombre }}</p>
+              <p class="fw-bold">Precio Unitario: ${{ item.producto.precio }}</p>
+            </li>
+          {% endfor %}
+          <li class="list-group-item" id="totalCarrito">Total: ${{ carrito.total }}</li>
         </ul>
-        <button class="btn btn-link text-start" type="button" data-bs-toggle="collapse" data-bs-target="#cuponCollapse">
-          ¿Tienes un cupón de descuento?
-        </button>
-        <div class="collapse" id="cuponCollapse">
-          <div class="input-group mt-3">
-            <input type="text" class="form-control" placeholder="Código de cupón" style="width: auto;">
-            <button class="btn btn-warning rounded-0" type="button">Aplicar</button>
-          </div>
-        </div>
 
         <div class="card-body">
-
           <!-- Botón confirmar pago -->
-          <button type="button" class="btn btn-secondary rounded-0" data-bs-toggle="modal"
-            data-bs-target="#confirmapago">Tramitar Compra</button>
+          <button type="button" class="btn btn-secondary rounded-0" data-bs-toggle="modal" data-bs-target="#confirmapago">Tramitar Compra</button>
 
           <!-- Modal pago confirmado -->
           <div class="modal fade" id="confirmapago" tabindex="-1" aria-labelledby="confirma" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Pago Exitoso</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">¡Último Paso!</h5>
                 </div>
                 <div class="modal-body">
-                  Su pago fue realizado con éxito.
+                  Confirmar la cantidad de productos.
                 </div>
                 <div class="modal-footer">
-                  <a href="{% url 'index'%}" class="btn btn-secondary" data-bs-dismiss="modal">OK</a>
+                  <a href="{% url 'boleta' %}" class="btn btn-secondary">OK</a>
                 </div>
               </div>
             </div>
@@ -81,8 +91,7 @@
 
       <div class="card mt-3 mb-2">
         <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle rounded-0" type="button" id="paymentDropdown"
-            data-bs-toggle="dropdown">
+          <button class="btn btn-primary dropdown-toggle rounded-0" type="button" id="paymentDropdown" data-bs-toggle="dropdown">
             Seleccionar medio de pago
           </button>
           <ul class="dropdown-menu rounded-0" aria-labelledby="paymentDropdown">
@@ -102,7 +111,7 @@
         </div>
       </div>
 
-      <!--Selección entrega o retiro-->
+      <!-- Selección entrega o retiro -->
       <div class="card mt-3 mb-5 p-2">
         <div class="form-check text-start">
           <input class="form-check-input" type="radio" name="exampleRadios" value="option1" checked>
@@ -117,101 +126,35 @@
           </label>
         </div>
       </div>
-
     </div>
-  
   </div>
+
+  <!-- Más productos -->
   <div class="row mb-3">
-    <h2>MAS PRODUCTOS</h2>
+    <h2>MÁS PRODUCTOS</h2>
   </div>
   <div class="row">
     {% for producto in productos %}
-    <div class="col-md-4 mb-4">
-      <div class="card">
-        {% if producto.foto %}
-        <img src="{{ producto.foto.url }}" class="card-img-top" alt="{{ producto.nombre }}">
-        {% else %}
-        <img src="{% static 'img/default-product.jpg' %}" class="card-img-top" alt="Producto sin imagen">
-        {% endif %}
-        <div class="card-body">
-          <h5 class="card-title">{{ producto.nombre }}</h5>
-          <p class="card-text">{{ producto.descripcion }}</p>
-          <p class="card-text fw-bold">$ {{ producto.precio }}</p>
-          <form method="post" action="{% url 'agregar_producto_carrito' producto.id %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary">Agregar al Carrito</button>
-          </form>
-          <a href="{% url 'detalle_producto' producto.id %}" class="btn btn-primary">Ver Detalle</a>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          {% if producto.foto %}
+            <img src="{{ producto.foto.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+          {% else %}
+            <img src="{% static 'img/default-product.jpg' %}" class="card-img-top" alt="Producto sin imagen">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ producto.nombre }}</h5>
+            <p class="card-text fw-bold">$ {{ producto.precio }}</p>
+            <form id="agregarProductoForm{{ producto.id }}" method="post" action="{% url 'agregar_producto_carrito' producto.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-warning">Agregar al Carrito</button>
+            </form>
+            <a href="{% url 'detalle_producto' producto.id %}" class="">Ver Detalle</a>
+          </div>
         </div>
       </div>
-    </div>
     {% endfor %}
   </div>
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Obtener todos los elementos de incremento y decremento
-    const incrementButtons = document.querySelectorAll('.increment');
-    const decrementButtons = document.querySelectorAll('.decrement');
-  
-    // Asignar eventos a los botones de incremento
-    incrementButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        const itemId = this.getAttribute('data-item');
-        const qtyInput = document.querySelector(`.qtyInput[data-item="${itemId}"]`);
-        const totalValue = document.querySelector(`#totalValue-${itemId}`);
-        const precioProducto = document.querySelector(`#precioProducto-${itemId}`);
-  
-        // Incrementar la cantidad
-        qtyInput.value = parseInt(qtyInput.value) + 1;
-  
-        // Calcular el nuevo precio total
-        const nuevoTotal = parseInt(qtyInput.value) * parseInt(precioProducto.innerText.replace('$', ''));
-        totalValue.innerText = `$ ${nuevoTotal}`;
-      });
-    });
-  
-    // Asignar eventos a los botones de decremento
-    decrementButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        const itemId = this.getAttribute('data-item');
-        const qtyInput = document.querySelector(`.qtyInput[data-item="${itemId}"]`);
-        const totalValue = document.querySelector(`#totalValue-${itemId}`);
-        const precioProducto = document.querySelector(`#precioProducto-${itemId}`);
-  
-        // Decrementar la cantidad, asegurándose de no bajar de 1
-        if (parseInt(qtyInput.value) > 1) {
-          qtyInput.value = parseInt(qtyInput.value) - 1;
-  
-          // Calcular el nuevo precio total
-          const nuevoTotal = parseInt(qtyInput.value) * parseInt(precioProducto.innerText.replace('$', ''));
-          totalValue.innerText = `$ ${nuevoTotal}`;
-        }
-      });
-    });
-  
-    // Asignar eventos al cambio directo de la cantidad
-    const qtyInputs = document.querySelectorAll('.qtyInput');
-    qtyInputs.forEach(input => {
-      input.addEventListener('change', function() {
-        const itemId = this.getAttribute('data-item');
-        const qtyInput = this;
-        const totalValue = document.querySelector(`#totalValue-${itemId}`);
-        const precioProducto = document.querySelector(`#precioProducto-${itemId}`);
-  
-        // Validar el valor mínimo de 1
-        if (parseInt(qtyInput.value) < 1) {
-          qtyInput.value = 1;
-        }
-  
-        // Calcular el nuevo precio total
-        const nuevoTotal = parseInt(qtyInput.value) * parseInt(precioProducto.innerText.replace('$', ''));
-        totalValue.innerText = `$ ${nuevoTotal}`;
-      });
-    });
-  });
-  </script>
-  
 
 {% endblock contenido %}
