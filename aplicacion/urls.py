@@ -6,7 +6,7 @@ from .views import (stuff, ajustescuenta,cerrar_sesion, index, login2, crearcuen
     eliminar_producto_carrito, eliminar_cuenta, actualizar_direccion, productosadmin, eliminar_producto, autocompletar,
     detalle_producto, eliminar_producto_carrito, eliminar_cuenta, actualizar_direccion, productosadmin, eliminar_producto,
     crear_pedido, detalle_pedido, aumentar_item_carrito, disminuir_item_carrito, mis_compras,
-    eliminar_pedido)
+    eliminar_pedido, editar_usuario, eliminar_usuario, actualizar_direccion, crear_pedido, detalle_pedido, aumentar_item_carrito,)
 from django.conf import settings
 from django.conf.urls.static import static
 
