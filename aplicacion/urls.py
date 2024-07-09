@@ -1,11 +1,11 @@
 from django.urls import path, include
 from .views import (stuff, ajustescuenta,cerrar_sesion, index, login2, crearcuenta, registro, 
-    administrador, listausuarios, localizacion, catalogo, agregar_producto_carrito, carrito, contacto, 
+    administrador, lista_usuarios, localizacion, catalogo, agregar_producto_carrito, carrito, contacto, 
     datospersonales, vistausuario, seguipedido, modpedido, listar_pedidos, finanzas, stock, 
     editarproducto, agregar_producto, guardado, actualizar_correo, actualizar_telefono, actualizar_usuario, detalle_producto,
     eliminar_producto_carrito, eliminar_cuenta, actualizar_direccion, productosadmin, eliminar_producto, autocompletar,
     detalle_producto, eliminar_producto_carrito, eliminar_cuenta, actualizar_direccion, productosadmin, eliminar_producto,
-    crear_pedido, detalle_pedido, aumentar_item_carrito, disminuir_item_carrito, boleta)
+    crear_pedido, detalle_pedido, aumentar_item_carrito, disminuir_item_carrito, boleta, editar_usuario, eliminar_usuario)
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -25,7 +25,9 @@ urlpatterns = [
     path('', index, name='index'),
     path('', include('django.contrib.auth.urls')),
     path('productosadmin/', productosadmin, name='productosadmin'),
-    path('listausuarios/', listausuarios, name='listausuarios'),
+    path('listausuarios/', lista_usuarios, name='listausuarios'),
+    path('editarusuario/<int:usuario_id>/', editar_usuario, name='editarusuario'),
+    path('eliminarusuario/<int:usuario_id>/', eliminar_usuario, name='eliminarusuario'),
     path('localizacion/', localizacion, name='localizacion'),
     path('modpedido/', modpedido, name='modpedido'),
     path('listar-pedidos/', listar_pedidos, name='listar_pedidos'),

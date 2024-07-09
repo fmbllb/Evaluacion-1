@@ -39,6 +39,11 @@ class UsuarioForm(UserCreationForm):
             user.save()
         return user
     
+#Editar usuario
+class UsuarioForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email', 'is_active', 'is_staff']
 
 class FiltroCategoriaForm(forms.Form):
     categoria = forms.ChoiceField(choices=TIPO_PRODUCTO, required=False, label='Categoría')

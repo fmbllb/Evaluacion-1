@@ -1,9 +1,7 @@
 {% extends "aplicacion/base.html" %}
-    
-    
-    
+{% load static %}
+{% load crispy_forms_tags %}
 {% block contenido %}
-{% load static%}
     
 <div class="container mt-5 container-fluid">
     <h1 class="mb-4">Usuarios Registrados</h1>
@@ -12,60 +10,52 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Dirección</th>
                     <th>Correo Electrónico</th>
-                    <th>Teléfono</th>
                     <th>Estado de la Cuenta</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
+                {% for usuario in usuarios %}
                 <tr>
-                    <td>Usuario 1</td>
-                    <td>Calle Falsa 123</td>
-                    <td>usuario1@example.com</td>
-                    <td>555-123-4567</td>
-                    <td>Activa</td>
+                    <td>{{ usuario.get_full_name }}</td>
+                    <td>{{ usuario.email }}</td>
                     <td>
-                        <button type="button" class="btn btn-danger rounded-0 btn-sm" data-bs-toggle="modal" data-bs-target="#modalConfirmarEliminar">Eliminar</button>
-                        <button class="btn btn-secondary rounded-0 btn-sm">Modificar</button>
+                        {% if usuario.is_active %}
+                            <span class="badge bg-success">Activa</span>
+                        {% else %}
+                            <span class="badge bg-danger">Desactivada</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger rounded-0 btn-sm" data-bs-toggle="modal" data-bs-target="#modalConfirmarEliminar{{ usuario.id }}">Eliminar</button>
+                        <a href="{% url 'editarusuario' usuario.id %}" class="btn btn-secondary rounded-0 btn-sm">Modificar</a>
                     </td>
                 </tr>
-                <tr>
-                    <td>Usuario 2</td>
-                    <td>Avenida Imaginaria 456</td>
-                    <td>usuario2@example.com</td>
-                    <td>555-987-6543</td>
-                    <td>Desactivada</td>
-                    <td>
-                        <button class="btn btn-danger rounded-0 btn-sm " data-bs-toggle="modal" data-bs-target="#modalConfirmarEliminar">Eliminar</button>
-                        <button class="btn btn-secondary rounded-0 btn-sm">Modificar</button>
-                    </td>
-                </tr>
-                <!-- Agrega más usuarios aquí -->
+                <!-- Modal de Confirmación para cada usuario -->
+                <div class="modal fade" id="modalConfirmarEliminar{{ usuario.id }}" tabindex="-1" role="dialog" aria-labelledby="modalConfirmarEliminar{{ usuario.id }}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalConfirmarEliminar{{ usuario.id }}Label">Confirmar Eliminación</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>¿Estás seguro de que deseas eliminar a {{ usuario.get_full_name }}?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <form method="post" action="{% url 'eliminarusuario' usuario.id %}">
+                                    {% csrf_token %}
+                                    <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-danger rounded-0">Eliminar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </tbody>
         </table>
-    </div>
-</div>
-
-
-
-<!-- Modal de Confirmación -->
-<div class="modal fade" id="modalConfirmarEliminar" tabindex="-1" role="dialog" aria-labelledby="modalConfirmarEliminarLabel" aria-hidden="true">
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="modalConfirmarEliminarLabel">Confirmar Eliminación</h5>
-               </button>
-           </div>
-           <div class="modal-body">
-               ¿Estás seguro de que deseas eliminar este usuario?
-        </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">Cancelar</button>
-                <a href="{% url 'listausuarios'%}" class="btn btn-danger rounded-0">Eliminar</a>
-            </div>
-        </div>
     </div>
 </div>
 
