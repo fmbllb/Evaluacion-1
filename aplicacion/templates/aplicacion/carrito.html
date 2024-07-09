@@ -27,27 +27,27 @@
               <p class="fw-bold">Precio Unitario: ${{ item.producto.precio }}</p>
             </div>
             <div class="input-group">
-              <label for="cantidad">Cantidad:</label>
-              <div class="input-group">
                 <button type="button" class="btn btn-outline-secondary btn-minus" data-item-id="{{ item.id }}">-</button>
                 <input type="number" name="cantidades" class="form-control item-quantity" min="1" value="{{ item.cantidad }}" data-item-id="{{ item.id }}">
-                <a type="button" href="{% url 'agregar_producto_carrito' item.id %}" class="btn btn-outline-secondary btn-plus" data-item-id="{{ item.id }}">+</a>
-              </div>
+                <button type="button" class="btn btn-outline-secondary btn-plus" data-item-id="{{ item.id }}">+</button>
             </div>
-            <div class="mb-3">
-              <label for="precio">Precio Total:</label>
-              <p class="card-text fw-bold" id="precioTotal-{{ item.id }}">${{ item.total }}</p>
-            </div>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <a href="{% url 'eliminar_producto_carrito' item.id %}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto del carrito?')">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket3" viewBox="0 0 16 16">
-                  <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM3.394 15l-1.48-6h-.97l1.525 6.426a.75.75 0 0 0 .729.574h9.606a.75.75 0 0 0 .73-.574L15.056 9h-.972l-1.479 6z"/>
-                </svg>
-              </a>
-            </div>
+        </div>
+        <div class="mb-3">
+          <label for="precio">Precio Total:</label>
+          <!-- Asegúrate de definir data-precio-unitario como el precio del producto -->
+          <p class="card-text fw-bold" id="precioTotal-{{ item.id }}" data-precio-unitario="{{ item.producto.precio }}">${{ item.total }}</p>
+        </div>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="{% url 'eliminar_producto_carrito' item.id %}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto del carrito?')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket3" viewBox="0 0 16 16">
+                <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM3.394 15l-1.48-6h-.97l1.525 6.426a.75.75 0 0 0 .729.574h9.606a.75.75 0 0 0 .73-.574L15.056 9h-.972l-1.479 6z"/>
+              </svg>
+            </a>
           </div>
-          <br>
-          {% endfor %}
+        </div>
+        <br>
+        {% endfor %}
+        
         {% else %}
           <p>No hay productos en el carrito</p>
         {% endif %}
@@ -64,7 +64,6 @@
           {% for item in carrito.items.all %}
             <li class="list-group-item">
               <p>{{ item.producto.nombre }}</p>
-              <p class="fw-bold">Precio Unitario: ${{ item.producto.precio }}</p>
             </li>
           {% endfor %}
           <p>Total en el carrito: ${{ total }}</p>
@@ -72,53 +71,8 @@
         <div class="card-body">
         <!-- Botón para abrir el modal -->
         {% if carrito.items.all %}
-        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#confirmacionPago">Tramitar Pago</button>
+        <a href="{% url 'confirmacion_compra' %}" class="btn btn-warning">Tramitar Pago</a>
         {% endif %}
-        <!-- Modal pago confirmado -->
-        <div class="modal fade" id="confirmacionPago" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmación de Pago</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{% url 'crear_pedido' %}" method="post">
-                            {% csrf_token %}
-                            {{ compra_form|crispy }}
-                            {% if carrito.items.all %}
-                            <h2>Haz Comprado:</h2>
-                            <div id="productos-compra">
-                                {% for item in carrito.items.all %}
-                                <div class="d-flex border align-items-center mt-3 p-2">
-                                    <div class="card-body">
-                                        <label for="producto">Producto:</label>
-                                        <h2 class="card-title">{{ item.producto.nombre }}</h2>
-                                        <input type="hidden" name="productos_ids" value="{{ item.producto.id }}">
-                                        <img src="{{ item.producto.foto.url }}" alt="{{ item.producto.nombre }}" class="img-fluid card-img-top mb-3">
-                                        <div class="mb-3 w-25">
-                                            <label for="cantidad">Cantidad:</label>
-                                            <div class="input-group">
-                                                <p>{{ item.cantidad }}</p>
-                                                <input type="hidden" name="cantidades" value="{{ item.cantidad }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-                            {% endif %}
-                            <button href="{% url 'carrito' %}" type="submit" class="btn btn-success">Ok</button>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-      
-        </div>
       </div>
 
       <div class="card mt-3 mb-2">
@@ -160,95 +114,6 @@
       </div>
     </div>
   </div>
-  <!-- Más productos -->
-<!--   <div class="row mb-3">
-    <h2>MÁS PRODUCTOS</h2>
-  </div>
-  <div class="row">
-    {% for producto in productos %}
-      <div class="col-md-4 mb-4">
-        <div class="card h-100">
-          {% if producto.foto %}
-            <img src="{{ producto.foto.url }}" class="card-img-top" alt="{{ producto.nombre }}">
-          {% else %}
-            <img src="{% static 'img/default-product.jpg' %}" class="card-img-top" alt="Producto sin imagen">
-          {% endif %}
-          <div class="card-body">
-            <h5 class="card-title">{{ producto.nombre }}</h5>
-            <p class="card-text fw-bold">$ {{ producto.precio }}</p>
-            <form id="agregarProductoForm{{ producto.id }}" method="post" action="{% url 'agregar_producto_carrito' producto.id %}">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-warning">Agregar al Carrito</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    {% endfor %}
-  </div> -->
 </div>
-<script>
-// JavaScript para carrito.html
-
-document.addEventListener("DOMContentLoaded", function() {
-  document.querySelectorAll('.btn-plus').forEach(button => {
-    button.addEventListener('click', function() {
-      let itemId = this.dataset.itemId;
-      let input = document.querySelector(`input[data-item-id="${itemId}"]`);
-      let newValue = parseInt(input.value) + 1;
-      input.value = newValue;
-      updateCartItem(itemId, newValue);
-    });
-  });
-
-  document.querySelectorAll('.btn-minus').forEach(button => {
-    button.addEventListener('click', function() {
-      let itemId = this.dataset.itemId;
-      let input = document.querySelector(`input[data-item-id="${itemId}"]`);
-      let newValue = parseInt(input.value) - 1;
-      if (newValue >= 1) {
-        input.value = newValue;
-        updateCartItem(itemId, newValue);
-      }
-    });
-  });
-});
-
-function updateCartItem(itemId, newQuantity) {
-  fetch(`/actualizar_carrito/${itemId}/${newQuantity}/`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRFToken': getCookie('csrftoken')
-    },
-    body: JSON.stringify({ 'item_id': itemId, 'new_quantity': newQuantity })
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Respuesta del servidor:', data);
-    // Actualizar la interfaz de usuario si es necesario
-    let precioTotalElement = document.getElementById(`precioTotal-${itemId}`);
-    if (precioTotalElement) {
-      precioTotalElement.innerText = `$${data.item_total}`;
-    }
-  })
-  .catch(error => console.error('Error al actualizar el carrito:', error));
-}
-
-function getCookie(name) {
-  let cookieValue = null;
-  if (document.cookie && document.cookie !== '') {
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      if (cookie.startsWith(name + '=')) {
-        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-        break;
-      }
-    }
-  }
-  return cookieValue;
-};
-</script>
-
 
 {% endblock contenido %}

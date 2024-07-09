@@ -1,104 +1,55 @@
 {% extends "aplicacion/base.html" %}
-    
 
 {% block contenido %}
-{%load static%}
+{% load static %}
 
-<body>
-    <div class="container mt-5">
-        <h2>Historial de Compras</h2>
-        {% for compra in compras %}
-        <div class="row mt-3 mb-3 white-background" id="pedido{{ forloop.counter }}Usuario">
-          <div class="row justify-content-center align-items-center">
+<div class="container mt-5">
+    <h2>Historial de Compras</h2>
+    {% for compra in compras %}
+    <div class="row mt-3 mb-3 white-background" id="pedido{{ forloop.counter }}Usuario">
+        <div class="row justify-content-center align-items-center">
             <div class="col-md-6 d-flex justify-content-center align-items-center">
-              <!-- Aquí puedes poner la lógica para mostrar la imagen del producto, por ejemplo: -->
-              <img src="{% static 'img/default-product.jpg' %}" alt="Producto {{ forloop.counter }}" class="img-fluid border" width="35%">
+                <img src="{% static 'img/default-product.jpg' %}" alt="Producto {{ forloop.counter }}" class="img-fluid border" width="35%">
             </div>
             <div class="col-md-6 px-5 mt-3">
-              <h4>Seguimiento de Pedido</h4>
-              <p><strong>Estado de la Entrega:</strong> {{ compra.estado_entrega }}</p>
-              <p><strong>Información del Pedido:</strong></p>
-              <ul>
-                <li><strong>Número de Pedido:</strong> {{ compra.id }}</li>
-                <li><strong>Fecha de Compra:</strong> {{ compra.fecha_compra|date:"d/m/Y" }}</li>
-                <li><strong>Producto:</strong> {{ compra.boleta.fk_producto.nombre }}</li>
-                <li><strong>Cantidad:</strong> {{ compra.carrito.items.count }}</li>
-                <li><strong>Total:</strong> ${{ compra.boleta.total }}</li>
-              </ul>
-              <div class="justify-content-center">
-                <a href="#" class="btn btn-secondary rounded-0 mt-2">Detalles de producto</a>
-              </div>
+                <h4>Seguimiento de Pedido</h4>
+                <p><strong>Estado de la Entrega:</strong> {{ compra.estado_entrega }}</p>
+                <p><strong>Información del Pedido:</strong></p>
+                <ul>
+                    <li><strong>Número de Pedido:</strong> {{ compra.id }}</li>
+                    <li><strong>Fecha de Compra:</strong> {{ compra.fecha_compra|date:"d/m/Y" }}</li>
+                    <li><strong>Producto:</strong> {{ compra.boleta.fk_producto.nombre }}</li>
+                    <li><strong>Cantidad:</strong> {{ compra.carrito.items.count }}</li>
+                    <li><strong>Total:</strong> ${{ compra.boleta.total }}</li>
+                </ul>
+                <div class="justify-content-center">
+                    <a href="{% url 'detalle_producto' compra.boleta.fk_producto.id %}" class="btn btn-secondary rounded-0 mt-2">Detalles de producto</a>
+                    <button class="btn btn-danger rounded-0 mt-2" data-bs-toggle="modal" data-bs-target="#confirmCancelModal{{ forloop.counter }}">Cancelar Pedido</button>
+                </div>
             </div>
-          </div>
-          <hr class="mt-5">
         </div>
-        {% endfor %}
-      </div>
-</body>
+        <hr class="mt-5">
+    </div>
 
-
-
-<!-- Modal de Confirmación para Cancelar Pedido -->
-<div class="modal fade" id="confirmCancelModal" tabindex="-1" aria-labelledby="confirmCancelModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmCancelModalLabel">Confirmar Cancelación</h5>
-                <button type="button" class="btn-close rounded-0" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ¿Estás seguro de que deseas cancelar este pedido? Será redirigido a la página de contacto.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <a href="#" class="btn btn-danger" id="confirmacionEliminarPedido">Cancelar Pedido</a><!--ENVÍA LA INFORMAICÓN A LA DB-->
+    <!-- Modal de Confirmación para Cancelar Pedido -->
+    <div class="modal fade" id="confirmCancelModal{{ forloop.counter }}" tabindex="-1" aria-labelledby="confirmCancelModalLabel{{ forloop.counter }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmCancelModalLabel{{ forloop.counter }}">Confirmar Cancelación</h5>
+                    <button type="button" class="btn-close rounded-0" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas cancelar este pedido? Serás redirigido a la página de contacto.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <a href="{% url 'cancelar_pedido' compra.id %}" class="btn btn-danger">Cancelar Pedido</a>
+                </div>
             </div>
         </div>
     </div>
+    {% endfor %}
 </div>
 
-{% endblock contenido %}
-{% comment %}  ACTUALIZACION DE LOS CAMBIOS EN EL CARRITO DE COMPRAS
-<div class="container border mb-3 mt-3">
-  <h2>Actualizar Telefono</h2>
-  <form method="POST">
-      {% csrf_token %}
-      {{ form | crispy }}
-      <div class="mb-3">
-          <button type="submit" class="btn btn-primary">Actualizar</button>
-      </div>
-  </form>
-  {% if messages %}
-      {% for message in messages %}
-          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-      {% endfor %}
-  {% endif %}
-</div> 
-{% endcomment %}
-
-{% comment %}     
-  <button class="btn btn-danger rounded-0 mt-2" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Cancelar Pedido</button>
-  <a href="#" class="btn btn-secondary rounded-0 mt-2">Detalles de producto</a> 
-      <div class="row mt-3 mb-5">
-        <div class="col-md-6 d-flex justify-content-center align-items-center">
-            <img src="{% static 'img/mini.jpg'%}" alt="Producto 1" class="img-fluid border" width="35%">
-        </div>
-        <div class="col-md-6 px-5 mt-3" id="pedido2Usuario">
-            <h4>Seguimiento de Pedido</h4>
-            <!--Pedido 2-->
-            <p><strong>Estado de la Entrega:</strong> Entregado</p>
-            <p><strong>Información del Pedido:</strong></p>
-            <ul>
-                <li><strong>Número de Pedido:</strong> 134567</li>
-                <li><strong>Fecha de Compra:</strong> 13 de diciembre de 2021</li>
-                <li><strong>Producto:</strong> Miniatura Soldado Lobos Lunares</li>
-                <li><strong>Cantidad:</strong> 2 unidades</li>
-                <li><strong>Total:</strong> $15.000</li>
-            </ul>
-            <div class="justify-content-center">
-              <a href="#" class="btn btn-secondary rounded-0 mt-2">Detalles de producto</a>
-            </div>
-            <hr class="mt-5">
-          </div>
-      </div>
-{% endcomment %}
+{% endblock %}

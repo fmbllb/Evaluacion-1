@@ -12,7 +12,7 @@
       <h4 class="m-4 pt-2">{{ user.username }}</h4>
     <div class="p-3 m-2">
 
-        <a href="{% url 'seguipedido'%}" class="btn btn-warning rounded-0 mt-2" role="button">Ver Mis Pedidos</a>
+        <a href="{% url 'seguipedido' usuario.id %}" class="btn btn-warning rounded-0 mt-2" role="button">Ver Mis Pedidos</a>
     </div>
     </form>
 </div>

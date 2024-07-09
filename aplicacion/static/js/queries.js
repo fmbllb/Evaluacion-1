@@ -259,50 +259,6 @@ $(document).ready(function () {
   );
 });
 
-
-$(document).ready(function() {
-  // Manejar el evento de clic en el botón de decremento
-  $('#decrement').on('click', function() {
-    adjustQuantity(-1);
-  });
-
-  // Manejar el evento de clic en el botón de incremento
-  $('#increment').on('click', function() {
-    adjustQuantity(1);
-  });
-
-  // Calcular el valor total al cambiar la cantidad
-  $('#qtyInputCarrito').on('input', function() {
-    calculateTotal();
-  });
-});
-
-function calculateTotal() {
-  const quantityInput = $('#qtyInputCarrito');
-  const price = 6500; // Precio del producto
-  const quantity = parseInt(quantityInput.val());
-  const total = price * quantity;
-  const impuestos = total * 0.38; // 38% de impuestos
-  const totalConImpuestos = total + impuestos;
-
-  $('#totalValue').text(`$${total}`);
-
-    // Actualizar los valores en las secciones correspondientes
-    $('#totalValue').text(`$${total}`);
-    $('#ctdTotalProductos').text(`${quantity} artículo(s) - $ ${total}`);
-    $('#totalConImpuestos').text(`Total (impuestos inc.) - $ ${totalConImpuestos.toFixed(2)}`);
-}
-
-function adjustQuantity(change) {
-  const quantityInput = $('#qtyInputCarrito');
-  const currentValue = parseInt(quantityInput.val());
-  const newValue = currentValue + change;
-  if (newValue >= 1 && newValue <= 10) {
-    quantityInput.val(newValue);
-    calculateTotal();
-  }
-}
-
 $(document).ready(function() {
   $('#recuperarContrasenaEmail').blur(function() {
     const email = $(this).val();
@@ -367,9 +323,6 @@ $(document).ready(function() {
   $("#nombreProducto, #descripcionProducto, #precioProducto, #categoriaProducto, #imagenProducto").on("input", validarCampos);
 });
 
-// Desactiva el campo de input del carrito de compras
-$("#qtyInputCarrito").attr("disabled", true)
-
 //Elimina elemento de la lista de los pedidos del administrador
 $(document).ready(function() {
   $("#confirmacionEliminarPedido").click(function() {
@@ -378,75 +331,129 @@ $(document).ready(function() {
   });
 });
 
-//Script pagina carrito
+//Pagina carrito
+// Script jQuery para calcular el precio total del carrito
 $(document).ready(function() {
-  // Botón de disminuir cantidad
-  $('.btn-minus').click(function(e) {
-      e.preventDefault();
-      var $input = $(this).parent().find('input.cantidad-input');
-      var cantidad = parseInt($input.val()) - 1;
-      cantidad = cantidad < 1 ? 1 : cantidad;
-      $input.val(cantidad);
-      actualizarPrecioTotal($input);
-      $input.trigger('change');
+  // Función para actualizar el precio total cuando cambia la cantidad
+  $('.item-quantity').on('input', function() {
+      var itemId = $(this).data('item-id');
+      var cantidad = parseInt($(this).val());
+      
+      // Obtener el precio unitario del producto desde el modelo Producto
+      var precioUnitario = parseFloat($('#precioTotal-' + itemId).data('precio-unitario'));
+      
+      // Verificar si el precioUnitario es un número válido y mayor que cero
+      if (isNaN(precioUnitario) || precioUnitario <= 0) {
+          precioUnitario = 0; // Establecer un valor predeterminado si no es válido
+      }
+      
+      // Calcular el precio total del item
+      var precioTotalItem = cantidad * precioUnitario;
+      
+      // Actualizar el texto del precio total del item en el carrito
+      $('#precioTotal-' + itemId).text('$' + precioTotalItem.toFixed(2));
+      
+      // Calcular y actualizar el precio total del carrito
+      calcularPrecioTotalCarrito();
   });
 
-  // Botón de aumentar cantidad
-  $('.btn-plus').click(function(e) {
-      e.preventDefault();
-      var $input = $(this).parent().find('input.cantidad-input');
-      var cantidad = parseInt($input.val()) + 1;
-      cantidad = cantidad > parseInt($input.attr('max')) ? parseInt($input.attr('max')) : cantidad;
-      $input.val(cantidad);
-      actualizarPrecioTotal($input);
-      $input.trigger('change');
+  // Función para manejar el incremento de cantidad
+  $('.btn-plus').on('click', function() {
+      var itemId = $(this).data('item-id');
+      var inputCantidad = $('.item-quantity[data-item-id="' + itemId + '"]');
+      var cantidad = parseInt(inputCantidad.val());
+      cantidad++;
+      inputCantidad.val(cantidad).trigger('input');
   });
 
-  // Función para actualizar el precio total por producto
-  function actualizarPrecioTotal($input) {
-      var cantidad = parseInt($input.val());
-      var precioUnitario = parseFloat($input.data('precio'));
-      var precioTotal = cantidad * precioUnitario;
-      $input.closest('.d-flex').find('.card-text').text('$ ' + precioTotal.toFixed(2));
-  }
-});
+  // Función para manejar el decremento de cantidad
+  $('.btn-minus').on('click', function() {
+      var itemId = $(this).data('item-id');
+      var inputCantidad = $('.item-quantity[data-item-id="' + itemId + '"]');
+      var cantidad = parseInt(inputCantidad.val());
+      if (cantidad > 1) {
+          cantidad--;
+          inputCantidad.val(cantidad).trigger('input');
+      }
+  });
 
-//Script para funciones de carrito
-$(document).ready(function () {
-  // Función para obtener el valor de una cookie por su nombre
-  function getCookie(name) {
-      var cookieValue = null;
-      if (document.cookie && document.cookie !== '') {
-          var cookies = document.cookie.split(';');
-          for (var i = 0; i < cookies.length; i++) {
-              var cookie = cookies[i].trim();
-              // Busca la cookie por su nombre
-              if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                  break;
-              }
+  // Deshabilitar la edición manual de los inputs de cantidad
+  $('.item-quantity').prop('disabled', true);
+
+  // Función para calcular el precio total del carrito
+  function calcularPrecioTotalCarrito() {
+      var totalCarrito = 0;
+      
+      // Iterar sobre cada item en el carrito y sumar sus precios totales
+      $('.item-quantity').each(function() {
+          var itemId = $(this).data('item-id');
+          var cantidad = parseInt($(this).val());
+          var precioUnitario = parseFloat($('#precioTotal-' + itemId).data('precio-unitario'));
+          
+          // Verificar si el precioUnitario es un número válido y mayor que cero
+          if (isNaN(precioUnitario) || precioUnitario <= 0) {
+              precioUnitario = 0; // Establecer un valor predeterminado si no es válido
           }
-      }
-      return cookieValue;
+          
+          var precioTotalItem = cantidad * precioUnitario;
+          totalCarrito += precioTotalItem;
+      });
+      
+      // Actualizar el texto del precio total del carrito en el HTML
+      $('#totalCarrito').text('Total: $' + totalCarrito.toFixed(2));
   }
 
-  // Función para establecer el valor de una cookie
-  function setCookie(name, value) {
-      document.cookie = name + '=' + encodeURIComponent(value) + ';path=/';
-  }
-
-  // Deshabilitar los campos de entrada al cargar la página
-  $('.qtyInputCarrito').prop('disabled', true);
-
-  // Cargar cantidades guardadas desde las cookies al cargar la página
-  $('.qtyInputCarrito').each(function () {
-      var itemID = $(this).data('item-id');
-      var cantidad = getCookie('cantidad_' + itemID);
-      if (cantidad !== null && cantidad !== '') {
-          $(this).val(cantidad);
-      }
-  });
+  // Llamar a la función para calcular el precio total del carrito al cargar la página
+  calcularPrecioTotalCarrito();
 });
+
+
+
+$(document).ready(function() {
+  // Función para el botón de aumentar cantidad
+  $('.qtyInputCarrito').on('click', '.btn.plus', function(e) {
+      e.preventDefault();
+      var input = $(this).closest('.qtyInputCarrito').find('input');
+      var newValue = parseInt(input.val()) + 1;
+      input.val(newValue);
+      actualizarPrecioTotal(input); // Llama a la función para actualizar el precio total
+  });
+
+  // Función para el botón de disminuir cantidad
+  $('.qtyInputCarrito').on('click', '.btn.minus', function(e) {
+      e.preventDefault();
+      var input = $(this).closest('.qtyInputCarrito').find('input');
+      var newValue = parseInt(input.val()) - 1;
+      if (newValue < 1) {
+          newValue = 1;
+      }
+      input.val(newValue);
+      actualizarPrecioTotal(input); // Llama a la función para actualizar el precio total
+  });
+
+  // Función para actualizar el precio total de un ítem
+  function actualizarPrecioTotal(input) {
+      var cantidad = parseInt(input.val());
+      var precioUnitario = parseFloat(input.closest('.card-body').find('.precio-unitario').text());
+      var precioTotal = cantidad * precioUnitario;
+      input.closest('.card-body').find('.precio-total').text(precioTotal.toFixed(2));
+      input.closest('.card-body').find('.precio-total-hidden').val(precioTotal.toFixed(2));
+      actualizarTotalCarrito(); // Actualiza el precio total del carrito
+  }
+
+  // Función para actualizar el precio total del carrito
+  function actualizarTotalCarrito() {
+      var totalCarrito = 0;
+      $('.precio-total').each(function() {
+          totalCarrito += parseFloat($(this).text());
+      });
+      $('#totalCarrito').text('Total: $' + totalCarrito.toFixed(2));
+  }
+
+  // Llamar a actualizarTotalCarrito al cargar la página
+  actualizarTotalCarrito();
+});
+
 
 /*$(document).ready(function () {
   let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
