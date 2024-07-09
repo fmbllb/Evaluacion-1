@@ -492,7 +492,7 @@ def crear_pedido(request):
             # Limpiar el carrito después de completar la compra
             carrito.items.all().delete()
 
-            return redirect('listar_pedidos')
+            return redirect('index')
         else:
             # Si el formulario no es válido o no se han seleccionado productos y cantidades
             return render(request, 'aplicacion/crud-pedidos/crear_pedido.html', {
