@@ -24,16 +24,6 @@
                 <p>{{ item.producto.nombre }}</p>
                 <p class="fw-bold">Precio Unitario: ${{ item.producto.precio }}</p>
               </div>
-<<<<<<< Updated upstream
-              <div class="mb-3 w-25">
-                <label for="cantidad">Cantidad:</label>
-                <div class="input-group">
-                  <button type="button" class="btn btn-outline-secondary btn-minus" onclick="disminuirCantidad({{ item.id }})">-</button>
-                  <input id="qtyInputCarrito-{{ item.id }}" class="qtyInputCarrito form-control form-control-sm cantidad-input" type="number" name="cantidades" min="1" value="{{ item.cantidad }}" data-precio="{{ item.producto.precio }}" data-item-id="{{ item.id }}">
-                  <button type="button" class="btn btn-outline-secondary btn-plus" onclick="aumentarCantidad({{ item.id }})">+</button>
-                </div>
-              </div>
-=======
               <div class="input-group">
                 <a href="{% url 'disminuir_item_carrito' item.id %}">
                   <button type="button" class="btn btn-outline-secondary btn-plus">-</button>
@@ -43,7 +33,6 @@
                     <button type="button" class="btn btn-outline-secondary btn-minus">+</button>
                 </a>
             </div>
->>>>>>> Stashed changes
               <div class="mb-3">
                 <label for="precio">Precio Total:</label>
                 <p class="card-text fw-bold" id="precioTotal-{{ item.id }}">${{ item.total }}</p>
