@@ -150,7 +150,7 @@ class DirectionUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Perfil
-        fields = ['direccion']
+        fields = []
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
