@@ -1,9 +1,10 @@
 from django.urls import path, include
 from .views import (stuff, ajustescuenta,cerrar_sesion, index, login2, crearcuenta, registro, 
     administrador, listausuarios, localizacion, catalogo, agregar_producto_carrito, carrito, contacto, 
-    datospersonales, vistausuario, seguipedido, modpedido, pedidosadmin, finanzas, stock, 
+    datospersonales, vistausuario, seguipedido, modpedido, listar_pedidos, finanzas, stock, 
     editarproducto, agregar_producto, guardado, actualizar_correo, actualizar_telefono, actualizar_usuario, detalle_producto,
-    detalle_producto, eliminar_producto_carrito, eliminar_cuenta, actualizar_direccion, productosadmin, eliminar_producto)
+    detalle_producto, eliminar_producto_carrito, eliminar_cuenta, actualizar_direccion, productosadmin, eliminar_producto,
+    crear_pedido, detalle_pedido, aumentar_item_carrito, disminuir_item_carrito)
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -26,7 +27,7 @@ urlpatterns = [
     path('listausuarios/', listausuarios, name='listausuarios'),
     path('localizacion/', localizacion, name='localizacion'),
     path('modpedido/', modpedido, name='modpedido'),
-    path('pedidosadmin/', pedidosadmin, name='pedidosadmin'),
+    path('listar-pedidos/', listar_pedidos, name='listar_pedidos'),
     path('producto/<int:producto_id>/', detalle_producto, name='detalle_producto'),
     path('registro/', registro, name='registro'),
     path('seguipedido/', seguipedido, name='seguipedido'),
@@ -44,6 +45,10 @@ urlpatterns = [
     path('eliminar_cuenta/', eliminar_cuenta, name='eliminar_cuenta'),
     path('actualizardireccion/', actualizar_direccion, name='actualizardireccion'),
     path('eliminar_producto/<str:nombre_producto>/', eliminar_producto, name='eliminar_producto'),
+    path('crear-pedido/', crear_pedido, name='crear_pedido'),
+    path('detalle-pedido/<int:pedido_id>/', detalle_pedido, name='detalle_pedido'),
+    path('aumentar-item/<int:item_id>/', aumentar_item_carrito, name='aumentar_item_carrito'),
+    path('disminuir-item/<int:item_id>/', disminuir_item_carrito, name='disminuir_item_carrito'),
 ]
 
 

@@ -12,6 +12,19 @@ from aplicacion import static
 
 
 
+#CRUD PEDIDOS
+#Formulario para la compra del pedido
+class CompraForm(forms.ModelForm):
+    class Meta:
+        model = Compra
+        fields = []
+
+#Formulario para el detalle de la compra
+class DetalleCompraForm(forms.ModelForm):
+    class Meta:
+        model = DetalleCompra
+        fields = ['cantidad']
+
 class UsuarioForm(UserCreationForm):
     email = forms.EmailField(label="Correo electrónico", widget=forms.EmailInput(attrs={"id": 'email'}))
     first_name = forms.CharField(label="Nombre", widget=forms.TextInput(attrs={"id": 'first_name'}))

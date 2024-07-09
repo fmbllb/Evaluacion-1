@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import  AuthenticationForm
 from .forms import *
+from django.utils import timezone
 from os import remove, path
 from django.conf import settings
 from django.contrib.auth import logout, login
@@ -17,9 +18,6 @@ from .enumeraciones import TIPO_PRODUCTO
 def administrador(request):
     return render(request, 'aplicacion/administrador.html')
 
-
-
-
 #VISTAS DEL PRODUCTO
 @login_required
 def agregar_producto(request):
@@ -32,6 +30,34 @@ def agregar_producto(request):
         form = AgregarProductoForm()
     return render(request, 'aplicacion/agregar_producto.html', {'form': form})
 
+
+@login_required
+def aumentar_item_carrito(request, item_id):
+    item = get_object_or_404(ItemCarrito, id=item_id)
+    if item.carrito.usuario != request.user:
+        messages.error(request, 'No tienes permiso para modificar este ítem.')
+        return redirect('carrito')
+    # Debugging: print item details
+    print(f"Aumentando cantidad para item: {item.id}, producto: {item.producto.nombre}")
+    item.aumentar_cantidad()
+    messages.success(request, f"La cantidad de {item.producto.nombre} se ha actualizado a {item.cantidad}.")
+    return redirect('carrito')
+
+@login_required
+def disminuir_item_carrito(request, item_id):
+    item = get_object_or_404(ItemCarrito, id=item_id)
+    if item.carrito.usuario != request.user:
+        messages.error(request, 'No tienes permiso para modificar este ítem.')
+        return redirect('carrito')
+    # Debugging: print item details
+    print(f"Disminuyendo cantidad para item: {item.id}, producto: {item.producto.nombre}")
+    if item.cantidad > 1:
+        item.disminuir_cantidad()
+        messages.success(request, 'Disminuyó la cantidad del ítem.')
+    else:
+        messages.error(request, 'No puedes disminuir la cantidad de este ítem por debajo de 1.')
+    return redirect('carrito')
+
 @login_required
 def agregar_producto_carrito(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
@@ -41,7 +67,7 @@ def agregar_producto_carrito(request, producto_id):
         cantidad = int(request.POST.get('cantidad', 1))  # Obtener la cantidad del formulario o asignar 1 por defecto
         carrito.agregar_producto(producto, cantidad)
         messages.success(request, f"{producto.nombre} ha sido agregado al carrito.")
-        return redirect('carrito')
+        return redirect('carrito')  # Redirigir a la página del carrito o donde sea necesario
 
     total_items = carrito.items.count()
     productos = Producto.objects.all()
@@ -93,10 +119,8 @@ def eliminar_producto_carrito(request, item_id):
     item = get_object_or_404(ItemCarrito, id=item_id)
     if item.carrito.usuario != request.user:
         return redirect('carrito')  # Redirige si no tiene permisos
-    
     # Elimina el item del carrito
     item.eliminar()
-    
     messages.success(request, f"{item.producto.nombre} ha sido eliminado del carrito.")
     return redirect('carrito')
 
@@ -111,26 +135,30 @@ def seguipedido(request):
 
 @login_required
 def carrito(request):
-    carrito = Carrito.objects.filter(usuario=request.user).first()
+    carrito, created = Carrito.objects.get_or_create(usuario=request.user)
+    productos = Producto.objects.all()  #  la lista de productos que se muestran en la página de carrito
     
-    if not carrito:
-        # Si el usuario no tiene un carrito, podemos crear uno nuevo
-        carrito = Carrito.objects.create(usuario=request.user)
-    
-    total_items = carrito.items.count()
-    productos = Producto.objects.all()
-    
+    if request.method == 'POST':
+        item_id = request.POST.get('item_id')
+        nueva_cantidad = int(request.POST.get('nueva_cantidad', 1))
+        # Actualizar la cantidad del item en el carrito
+        item = get_object_or_404(ItemCarrito, id=item_id, carrito=carrito)
+        item.actualizar_cantidad(nueva_cantidad)
+        # Redireccionar a la misma página o a donde desees
+        return redirect('carrito')
     context = {
         'carrito': carrito,
-        'total_items': total_items,
         'productos': productos,
     }
     return render(request, 'aplicacion/carrito.html', context)
 
+
 def detalle_producto(request, nombre_producto):
     producto = get_object_or_404(Producto, id=id)
+    nombre_producto = producto.nombre
     context = {
         'producto': producto,
+        'nombre_producto': nombre_producto
     }
     return render(request, 'aplicacion/detalleproducto.html', context)
 
@@ -333,18 +361,6 @@ def index(request):
     }
     return render(request, 'aplicacion/index.html', datos)
 
-def listausuarios(request):
-    return render(request, 'aplicacion/listausuarios.html')
-
-def localizacion(request):
-    return render(request, 'aplicacion/localizacion.html')
-
-def modpedido(request):
-    return render(request, 'aplicacion/modpedido.html')
-
-def pedidosadmin(request):
-    return render(request, 'aplicacion/pedidosadmin.html')
-
 def productosadmin(request):
     productos = Producto.objects.all()
 
@@ -358,6 +374,105 @@ def productosadmin(request):
 
     return render(request, 'aplicacion/productosadmin.html', datos)
 
+#Eliminar producto
+def eliminar_producto(request, nombre_producto):
+    producto = get_object_or_404(Producto, nombre=nombre_producto)
+    producto.delete()
+    return redirect('productosadmin')
+
+#CRUD USUARIOS
+def listausuarios(request):
+    return render(request, 'aplicacion/listausuarios.html')
+
+def localizacion(request):
+    return render(request, 'aplicacion/localizacion.html')
+
+def modpedido(request):
+    return render(request, 'aplicacion/modpedido.html')
+
+#CRUD DE PEDIDOS
+#Crear pedidos admin
+@login_required
+def crear_pedido(request):
+    carrito = Carrito.objects.get(usuario=request.user)
+    items = carrito.items.all()
+    total = sum(item.producto.precio * item.cantidad for item in items)
+    
+    if request.method == 'POST':
+        compra_form = CompraForm(request.POST)
+        productos_ids = request.POST.getlist('productos_ids')
+        cantidades = request.POST.getlist('cantidades')
+
+        if compra_form.is_valid() and productos_ids and cantidades:
+            # Encuentra el primer producto del carrito del usuario
+            producto = Producto.objects.filter(carritos__usuario=request.user).first()
+            if not producto:
+                return render(request, 'aplicacion/crud-pedidos/crear_pedido.html', {
+                    'compra_form': compra_form,
+                    'carrito': carrito,
+                    'error': 'No hay productos en el carrito.'
+                })
+
+            # Encuentra la última boleta asociada a ese producto
+            boleta = Boleta.objects.filter(fk_producto=producto).last()
+            if not boleta:
+                boleta = Boleta.objects.create(
+                    subtotal=0,
+                    total=0,
+                    fecha_boleta=timezone.now().date(),
+                    giro='',
+                    medio_pago='',
+                    fk_producto=producto
+                )
+
+            compra = Compra.objects.create(
+                usuario=request.user,
+                boleta=boleta,
+                total=0
+            )
+
+            for producto_id, cantidad in zip(productos_ids, cantidades):
+                producto = Producto.objects.get(id=producto_id)
+                detalle = DetalleCompra(
+                    compra=compra,
+                    producto=producto,
+                    cantidad=int(cantidad),
+                    precio_unitario=producto.precio
+                )
+                detalle.save()
+                compra.total += detalle.precio_unitario * detalle.cantidad
+
+            compra.save()
+
+            return redirect('listar_pedidos')
+
+    else:
+        compra_form = CompraForm()
+    
+    context = {
+        'compra_form': compra_form,
+        'carrito': carrito,
+        'total': total,
+        'items': items,
+    }
+
+    return render(request, 'aplicacion/crud-pedidos/crear_pedido.html', context)
+
+#Detalle pedido
+def detalle_pedido(request, id):
+    compra = get_object_or_404(Compra, id=id)
+    return render(request, 'aplicacion/crud-pedidos/detalle_pedido.html', {'compra': compra})
+
+#Listar Pedidos
+def listar_pedidos(request):
+    compras = Compra.objects.all().order_by('-fecha_compra')
+    context = {
+        'compras': compras
+    }
+    return render(request, 'aplicacion/crud-pedidos/listar_pedidos.html', context)
+
+
+
 def registro(request):
     return render(request, 'aplicacion/registro.html')
 
@@ -365,9 +480,5 @@ def registro(request):
 def stock(request):
     return render(request, 'aplicacion/stock.html')
 
-#Eliminar producto
-def eliminar_producto(request, nombre_producto):
-    producto = get_object_or_404(Producto, nombre=nombre_producto)
-    producto.delete()
-    return redirect('productosadmin')
+
 
