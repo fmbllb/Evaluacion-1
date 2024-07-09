@@ -19,8 +19,7 @@
                     <li><strong>Número de Pedido:</strong> {{ compra.id }}</li>
                     <li><strong>Fecha de Compra:</strong> {{ compra.fecha_compra|date:"d/m/Y" }}</li>
                     <li><strong>Producto:</strong> {{ compra.boleta.fk_producto.nombre }}</li>
-                    <li><strong>Cantidad:</strong> {{ compra.carrito.items.count }}</li>
-                    <li><strong>Total:</strong> ${{ compra.boleta.total }}</li>
+                    <li><strong>Total:</strong> ${{ compra.total }}</li>
                 </ul>
                 <div class="justify-content-center">
                     <a href="{% url 'detalle_producto' compra.boleta.fk_producto.id %}" class="btn btn-secondary rounded-0 mt-2">Detalles de producto</a>
