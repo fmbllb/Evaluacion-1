@@ -25,6 +25,7 @@ class Producto(models.Model):
         return self.nombre
 
 class Boleta(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)  # Clave foránea al usuario
     subtotal = models.IntegerField(_("Subtotal"), validators=[MinValueValidator(0)])
     total = models.IntegerField(_("Total"), validators=[MinValueValidator(0)])
     fecha_boleta = models.DateField(_("Fecha"))
