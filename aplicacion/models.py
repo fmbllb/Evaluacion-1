@@ -111,6 +111,7 @@ class Compra(models.Model):
         ('P', 'Pendiente'),
         ('E', 'Enviado'),
         ('R', 'Recibido'),
+        ('X', 'Cancelado'),
     )
     estado_entrega = models.CharField(max_length=1, choices=estado, default='P')
 

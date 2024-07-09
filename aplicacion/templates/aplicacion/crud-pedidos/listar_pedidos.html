@@ -1,25 +1,22 @@
 {% extends "aplicacion/base.html" %}
-    
-    
-    
+{% load static %}
+{% load crispy_forms_tags %}
 {% block contenido %}
-{%load static%}
 
 <div class="container mt-5">
-<h2>Listado de Pedidos</h2>
-<div>
-    <a href="{% url 'carrito' %}" class="btn btn-success"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-plus" viewBox="0 0 16 16">
-        <path d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7"/>
-        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
-    </svg></a> (Pruebas del sistema, crear pedido)
-</div>
-{% if compras %}
+    <h2>Listado de Pedidos</h2>
+    <div>
+        <a href="{% url 'carrito' %}" class="btn btn-success">
+            <!-- Icono de Bootstrap -->
+        </a> (Pruebas del sistema, crear pedido)
+    </div>
+    {% if compras %}
     <table class="table table-bordered">
         <thead>
             <tr>
-            <th>Número de Pedido</th>
-                <th>Nombre del Producto</th>
-                <th>Cantidad</th>
+                <th>Número de Pedido</th>
+                <th>Cantidad de Productos</th>
+                <th>Total del Pedido</th>
                 <th>Fecha de Compra</th>
                 <th>Estado de Entrega</th>
                 <th>Acciones</th>
@@ -29,115 +26,45 @@
             {% for compra in compras %}
                 <tr>
                     <td>{{ compra.id }}</td>
-                    <td>
-                        <ul>
-                            {% for detalle in compra.detallecompra_set.all %}
-                                <li>{{ detalle.producto.nombre }}</li>
-                            {% endfor %}
-                        </ul>
-                    </td>
-                    <td>
-                        <ul>
-                            {% for detalle in compra.detallecompra_set.all %}
-                                <li>{{ detalle.cantidad }}</li>
-                            {% endfor %}
-                        </ul>
-                    </td>
+                    <td>{{ compra.detallecompra_set.count }}</td>
+                    <td>{{ compra.total }}</td>
                     <td>{{ compra.fecha_compra }}</td>
-                    <td>{{ compra.get_estado_entrega_display }}
-                        <a href="{% url 'crear_pedido'%}" class="btn btn-info" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
-                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
-                            </svg>
-                        </a>
-                    </td>
+                    <td>{{ compra.get_estado_entrega_display }}</td>
                     <td>
-                        <form action="{% url 'eliminar_pedido' compra.id %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-sm">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket2-fill" viewBox="0 0 16 16">
-                                <path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1"/>
-                                </svg>
-                            </button>
-                        </form>
+                        <a href="{% url 'detalle_pedido' compra.id %}" class="btn btn-info btn-sm">Ver</a>
+                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarPedido{{ compra.id }}">Eliminar</button>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 {% else %}
-<p>No hay pedidos.</p>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-            <th>Número de Pedido</th>
-                <th>Nombre del Producto</th>
-                <th>Cantidad</th>
-                <th>Fecha de Compra</th>
-                <th>Estado de Entrega</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for compra in compras %}
-                <tr>
-                    <td>{{ compra.id }}</td>
-                    <td>
-                        <ul>
-                            {% for detalle in compra.detallecompra_set.all %}
-                                <li>{{ detalle.producto.nombre }}</li>
-                            {% endfor %}
-                        </ul>
-                    </td>
-                    <td>
-                        <ul>
-                            {% for detalle in compra.detallecompra_set.all %}
-                                <li>{{ detalle.cantidad }}</li>
-                            {% endfor %}
-                        </ul>
-                    </td>
-                    <td>{{ compra.fecha_compra }}</td>
-                    <td>{{ compra.get_estado_entrega_display }}</td>
-                    <td>
-                        <a href="{% url 'detalle_pedido' compra.id %}" class="btn btn-info">Ver</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    
+    <p>No hay pedidos.</p>
 {% endif %}
-</div>
 
-<!--   <td>
-    <div class="">
-    <a href="" class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket2-fill" viewBox="0 0 16 16">
-        <path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1"/>
-    </svg></a>
-    <a href="" class="btn btn-warning"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building-gear" viewBox="0 0 16 16">
-        <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6.5a.5.5 0 0 1-1 0V1H3v14h3v-2.5a.5.5 0 0 1 .5-.5H8v4H3a1 1 0 0 1-1-1z"/>
-        <path d="M4.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm4.386 1.46c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382zM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"/>
-    </svg></a>
-    </div>
-</td> -->
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Estado</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            Formulario de modificacion
-        </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Guardar Cambios</button>
+<!-- Modal para eliminar pedido -->
+{% for compra in compras %}
+    <div class="modal fade" id="modalEliminarPedido{{ compra.id }}" tabindex="-1" aria-labelledby="modalEliminarPedidoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEliminarPedidoLabel">Eliminar Pedido #{{ compra.id }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que quieres eliminar este pedido?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <form action="{% url 'eliminar_pedido' compra.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-    </div>
-</div>
+{% endfor %}
+
+
 {% endblock contenido %}

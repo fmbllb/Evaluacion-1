@@ -25,6 +25,15 @@ class DetalleCompraForm(forms.ModelForm):
         model = DetalleCompra
         fields = ['cantidad']
 
+#Modificar el estado de un pedido especifico
+class ModificarEstadoPedidoForm(forms.ModelForm):
+    class Meta:
+        model = Compra
+        fields = ['estado_entrega']
+        widgets = {
+            'estado_entrega': forms.Select(attrs={'class': 'form-select'})
+        }
+        
 class UsuarioForm(UserCreationForm):
     email = forms.EmailField(label="Correo electrónico", widget=forms.EmailInput(attrs={"id": 'email'}))
     first_name = forms.CharField(label="Nombre", widget=forms.TextInput(attrs={"id": 'first_name'}))

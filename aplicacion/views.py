@@ -526,14 +526,6 @@ def crear_pedido(request):
 
     return render(request, 'aplicacion/crud-pedidos/crear_pedido.html', context)
 
-@login_required
-def eliminar_pedido(request, pedido_id):
-    pedido = get_object_or_404(Compra, id=pedido_id, usuario=request.user)
-    
-    if request.method == 'POST':
-        pedido.delete()
-        return redirect('listar_pedidos')
-    return redirect('listar_pedidos')
 
 #Detalle pedido
 def detalle_pedido(request, id):
@@ -544,12 +536,45 @@ def detalle_pedido(request, id):
 @login_required
 def listar_pedidos(request):
     compras = Compra.objects.all().order_by('-fecha_compra')
-    context = {
+    datos = {
         'compras': compras
     }
-    return render(request, 'aplicacion/crud-pedidos/listar_pedidos.html', context)
+    return render(request, 'aplicacion/crud-pedidos/listar_pedidos.html', datos)
 
+#Modificar estado de pedido
+def modificar_estado_pedido(request, pedido_id):
+    compra = get_object_or_404(Compra, id=pedido_id)
+    
+    if request.method == 'POST':
+        form = ModificarEstadoPedidoForm(request.POST, instance=compra)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_pedidos')
+    else:
+        form = ModificarEstadoPedidoForm(instance=compra)
+    
+    return render(request, 'aplicacion/crud-pedidos/detallespedido.html', {'form': form, 'compra': compra})
 
+#Eliminar pedido de lista
+@login_required
+def eliminar_pedido(request, pedido_id):
+    pedido = get_object_or_404(Compra, id=pedido_id, usuario=request.user)
+    
+    if request.method == 'POST':
+        pedido.delete()
+        return redirect('listar_pedidos')
+    return redirect('aplicacion/crud-pedidos/listar_pedidos.html')
+
+#Ver detalles de pedido
+@login_required
+def detalle_pedido(request, pedido_id):
+    compra = get_object_or_404(Compra, id=pedido_id)
+    if request.method == 'POST':
+        nuevo_estado = request.POST.get('estado')
+        compra.estado_entrega = nuevo_estado
+        compra.save()
+        return redirect('detalle_pedido', pedido_id=pedido_id)  # Redirigir de nuevo a la página de detalles
+    return render(request, 'aplicacion/crud-pedidos/detallepedido.html', {'compra': compra})
 
 def registro(request):
     return render(request, 'aplicacion/registro.html')
