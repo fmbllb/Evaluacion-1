@@ -1,12 +1,12 @@
 from django.urls import path, include
 from .views import (stuff, ajustescuenta,cerrar_sesion, index, login2, crearcuenta, registro, 
     administrador, lista_usuarios, localizacion, catalogo, agregar_producto_carrito, carrito, contacto, 
-    datospersonales, vistausuario, seguipedido, modificar_estado_pedido, eliminar_pedido, listar_pedidos, finanzas, stock, 
+    datospersonales, vistausuario, seguipedido, modificar_estado_pedido, listar_pedidos, finanzas, stock, 
     editarproducto, agregar_producto, actualizar_correo, actualizar_telefono, actualizar_usuario, detalle_producto,
     eliminar_producto_carrito, eliminar_cuenta, actualizar_direccion, productosadmin, eliminar_producto, autocompletar,
     detalle_producto, eliminar_producto_carrito, eliminar_cuenta, actualizar_direccion, productosadmin, eliminar_producto,
     crear_pedido, detalle_pedido, aumentar_item_carrito, disminuir_item_carrito, mis_compras,
-    editar_usuario, eliminar_usuario, actualizar_direccion, crear_pedido, detalle_pedido, aumentar_item_carrito,)
+    eliminar_pedido, editar_usuario, eliminar_usuario, actualizar_direccion, crear_pedido, detalle_pedido, aumentar_item_carrito,)
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -30,9 +30,9 @@ urlpatterns = [
     path('eliminarusuario/<int:usuario_id>/', eliminar_usuario, name='eliminarusuario'),
     path('localizacion/', localizacion, name='localizacion'),
     path('listar-pedidos/', listar_pedidos, name='listar_pedidos'),
-    path('modificar_estado_pedido/<int:compra_id>/', modificar_estado_pedido, name='modificar_estado_pedido'),
     path('eliminar_pedido/<int:pedido_id>/', eliminar_pedido, name='eliminar_pedido'),
     path('detalle-pedido/<int:pedido_id>/', detalle_pedido, name='detalle_pedido'),
+    path('modificar_estado_pedido/<int:pedido_id>/', modificar_estado_pedido, name='modificar_estado_pedido'),
     path('producto/<int:producto_id>/', detalle_producto, name='detalle_producto'),
     path('registro/', registro, name='registro'),
     path('seguipedido/', seguipedido, name='seguipedido'),
@@ -56,6 +56,7 @@ urlpatterns = [
     path('aumentar-item/<int:item_id>/', aumentar_item_carrito, name='aumentar_item_carrito'),
     path('disminuir-item/<int:item_id>/', disminuir_item_carrito, name='disminuir_item_carrito'),
     path('boleta/', mis_compras, name='boleta'),
+    path('eliminar-pedido/<int:pedido_id>/', eliminar_pedido, name='eliminar_pedido'),
 
 ]
 

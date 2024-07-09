@@ -526,55 +526,56 @@ def crear_pedido(request):
 
     return render(request, 'aplicacion/crud-pedidos/crear_pedido.html', context)
 
+@login_required
+def eliminar_pedido(request, pedido_id):
+    compra = get_object_or_404(Compra, id=pedido_id)
+    if request.method == 'POST':
+        compra.delete()
+        return redirect('listar_pedidos')
+    return render(request, 'aplicacion/crud-pedidos/listar_pedidos.html', {'compra': compra})
 
 #Detalle pedido
-def detalle_pedido(request, id):
-    compra = get_object_or_404(Compra, id=id)
-    return render(request, 'aplicacion/crud-pedidos/detalle_pedido.html', {'compra': compra})
+def detalle_pedido(request, pedido_id):
+    compra = get_object_or_404(Compra, id=pedido_id)
+    detalles = [
+        {
+            "producto": detalle.producto.nombre,
+            "cantidad": detalle.cantidad
+        } for detalle in compra.detallecompra_set.all()
+    ]
+    data = {
+        "numero_pedido": compra.id,
+        "detalles": detalles,
+        "total": compra.total,
+        "fecha_compra": compra.fecha_compra.strftime("%d-%m-%Y %H:%M:%S"),
+        "estado": compra.get_estado_entrega_display(),
+    }
+    return JsonResponse(data)
 
 #Listar Pedidos
 @login_required
 def listar_pedidos(request):
-    compras = Compra.objects.all().order_by('-fecha_compra')
-    datos = {
-        'compras': compras
-    }
-    return render(request, 'aplicacion/crud-pedidos/listar_pedidos.html', datos)
+    compras = Compra.objects.all()
+    return render(request, 'aplicacion/crud-pedidos/listar_pedidos.html', {'compras': compras})
 
-#Modificar estado de pedido
+#Modificar el estado de un pedido
 def modificar_estado_pedido(request, pedido_id):
-    compra = get_object_or_404(Compra, id=pedido_id)
-    
-    if request.method == 'POST':
-        form = ModificarEstadoPedidoForm(request.POST, instance=compra)
-        if form.is_valid():
-            form.save()
-            return redirect('listar_pedidos')
-    else:
-        form = ModificarEstadoPedidoForm(instance=compra)
-    
-    return render(request, 'aplicacion/crud-pedidos/detallespedido.html', {'form': form, 'compra': compra})
-
-#Eliminar pedido de lista
-@login_required
-def eliminar_pedido(request, pedido_id):
-    pedido = get_object_or_404(Compra, id=pedido_id, usuario=request.user)
-    
-    if request.method == 'POST':
-        pedido.delete()
+    if request.method == 'GET':
+        estado = request.GET.get('estado')
+        compra = get_object_or_404(Compra, pk=pedido_id)
+        
+        # Validar y actualizar el estado de la compra
+        if estado in ['P', 'E', 'R', 'C']:
+            compra.estado_entrega = estado
+            compra.save()
+        
+        # Redirigir a la página de lista de pedidos
         return redirect('listar_pedidos')
-    return redirect('aplicacion/crud-pedidos/listar_pedidos.html')
+    
+    # Manejar otros métodos HTTP según sea necesario
+    return redirect('aplicacion/crud-pedidos/listar_pedidos')
+  
 
-#Ver detalles de pedido
-@login_required
-def detalle_pedido(request, pedido_id):
-    compra = get_object_or_404(Compra, id=pedido_id)
-    if request.method == 'POST':
-        nuevo_estado = request.POST.get('estado')
-        compra.estado_entrega = nuevo_estado
-        compra.save()
-        return redirect('detalle_pedido', pedido_id=pedido_id)  # Redirigir de nuevo a la página de detalles
-    return render(request, 'aplicacion/crud-pedidos/detallepedido.html', {'compra': compra})
 
 def registro(request):
     return render(request, 'aplicacion/registro.html')

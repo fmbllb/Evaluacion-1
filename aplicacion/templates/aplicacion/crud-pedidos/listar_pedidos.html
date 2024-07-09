@@ -11,60 +11,156 @@
         </a> (Pruebas del sistema, crear pedido)
     </div>
     {% if compras %}
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Número de Pedido</th>
-                <th>Cantidad de Productos</th>
-                <th>Total del Pedido</th>
-                <th>Fecha de Compra</th>
-                <th>Estado de Entrega</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for compra in compras %}
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td>{{ compra.id }}</td>
-                    <td>{{ compra.detallecompra_set.count }}</td>
-                    <td>{{ compra.total }}</td>
-                    <td>{{ compra.fecha_compra }}</td>
-                    <td>{{ compra.get_estado_entrega_display }}</td>
-                    <td>
-                        <a href="{% url 'detalle_pedido' compra.id %}" class="btn btn-info btn-sm">Ver</a>
-                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarPedido{{ compra.id }}">Eliminar</button>
-                    </td>
+                    <th>Número de Pedido</th>
+                    <th>Cantidad de Productos</th>
+                    <th>Total del Pedido</th>
+                    <th>Fecha de Compra</th>
+                    <th>Estado de Entrega</th>
+                    <th>Acciones</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    <p>No hay pedidos.</p>
-{% endif %}
+            </thead>
+            <tbody>
+                {% for compra in compras %}
+                    <tr>
+                        <td style="padding: 0.5">{{ compra.id }}</td>
+                        <td style="padding: 0.5">{{ compra.detallecompra_set.count }}</td>
+                        <td style="padding: 0.5">{{ compra.total }}</td>
+                        <td style="padding: 0.5">{{ compra.fecha_compra }}</td>
+                        <td style="padding: 0.5">{{ compra.get_estado_entrega_display }}</td>
+                        <td style="padding: 0.5">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <!-- Dropdown para modificar el estado del pedido -->
+                                    <div class="dropdown">
+                                        <button class="btn btn-warning btn-sm dropdown-toggle" type="button" id="dropdownEstado{{ compra.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Estado
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownEstado{{ compra.id }}">
+                                            <li><a class="dropdown-item" href="{% url 'modificar_estado_pedido' compra.id %}?estado=P">Pendiente</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'modificar_estado_pedido' compra.id %}?estado=E">Enviado</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'modificar_estado_pedido' compra.id %}?estado=R">Recibido</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'modificar_estado_pedido' compra.id %}?estado=C">Cancelado</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Fin del dropdown -->
+                            
+                            <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#detalleModal" data-pedido-id="{{ compra.id }}">Ver</button>
+                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarPedido{{ compra.id }}">Eliminar</button>
+                        </td>
+                    </tr>
+                    
+                    <!-- Modal para confirmar la eliminación del pedido -->
+                    <div class="modal fade" id="modalEliminarPedido{{ compra.id }}" tabindex="-1" aria-labelledby="modalEliminarPedidoLabel{{ compra.id }}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalEliminarPedidoLabel{{ compra.id }}">Confirmar Eliminación</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>¿Estás seguro de que deseas eliminar este pedido?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <form action="{% url 'eliminar_pedido' compra.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                {% endfor %}
+                
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hay pedidos.</p>
+    {% endif %}
+</div>
 
-<!-- Modal para eliminar pedido -->
-{% for compra in compras %}
-    <div class="modal fade" id="modalEliminarPedido{{ compra.id }}" tabindex="-1" aria-labelledby="modalEliminarPedidoLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalEliminarPedidoLabel">Eliminar Pedido #{{ compra.id }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ¿Estás seguro de que quieres eliminar este pedido?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <form action="{% url 'eliminar_pedido' compra.id %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                    </form>
-                </div>
+<!-- Modal para detalles del pedido -->
+<div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="detalleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detalleModalLabel">Detalles del Pedido</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Número de Pedido:</strong> <span id="pedidoNumero"></span></p>
+                <p><strong>Fecha de Compra:</strong> <span id="fechaCompra"></span></p>
+                <p><strong>Total del Pedido:</strong> <span id="totalPedido"></span></p>
+                <p><strong>Estado del Pedido:</strong> <span id="estadoPedido"></span></p>
+                <hr>
+                <h5>Productos:</h5>
+                <ul id="listaProductos">
+                    <!-- Aquí se llenarán dinámicamente los detalles de los productos -->
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
-{% endfor %}
+</div>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const detalleModal = document.getElementById('detalleModal');
+    detalleModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        const pedidoId = button.getAttribute('data-pedido-id');
+
+        fetch(`/detalle-pedido/${pedidoId}/`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('pedidoNumero').textContent = data.numero_pedido;
+                document.getElementById('fechaCompra').textContent = data.fecha_compra;
+                document.getElementById('totalPedido').textContent = data.total;
+                document.getElementById('estadoPedido').textContent = data.estado;
+                const listaProductos = document.getElementById('listaProductos');
+                listaProductos.innerHTML = '';
+                data.detalles.forEach(detalle => {
+                    const li = document.createElement('li');
+                    li.textContent = `${detalle.producto} - Cantidad: ${detalle.cantidad}`;
+                    listaProductos.appendChild(li);
+                });
+            });
+    });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const detalleModal = document.getElementById('detalleModal');
+    detalleModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        const pedidoId = button.getAttribute('data-pedido-id');
+
+        fetch(`/detalle-pedido/${pedidoId}/`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('pedidoNumero').textContent = data.numero_pedido;
+                document.getElementById('fechaCompra').textContent = data.fecha_compra;
+                document.getElementById('totalPedido').textContent = data.total;
+                document.getElementById('estadoPedido').textContent = data.estado;
+                const listaProductos = document.getElementById('listaProductos');
+                listaProductos.innerHTML = '';
+                data.detalles.forEach(detalle => {
+                    const li = document.createElement('li');
+                    li.textContent = `${detalle.producto} - Cantidad: ${detalle.cantidad}`;
+                    listaProductos.appendChild(li);
+                });
+            });
+    });
+});
+</script>
 
 {% endblock contenido %}
