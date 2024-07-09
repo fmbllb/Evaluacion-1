@@ -37,7 +37,6 @@ def agregar_producto(request):
 def aumentar_item_carrito(request, item_id):
     item = get_object_or_404(ItemCarrito, id=item_id)
     if item.carrito.usuario != request.user:
-        messages.error(request, 'No tienes permiso para modificar este ítem.')
         return redirect('carrito')
     # Debugging: print item details
     print(f"Aumentando cantidad para item: {item.id}, producto: {item.producto.nombre}")
@@ -49,22 +48,30 @@ def aumentar_item_carrito(request, item_id):
 def disminuir_item_carrito(request, item_id):
     item = get_object_or_404(ItemCarrito, id=item_id)
     if item.carrito.usuario != request.user:
-        messages.error(request, 'No tienes permiso para modificar este ítem.')
         return redirect('carrito')
     # Debugging: print item details
     print(f"Disminuyendo cantidad para item: {item.id}, producto: {item.producto.nombre}")
     if item.cantidad > 1:
         item.disminuir_cantidad()
-        messages.success(request, 'Disminuyó la cantidad del ítem.')
     else:
         messages.error(request, 'No puedes disminuir la cantidad de este ítem por debajo de 1.')
+    return redirect('carrito')
+
+@login_required
+def actualizar_item_carrito(request, item_id):
+    item = get_object_or_404(ItemCarrito, id=item_id)
+    if item.carrito.usuario != request.user:
+        return redirect('carrito')
+    if request.method == 'POST':
+        nueva_cantidad = int(request.POST.get('nueva_cantidad', 1))
+        item.cantidad = nueva_cantidad
+        item.save()
     return redirect('carrito')
 
 @login_required
 def agregar_producto_carrito(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
     carrito, creado = Carrito.objects.get_or_create(usuario=request.user)
-    
     if request.method == 'POST':
         cantidad = int(request.POST.get('cantidad', 1))  # Obtener la cantidad del formulario o asignar 1 por defecto
         carrito.agregar_producto(producto, cantidad)
@@ -539,6 +546,16 @@ def eliminar_pedido(request, pedido_id):
 def detalle_pedido(request, id):
     compra = get_object_or_404(Compra, id=id)
     return render(request, 'aplicacion/crud-pedidos/detalle_pedido.html', {'compra': compra})
+
+#Listar pedidos de 1 usuario
+@login_required
+def seguipedido(request, usuario_id):
+    usuario = get_object_or_404(User, id=usuario_id)
+    compras = Compra.objects.filter(usuario=usuario).order_by('-fecha_compra')
+    context = {
+        'compras': compras
+    }
+    return render(request, 'aplicacion/crud-pedidos/seguipedido.html', context)
 
 #Listar Pedidos
 @login_required

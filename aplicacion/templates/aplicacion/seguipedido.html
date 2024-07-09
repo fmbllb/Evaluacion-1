@@ -34,6 +34,47 @@
         </div>
         {% endfor %}
       </div>
+</body>
+
+
+
+<!-- Modal de Confirmación para Cancelar Pedido -->
+<div class="modal fade" id="confirmCancelModal" tabindex="-1" aria-labelledby="confirmCancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmCancelModalLabel">Confirmar Cancelación</h5>
+                <button type="button" class="btn-close rounded-0" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas cancelar este pedido? Será redirigido a la página de contacto.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <a href="#" class="btn btn-danger" id="confirmacionEliminarPedido">Cancelar Pedido</a><!--ENVÍA LA INFORMAICÓN A LA DB-->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}
+{% comment %}  ACTUALIZACION DE LOS CAMBIOS EN EL CARRITO DE COMPRAS
+<div class="container border mb-3 mt-3">
+  <h2>Actualizar Telefono</h2>
+  <form method="POST">
+      {% csrf_token %}
+      {{ form | crispy }}
+      <div class="mb-3">
+          <button type="submit" class="btn btn-primary">Actualizar</button>
+      </div>
+  </form>
+  {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+  {% endif %}
+</div> 
+{% endcomment %}
 
 {% comment %}     
   <button class="btn btn-danger rounded-0 mt-2" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Cancelar Pedido</button>
@@ -61,43 +102,3 @@
           </div>
       </div>
 {% endcomment %}
-</body>
-{% comment %}  ACTUALIZACION DE LOS CAMBIOS EN EL CARRITO DE COMPRAS
-<div class="container border mb-3 mt-3">
-  <h2>Actualizar Telefono</h2>
-  <form method="POST">
-      {% csrf_token %}
-      {{ form | crispy }}
-      <div class="mb-3">
-          <button type="submit" class="btn btn-primary">Actualizar</button>
-      </div>
-  </form>
-  {% if messages %}
-      {% for message in messages %}
-          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-      {% endfor %}
-  {% endif %}
-</div> 
-{% endcomment %}
-
-
-<!-- Modal de Confirmación para Cancelar Pedido -->
-<div class="modal fade" id="confirmCancelModal" tabindex="-1" aria-labelledby="confirmCancelModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmCancelModalLabel">Confirmar Cancelación</h5>
-                <button type="button" class="btn-close rounded-0" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ¿Estás seguro de que deseas cancelar este pedido? Será redirigido a la página de contacto.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <a href="#" class="btn btn-danger" id="confirmacionEliminarPedido">Cancelar Pedido</a><!--ENVÍA LA INFORMAICÓN A LA DB-->
-            </div>
-        </div>
-    </div>
-</div>
-
-{% endblock contenido %}
