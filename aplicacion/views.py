@@ -395,8 +395,21 @@ def eliminar_producto(request, nombre_producto):
 #CRUD USUARIOS
 @login_required
 def lista_usuarios(request):
-    usuarios = User.objects.all()
-    return render(request, 'aplicacion/listausuarios.html', {'usuarios': usuarios})
+    # Obtener parámetros de orden y dirección (ascendente o descendente)
+    orden_por = request.GET.get('ordenar_por', 'username')  # Campo predeterminado para ordenar
+    direccion = request.GET.get('direccion', 'asc')         # Dirección predeterminada
+    
+    if direccion == 'desc':
+        orden_por = '-' + orden_por  # Prefijo '-' para orden descendente
+    
+    # Obtener usuarios ordenados
+    usuarios = User.objects.all().order_by(orden_por)
+    
+    return render(request, 'aplicacion/listausuarios.html', {
+        'usuarios': usuarios,
+        'orden_por': orden_por,
+        'direccion': direccion
+    })
 
 def localizacion(request):
     return render(request, 'aplicacion/localizacion.html')

@@ -5,10 +5,63 @@
     
 <div class="container mt-5 container-fluid">
     <h1 class="mb-4">Usuarios Registrados</h1>
+    
+    <!-- Cuadro de ordenamiento -->
+    <div class="card bg-dark text-white mb-3">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Ordenar por:</h5>
+                <div class="btn-group">
+                    <a id="ordenar-username" class="btn btn-outline-warning {% if orden_por == 'username' %}active{% endif %}" href="?ordenar_por=username&direccion={{ direccion }}">
+                        Nombre de Usuario
+                        {% if orden_por == 'username' %}
+                            {% if direccion == 'asc' %}
+                                <i id="icon-username" class="bi bi-caret-up-fill"></i>
+                            {% else %}
+                                <i id="icon-username" class="bi bi-caret-down-fill"></i>
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                    <a id="ordenar-email" class="btn btn-outline-warning {% if orden_por == 'email' %}active{% endif %}" href="?ordenar_por=email&direccion={{ direccion }}">
+                        Correo Electrónico
+                        {% if orden_por == 'email' %}
+                            {% if direccion == 'asc' %}
+                                <i id="icon-email" class="bi bi-caret-up-fill"></i>
+                            {% else %}
+                                <i id="icon-email" class="bi bi-caret-down-fill"></i>
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                    <a id="ordenar-is-active" class="btn btn-outline-warning {% if orden_por == 'is_active' %}active{% endif %}" href="?ordenar_por=is_active&direccion={{ direccion }}">
+                        Estado de la Cuenta
+                        {% if orden_por == 'is_active' %}
+                            {% if direccion == 'asc' %}
+                                <i id="icon-is-active" class="bi bi-caret-up-fill"></i>
+                            {% else %}
+                                <i id="icon-is-active" class="bi bi-caret-down-fill"></i>
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                    <a id="ordenar-first-name" class="btn btn-outline-warning {% if orden_por == 'first_name' %}active{% endif %}" href="?ordenar_por=first_name&direccion={{ direccion }}">
+                        Nombre
+                        {% if orden_por == 'first_name' %}
+                            {% if direccion == 'asc' %}
+                                <i id="icon-first-name" class="bi bi-caret-up-fill"></i>
+                            {% else %}
+                                <i id="icon-first-name" class="bi bi-caret-down-fill"></i>
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="table-responsive">
-        <table class="table">
+        <table class="table table-striped table-bordered">
             <thead>
                 <tr>
+                    <th>Nombre de Usuario</th>
                     <th>Nombre</th>
                     <th>Correo Electrónico</th>
                     <th>Estado de la Cuenta</th>
@@ -18,7 +71,8 @@
             <tbody>
                 {% for usuario in usuarios %}
                 <tr>
-                    <td>{{ usuario.get_full_name }}</td>
+                    <td>{{ usuario.username }}</td>
+                    <td>{{ usuario.get_full_name }}</td>  <!-- Ajusta según tu método de obtener nombre completo -->
                     <td>{{ usuario.email }}</td>
                     <td>
                         {% if usuario.is_active %}
@@ -58,5 +112,45 @@
         </table>
     </div>
 </div>
+
+<!-- Script para cambiar la dirección y actualizar las flechas -->
+<script>
+    // Función para manejar el cambio de dirección y actualizar las flechas
+    function cambiarOrden(nombreBoton) {
+        var boton = document.getElementById(nombreBoton);
+        var icono = document.getElementById('icon-' + nombreBoton);
+        
+        // Obtener la dirección actual
+        var url = new URL(boton.href);
+        var direccionActual = url.searchParams.get("direccion");
+        
+        // Cambiar la dirección y actualizar el enlace
+        var nuevaDireccion = (direccionActual === 'asc') ? 'desc' : 'asc';
+        boton.href = boton.href.replace('direccion=' + direccionActual, 'direccion=' + nuevaDireccion);
+        
+        // Cambiar el ícono de la flecha
+        if (direccionActual === 'asc') {
+            icono.classList.remove('bi-caret-up-fill');
+            icono.classList.add('bi-caret-down-fill');
+        } else {
+            icono.classList.remove('bi-caret-down-fill');
+            icono.classList.add('bi-caret-up-fill');
+        }
+    }
+    
+    // Asignar evento de clic a cada botón de ordenamiento
+    document.getElementById('ordenar-username').addEventListener('click', function() {
+        cambiarOrden('ordenar-username');
+    });
+    document.getElementById('ordenar-email').addEventListener('click', function() {
+        cambiarOrden('ordenar-email');
+    });
+    document.getElementById('ordenar-is-active').addEventListener('click', function() {
+        cambiarOrden('ordenar-is-active');
+    });
+    document.getElementById('ordenar-first-name').addEventListener('click', function() {
+        cambiarOrden('ordenar-first-name');
+    });
+</script>
 
 {% endblock contenido %}
