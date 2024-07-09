@@ -137,7 +137,7 @@ def seguipedido(request):
 def carrito(request):
     carrito, created = Carrito.objects.get_or_create(usuario=request.user)
     productos = Producto.objects.all()  #  la lista de productos que se muestran en la página de carrito
-    
+    total = sum(item.producto.precio * item.cantidad for item in carrito.items.all())
     if request.method == 'POST':
         item_id = request.POST.get('item_id')
         nueva_cantidad = int(request.POST.get('nueva_cantidad', 1))
@@ -149,9 +149,17 @@ def carrito(request):
     context = {
         'carrito': carrito,
         'productos': productos,
+        'total': total,
     }
     return render(request, 'aplicacion/carrito.html', context)
 
+def boleta(request):
+    boletas_usuario = Boleta.objects.filter(usuario=request.user)
+    
+    context = {
+        'boletas_usuario': boletas_usuario,
+    }
+    return render(request, 'aplicacion/boleta_usuario.html', context)
 
 def detalle_producto(request, nombre_producto):
     producto = get_object_or_404(Producto, id=id)

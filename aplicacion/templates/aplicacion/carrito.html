@@ -67,7 +67,7 @@
               <p id="precioProducto-{{ item.id }}" class="fw-bold">${{ item.producto.precio }}</p>
             </li>
           {% endfor %}
-          <li class="list-group-item" id="totalCarrito-{{ item.id }}">Total: $ {{ item.total }}</li>
+          <li class="list-group-item" id="totalCarrito">Total del Carrito: $ {{ total }}</li>
         </ul>
 
         <div class="collapse" id="cuponCollapse">
@@ -93,7 +93,7 @@
                   Confirmar la cantidad de productos.
                 </div>
                 <div class="modal-footer">
-                  <a href="{% url 'crear_pedido' %}" class="btn btn-secondary">OK</a>
+                  <a href="{% url 'boleta' %}" class="btn btn-secondary">OK</a>
                 </div>
               </div>
             </div>
