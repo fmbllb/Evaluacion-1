@@ -339,9 +339,6 @@ def actualizar_usuario(request):
 def finanzas(request):
     return render(request, 'aplicacion/finanzas.html')
 
-def guardado(request):
-    return render(request, 'aplicacion/guardado.html')
-
 #Index
 def index(request):
     productos=Producto.objects.all()
@@ -498,6 +495,7 @@ def detalle_pedido(request, id):
     return render(request, 'aplicacion/crud-pedidos/detalle_pedido.html', {'compra': compra})
 
 #Listar Pedidos
+@login_required
 def listar_pedidos(request):
     compras = Compra.objects.all().order_by('-fecha_compra')
     context = {
@@ -511,6 +509,7 @@ def registro(request):
     return render(request, 'aplicacion/registro.html')
 
 
+@login_required
 def stock(request):
     return render(request, 'aplicacion/stock.html')
 

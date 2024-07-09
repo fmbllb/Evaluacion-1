@@ -2,7 +2,7 @@ from django.urls import path, include
 from .views import (stuff, ajustescuenta,cerrar_sesion, index, login2, crearcuenta, registro, 
     administrador, lista_usuarios, localizacion, catalogo, agregar_producto_carrito, carrito, contacto, 
     datospersonales, vistausuario, seguipedido, modpedido, listar_pedidos, finanzas, stock, 
-    editarproducto, agregar_producto, guardado, actualizar_correo, actualizar_telefono, actualizar_usuario, detalle_producto,
+    editarproducto, agregar_producto, actualizar_correo, actualizar_telefono, actualizar_usuario, detalle_producto,
     eliminar_producto_carrito, eliminar_cuenta, actualizar_direccion, productosadmin, eliminar_producto, autocompletar,
     detalle_producto, eliminar_producto_carrito, eliminar_cuenta, actualizar_direccion, productosadmin, eliminar_producto,
     crear_pedido, detalle_pedido, aumentar_item_carrito, disminuir_item_carrito, boleta, editar_usuario, eliminar_usuario)
@@ -21,7 +21,6 @@ urlpatterns = [
     path('datospersonales/', datospersonales, name='datospersonales'),
     path('editarproducto/<str:nombre_producto>/', editarproducto, name='editarproducto'),
     path('finanzas/', finanzas, name='finanzas'),
-    path('guardado/', guardado, name='guardado'),
     path('', index, name='index'),
     path('', include('django.contrib.auth.urls')),
     path('productosadmin/', productosadmin, name='productosadmin'),
