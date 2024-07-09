@@ -1,0 +1,30 @@
+{% extends "aplicacion/base.html" %}
+{% load crispy_forms_tags %}
+{% block contenido %}
+{% load static %}
+
+<h2>Confirmación de Compra</h2>
+
+<ul>
+  {% for item in carrito.items.all %}
+  <li>
+    <div>
+      <img src="{{ item.producto.foto.url }}" alt="{{ item.producto.nombre }}" width="100">
+    </div>
+    <div>
+      <p>Producto: {{ item.producto.nombre }}</p>
+      <p>Cantidad: {{ item.cantidad }}</p>
+      <p>Precio Total: ${{ item.total }}</p>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+
+<!-- Formulario para enviar los datos -->
+<form action="{% url 'guardar_compra' %}" method="post">
+  {% csrf_token %}
+  {{ compra_form|crispy }}
+  <button type="submit" class="btn btn-success">Confirmar Compra</button>
+</form>
+
+{% endblock contenido %}
