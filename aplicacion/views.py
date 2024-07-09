@@ -10,17 +10,23 @@ from django.contrib.auth import logout, login
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import *
 from .enumeraciones import TIPO_PRODUCTO
 
 # Create your views here.
 
+#Verifica si un usuario es administrador
+def es_admin(user):
+    return user.is_authenticated and user.is_staff
+
+@user_passes_test(es_admin)
 @login_required
 def administrador(request):
     return render(request, 'aplicacion/administrador.html')
 
 #VISTAS DEL PRODUCTO
+@user_passes_test(es_admin)
 @login_required
 def agregar_producto(request):
     if request.method == 'POST':
@@ -210,6 +216,7 @@ def contacto(request):
 """ def perfil():
     return render() """
 
+@user_passes_test(es_admin)
 @login_required
 def stuff(request):
     form = AuthenticationForm()
@@ -343,7 +350,7 @@ def actualizar_usuario(request):
         'form': form
     })
 
-
+@user_passes_test(es_admin)
 @login_required
 def finanzas(request):
     return render(request, 'aplicacion/finanzas.html')
@@ -362,6 +369,7 @@ def index(request):
     }
     return render(request, 'aplicacion/index.html', datos)
 
+@user_passes_test(es_admin)
 @login_required
 def productosadmin(request):
     productos = Producto.objects.all()
@@ -387,12 +395,14 @@ def productosadmin(request):
     return render(request, 'aplicacion/productosadmin.html', datos)
 
 #Eliminar producto
+@user_passes_test(es_admin)
 def eliminar_producto(request, nombre_producto):
     producto = get_object_or_404(Producto, nombre=nombre_producto)
     producto.delete()
     return redirect('productosadmin')
 
 #CRUD USUARIOS
+@user_passes_test(es_admin)
 @login_required
 def lista_usuarios(request):
     # Obtener parámetros de orden y dirección (ascendente o descendente)
@@ -414,10 +424,12 @@ def lista_usuarios(request):
 def localizacion(request):
     return render(request, 'aplicacion/localizacion.html')
 
+@user_passes_test(es_admin)
 def modpedido(request):
     return render(request, 'aplicacion/modpedido.html')
 
 #Editar usuario
+@user_passes_test(es_admin)
 @login_required
 def editar_usuario(request, usuario_id):
     usuario = get_object_or_404(User, id=usuario_id)
@@ -432,6 +444,7 @@ def editar_usuario(request, usuario_id):
     return render(request, 'aplicacion/editarusuario', {'form': form, 'usuario': usuario})
 
 #Eliminar usuario
+@user_passes_test(es_admin)
 @login_required
 def eliminar_usuario(request, usuario_id):
     usuario = get_object_or_404(User, id=usuario_id)
@@ -526,6 +539,7 @@ def crear_pedido(request):
 
     return render(request, 'aplicacion/crud-pedidos/crear_pedido.html', context)
 
+@user_passes_test(es_admin)
 @login_required
 def eliminar_pedido(request, pedido_id):
     compra = get_object_or_404(Compra, id=pedido_id)
@@ -535,6 +549,7 @@ def eliminar_pedido(request, pedido_id):
     return render(request, 'aplicacion/crud-pedidos/listar_pedidos.html', {'compra': compra})
 
 #Detalle pedido
+@login_required
 def detalle_pedido(request, pedido_id):
     compra = get_object_or_404(Compra, id=pedido_id)
     detalles = [
@@ -553,12 +568,15 @@ def detalle_pedido(request, pedido_id):
     return JsonResponse(data)
 
 #Listar Pedidos
+@user_passes_test(es_admin)
 @login_required
 def listar_pedidos(request):
     compras = Compra.objects.all()
     return render(request, 'aplicacion/crud-pedidos/listar_pedidos.html', {'compras': compras})
 
 #Modificar el estado de un pedido
+@login_required
+@user_passes_test(es_admin)
 def modificar_estado_pedido(request, pedido_id):
     if request.method == 'GET':
         estado = request.GET.get('estado')
@@ -582,10 +600,12 @@ def registro(request):
 
 
 @login_required
+@user_passes_test(es_admin)
 def stock(request):
     return render(request, 'aplicacion/stock.html')
 
 #Editar un producto existente
+@user_passes_test(es_admin)
 def editarproducto(request, nombre_producto):
     produc=get_object_or_404(Producto,nombre= nombre_producto)
     form=EditarProductoForm(instance=produc)
@@ -614,6 +634,7 @@ def editarproducto(request, nombre_producto):
     
 
 #Eliminar producto
+@user_passes_test(es_admin)
 @login_required
 def eliminar_producto(request, nombre_producto):
     producto = get_object_or_404(Producto, nombre=nombre_producto)
