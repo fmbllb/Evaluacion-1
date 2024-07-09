@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col-sm-8">
       <h2 style="font-size:150%"><strong>Carrito de Compras</strong></h2>
-      <form id="carritoForm" method="post">
+      <form method="post">
         {% csrf_token %}
         {{ compra_form|crispy }}
         {% if carrito.items.all %}
@@ -68,21 +68,54 @@
         </ul>
 
         <div class="card-body">
-          <!-- Botón confirmar pago -->
-          <a href="{% url 'crear_pedido' %}" class="btn btn-warning">Tramitar Pago</a>
-          <!-- Modal pago confirmado -->
-          <div class="modal fade" id="confirmapago" tabindex="-1" aria-labelledby="confirma" aria-hidden="true">
+        <!-- Botón para abrir el modal -->
+        {% if carrito.items.all %}
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#confirmacionPago">Tramitar Pago</button>
+        {% endif %}
+        <!-- Modal pago confirmado -->
+        <div class="modal fade" id="confirmacionPago" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">¡Compra Confirmada!</h5>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmación de Pago</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{% url 'crear_pedido' %}" method="post">
+                            {% csrf_token %}
+                            {{ compra_form|crispy }}
+                            {% if carrito.items.all %}
+                            <div id="productos-compra">
+                                {% for item in carrito.items.all %}
+                                <div class="d-flex border align-items-center mt-3 p-2">
+                                    <div class="card-body">
+                                        <label for="producto">Producto:</label>
+                                        <h2 class="card-title">{{ item.producto.nombre }}</h2>
+                                        <input type="hidden" name="productos_ids" value="{{ item.producto.id }}">
+                                        <img src="{{ item.producto.foto.url }}" alt="{{ item.producto.nombre }}" class="img-fluid card-img-top mb-3">
+                                        <div class="mb-3 w-25">
+                                            <label for="cantidad">Cantidad:</label>
+                                            <div class="input-group">
+                                                <p>{{ item.cantidad }}</p>
+                                                <input type="hidden" name="cantidades" value="{{ item.cantidad }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                            <button href="{% url 'catalogo' %}" type="submit" class="btn btn-success">Realizar Envío</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
                 </div>
-                <div class="modal-footer">
-                  <a class="btn btn-secondary">OK</a>
-                </div>
-              </div>
             </div>
-          </div>
+        </div>
+        
+      
+
         </div>
       </div>
 
@@ -125,9 +158,8 @@
       </div>
     </div>
   </div>
-
   <!-- Más productos -->
-  <div class="row mb-3">
+<!--   <div class="row mb-3">
     <h2>MÁS PRODUCTOS</h2>
   </div>
   <div class="row">
@@ -151,7 +183,7 @@
         </div>
       </div>
     {% endfor %}
-  </div>
+  </div> -->
 </div>
 
 {% endblock contenido %}
