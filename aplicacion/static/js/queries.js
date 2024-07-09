@@ -378,7 +378,7 @@ $(document).ready(function() {
   });
 });
 
-//Script aumento y decremento de carrito
+//Script pagina carrito
 $(document).ready(function() {
   // Botón de disminuir cantidad
   $('.btn-minus').click(function(e) {

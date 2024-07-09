@@ -17,24 +17,19 @@
         <div class="linea-horizontal"></div>
 
         <div class="col-lg-6">
-            <h3>{{ producto.nombre }}</h1>
-            <p class="mt-3">En stock: # Articulo(s)</p>
+            <h3><strong>{{ producto.nombre }}</strong></h1>
+            <p class="mt-3">En stock: {{producto.stock}} Articulo(s)</p>
             <p style="font-size: x-large;"><strong>${{ producto.precio }}</strong></p>
             
-            <!-- Contador -->
-            <div class="input-group ms-5 p-3">
-                <button class="btn btn-outline-secondary rounded-0" type="button" id="decrement">-</button>
-                <input type="number" value="1" min="1" max="10" class="form-control text-center" id="qtyInput">
-                <button class="btn btn-outline-secondary rounded-0" type="button" id="increment">+</button>
-            </div>
-
             <!--Botones-->
-            <div class="mt-5 d-flex justify-content-lg-between justify-content-center">
-                <a href="{% url 'catalogo' %}" class="btn btn-primary rounded-0">Volver al catálogo</a>
-                <form method="post" action="{% url 'agregar_producto_carrito' producto.id %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-success">Agregar al Carrito</button>
-                </form>
+            <div class="row">
+                <div class="mt-5 d-flex">
+                    <a href="{% url 'catalogo' %}" class="btn btn-primary rounded-0">Volver al catálogo</a>
+                    <form class="mx-3" method="post" action="{% url 'agregar_producto_carrito' producto.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success rounded-0">Agregar al Carrito</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

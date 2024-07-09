@@ -350,9 +350,6 @@ def index(request):
     for producto in productos:
         categorias[producto.categoria_producto].append(producto)
 
-
-
-
     datos = {
         'categorias': categorias,
         'productos':productos
