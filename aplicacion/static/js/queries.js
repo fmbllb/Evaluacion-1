@@ -398,6 +398,38 @@ $(document).ready(function() {
   });
 });
 
+//Script aumento y decremento de carrito
+$(document).ready(function() {
+  // Botón de disminuir cantidad
+  $('.btn-minus').click(function(e) {
+      e.preventDefault();
+      var $input = $(this).parent().find('input.cantidad-input');
+      var cantidad = parseInt($input.val()) - 1;
+      cantidad = cantidad < 1 ? 1 : cantidad;
+      $input.val(cantidad);
+      actualizarPrecioTotal($input);
+      $input.trigger('change');
+  });
+
+  // Botón de aumentar cantidad
+  $('.btn-plus').click(function(e) {
+      e.preventDefault();
+      var $input = $(this).parent().find('input.cantidad-input');
+      var cantidad = parseInt($input.val()) + 1;
+      cantidad = cantidad > parseInt($input.attr('max')) ? parseInt($input.attr('max')) : cantidad;
+      $input.val(cantidad);
+      actualizarPrecioTotal($input);
+      $input.trigger('change');
+  });
+
+  // Función para actualizar el precio total por producto
+  function actualizarPrecioTotal($input) {
+      var cantidad = parseInt($input.val());
+      var precioUnitario = parseFloat($input.data('precio'));
+      var precioTotal = cantidad * precioUnitario;
+      $input.closest('.d-flex').find('.card-text').text('$ ' + precioTotal.toFixed(2));
+  }
+});
 
 
 /*$(document).ready(function () {

@@ -11,45 +11,41 @@
         {% csrf_token %}
         {{ compra_form|crispy }}
         {% if carrito.items.all %}
-        {% for item in carrito.items.all %}
-        <div class="d-flex border align-items-center mt-3 p-2">
-            {% if item.producto.foto %}
-                <img src="{{ item.producto.foto.url }}" class="img-fluid me-3" alt="Imagen del producto" width="20%">
-            {% else %}
-                <img src="{% static 'img/default-product-image.jpg' %}" class="img-fluid me-3" alt="Imagen por defecto" width="20%">
-            {% endif %}
-            <div class="flex-grow-1">
+          {% for item in carrito.items.all %}
+            <div class="d-flex border align-items-center mt-3 p-2">
+              <div class="me-3">
+                {% if item.producto.foto %}
+                  <img src="{{ item.producto.foto.url }}" class="img-fluid" alt="Imagen del producto" width="100">
+                {% else %}
+                  <img src="{% static 'img/default-product-image.jpg' %}" class="img-fluid" alt="Imagen por defecto" width="100">
+                {% endif %}
+              </div>
+              <div class="flex-grow-1">
                 <p>{{ item.producto.nombre }}</p>
-                <p id="precioProducto-{{ item.id }}" class="fw-bold">${{ item.producto.precio }}</p>
-            </div>
-            <div class="mb-3 w-25">
+                <p class="fw-bold">Precio Unitario: ${{ item.producto.precio }}</p>
+              </div>
+              <div class="mb-3 w-25">
                 <label for="cantidad">Cantidad:</label>
                 <div class="input-group">
-                  <form method="post" action="{% url 'disminuir_item_carrito' item.id %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-outline-secondary btn-minus">-</button>
-                  </form>
+                  <button type="button" class="btn btn-outline-secondary btn-minus" onclick="disminuirCantidad({{ item.id }})">-</button>
                   <input type="number" name="cantidades" class="form-control form-control-sm cantidad-input" min="1" value="{{ item.cantidad }}" data-precio="{{ item.producto.precio }}" data-item-id="{{ item.id }}">
-                  <form method="post" action="{% url 'aumentar_item_carrito' item.id %}">
-                      {% csrf_token %}
-                      <button type="submit" class="btn btn-outline-secondary btn-plus">+</button>
-                  </form>
+                  <button type="button" class="btn btn-outline-secondary btn-plus" onclick="aumentarCantidad({{ item.id }})">+</button>
                 </div>
-            </div>
-            <div class="mb-3">
+              </div>
+              <div class="mb-3">
                 <label for="precio">Precio Total:</label>
-                <p class="card-text" id="precioTotal-{{ item.id }}">${{ item.total }}</p>
-            </div>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end me-2">
-                <a href="{% url 'eliminar_producto_carrito' item.id %}" class="btn btn-danger">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket3" viewBox="0 0 16 16">
-                        <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM3.394 15l-1.48-6h-.97l1.525 6.426a.75.75 0 0 0 .729.574h9.606a.75.75 0 0 0 .73-.574L15.056 9h-.972l-1.479 6z"/>
-                    </svg>
+                <p class="card-text fw-bold" id="precioTotal-{{ item.id }}">${{ item.total }}</p>
+              </div>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="{% url 'eliminar_producto_carrito' item.id %}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto del carrito?')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket3" viewBox="0 0 16 16">
+                    <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM3.394 15l-1.48-6h-.97l1.525 6.426a.75.75 0 0 0 .729.574h9.606a.75.75 0 0 0 .73-.574L15.056 9h-.972l-1.479 6z"/>
+                  </svg>
                 </a>
+              </div>
             </div>
-        </div>
-        <br>
-      {% endfor %}
+            <br>
+          {% endfor %}
         {% else %}
           <p>No hay productos en el carrito</p>
         {% endif %}
@@ -64,23 +60,15 @@
           {% for item in carrito.items.all %}
             <li class="list-group-item">
               <p>{{ item.producto.nombre }}</p>
-              <p id="precioProducto-{{ item.id }}" class="fw-bold">${{ item.producto.precio }}</p>
+              <p class="fw-bold">Precio Unitario: ${{ item.producto.precio }}</p>
             </li>
           {% endfor %}
-          <li class="list-group-item" id="totalCarrito-{{ item.id }}">Total: $ {{ item.total }}</li>
+          <li class="list-group-item" id="totalCarrito">Total: ${{ carrito.total }}</li>
         </ul>
-
-        <div class="collapse" id="cuponCollapse">
-          <div class="input-group mt-3">
-            <input type="text" class="form-control" placeholder="Código de cupón">
-            <button class="btn btn-warning rounded-0" type="button">Aplicar</button>
-          </div>
-        </div>
 
         <div class="card-body">
           <!-- Botón confirmar pago -->
-          <button type="button" class="btn btn-secondary rounded-0" data-bs-toggle="modal"
-            data-bs-target="#confirmapago">Tramitar Compra</button>
+          <button type="button" class="btn btn-secondary rounded-0" data-bs-toggle="modal" data-bs-target="#confirmapago">Tramitar Compra</button>
 
           <!-- Modal pago confirmado -->
           <div class="modal fade" id="confirmapago" tabindex="-1" aria-labelledby="confirma" aria-hidden="true">
@@ -103,8 +91,7 @@
 
       <div class="card mt-3 mb-2">
         <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle rounded-0" type="button" id="paymentDropdown"
-            data-bs-toggle="dropdown">
+          <button class="btn btn-primary dropdown-toggle rounded-0" type="button" id="paymentDropdown" data-bs-toggle="dropdown">
             Seleccionar medio de pago
           </button>
           <ul class="dropdown-menu rounded-0" aria-labelledby="paymentDropdown">
@@ -124,7 +111,7 @@
         </div>
       </div>
 
-      <!--Selección entrega o retiro-->
+      <!-- Selección entrega o retiro -->
       <div class="card mt-3 mb-5 p-2">
         <div class="form-check text-start">
           <input class="form-check-input" type="radio" name="exampleRadios" value="option1" checked>
@@ -141,30 +128,33 @@
       </div>
     </div>
   </div>
+
+  <!-- Más productos -->
   <div class="row mb-3">
-    <h2>MAS PRODUCTOS</h2>
+    <h2>MÁS PRODUCTOS</h2>
   </div>
   <div class="row">
     {% for producto in productos %}
-    <div class="col-md-4 mb-4">
-      <div class="card h-100">
-        {% if producto.foto %}
-        <img src="{{ producto.foto.url }}" class="card-img-top" alt="{{ producto.nombre }}">
-        {% else %}
-        <img src="{% static 'img/default-product.jpg' %}" class="card-img-top" alt="Producto sin imagen">
-        {% endif %}
-        <div class="card-body">
-          <h5 class="card-title">{{ producto.nombre }}</h5>
-          <p class="card-text fw-bold">$ {{ producto.precio }}</p>
-          <form id="agregarProductoForm{{ producto.id }}" method="post" action="{% url 'agregar_producto_carrito' producto.id %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-warning">Agregar al Carrito</button>
-          </form>
-          <a href="{% url 'detalle_producto' producto.id %}" class="">Ver Detalle</a>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          {% if producto.foto %}
+            <img src="{{ producto.foto.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+          {% else %}
+            <img src="{% static 'img/default-product.jpg' %}" class="card-img-top" alt="Producto sin imagen">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ producto.nombre }}</h5>
+            <p class="card-text fw-bold">$ {{ producto.precio }}</p>
+            <form id="agregarProductoForm{{ producto.id }}" method="post" action="{% url 'agregar_producto_carrito' producto.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-warning">Agregar al Carrito</button>
+            </form>
+            <a href="{% url 'detalle_producto' producto.id %}" class="">Ver Detalle</a>
+          </div>
         </div>
       </div>
-    </div>
     {% endfor %}
   </div>
 </div>
+
 {% endblock contenido %}
