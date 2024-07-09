@@ -598,7 +598,7 @@ def seguipedido(request, usuario_id):
     context = {
         'compras': compras
     }
-    return render(request, 'aplicacion/crud-pedidos/seguipedido.html', context)
+    return render(request, 'aplicacion/seguipedido.html', context)
 
 #Listar Pedidos
 @login_required

@@ -9,7 +9,7 @@
     <div class="row mt-3 mb-3 white-background" id="pedido{{ forloop.counter }}Usuario">
         <div class="row justify-content-center align-items-center">
             <div class="col-md-6 d-flex justify-content-center align-items-center">
-                <img src="{% static 'img/default-product.jpg' %}" alt="Producto {{ forloop.counter }}" class="img-fluid border" width="35%">
+                <img src="{{ compra.producto.foto.url }}" alt="Producto {{ forloop.counter }}" class="img-fluid border" width="35%">
             </div>
             <div class="col-md-6 px-5 mt-3">
                 <h4>Seguimiento de Pedido</h4>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <a href="{% url 'cancelar_pedido' compra.id %}" class="btn btn-danger">Cancelar Pedido</a>
+                    <a href="{% url 'index' %}" class="btn btn-danger">Cancelar Pedido</a>
                 </div>
             </div>
         </div>
