@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import redirect
+
 #from django.contrib.auth.models import User
 
 class Producto(models.Model):
@@ -40,21 +42,36 @@ class Boleta(models.Model):
 
 class Carrito(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-    productos = models.ManyToManyField(Producto, through='ItemCarrito', related_name='carritos')
+    productos = models.ManyToManyField('Producto', through='ItemCarrito', related_name='carritos')
 
     def __str__(self):
         return f"Carrito de {self.usuario.username}"
 
-    def agregar_producto(self, producto, cantidad):
-        item, creado = ItemCarrito.objects.get_or_create(
-            carrito=self,
-            producto=producto,
-            defaults={'cantidad': cantidad}
-        )
+    def agregar_producto(self, producto):
+        item, creado = ItemCarrito.objects.get_or_create(carrito=self, producto=producto)
         if not creado:
-            item.cantidad += cantidad
+            item.cantidad += 1
             item.save()
-        return item
+
+    def eliminar_producto(self, producto):
+        ItemCarrito.objects.filter(carrito=self, producto=producto).delete()
+
+    def restar_producto(self, producto):
+        item = ItemCarrito.objects.get(carrito=self, producto=producto)
+        if item.cantidad > 1:
+            item.cantidad -= 1
+            item.save()
+        else:
+            self.eliminar_producto(producto)
+
+    def limpiar_carrito(self):
+        self.productos.clear()
+
+    def obtener_total(self):
+        total = 0
+        for item in self.items.all():
+            total += item.total
+        return total
 
 
 class ItemCarrito(models.Model):
