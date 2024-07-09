@@ -272,13 +272,13 @@ $(document).ready(function() {
   });
 
   // Calcular el valor total al cambiar la cantidad
-  $('#qtyInput').on('input', function() {
+  $('#qtyInputCarrito').on('input', function() {
     calculateTotal();
   });
 });
 
 function calculateTotal() {
-  const quantityInput = $('#qtyInput');
+  const quantityInput = $('#qtyInputCarrito');
   const price = 6500; // Precio del producto
   const quantity = parseInt(quantityInput.val());
   const total = price * quantity;
@@ -294,7 +294,7 @@ function calculateTotal() {
 }
 
 function adjustQuantity(change) {
-  const quantityInput = $('#qtyInput');
+  const quantityInput = $('#qtyInputCarrito');
   const currentValue = parseInt(quantityInput.val());
   const newValue = currentValue + change;
   if (newValue >= 1 && newValue <= 10) {
@@ -387,8 +387,7 @@ $(document).ready(function() {
 });
 
 // Desactiva el campo de input del carrito de compras
-$("#qtyInput").attr("disabled", true)
- 
+$("#qtyInputCarrito").attr("disabled", true)
 
 //Elimina elemento de la lista de los pedidos del administrador
 $(document).ready(function() {
@@ -431,6 +430,24 @@ $(document).ready(function() {
   }
 });
 
+//Validacion de numero de campo de cantidad en carrito
+$(document).ready(function () {
+  // Deshabilitar los campos de entrada al cargar la página
+  $('.qtyInputCarrito').prop('disabled', true);
+
+  // Habilitar el campo de entrada al hacer clic en los botones + o -
+  $('.btn-minus, .btn-plus').on('click', function () {
+    var itemID = $(this).closest('.input-group').find('.qtyInputCarrito').data('item-id');
+    $('#qtyInputCarrito-' + itemID).prop('disabled', false);
+  });
+
+  // Validar y restringir entrada a números solo cuando el campo está habilitado
+  $('.qtyInputCarrito').on('input', function () {
+    if (!$(this).prop('disabled')) {
+      this.value = this.value.replace(/[^0-9]/g, ''); // Solo permite números
+    }
+  });
+});
 
 /*$(document).ready(function () {
   let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
