@@ -9,7 +9,7 @@
     <form method="POST" class="mt-4">
         {% csrf_token %}
         {{ form|crispy }}
-        <button type="submit" class="btn btn-primary mt-3">Guardar Cambios</button>
+        <button type="submit" class="btn btn-success mt-3">Guardar Cambios</button>
     </form>
 </div>
 
