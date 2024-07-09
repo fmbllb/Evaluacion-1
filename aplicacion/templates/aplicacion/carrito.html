@@ -27,15 +27,16 @@
           <div class="input-group">
             <label for="cantidad">Cantidad:</label>
             <div class="input-group">
-              <button type="button" class="btn btn-outline-secondary btn-minus">-</button>
-              <input type="number" name="cantidades" class="form-control item-quantity" min="1" value="{{ item.cantidad }}" data-item-id="{{ item.id }}">
-              <button type="button" class="btn btn-outline-secondary btn-plus">+</button>
+                <button type="button" class="btn btn-outline-secondary btn-minus" data-item-id="{{ item.id }}">-</button>
+                <input type="number" name="cantidades" class="form-control item-quantity" min="1" value="{{ item.cantidad }}" data-item-id="{{ item.id }}">
+                <button type="button" class="btn btn-outline-secondary btn-plus" data-item-id="{{ item.id }}">+</button>
             </div>
-          </div>
-          <div class="mb-3">
-            <label for="precio">Precio Total:</label>
-            <p class="card-text fw-bold" id="precioTotal-{{ item.id }}">${{ item.total }}</p>
-          </div>
+        </div>
+        <div class="mb-3">
+          <label for="precio">Precio Total:</label>
+          <!-- Asegúrate de definir data-precio-unitario como el precio del producto -->
+          <p class="card-text fw-bold" id="precioTotal-{{ item.id }}" data-precio-unitario="{{ item.producto.precio }}">${{ item.total }}</p>
+        </div>
           <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <a href="{% url 'eliminar_producto_carrito' item.id %}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto del carrito?')">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket3" viewBox="0 0 16 16">
@@ -61,7 +62,6 @@
           {% for item in carrito.items.all %}
             <li class="list-group-item">
               <p>{{ item.producto.nombre }}</p>
-              <p class="fw-bold">Precio Unitario: ${{ item.producto.precio }}</p>
             </li>
           {% endfor %}
           <li class="list-group-item" id="totalCarrito">Total: ${{ total }}</li>
@@ -69,53 +69,8 @@
         <div class="card-body">
         <!-- Botón para abrir el modal -->
         {% if carrito.items.all %}
-        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#confirmacionPago">Tramitar Pago</button>
+        <a href="{% url 'confirmacion_compra' %}" class="btn btn-warning">Tramitar Pago</a>
         {% endif %}
-        <!-- Modal pago confirmado -->
-        <div class="modal fade" id="confirmacionPago" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmación de Pago</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{% url 'crear_pedido' %}" method="post">
-                            {% csrf_token %}
-                            {{ compra_form|crispy }}
-                            {% if carrito.items.all %}
-                            <h2>Haz Comprado:</h2>
-                            <div id="productos-compra">
-                                {% for item in carrito.items.all %}
-                                <div class="d-flex border align-items-center mt-3 p-2">
-                                    <div class="card-body">
-                                        <label for="producto">Producto:</label>
-                                        <h2 class="card-title">{{ item.producto.nombre }}</h2>
-                                        <input type="hidden" name="productos_ids" value="{{ item.producto.id }}">
-                                        <img src="{{ item.producto.foto.url }}" alt="{{ item.producto.nombre }}" class="img-fluid card-img-top mb-3">
-                                        <div class="mb-3 w-25">
-                                            <label for="cantidad">Cantidad:</label>
-                                            <div class="input-group">
-                                                <p>{{ item.cantidad }}</p>
-                                                <input type="hidden" name="cantidades" value="{{ item.cantidad }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-                            {% endif %}
-                            <button href="{% url 'carrito' %}" type="submit" class="btn btn-success">Ok</button>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-      
-        </div>
       </div>
 
       <div class="card mt-3 mb-2">
@@ -157,83 +112,6 @@
       </div>
     </div>
   </div>
-  <!-- Más productos -->
-<!--   <div class="row mb-3">
-    <h2>MÁS PRODUCTOS</h2>
-  </div>
-  <div class="row">
-    {% for producto in productos %}
-      <div class="col-md-4 mb-4">
-        <div class="card h-100">
-          {% if producto.foto %}
-            <img src="{{ producto.foto.url }}" class="card-img-top" alt="{{ producto.nombre }}">
-          {% else %}
-            <img src="{% static 'img/default-product.jpg' %}" class="card-img-top" alt="Producto sin imagen">
-          {% endif %}
-          <div class="card-body">
-            <h5 class="card-title">{{ producto.nombre }}</h5>
-            <p class="card-text fw-bold">$ {{ producto.precio }}</p>
-            <form id="agregarProductoForm{{ producto.id }}" method="post" action="{% url 'agregar_producto_carrito' producto.id %}">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-warning">Agregar al Carrito</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    {% endfor %}
-  </div> -->
 </div>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-      document.querySelectorAll('.btn-plus').forEach(button => {
-          button.addEventListener('click', function() {
-              let input = this.previousElementSibling;
-              let newValue = parseInt(input.value) + 1;
-              input.value = newValue;
-              updateCartItem(input.dataset.itemId, newValue);
-          });
-      });
-
-      document.querySelectorAll('.btn-minus').forEach(button => {
-          button.addEventListener('click', function() {
-              let input = this.nextElementSibling;
-              let newValue = parseInt(input.value) - 1;
-              if (newValue >= 1) {
-                  input.value = newValue;
-                  updateCartItem(input.dataset.itemId, newValue);
-              }
-          });
-      });
-
-/*       function updateCartItem(itemId, newQuantity) {
-          // Crea un formulario oculto y envíalo automáticamente
-          let form = document.createElement('form');
-          form.method = 'post';
-          form.action = `/carrito/${itemId}/`;
-
-          let csrfToken = document.createElement('input');
-          csrfToken.type = 'hidden';
-          csrfToken.name = 'csrfmiddlewaretoken';
-          csrfToken.value = '{{ csrf_token }}';
-          form.appendChild(csrfToken);
-
-          let itemIdInput = document.createElement('input');
-          itemIdInput.type = 'hidden';
-          itemIdInput.name = 'item_id';
-          itemIdInput.value = itemId;
-          form.appendChild(itemIdInput);
-
-          let quantityInput = document.createElement('input');
-          quantityInput.type = 'hidden';
-          quantityInput.name = 'nueva_cantidad';
-          quantityInput.value = newQuantity;
-          form.appendChild(quantityInput);
-
-          document.body.appendChild(form);
-          form.submit();
-      } */
-  });
-</script>
-
 
 {% endblock contenido %}

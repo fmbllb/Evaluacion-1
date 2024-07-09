@@ -145,16 +145,24 @@ def seguipedido(request):
 @login_required
 def carrito(request):
     carrito, created = Carrito.objects.get_or_create(usuario=request.user)
-    productos = Producto.objects.all()  #  la lista de productos que se muestran en la página de carrito
+    productos = Producto.objects.all()  # Aquí deberías ajustar según tus necesidades
     total = sum(item.producto.precio * item.cantidad for item in carrito.items.all())
+
     if request.method == 'POST':
         item_id = request.POST.get('item_id')
         nueva_cantidad = int(request.POST.get('nueva_cantidad', 1))
+
         # Actualizar la cantidad del item en el carrito
         item = get_object_or_404(ItemCarrito, id=item_id, carrito=carrito)
         item.actualizar_cantidad(nueva_cantidad)
+
+        # Actualizar el total del carrito después de la modificación
+        total = sum(item.producto.precio * item.cantidad for item in carrito.items.all())
+
         # Redireccionar a la misma página o a donde desees
         return redirect('carrito')
+
+    # Si el método no es POST, renderizar la página con el carrito actual
     context = {
         'carrito': carrito,
         'productos': productos,
@@ -631,3 +639,29 @@ def autocompletar(request):
             producto_json['value'] = reverse('detalle_producto', args=[producto.nombre])
             results.append(producto_json)
         return JsonResponse(results, safe=False)
+    
+#Pagina de confirmacion de compra
+def confirmacion_compra(request):
+    carrito = Carrito.objects.get(usuario=request.user)
+    total = sum(item.total for item in carrito.items.all())
+    compra_form = CompraForm()
+
+    context = {
+        'carrito': carrito,
+        'total': total,
+        'compra_form': compra_form,
+    }
+    return render(request, 'aplicacion/confirmacion_compra.html', context)
+
+#Guardar compra
+def guardar_compra(request):
+    if request.method == 'POST':
+        form = CompraForm(request.POST)
+        if form.is_valid():
+            compra = form.save()
+            # Lógica adicional, como enviar correos electrónicos de confirmación, etc.
+            return redirect('pagina_de_confirmacion')  # Redirigir a la página de confirmación
+    else:
+        form = CompraForm()
+    
+    return render(request, 'confirmacion_pago.html', {'form': form})

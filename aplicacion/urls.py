@@ -7,7 +7,7 @@ from .views import (stuff, ajustescuenta,cerrar_sesion, index, login2, crearcuen
     detalle_producto, eliminar_producto_carrito, eliminar_cuenta, actualizar_direccion, productosadmin, eliminar_producto,
     crear_pedido, detalle_pedido, aumentar_item_carrito, disminuir_item_carrito, mis_compras,
     eliminar_pedido, editar_usuario, eliminar_usuario, actualizar_direccion, crear_pedido, detalle_pedido, aumentar_item_carrito,
-    actualizar_item_carrito,)
+    actualizar_item_carrito, confirmacion_compra, guardar_compra)
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -25,6 +25,8 @@ urlpatterns = [
     path('finanzas/', finanzas, name='finanzas'),
     path('', index, name='index'),
     path('', include('django.contrib.auth.urls')),
+    path('confirmacion/', confirmacion_compra, name='confirmacion_compra'),
+    path('guardar_compra/', guardar_compra, name='guardar_compra'),
     path('productosadmin/', productosadmin, name='productosadmin'),
     path('listausuarios/', lista_usuarios, name='listausuarios'),
     path('editarusuario/<int:usuario_id>/', editar_usuario, name='editarusuario'),
