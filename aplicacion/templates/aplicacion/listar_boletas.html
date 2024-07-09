@@ -1,7 +1,7 @@
 {% extends "aplicacion/base.html" %}
 {% block contenido %}
     <h2>Mis Compras</h2>
-    {% if compras %}
+    {% if ultima_compra %}
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -13,14 +13,15 @@
                 </tr>
             </thead>
             <tbody>
-                {% for compra in compras %}
-                    <tr>
-                        <td>{{ compra.boleta.id }}</td>
-                        <td>{{ compra.fecha_compra }}</td>
-                        <td>${{ compra.total }}</td>
-                        <td>{{ compra.get_estado_entrega_display }}</td>
-                    </tr>
-                {% endfor %}
+                <tr>
+                    <td>{{ ultima_compra.boleta.id }}</td>
+                    <td>{{ ultima_compra.fecha_compra }}</td>
+                    <td>${{ ultima_compra.total }}</td>
+                    <td>{{ ultima_compra.get_estado_entrega_display }}</td>
+                    <td>
+                        <a href="{% url 'detalle_boleta' ultima_compra.boleta.id %}" class="btn btn-info">Ver Detalle</a>
+                    </td>
+                </tr>
             </tbody>
         </table>
     {% else %}

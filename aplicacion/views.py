@@ -153,13 +153,24 @@ def carrito(request):
     }
     return render(request, 'aplicacion/carrito.html', context)
 
-def boleta(request):
-    boletas_usuario = Boleta.objects.filter(usuario=request.user)
-    
+@login_required
+def boleta(request, usuario_id):
+    # Busca las boletas del usuario actual
+    boletas = Boleta.objects.filter(usuario_id=usuario_id)
     context = {
-        'boletas_usuario': boletas_usuario,
+        'boletas': boletas
     }
     return render(request, 'aplicacion/boleta_usuario.html', context)
+
+@login_required
+def mis_compras(request):
+    compras = Compra.objects.filter(usuario=request.user).order_by('-fecha_compra')
+    context = {
+        'compras': compras
+    }
+    return render(request, 'aplicacion/boleta_usuario.html', context)
+
+
 
 def detalle_producto(request, nombre_producto):
     producto = get_object_or_404(Producto, id=id)
@@ -186,7 +197,6 @@ def catalogo(request):
 
 #Detalles de producto
 def detalle_producto(request, nombre_producto):
-
     producto = get_object_or_404(Producto, nombre=nombre_producto)
     return render(request, 'aplicacion/detalle_producto.html', {'producto': producto})
 
@@ -216,7 +226,6 @@ def stuff(request):
 
 
 #VISTAS DE USUARIO/CUENTA
-
 def crearcuenta(request):
     if request.method == "POST":
         form = UsuarioForm(request.POST)
@@ -402,7 +411,8 @@ def modpedido(request):
 #Crear pedidos admin
 @login_required
 def crear_pedido(request):
-    carrito = Carrito.objects.get(usuario=request.user)
+    # Obtener el carrito actual del usuario
+    carrito = get_object_or_404(Carrito, usuario=request.user)
     items = carrito.items.all()
     total = sum(item.producto.precio * item.cantidad for item in items)
     
@@ -410,19 +420,16 @@ def crear_pedido(request):
         compra_form = CompraForm(request.POST)
         productos_ids = request.POST.getlist('productos_ids')
         cantidades = request.POST.getlist('cantidades')
-
         if compra_form.is_valid() and productos_ids and cantidades:
-            # Encuentra el primer producto del carrito del usuario
-            producto = Producto.objects.filter(carritos__usuario=request.user).first()
-            if not producto:
+            # Crear una nueva boleta si no hay una asociada al primer producto del carrito del usuario
+            primer_producto = Producto.objects.filter(carritos__usuario=request.user).first()
+            if not primer_producto:
                 return render(request, 'aplicacion/crud-pedidos/crear_pedido.html', {
                     'compra_form': compra_form,
                     'carrito': carrito,
                     'error': 'No hay productos en el carrito.'
                 })
-
-            # Encuentra la última boleta asociada a ese producto
-            boleta = Boleta.objects.filter(fk_producto=producto).last()
+            boleta = Boleta.objects.filter(fk_producto=primer_producto).last()
             if not boleta:
                 boleta = Boleta.objects.create(
                     subtotal=0,
@@ -430,14 +437,21 @@ def crear_pedido(request):
                     fecha_boleta=timezone.now().date(),
                     giro='',
                     medio_pago='',
-                    fk_producto=producto
+                    fk_producto=primer_producto
                 )
-
+            # Crear la compra asociada a la boleta
             compra = Compra.objects.create(
                 usuario=request.user,
                 boleta=boleta,
-                total=0
+                total=0  # El total se calculará después de crear los detalles de compra
             )
+            # Crear detalles de compra para cada producto seleccionado
+            if len(productos_ids) != len(cantidades):
+                return render(request, 'aplicacion/crud-pedidos/crear_pedido.html', {
+                    'compra_form': compra_form,
+                    'carrito': carrito,
+                    'error': 'Error en la selección de productos y cantidades.'
+                })
 
             for producto_id, cantidad in zip(productos_ids, cantidades):
                 producto = Producto.objects.get(id=producto_id)
@@ -452,7 +466,17 @@ def crear_pedido(request):
 
             compra.save()
 
+            # Limpiar el carrito después de completar la compra
+            carrito.items.all().delete()
+
             return redirect('listar_pedidos')
+        else:
+            # Si el formulario no es válido o no se han seleccionado productos y cantidades
+            return render(request, 'aplicacion/crud-pedidos/crear_pedido.html', {
+                'compra_form': compra_form,
+                'carrito': carrito,
+                'error': 'Por favor selecciona al menos un producto.'
+            })
 
     else:
         compra_form = CompraForm()
@@ -465,6 +489,15 @@ def crear_pedido(request):
     }
 
     return render(request, 'aplicacion/crud-pedidos/crear_pedido.html', context)
+
+@login_required
+def eliminar_pedido(request, pedido_id):
+    pedido = get_object_or_404(Compra, id=pedido_id, usuario=request.user)
+    
+    if request.method == 'POST':
+        pedido.delete()
+        return redirect('listar_pedidos')
+    return redirect('listar_pedidos')
 
 #Detalle pedido
 def detalle_pedido(request, id):

@@ -24,6 +24,7 @@
                 <p>{{ item.producto.nombre }}</p>
                 <p class="fw-bold">Precio Unitario: ${{ item.producto.precio }}</p>
               </div>
+<<<<<<< Updated upstream
               <div class="mb-3 w-25">
                 <label for="cantidad">Cantidad:</label>
                 <div class="input-group">
@@ -32,6 +33,17 @@
                   <button type="button" class="btn btn-outline-secondary btn-plus" onclick="aumentarCantidad({{ item.id }})">+</button>
                 </div>
               </div>
+=======
+              <div class="input-group">
+                <a href="{% url 'disminuir_item_carrito' item.id %}">
+                  <button type="button" class="btn btn-outline-secondary btn-plus">-</button>
+                </a>
+                <input type="number" name="cantidades" class="form-control" min="1" value="{{ item.cantidad }}">
+                <a href="{% url 'aumentar_item_carrito' item.id %}">
+                    <button type="button" class="btn btn-outline-secondary btn-minus">+</button>
+                </a>
+            </div>
+>>>>>>> Stashed changes
               <div class="mb-3">
                 <label for="precio">Precio Total:</label>
                 <p class="card-text fw-bold" id="precioTotal-{{ item.id }}">${{ item.total }}</p>
@@ -63,25 +75,21 @@
               <p class="fw-bold">Precio Unitario: ${{ item.producto.precio }}</p>
             </li>
           {% endfor %}
-          <li class="list-group-item" id="totalCarrito">Total: ${{ carrito.total }}</li>
+          <li class="list-group-item" id="totalCarrito">Total: ${{ total }}</li>
         </ul>
 
         <div class="card-body">
           <!-- Botón confirmar pago -->
-          <button type="button" class="btn btn-secondary rounded-0" data-bs-toggle="modal" data-bs-target="#confirmapago">Tramitar Compra</button>
-
+          <a href="{% url 'crear_pedido' %}" class="btn btn-warning">Tramitar Pago</a>
           <!-- Modal pago confirmado -->
           <div class="modal fade" id="confirmapago" tabindex="-1" aria-labelledby="confirma" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">¡Último Paso!</h5>
-                </div>
-                <div class="modal-body">
-                  Confirmar la cantidad de productos.
+                  <h5 class="modal-title" id="exampleModalLabel">¡Compra Confirmada!</h5>
                 </div>
                 <div class="modal-footer">
-                  <a href="{% url 'boleta' %}" class="btn btn-secondary">OK</a>
+                  <a class="btn btn-secondary">OK</a>
                 </div>
               </div>
             </div>
