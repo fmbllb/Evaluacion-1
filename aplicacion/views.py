@@ -52,6 +52,23 @@ def aumentar_item_carrito(request, item_id):
     return redirect('carrito')
 
 @login_required
+def listar_pedidos_usuario(request):
+    compras = Compra.objects.filter(usuario=request.user).order_by('-fecha_compra')
+    return render(request, 'aplicacion/listar_pedidos_usuario.html', {'compras': compras})
+
+@login_required
+def cancelar_pedido(request, pedido_id):
+    pedido = get_object_or_404(Compra, id=pedido_id, usuario=request.user)
+
+    if request.method == 'POST':
+        pedido.cancelado = True 
+        pedido.save()
+
+        return redirect('detalle_pedido', pedido_id=pedido.id)
+
+    return render(request, 'aplicacion/cancelar_pedido.html', {'pedido': pedido})
+
+@login_required
 def disminuir_item_carrito(request, item_id):
     item = get_object_or_404(ItemCarrito, id=item_id)
     if item.carrito.usuario != request.user:
@@ -633,7 +650,7 @@ def seguipedido(request, usuario_id):
     context = {
         'compras': compras
     }
-    return render(request, 'aplicacion/crud-pedidos/seguipedido.html', context)
+    return render(request, 'aplicacion/seguipedido.html', context)
 
 #Listar Pedidos
 @user_passes_test(es_admin)
