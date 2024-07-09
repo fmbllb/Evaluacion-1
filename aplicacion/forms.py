@@ -17,7 +17,7 @@ from aplicacion import static
 class CompraForm(forms.ModelForm):
     class Meta:
         model = Compra
-        fields = ['usuario', 'productos', 'fecha_compra', 'boleta', 'total', 'estado_entrega']
+        fields = ['usuario', 'productos', 'boleta', 'total', 'estado_entrega']
 
 #Formulario para el detalle de la compra
 class DetalleCompraForm(forms.ModelForm):
